@@ -31,11 +31,11 @@
 	
 	// Check NSUserDefaults for state adjustment: Switch and associated image
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		_nightMode.on = YES;
+		_nightMode.on = NO;
 		[_nightImage setBackgroundImage:[UIImage imageNamed:@"nighttoggleoff.png"] forState:UIControlStateNormal];
 	}
 	else {
-		_nightMode.on = NO;
+		_nightMode.on = YES;
 		[_nightImage setBackgroundImage:[UIImage imageNamed:@"nightmode.png"] forState:UIControlStateNormal];
 	}
 
@@ -104,7 +104,7 @@
 	
 	[self playSound];
 	
-	if ([switchState isOn]) {
+	if (![switchState isOn]) {
 		[[NSUserDefaults standardUserDefaults] setObject:@"night" forKey:@"UI"];
 		[_nightImage setBackgroundImage:[UIImage imageNamed:@"nighttoggleoff.png"] forState:UIControlStateNormal];
 		NSLog(@"UI set to night");

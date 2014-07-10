@@ -233,7 +233,7 @@
 	
 	
 	hits = [[UILabel alloc] init];
-	[hits setText:[NSString stringWithFormat:@"%i/%0.1f = %f", scoreNumber, gameTime, (scoreNumber / gameTime)]];
+	[hits setText:[NSString stringWithFormat:@"%i/%0.1f = %0.2f", scoreNumber, gameTime, (scoreNumber / gameTime)]];
 	hits.frame = CGRectMake(80.0, 310.0, 160.0, 40.0);
 	hits.textAlignment = NSTextAlignmentCenter;
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {

@@ -44,14 +44,20 @@
 
 -(void)updateInterface {
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		// Night UI Code
+		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"nightcreditsbutton.png"] forState:UIControlStateNormal];
+		[_rateOutlet setBackgroundImage:[UIImage imageNamed:@"nightratebutton.png"] forState:UIControlStateNormal];
+		[_backOutlet setBackgroundImage:[UIImage imageNamed:@"nightback.png"] forState:UIControlStateNormal];
+		[_settingsBackground setImage:[UIImage imageNamed:@"nightbackground.png"]];
+		[_settingsIcon setImage:[UIImage imageNamed:@"settingsnighticon.png"]];
 	}
 	else {
-		// Normal UI Code
+		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"normalcreditsbutton.png"] forState:UIControlStateNormal];
+		[_rateOutlet setBackgroundImage:[UIImage imageNamed:@"normalratebutton.png"] forState:UIControlStateNormal];
+		[_backOutlet setBackgroundImage:[UIImage imageNamed:@"normalback.png"] forState:UIControlStateNormal];
+		[_settingsBackground setImage:[UIImage imageNamed:@"normalbackground.png"]];
+		[_settingsIcon setImage:[UIImage imageNamed:@"settingsicon.png"]];
 	}
 }
-
-
 
 
 /*
@@ -66,6 +72,7 @@
 */
 
 - (IBAction)soundFXSwitch:(id)sender {
+	
 }
 - (IBAction)credits:(id)sender {
 }

@@ -18,5 +18,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *soundFXLabel;
 - (IBAction)credits:(id)sender;
 - (IBAction)rate:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *creditsOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *rateOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *backOutlet;
 
 @end
