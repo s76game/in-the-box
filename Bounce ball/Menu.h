@@ -8,11 +8,10 @@
 
 #import "ViewController.h"
 #import "SpaceShipScene.h"
-#import "NightScene.h"
 #import "NormalStrategic.h"
-#import "NightStrategic.h"
 
 BOOL returnToMenu;
+NSString *lastPlayed;
 
 @interface Menu : ViewController <SKSceneDelegate> {
 	CGRect screenRect;

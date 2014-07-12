@@ -26,40 +26,24 @@
 	
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"normal"]) {
-//		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-//			[self nightScene];
-//		}
-//		else {
+// Normal gameplay
 			[self spaceShipScene];
-//		}
 	}
 	else {
-		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-			[self nightStrategy];
-		}
-		else {
+// Strategic gameplay
 			[self normalStrategy];
-		}
 	}
 }
 
 - (void)viewDidLoad {
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showDifferentView) name:@"showDifferenView" object:nil];
-	
+
 	[super viewDidLoad];
 	sceneView = (SKView *) self.view;
 	sceneView.showsPhysics = YES;
-	NSLog(@"Menu loaded");
 }
 
 
--(void)viewDidAppear:(BOOL)animated {
-	if (returnToMenu) {
-		[self showDifferentView];
-		returnToMenu = NO;
-	}
-}
 
 
 - (void)didReceiveMemoryWarning {
@@ -70,34 +54,41 @@
 -(void)spaceShipScene {
 	SpaceShipScene* hello = [[SpaceShipScene alloc] initWithSize:screenSize];
 	spriteView = (SKView *) self.view;
-//	scene.delegate = self;
+	hello.delegate = self;
+	lastPlayed = @"normal";
 	[spriteView presentScene: hello];
 }
 
--(void)nightScene {
-	NightScene* hello = [[NightScene alloc] initWithSize:screenSize];
-	spriteView = (SKView *) self.view;
-	[spriteView presentScene: hello];
-}
 
 -(void)normalStrategy {
 	NormalStrategic* hello = [[NormalStrategic alloc] initWithSize:screenSize];
 	spriteView = (SKView *) self.view;
+	hello.delegate = self;
+	lastPlayed = @"normalStrategy";
 	[spriteView presentScene: hello];
 }
-
--(void)nightStrategy {
-	NightStrategic* hello = [[NightStrategic alloc] initWithSize:screenSize];
-	spriteView = (SKView *) self.view;
-	[spriteView presentScene: hello];
-}
-
-
 
 -(void)showDifferentView
 {
-	[self dismissViewControllerAnimated:YES completion:nil];
-	NSLog(@"Alpha");
+	[self.navigationController popViewControllerAnimated:YES];
+	NSLog(@"Dismiss to previous view controller");
+}
+
+-(void)showScene {
+	if ([lastPlayed isEqualToString:@"normalStrategy"]) {
+		NormalStrategic* hello = [[NormalStrategic alloc] initWithSize:screenSize];
+		spriteView = (SKView *) self.view;
+		hello.delegate = self;
+		lastPlayed = @"normalStrategy";
+		[spriteView presentScene: hello];
+	}
+	else if ([lastPlayed isEqualToString:@"normal"]) {
+		SpaceShipScene* hello = [[SpaceShipScene alloc] initWithSize:screenSize];
+		spriteView = (SKView *) self.view;
+		hello.delegate = self;
+		lastPlayed = @"normal";
+		[spriteView presentScene: hello];
+	}
 }
 
 

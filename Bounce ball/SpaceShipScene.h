@@ -6,6 +6,14 @@
 //  Copyright (c) 2014 Rybel. All rights reserved.
 //
 
+
+
+//
+//  Bit mask definitions for this file that apply to Strategic Gameplay are defined in this file on behalf of both
+//
+
+
+
 #import <SpriteKit/SpriteKit.h>
 #import <AudioToolBox/AudioToolbox.h>
 #import "Menu.h"
@@ -26,6 +34,8 @@ static const uint32_t ballCategory     =  0x1 << 0;
 static const uint32_t lineCategory     =  0x1 << 1;
 static const uint32_t edgeCategory     =  0x1 << 2;
 
+
+
 @interface SpaceShipScene : SKScene <SKPhysicsContactDelegate, NSObject> {
 	
 	UIButton *menu;
@@ -33,6 +43,7 @@ static const uint32_t edgeCategory     =  0x1 << 2;
 	UILabel *hits;
 	UIButton *start;
 	
+	SKShapeNode *border;
 	UIImageView *screenCrack;
 	SystemSoundID breaking;
 	SKSpriteNode *line;

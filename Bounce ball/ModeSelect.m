@@ -118,14 +118,19 @@
 
 -(void)playSound {
 	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
 	// Create the sound ID
-	NSString* path = [[NSBundle mainBundle]
-					  pathForResource:@"toggle_sound" ofType:@"mp3"];
-	NSURL* url = [NSURL fileURLWithPath:path];
-	AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &breaking);
+		NSString* path = [[NSBundle mainBundle]
+						  pathForResource:@"toggle_sound" ofType:@"mp3"];
+		NSURL* url = [NSURL fileURLWithPath:path];
+		AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &breaking);
  
-	// Play the sound
-	AudioServicesPlaySystemSound(breaking);
+		// Play the sound
+		AudioServicesPlaySystemSound(breaking);
+	}
+	else {
+		NSLog(@"Sounds turned off");
+	}
 }
 
 -(void)updateInterface {

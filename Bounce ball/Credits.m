@@ -29,6 +29,21 @@
     // Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+	[self updateInterface];
+}
+
+-(void)updateInterface {
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+		[_credits setImage:[UIImage imageNamed:@"nightcredits.png"]];
+		[_creditsBackground setImage:[UIImage imageNamed:@"nightbackground.png"]];
+	}
+	else {
+		[_credits setImage:[UIImage imageNamed:@"normalcredits.png"]];
+		[_creditsBackground setImage:[UIImage imageNamed:@"normalbackground.png"]];
+	}
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

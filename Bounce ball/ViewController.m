@@ -35,13 +35,16 @@
 		// Set toBePlayed to normal
 		[[NSUserDefaults standardUserDefaults] setObject:@"normal" forKey:@"toBePlayed"];
 		
-		NSLog(@"First Launch");
+		// Turn of sound effects
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"soundFX"];
+		
 		
 		// Set the "hasPerformedFirstLaunch" key so this block won't execute again
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasPerformedFirstLaunch"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		
 		// Tutorial code goes here
+		
 		
 	}
 	

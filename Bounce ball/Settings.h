@@ -7,19 +7,20 @@
 //
 
 #import "ViewController.h"
+#import <MessageUI/MessageUI.h>
 
-@interface Settings : ViewController {
+@interface Settings : ViewController <MFMailComposeViewControllerDelegate>{
 	
 }
-@property (strong, nonatomic) IBOutlet UISwitch *nightMode;
+@property (strong, nonatomic) IBOutlet UISwitch *soundFXOutlet;
 @property (strong, nonatomic) IBOutlet UIImageView *settingsBackground;
 @property (strong, nonatomic) IBOutlet UIImageView *settingsIcon;
-- (IBAction)soundFXSwitch:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *soundFXLabel;
-- (IBAction)credits:(id)sender;
+- (IBAction)feedback:(id)sender;
 - (IBAction)rate:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *creditsOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *rateOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *backOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *feedbackOutlet;
 
 @end

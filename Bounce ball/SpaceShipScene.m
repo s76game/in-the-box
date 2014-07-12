@@ -10,7 +10,8 @@
 
 @interface SpaceShipScene ()
 @property BOOL contentCreated;
-@property (weak, nonatomic) id <SKSceneDelegate> delegate;
+
+@property (weak, nonatomic) id <sceneDelegate> delegate;
 
 @end
 
@@ -37,26 +38,28 @@
 {
 	[self screenSize];
 	
-	// Set up score
+	// Set up score and display
 	score = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth/2), 25, 300, 100)];
 	[self.view addSubview:score];
 	scoreNumber = 0;
 	score.text = @"Time";
-	[score setFont:[UIFont systemFontOfSize:25]];
+	[score setFont:[UIFont fontWithName:@"Prototype" size:25]];
+	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		score.textColor = [UIColor whiteColor];
 	}
 	
+	
+	// Set up background texture
 	NSString *textureName;
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		textureName = @"nightbackground.png";
+		textureName = @"nightbackgroundplain.png";
 	}
 	else {
 		textureName = @"normalbackground.png";
 	}
-	
-	// Set up background texture
+
 	SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%@", textureName]];
 	SKSpriteNode *background = [SKSpriteNode spriteNodeWithTexture:backgroundTexture size:self.view.frame.size];
 	background.position = (CGPoint) {CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame)};
@@ -74,11 +77,30 @@
 	
 	// Set up scene
 	
+	// Set up border physics
 	self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
 	self.physicsBody.categoryBitMask = edgeCategory;
 	self.physicsBody.contactTestBitMask = edgeCategory;
 	self.physicsWorld.contactDelegate = self;
 	self.physicsWorld.gravity = CGVectorMake(0.0, 0.0);
+	
+	// Set up border graphics
+	border = [SKShapeNode node];
+	
+	CGMutablePathRef path = CGPathCreateMutable();
+	CGPathMoveToPoint(path, NULL, 1, 1);
+	CGPathAddLineToPoint(path, NULL, 1, (screenHeight-1));
+	CGPathAddLineToPoint(path, NULL, (screenWidth-1), (screenHeight-1));
+	CGPathAddLineToPoint(path, NULL, (screenWidth-1), 1);
+	CGPathAddLineToPoint(path, NULL, 1, 1);
+	
+	border.path = path;
+	[border setStrokeColor:[UIColor greenColor]];
+	[border setLineWidth:5];
+	
+	[self addChild:border];
+	
+	
 	
 	ball = [self newBall];
 	ball.position = CGPointMake(CGRectGetMidX(self.frame),                              CGRectGetMidY(self.frame));
@@ -233,7 +255,7 @@
 	
 	
 	hits = [[UILabel alloc] init];
-	[hits setText:[NSString stringWithFormat:@"%i/%0.1f = %0.2f", scoreNumber, gameTime, (scoreNumber / gameTime)]];
+	[hits setText:[NSString stringWithFormat:@"%i/%0.1f = %0.3f", scoreNumber, gameTime, (scoreNumber / gameTime)]];
 	hits.frame = CGRectMake(80.0, 310.0, 160.0, 40.0);
 	hits.textAlignment = NSTextAlignmentCenter;
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
@@ -248,7 +270,7 @@
 	
 	menu = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[menu addTarget:self action:@selector(menuButton:) forControlEvents:UIControlEventTouchUpInside];
-	[menu setTitle:@"Go to menu" forState:UIControlStateNormal];
+	[menu setTitle:@"Go back" forState:UIControlStateNormal];
 	menu.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
@@ -366,6 +388,7 @@
 	}
 	
 }
+
 
 
 @end

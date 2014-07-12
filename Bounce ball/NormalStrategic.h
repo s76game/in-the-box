@@ -7,7 +7,46 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import <AudioToolBox/AudioToolbox.h>
+#import "Menu.h"
 
-@interface NormalStrategic : SKScene
+int pos1x;
+int pos1y;
+int pos2x;
+int pos2y;
+float gameTime;
+int scoreNumber;
+BOOL gameOver;
+BOOL gameStarted;
+int x;
+int y;
+BOOL dotDrawn;
+
+@protocol sceneDelegate <NSObject>
+-(void)showDifferentView;
+@end
+
+@protocol resetSKScene <NSObject>
+-(void)showScene;
+@end
+
+@interface NormalStrategic : SKScene <SKPhysicsContactDelegate, NSObject> {
+	
+	UIButton *menu;
+	UIButton *replay;
+	UILabel *hits;
+	UIButton *start;
+	
+	SKShapeNode* border;
+	SKShapeNode* lines;
+	UIImageView *screenCrack;
+	SystemSoundID breaking;
+	SKSpriteNode *line;
+	SKAction *remove;
+	SKSpriteNode *ball;
+	UILabel *score;
+	CGFloat screenWidth;
+	CGFloat screenHeight;
+}
 
 @end

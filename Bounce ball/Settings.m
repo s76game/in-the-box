@@ -26,6 +26,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	[_soundFXOutlet addTarget:self action:@selector(stateChanged:) forControlEvents:UIControlEventValueChanged];
+	
+	//Only hide until URL has been received
+	_rateOutlet.hidden = YES;
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
+		_soundFXOutlet.on = YES;
+	}
+	else {
+		_soundFXOutlet.on = NO;
+	}
+	
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,7 +50,8 @@
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)viewDidAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated {
+	NSLog(@"Alpha");
 	[self updateInterface];
 }
 
@@ -71,12 +85,79 @@
 }
 */
 
-- (IBAction)soundFXSwitch:(id)sender {
-	
+-(void)stateChanged:(UISwitch *)switchState {
+	if (_soundFXOutlet.isOn) {
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"soundFX"];
+	}
+	else {
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"soundFX"];
+	}
 }
-- (IBAction)credits:(id)sender {
+
+
+- (IBAction)feedback:(id)sender {
+	if ([MFMailComposeViewController canSendMail])
+	{
+		MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
+		
+		mailer.mailComposeDelegate = self;
+		
+		[mailer setSubject:@"Feedback/Suggestions Inside The Box"];
+		
+		NSArray *toRecipients = [NSArray arrayWithObjects:@"rybelllc@gmail.com", nil];
+		[mailer setToRecipients:toRecipients];
+		
+		NSString *emailBody = @"Leave your feedback or suggestions here and we will do our best to take them into consideration and make the app even better! If you want support regarding the app then go to http://www.rybel-llc.com/support Thank you for the feedback!";
+		[mailer setMessageBody:emailBody isHTML:YES];
+		
+		[self presentViewController:mailer animated:YES completion:nil];
+	}
+	else
+	{
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mail Incompatibility"
+														message:@"Your device doesn't support the mail composer sheet"
+													   delegate:nil
+											  cancelButtonTitle:@"OK"
+											  otherButtonTitles: nil];
+		[alert show];
+	}
+}
+
+// Goes along with mail modal view controller
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+ // Notifies users about errors associated with the interface
+ switch (result)
+ {
+	 case MFMailComposeResultCancelled:
+		 NSLog(@"Cancelled");
+		 break;
+	 case MFMailComposeResultSaved:
+		 NSLog(@"Saved");
+		 break;
+	 case MFMailComposeResultSent:
+		 NSLog(@"Sent");
+		 break;
+	 case MFMailComposeResultFailed:
+		 NSLog(@"Failed");
+		 break;
+		 
+	 default:
+	 {
+		 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Send Failure" message:@"Sending Failed - Unknown Error"
+														delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+		 [alert show];
+	 }
+		 
+		 break;
+ }
+ [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)rate:(id)sender {
+	
+	// Open appstore app URL
+	
+//	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"OUR URL HERE"]];
 }
 @end
