@@ -110,7 +110,7 @@
 		NSLog(@"UI set to night");
 	} else {
 		[[NSUserDefaults standardUserDefaults] setObject:@"normal" forKey:@"UI"];
-		[_nightImage setBackgroundImage:[UIImage imageNamed:@"nightmode.png"] forState:UIControlStateNormal];
+		[_nightImage setBackgroundImage:[UIImage imageNamed:@"nighttoggleon.png"] forState:UIControlStateNormal];
 		NSLog(@"UI set to normal");
 	}
 	[self updateInterface];

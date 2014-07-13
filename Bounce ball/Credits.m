@@ -37,10 +37,12 @@
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		[_credits setImage:[UIImage imageNamed:@"nightcredits.png"]];
 		[_creditsBackground setImage:[UIImage imageNamed:@"nightbackground.png"]];
+		[_creditsBack setBackgroundImage:[UIImage imageNamed:@"nightback.png"] forState:UIControlStateNormal];
 	}
 	else {
 		[_credits setImage:[UIImage imageNamed:@"normalcredits.png"]];
 		[_creditsBackground setImage:[UIImage imageNamed:@"normalbackground.png"]];
+		[_creditsBack setBackgroundImage:[UIImage imageNamed:@"normalback.png"] forState:UIControlStateNormal];
 	}
 }
 

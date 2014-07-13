@@ -22,5 +22,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *rateOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *backOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *feedbackOutlet;
+@property (strong, nonatomic) IBOutlet UILabel *label;
 
 @end

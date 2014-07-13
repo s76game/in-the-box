@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *splashImage;
 @property (strong, nonatomic) IBOutlet UIImageView *quote;
 - (IBAction)advance:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *advanceOulet;
 
 
 

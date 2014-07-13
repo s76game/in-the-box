@@ -22,13 +22,10 @@ int x;
 int y;
 BOOL dotDrawn;
 
-@protocol sceneDelegate <NSObject>
--(void)showDifferentView;
-@end
+static const uint32_t ballCategory     =  0x1 << 0;
+static const uint32_t lineCategory     =  0x1 << 1;
+static const uint32_t edgeCategory     =  0x1 << 2;
 
-@protocol resetSKScene <NSObject>
--(void)showScene;
-@end
 
 @interface Normal : SKScene <SKPhysicsContactDelegate, NSObject> {
 	

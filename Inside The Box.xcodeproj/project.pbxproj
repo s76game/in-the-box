@@ -80,6 +80,12 @@
 		94C7FEC5194E3CDF00270AE8 /* Bounce_ballTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C7FEC4194E3CDF00270AE8 /* Bounce_ballTests.m */; };
 		94C7FECF194E3DE600270AE8 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C7FECE194E3DE600270AE8 /* SpriteKit.framework */; };
 		94D31A48197236FE006E21C2 /* Normal.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D31A47197236FE006E21C2 /* Normal.m */; };
+		94D31A4B1972390C006E21C2 /* nighttoggleon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D31A491972390C006E21C2 /* nighttoggleon.png */; };
+		94D31A4C1972390C006E21C2 /* nighttoggleoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D31A4A1972390C006E21C2 /* nighttoggleoff.png */; };
+		94D31A511972483E006E21C2 /* strategymodebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D31A4D1972483E006E21C2 /* strategymodebutton.png */; };
+		94D31A521972483E006E21C2 /* strategyplaybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D31A4E1972483E006E21C2 /* strategyplaybutton.png */; };
+		94D31A531972483E006E21C2 /* strategyproceed.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D31A4F1972483E006E21C2 /* strategyproceed.png */; };
+		94D31A541972483E006E21C2 /* strategytitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D31A501972483E006E21C2 /* strategytitle.png */; };
 		94E19B93196C8F4600893DEE /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94E19B92196C8F4600893DEE /* Media.xcassets */; };
 		94E19B96196C93C600893DEE /* Credits.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E19B95196C93C600893DEE /* Credits.m */; };
 		94E19B98196C955200893DEE /* Prototype.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94E19B97196C955200893DEE /* Prototype.ttf */; };
@@ -184,6 +190,12 @@
 		94C7FECE194E3DE600270AE8 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		94D31A46197236FE006E21C2 /* Normal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Normal.h; sourceTree = "<group>"; };
 		94D31A47197236FE006E21C2 /* Normal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Normal.m; sourceTree = "<group>"; };
+		94D31A491972390C006E21C2 /* nighttoggleon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nighttoggleon.png; sourceTree = "<group>"; };
+		94D31A4A1972390C006E21C2 /* nighttoggleoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nighttoggleoff.png; sourceTree = "<group>"; };
+		94D31A4D1972483E006E21C2 /* strategymodebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strategymodebutton.png; sourceTree = "<group>"; };
+		94D31A4E1972483E006E21C2 /* strategyplaybutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strategyplaybutton.png; sourceTree = "<group>"; };
+		94D31A4F1972483E006E21C2 /* strategyproceed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strategyproceed.png; sourceTree = "<group>"; };
+		94D31A501972483E006E21C2 /* strategytitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strategytitle.png; sourceTree = "<group>"; };
 		94E19B92196C8F4600893DEE /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = ../Media.xcassets; sourceTree = "<group>"; };
 		94E19B94196C93C600893DEE /* Credits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Credits.h; sourceTree = "<group>"; };
 		94E19B95196C93C600893DEE /* Credits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Credits.m; sourceTree = "<group>"; };
@@ -268,12 +280,17 @@
 			name = "Normal Gameplay Scenes";
 			sourceTree = "<group>";
 		};
-		94033A2519634F1000FD9516 /* Strategy_Mode */ = {
+		94033A2519634F1000FD9516 /* Strategy Images */ = {
 			isa = PBXGroup;
 			children = (
+				94D31A4D1972483E006E21C2 /* strategymodebutton.png */,
+				94D31A4E1972483E006E21C2 /* strategyplaybutton.png */,
+				94D31A4F1972483E006E21C2 /* strategyproceed.png */,
+				94D31A501972483E006E21C2 /* strategytitle.png */,
 				94033A1619634EE200FD9516 /* goal.png */,
 			);
-			name = Strategy_Mode;
+			name = "Strategy Images";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		94033A2619634F1F00FD9516 /* Sound Effects */ = {
@@ -293,6 +310,7 @@
 				94033A1B19634EE200FD9516 /* strategyselection.png */,
 				940339DA195F755600FD9516 /* normalselection.png */,
 				94792A9D1958EC02004A6404 /* gamcentericon.png */,
+				94033A2519634F1000FD9516 /* Strategy Images */,
 				949104731971C4B90070273A /* Night Images */,
 				949104721971C4880070273A /* Normal Images */,
 			);
@@ -348,6 +366,8 @@
 		949104731971C4B90070273A /* Night Images */ = {
 			isa = PBXGroup;
 			children = (
+				94D31A491972390C006E21C2 /* nighttoggleon.png */,
+				94D31A4A1972390C006E21C2 /* nighttoggleoff.png */,
 				940339E2195F864200FD9516 /* nightbackground.png */,
 				940339E6195F892C00FD9516 /* nightball.png */,
 				94BDFF45196B745100723965 /* nightcreditsbutton.png */,
@@ -418,7 +438,6 @@
 		94C7FEA8194E3CDF00270AE8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				94033A2519634F1000FD9516 /* Strategy_Mode */,
 				94033A2619634F1F00FD9516 /* Sound Effects */,
 				949104711971C4220070273A /* Launch Images */,
 				940339EC1960DA0400FD9516 /* App Icons */,
@@ -533,10 +552,12 @@
 				94033A0C1960DA0400FD9516 /* iTunesArtwork@2x.png in Resources */,
 				9491046D1971C3D60070273A /* nightquote2.png in Resources */,
 				94BDFF4B196B745100723965 /* settingsicon.png in Resources */,
+				94D31A521972483E006E21C2 /* strategyplaybutton.png in Resources */,
 				94792ABF1958EC02004A6404 /* normalmodebutton.png in Resources */,
 				94792AD3195B6FEA004A6404 /* iPodiPhone5.png in Resources */,
 				9491046C1971C3D60070273A /* nightquote1.png in Resources */,
 				94792AD1195B6FEA004A6404 /* iPadiPadmini.png in Resources */,
+				94D31A4C1972390C006E21C2 /* nighttoggleoff.png in Resources */,
 				94792AB31958EC02004A6404 /* nightmodetitle.png in Resources */,
 				94033A071960DA0400FD9516 /* AppIcon72x72.png in Resources */,
 				94033A021960DA0400FD9516 /* AppIcon50x50@2x.png in Resources */,
@@ -552,6 +573,8 @@
 				94792AB91958EC02004A6404 /* nightmodebutton.png in Resources */,
 				94033A091960DA0400FD9516 /* AppIcon76x76.png in Resources */,
 				94033A031960DA0400FD9516 /* AppIcon57x57.png in Resources */,
+				94D31A531972483E006E21C2 /* strategyproceed.png in Resources */,
+				94D31A4B1972390C006E21C2 /* nighttoggleon.png in Resources */,
 				94E19B98196C955200893DEE /* Prototype.ttf in Resources */,
 				94033A011960DA0400FD9516 /* AppIcon50x50.png in Resources */,
 				9400629A1963C40300B5D811 /* normalgo.png in Resources */,
@@ -584,10 +607,12 @@
 				94792AC91958F7C9004A6404 /* normalball.png in Resources */,
 				94033A0B1960DA0400FD9516 /* iTunesArtwork.png in Resources */,
 				940339DB195F755600FD9516 /* normalselection.png in Resources */,
+				94D31A541972483E006E21C2 /* strategytitle.png in Resources */,
 				94E19B93196C8F4600893DEE /* Media.xcassets in Resources */,
 				940339FF1960DA0400FD9516 /* AppIcon40x40.png in Resources */,
 				940339FD1960DA0400FD9516 /* AppIcon29x29.png in Resources */,
 				94033A2319634EE200FD9516 /* strategyselection.png in Resources */,
+				94D31A511972483E006E21C2 /* strategymodebutton.png in Resources */,
 				94033A1D19634EE200FD9516 /* flickering_noise.mp3 in Resources */,
 				94033A2119634EE200FD9516 /* normalcreditsbutton.png in Resources */,
 			);

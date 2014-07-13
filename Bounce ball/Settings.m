@@ -63,6 +63,8 @@
 		[_backOutlet setBackgroundImage:[UIImage imageNamed:@"nightback.png"] forState:UIControlStateNormal];
 		[_settingsBackground setImage:[UIImage imageNamed:@"nightbackground.png"]];
 		[_settingsIcon setImage:[UIImage imageNamed:@"settingsnighticon.png"]];
+		[_feedbackOutlet setBackgroundImage:[UIImage imageNamed:@"nightratebutton.png"] forState:UIControlStateNormal];
+		[_label setTextColor:[UIColor whiteColor]];
 	}
 	else {
 		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"normalcreditsbutton.png"] forState:UIControlStateNormal];
@@ -70,6 +72,8 @@
 		[_backOutlet setBackgroundImage:[UIImage imageNamed:@"normalback.png"] forState:UIControlStateNormal];
 		[_settingsBackground setImage:[UIImage imageNamed:@"normalbackground.png"]];
 		[_settingsIcon setImage:[UIImage imageNamed:@"settingsicon.png"]];
+		[_feedbackOutlet setBackgroundImage:[UIImage imageNamed:@"normalratebutton.png"] forState:UIControlStateNormal];
+		[_label setTextColor:[UIColor blackColor]];
 	}
 }
 

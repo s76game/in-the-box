@@ -142,11 +142,6 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	
-	NSLog(gameOver ? @"Game Over Yes" : @"Game Over No");
-	NSLog(dotDrawn ? @"Dot drawn Yes" : @"Dot drawn No");
-	NSLog(gameStarted ? @"Game Started Yes" : @"Game Started No");
-	
-	
 	if (!gameOver && !dotDrawn && gameStarted) {
 		
 		[self removeLine];
@@ -400,6 +395,9 @@
 // Start ball on user touch
 // Done to avoid extremely low FPS at load of scene
 -(void)start:(UIButton *)button {
+	
+	gameTime = 0;
+	
 	gameStarted = YES;
 	// Remove button from parent
 	[start removeFromSuperview];
@@ -438,8 +436,6 @@
 	if (!gameOver) {
 		
 		gameTime = gameTime + 0.1;
-		
-		gameTime = (float) ((int) (gameTime * 100.0)) / 100.0;
 		
 		score.text = [NSString stringWithFormat:@"%.01f", gameTime];
 		

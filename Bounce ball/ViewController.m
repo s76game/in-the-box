@@ -96,6 +96,14 @@
 		[_frame setImage:[UIImage imageNamed:@"nighttitle.png"]];
 		[_background setImage:[UIImage imageNamed:@"nightbackground.png"]];
 	}
+	else if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"strategy"] && ![[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"night"]) {
+		// Strategy UI Code
+		[_mode setBackgroundImage:[UIImage imageNamed:@"strategymodebutton.png"] forState:UIControlStateNormal];
+		[_play setBackgroundImage:[UIImage imageNamed:@"strategyplaybutton.png"] forState:UIControlStateNormal];
+		[_settings setBackgroundImage:[UIImage imageNamed:@"normalsettings"] forState:UIControlStateNormal];
+		[_frame setImage:[UIImage imageNamed:@"strategytitle.png"]];
+		[_background setImage:[UIImage imageNamed:@"normalbackground.png"]];
+	}
 	else {
 		// Normal UI code
 		[_mode setBackgroundImage:[UIImage imageNamed:@"normalmodebutton.png"] forState:UIControlStateNormal];
@@ -104,6 +112,7 @@
 		[_frame setImage:[UIImage imageNamed:@"normaltitle.png"]];
 		[_background setImage:[UIImage imageNamed:@"normalbackground.png"]];
 	}
+	
 	
 #pragma mark Rate my app code
 	

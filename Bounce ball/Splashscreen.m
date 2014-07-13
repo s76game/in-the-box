@@ -27,10 +27,18 @@
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		_splashImage.image = [UIImage imageNamed:@"nightbackground.png"];
 		_quote.image = [UIImage imageNamed:@"nightquote.png"];
+		[_advanceOulet setBackgroundImage:[UIImage imageNamed:@"normalproceed.png"] forState:UIControlStateNormal];
+	}
+	else if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"strategy"] && ![[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"night"]) {
+		// Strategy UI Code
+		_splashImage.image = [UIImage imageNamed:@"normalbackground.png"];
+		_quote.image = [UIImage imageNamed:@"normalquote.png"];
+		[_advanceOulet setBackgroundImage:[UIImage imageNamed:@"strategyproceed.png"] forState:UIControlStateNormal];
 	}
 	else {
 		_splashImage.image = [UIImage imageNamed:@"normalbackground.png"];
 		_quote.image = [UIImage imageNamed:@"normalquote.png"];
+		[_advanceOulet setBackgroundImage:[UIImage imageNamed:@"normalproceed.png"] forState:UIControlStateNormal];
 	}
 }
 

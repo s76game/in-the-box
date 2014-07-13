@@ -452,6 +452,7 @@
                         <outlet property="backOutlet" destination="pig-Ib-eRU" id="Um5-tx-Cqp"/>
                         <outlet property="creditsOutlet" destination="quz-ki-qLs" id="hWo-Is-gwy"/>
                         <outlet property="feedbackOutlet" destination="vLp-xh-hyR" id="XfE-BV-jDg"/>
+                        <outlet property="label" destination="6cu-9o-hfK" id="G0P-9q-GFW"/>
                         <outlet property="rateOutlet" destination="HFg-Y2-SR9" id="zqF-1l-bkr"/>
                         <outlet property="settingsBackground" destination="Qhs-Rt-37X" id="WzK-T3-XYd"/>
                         <outlet property="settingsIcon" destination="y0M-kh-TUP" id="fDP-LO-gbq"/>
@@ -479,10 +480,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                             </imageView>
                             <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jCu-Mn-mcg">
-                                <rect key="frame" x="68" y="147" width="344" height="185"/>
+                                <rect key="frame" x="68" y="147" width="350" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="344" id="AiN-ky-4bY"/>
-                                    <constraint firstAttribute="height" constant="185" id="qyg-Ax-zQp"/>
+                                    <constraint firstAttribute="width" constant="350" id="AiN-ky-4bY"/>
+                                    <constraint firstAttribute="height" constant="100" id="qyg-Ax-zQp"/>
                                 </constraints>
                             </imageView>
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6b-RG-Aqt">
@@ -501,19 +502,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="u6b-RG-Aqt" firstAttribute="top" secondItem="jCu-Mn-mcg" secondAttribute="bottom" constant="49" id="18S-qi-9s2"/>
+                            <constraint firstItem="u6b-RG-Aqt" firstAttribute="top" secondItem="jCu-Mn-mcg" secondAttribute="bottom" constant="134" id="18S-qi-9s2"/>
                             <constraint firstItem="lqr-V4-TYc" firstAttribute="top" secondItem="5PS-EJ-zCy" secondAttribute="bottom" id="3F6-j4-Rpo"/>
                             <constraint firstAttribute="trailing" secondItem="5PS-EJ-zCy" secondAttribute="trailing" id="PQi-ho-q43"/>
                             <constraint firstItem="5PS-EJ-zCy" firstAttribute="leading" secondItem="s0o-wf-Fnq" secondAttribute="leading" id="nRi-IA-eBk"/>
-                            <constraint firstItem="u6b-RG-Aqt" firstAttribute="centerX" secondItem="jCu-Mn-mcg" secondAttribute="centerX" constant="0.5" id="oD3-O4-1Xe"/>
+                            <constraint firstItem="u6b-RG-Aqt" firstAttribute="centerX" secondItem="jCu-Mn-mcg" secondAttribute="centerX" constant="-2.5" id="oD3-O4-1Xe"/>
                             <constraint firstItem="5PS-EJ-zCy" firstAttribute="top" secondItem="s0o-wf-Fnq" secondAttribute="top" id="qw8-aW-KQz"/>
-                            <constraint firstItem="jCu-Mn-mcg" firstAttribute="centerY" secondItem="5PS-EJ-zCy" secondAttribute="centerY" id="yOw-ZN-1XA"/>
-                            <constraint firstItem="jCu-Mn-mcg" firstAttribute="centerX" secondItem="5PS-EJ-zCy" secondAttribute="centerX" id="zqc-zw-hYo"/>
+                            <constraint firstItem="jCu-Mn-mcg" firstAttribute="centerY" secondItem="5PS-EJ-zCy" secondAttribute="centerY" constant="-43" id="yOw-ZN-1XA"/>
+                            <constraint firstItem="jCu-Mn-mcg" firstAttribute="centerX" secondItem="5PS-EJ-zCy" secondAttribute="centerX" constant="3" id="zqc-zw-hYo"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="0uI-3W-9sq"/>
                     <connections>
+                        <outlet property="advanceOulet" destination="u6b-RG-Aqt" id="ijV-Ct-hAA"/>
                         <outlet property="quote" destination="jCu-Mn-mcg" id="98a-g1-M6D"/>
                         <outlet property="splashImage" destination="5PS-EJ-zCy" id="KEP-iH-mJA"/>
                     </connections>
@@ -556,7 +558,7 @@
                                     <constraint firstAttribute="width" constant="100" id="9ds-c8-1fX"/>
                                     <constraint firstAttribute="height" constant="100" id="v1D-Kr-Hhj"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="nightmode.png">
+                                <state key="normal" backgroundImage="nighttoggleon.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -670,12 +672,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                             </imageView>
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CO4-4B-Xni">
-                                <rect key="frame" x="425" y="20" width="35" height="30"/>
+                                <rect key="frame" x="403" y="20" width="57" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="15P-0Z-abi"/>
+                                    <constraint firstAttribute="width" constant="57" id="15P-0Z-abi"/>
                                     <constraint firstAttribute="height" constant="30" id="M8X-8w-6dc"/>
                                 </constraints>
-                                <state key="normal" title="Back">
+                                <state key="normal" backgroundImage="normalback.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -709,6 +711,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="credits" destination="bk3-u5-chw" id="IEa-oa-3mK"/>
+                        <outlet property="creditsBack" destination="CO4-4B-Xni" id="rDh-Vx-G6n"/>
                         <outlet property="creditsBackground" destination="1fN-ke-XLH" id="91c-eP-hy9"/>
                     </connections>
                 </viewController>
@@ -738,7 +741,7 @@
     </scenes>
     <resources>
         <image name="gamcentericon.png" width="127" height="126"/>
-        <image name="nightmode.png" width="305" height="305"/>
+        <image name="nighttoggleon.png" width="305" height="305"/>
         <image name="normalback.png" width="302" height="127"/>
         <image name="normalbackground.png" width="1128" height="1500"/>
         <image name="normalcreditsbutton.png" width="465" height="151"/>
