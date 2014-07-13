@@ -25,6 +25,10 @@
 
 -(void)viewWillAppear:(BOOL)animated {
 	
+	_quote.alpha = 0.0;
+	_quote2.alpha = 0.0;
+	_advanceOulet.alpha = 0.0;
+	
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"bannerVisible"]) {
 		_AdBanner.hidden = NO;
 	}
@@ -56,8 +60,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
 
-    [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(advanceSceneTimer:) userInfo:nil repeats:NO];
+-(void)viewDidAppear:(BOOL)animated {
+	[UIView animateWithDuration:1.0 delay:0.5 options:0 animations:^{
+		_quote.alpha = 1.0f;
+		_advanceOulet.alpha = 1.0f;
+	} completion:^(BOOL finished) {
+		[UIView animateWithDuration:1.0 delay:0.5 options:0 animations:^{
+			_quote2.alpha = 1.0f;
+		} completion:^(BOOL finished) {
+			[NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];		}];
+	}];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,7 +93,7 @@
 }
 */
 
--(void)advanceSceneTimer:(NSTimer *)timer {
+-(void)advanceTimer:(NSTimer *)timer {
 	[self advanceScene];
 }
 
@@ -106,4 +120,5 @@
 - (IBAction)advance:(id)sender {
 	[self advanceScene];
 }
+
 @end
