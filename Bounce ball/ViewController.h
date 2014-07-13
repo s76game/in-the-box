@@ -11,10 +11,12 @@
 #import <QuartzCore/QuartzCore.h>
 #import <GameKit/GameKit.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import <iAd/iAd.h>
 
 
-@interface ViewController : UIViewController <GKGameCenterControllerDelegate> {
 
+@interface ViewController : UIViewController <GKGameCenterControllerDelegate, ADBannerViewDelegate> {
+	
 	
 }
 - (IBAction)start:(id)sender;
@@ -24,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *settings;
 @property (strong, nonatomic) IBOutlet UIImageView *frame;
 @property (strong, nonatomic) IBOutlet UIImageView *background;
+@property (strong, nonatomic) IBOutlet ADBannerView *banner;
 
 
 @end

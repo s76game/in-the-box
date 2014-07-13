@@ -12,5 +12,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *credits;
 @property (strong, nonatomic) IBOutlet UIImageView *creditsBackground;
 @property (strong, nonatomic) IBOutlet UIButton *creditsBack;
+@property (strong, nonatomic) IBOutlet ADBannerView *AdBanner;
 
 @end

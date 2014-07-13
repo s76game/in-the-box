@@ -71,7 +71,6 @@
 -(void)showDifferentView
 {
 	[self.navigationController popViewControllerAnimated:YES];
-	NSLog(@"Dismiss to previous view controller");
 }
 
 -(void)showScene {

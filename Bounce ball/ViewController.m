@@ -10,9 +10,52 @@
 
 @interface ViewController ()
 
-
 @end
 @implementation ViewController
+
+
+
+-(void)viewDidAppear:(BOOL)animated{
+	[NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(executeiAd:) userInfo:nil repeats:NO];
+}
+
+-(void)executeiAd:(NSTimer *)timer {
+	if (!_banner.isBannerLoaded) {
+		_banner.hidden = YES;
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"bannerVisible"];
+	}
+	else {
+		_banner.hidden = NO;
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"bannerVisible"];
+
+	}
+}
+
+//- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+//{
+//	
+//	NSLog(@"Alpha");
+//	if (!bannerIsVisible)
+//	{
+//		NSLog(@"Alpha Bravo");
+//		_banner.hidden = NO;
+//		bannerIsVisible = YES;
+//	}
+//	
+//}
+//
+//- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+//{
+//	NSLog(@"Bravo");
+//	if (bannerIsVisible)
+//	{
+//		NSLog(@"Bravo Bravo");
+//		// assumes the banner view is at the top of the screen.
+//		_banner.hidden = YES;
+//		bannerIsVisible = NO;
+//	}
+//}
+
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,6 +69,8 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	
+	_banner.delegate = self;
 	
 	_ball.layer.cornerRadius = 37.5;
 	

@@ -23,5 +23,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *backOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *feedbackOutlet;
 @property (strong, nonatomic) IBOutlet UILabel *label;
+@property (strong, nonatomic) IBOutlet ADBannerView *AdBanner;
 
 @end

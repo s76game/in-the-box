@@ -36,7 +36,7 @@
 	}
 	else {
 		_nightMode.on = YES;
-		[_nightImage setBackgroundImage:[UIImage imageNamed:@"nightmode.png"] forState:UIControlStateNormal];
+		[_nightImage setBackgroundImage:[UIImage imageNamed:@"nighttoggleon.png"] forState:UIControlStateNormal];
 	}
 
 }
@@ -107,11 +107,9 @@
 	if (![switchState isOn]) {
 		[[NSUserDefaults standardUserDefaults] setObject:@"night" forKey:@"UI"];
 		[_nightImage setBackgroundImage:[UIImage imageNamed:@"nighttoggleoff.png"] forState:UIControlStateNormal];
-		NSLog(@"UI set to night");
 	} else {
 		[[NSUserDefaults standardUserDefaults] setObject:@"normal" forKey:@"UI"];
 		[_nightImage setBackgroundImage:[UIImage imageNamed:@"nighttoggleon.png"] forState:UIControlStateNormal];
-		NSLog(@"UI set to normal");
 	}
 	[self updateInterface];
 }
@@ -129,11 +127,19 @@
 		AudioServicesPlaySystemSound(breaking);
 	}
 	else {
-		NSLog(@"Sounds turned off");
+		NSLog(@"***Breaking Sound***");
 	}
 }
 
 -(void)updateInterface {
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"bannerVisible"]) {
+		_banner.hidden = NO;
+	}
+	else {
+	_banner.hidden = YES;
+	}
+		
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		[_modeTitle setImage:[UIImage imageNamed:@"nightmodetitle.png"]];
 		[_modeBackground setImage:[UIImage imageNamed:@"nightbackground.png"]];
@@ -146,6 +152,7 @@
 		[_back setBackgroundImage:[UIImage imageNamed:@"normalback.png"] forState:UIControlStateNormal];
 	}
 }
+
 
 
 

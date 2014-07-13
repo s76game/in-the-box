@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface ModeSelect : ViewController {
+@interface ModeSelect : UIViewController {
 	SystemSoundID breaking;
 }
 - (IBAction)normalButton:(id)sender;
@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *back;
 @property (strong, nonatomic) IBOutlet UISwitch *nightMode;
 @property (strong, nonatomic) IBOutlet UIButton *nightImage;
+@property (strong, nonatomic) IBOutlet ADBannerView *banner;
 
 	
 

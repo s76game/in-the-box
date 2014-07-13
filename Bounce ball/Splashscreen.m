@@ -24,20 +24,31 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"bannerVisible"]) {
+		_AdBanner.hidden = NO;
+	}
+	else {
+		_AdBanner.hidden = YES;
+	}
+	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		_splashImage.image = [UIImage imageNamed:@"nightbackground.png"];
-		_quote.image = [UIImage imageNamed:@"nightquote.png"];
+		_quote.image = [UIImage imageNamed:@"nightquote1.png"];
+		_quote2.image = [UIImage imageNamed:@"nightquote2.png"];
 		[_advanceOulet setBackgroundImage:[UIImage imageNamed:@"normalproceed.png"] forState:UIControlStateNormal];
 	}
 	else if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"strategy"] && ![[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"night"]) {
 		// Strategy UI Code
 		_splashImage.image = [UIImage imageNamed:@"normalbackground.png"];
-		_quote.image = [UIImage imageNamed:@"normalquote.png"];
+		_quote.image = [UIImage imageNamed:@"normalquote1.png"];
+		_quote2.image = [UIImage imageNamed:@"normalquote2.png"];
 		[_advanceOulet setBackgroundImage:[UIImage imageNamed:@"strategyproceed.png"] forState:UIControlStateNormal];
 	}
 	else {
 		_splashImage.image = [UIImage imageNamed:@"normalbackground.png"];
-		_quote.image = [UIImage imageNamed:@"normalquote.png"];
+		_quote.image = [UIImage imageNamed:@"normalquote1.png"];
+		_quote2.image = [UIImage imageNamed:@"normalquote2.png"];
 		[_advanceOulet setBackgroundImage:[UIImage imageNamed:@"normalproceed.png"] forState:UIControlStateNormal];
 	}
 }

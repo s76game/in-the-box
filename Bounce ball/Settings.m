@@ -51,12 +51,19 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-	NSLog(@"Alpha");
 	[self updateInterface];
 }
 
 
 -(void)updateInterface {
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"bannerVisible"]) {
+		_AdBanner.hidden = NO;
+	}
+	else {
+		_AdBanner.hidden = YES;
+	}
+	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"nightcreditsbutton.png"] forState:UIControlStateNormal];
 		[_rateOutlet setBackgroundImage:[UIImage imageNamed:@"nightratebutton.png"] forState:UIControlStateNormal];

@@ -39,7 +39,7 @@
 	[self screenSize];
 	
 	// Set up score
-	score = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth/2), 25, 300, 100)];
+	score = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth/2)-25, 25, 300, 50)];
 	[self.view addSubview:score];
 	scoreNumber = 0;
 	score.text = @"Time";
@@ -93,7 +93,12 @@
 	CGPathAddLineToPoint(path, NULL, 1, 1);
 	
 	border.path = path;
-	[border setStrokeColor:[UIColor greenColor]];
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+		[border setStrokeColor:[UIColor whiteColor]];
+	}
+	else {
+		[border setStrokeColor:[UIColor blackColor]];
+	}
 	[border setLineWidth:5];
 	
 	[self addChild:border];
@@ -154,7 +159,6 @@
 		pos1x = positionInScene.x;
 		pos1y = positionInScene.y;
 		
-		NSLog(@"First touch");
 	}
 }
 
@@ -297,7 +301,6 @@
 
 -(void)gameOver {
 	[self removeLine];
-	NSLog(@"Game Over");
 	gameOver = YES;
 	
 	// Create game over UI

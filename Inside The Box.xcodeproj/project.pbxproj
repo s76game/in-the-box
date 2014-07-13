@@ -86,6 +86,7 @@
 		94D31A521972483E006E21C2 /* strategyplaybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D31A4E1972483E006E21C2 /* strategyplaybutton.png */; };
 		94D31A531972483E006E21C2 /* strategyproceed.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D31A4F1972483E006E21C2 /* strategyproceed.png */; };
 		94D31A541972483E006E21C2 /* strategytitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D31A501972483E006E21C2 /* strategytitle.png */; };
+		94D31A571972C392006E21C2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94D31A561972C392006E21C2 /* iAd.framework */; };
 		94E19B93196C8F4600893DEE /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94E19B92196C8F4600893DEE /* Media.xcassets */; };
 		94E19B96196C93C600893DEE /* Credits.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E19B95196C93C600893DEE /* Credits.m */; };
 		94E19B98196C955200893DEE /* Prototype.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94E19B97196C955200893DEE /* Prototype.ttf */; };
@@ -194,8 +195,9 @@
 		94D31A4A1972390C006E21C2 /* nighttoggleoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nighttoggleoff.png; sourceTree = "<group>"; };
 		94D31A4D1972483E006E21C2 /* strategymodebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strategymodebutton.png; sourceTree = "<group>"; };
 		94D31A4E1972483E006E21C2 /* strategyplaybutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strategyplaybutton.png; sourceTree = "<group>"; };
-		94D31A4F1972483E006E21C2 /* strategyproceed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strategyproceed.png; sourceTree = "<group>"; };
+		94D31A4F1972483E006E21C2 /* strategyproceed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = strategyproceed.png; path = ../strategyproceed.png; sourceTree = "<group>"; };
 		94D31A501972483E006E21C2 /* strategytitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strategytitle.png; sourceTree = "<group>"; };
+		94D31A561972C392006E21C2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		94E19B92196C8F4600893DEE /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = ../Media.xcassets; sourceTree = "<group>"; };
 		94E19B94196C93C600893DEE /* Credits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Credits.h; sourceTree = "<group>"; };
 		94E19B95196C93C600893DEE /* Credits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Credits.m; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94D31A571972C392006E21C2 /* iAd.framework in Frameworks */,
 				94F843DD196E4EF100461256 /* MessageUI.framework in Frameworks */,
 				940339E1195F78B300FD9516 /* StoreKit.framework in Frameworks */,
 				94792ADE195CDE23004A6404 /* AudioToolbox.framework in Frameworks */,
@@ -285,7 +288,6 @@
 			children = (
 				94D31A4D1972483E006E21C2 /* strategymodebutton.png */,
 				94D31A4E1972483E006E21C2 /* strategyplaybutton.png */,
-				94D31A4F1972483E006E21C2 /* strategyproceed.png */,
 				94D31A501972483E006E21C2 /* strategytitle.png */,
 				94033A1619634EE200FD9516 /* goal.png */,
 			);
@@ -321,6 +323,7 @@
 		949104701971C4110070273A /* Splash Screen */ = {
 			isa = PBXGroup;
 			children = (
+				94D31A4F1972483E006E21C2 /* strategyproceed.png */,
 				9400629B1964AE0700B5D811 /* normalproceed.png */,
 				949104691971C3D60070273A /* nightquote1.png */,
 				9491046A1971C3D60070273A /* nightquote2.png */,
@@ -388,12 +391,7 @@
 		94C7FE9C194E3CDF00270AE8 = {
 			isa = PBXGroup;
 			children = (
-				94F843DC196E4EF100461256 /* MessageUI.framework */,
-				940339E0195F78B300FD9516 /* StoreKit.framework */,
-				94792ADD195CDE23004A6404 /* AudioToolbox.framework */,
-				94792ADB195BAA16004A6404 /* GameKit.framework */,
-				94792ACA1958FA17004A6404 /* QuartzCore.framework */,
-				94C7FECE194E3DE600270AE8 /* SpriteKit.framework */,
+				94D31A5519724EA2006E21C2 /* Frameworks */,
 				94C7FEA7194E3CDF00270AE8 /* Bounce ball */,
 				94C7FEC1194E3CDF00270AE8 /* Bounce ballTests */,
 				94C7FEA6194E3CDF00270AE8 /* Products */,
@@ -465,6 +463,20 @@
 				94C7FEC3194E3CDF00270AE8 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		94D31A5519724EA2006E21C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				94D31A561972C392006E21C2 /* iAd.framework */,
+				94F843DC196E4EF100461256 /* MessageUI.framework */,
+				940339E0195F78B300FD9516 /* StoreKit.framework */,
+				94792ADD195CDE23004A6404 /* AudioToolbox.framework */,
+				94792ADB195BAA16004A6404 /* GameKit.framework */,
+				94792ACA1958FA17004A6404 /* QuartzCore.framework */,
+				94C7FECE194E3DE600270AE8 /* SpriteKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

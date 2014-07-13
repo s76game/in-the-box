@@ -34,6 +34,14 @@
 }
 
 -(void)updateInterface {
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"bannerVisible"]) {
+		_AdBanner.hidden = NO;
+	}
+	else {
+		_AdBanner.hidden = YES;
+	}
+	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		[_credits setImage:[UIImage imageNamed:@"nightcredits.png"]];
 		[_creditsBackground setImage:[UIImage imageNamed:@"nightbackground.png"]];

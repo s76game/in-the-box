@@ -15,8 +15,10 @@
 }
 @property (strong, nonatomic) IBOutlet UIImageView *splashImage;
 @property (strong, nonatomic) IBOutlet UIImageView *quote;
+@property (strong, nonatomic) IBOutlet UIImageView *quote2;
 - (IBAction)advance:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *advanceOulet;
+@property (strong, nonatomic) IBOutlet ADBannerView *AdBanner;
 
 
 
