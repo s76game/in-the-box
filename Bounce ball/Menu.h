@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "SpaceShipScene.h"
+#import "Normal.h"
 #import "NormalStrategic.h"
 
 BOOL returnToMenu;

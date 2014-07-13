@@ -142,6 +142,11 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	
+	NSLog(gameOver ? @"Game Over Yes" : @"Game Over No");
+	NSLog(dotDrawn ? @"Dot drawn Yes" : @"Dot drawn No");
+	NSLog(gameStarted ? @"Game Started Yes" : @"Game Started No");
+	
+	
 	if (!gameOver && !dotDrawn && gameStarted) {
 		
 		[self removeLine];
@@ -159,8 +164,6 @@
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	
-	if (!gameOver && !dotDrawn && gameStarted) {
 	
 		[self removeLine];
 	
@@ -192,12 +195,9 @@
 		[lines setLineWidth:3];
 	
 		[self addChild:lines];
-	}
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	
-	if (!gameOver && !dotDrawn && gameStarted) {
 	
 		[self removeLine];
 	
@@ -237,7 +237,6 @@
 		[lines setLineWidth:3];
 	
 		[self addChild:lines];
-	}
 }
 
 

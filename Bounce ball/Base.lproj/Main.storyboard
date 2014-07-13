@@ -478,7 +478,7 @@
                             <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="normalbackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="5PS-EJ-zCy">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                             </imageView>
-                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="normalquote.png" translatesAutoresizingMaskIntoConstraints="NO" id="jCu-Mn-mcg">
+                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jCu-Mn-mcg">
                                 <rect key="frame" x="68" y="147" width="344" height="185"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="344" id="AiN-ky-4bY"/>
@@ -746,7 +746,6 @@
         <image name="normalmodetitle.png" width="381" height="168"/>
         <image name="normalplaybutton.png" width="310" height="122"/>
         <image name="normalproceed.png" width="135" height="87"/>
-        <image name="normalquote.png" width="827" height="430"/>
         <image name="normalratebutton.png" width="338" height="150"/>
         <image name="normalselection.png" width="305" height="305"/>
         <image name="normalsettings.png" width="115" height="115"/>

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9400629A1963C40300B5D811 /* normalgo.png in Resources */ = {isa = PBXBuildFile; fileRef = 940062991963C40300B5D811 /* normalgo.png */; };
 		9400629C1964AE0700B5D811 /* normalproceed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9400629B1964AE0700B5D811 /* normalproceed.png */; };
-		940339D8195F728C00FD9516 /* nighttoggleoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 940339D6195F728C00FD9516 /* nighttoggleoff.png */; };
 		940339DB195F755600FD9516 /* normalselection.png in Resources */ = {isa = PBXBuildFile; fileRef = 940339DA195F755600FD9516 /* normalselection.png */; };
 		940339E1195F78B300FD9516 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 940339E0195F78B300FD9516 /* StoreKit.framework */; };
 		940339E3195F864200FD9516 /* nightbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 940339E2195F864200FD9516 /* nightbackground.png */; };
@@ -39,7 +38,6 @@
 		94033A2219634EE200FD9516 /* normalratebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94033A1A19634EE200FD9516 /* normalratebutton.png */; };
 		94033A2319634EE200FD9516 /* strategyselection.png in Resources */ = {isa = PBXBuildFile; fileRef = 94033A1B19634EE200FD9516 /* strategyselection.png */; };
 		94033A2419634EE200FD9516 /* toggle_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 94033A1C19634EE200FD9516 /* toggle_sound.mp3 */; };
-		94033A2919635C7D00FD9516 /* nighttoggleoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 94033A2819635C7D00FD9516 /* nighttoggleoff.png */; };
 		94792A921958EBCF004A6404 /* Splashscreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 94792A911958EBCF004A6404 /* Splashscreen.m */; };
 		94792A951958EBDC004A6404 /* ModeSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 94792A941958EBDC004A6404 /* ModeSelect.m */; };
 		94792AB31958EC02004A6404 /* nightmodetitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 94792A991958EC02004A6404 /* nightmodetitle.png */; };
@@ -81,7 +79,7 @@
 		94C7FEB7194E3CDF00270AE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94C7FEB5194E3CDF00270AE8 /* Main.storyboard */; };
 		94C7FEC5194E3CDF00270AE8 /* Bounce_ballTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C7FEC4194E3CDF00270AE8 /* Bounce_ballTests.m */; };
 		94C7FECF194E3DE600270AE8 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C7FECE194E3DE600270AE8 /* SpriteKit.framework */; };
-		94C7FED5194E3F1F00270AE8 /* SpaceShipScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C7FED4194E3F1F00270AE8 /* SpaceShipScene.m */; };
+		94D31A48197236FE006E21C2 /* Normal.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D31A47197236FE006E21C2 /* Normal.m */; };
 		94E19B93196C8F4600893DEE /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94E19B92196C8F4600893DEE /* Media.xcassets */; };
 		94E19B96196C93C600893DEE /* Credits.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E19B95196C93C600893DEE /* Credits.m */; };
 		94E19B98196C955200893DEE /* Prototype.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94E19B97196C955200893DEE /* Prototype.ttf */; };
@@ -103,7 +101,6 @@
 /* Begin PBXFileReference section */
 		940062991963C40300B5D811 /* normalgo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalgo.png; path = ../normalgo.png; sourceTree = "<group>"; };
 		9400629B1964AE0700B5D811 /* normalproceed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalproceed.png; path = ../normalproceed.png; sourceTree = "<group>"; };
-		940339D6195F728C00FD9516 /* nighttoggleoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nighttoggleoff.png; path = ../../nighttoggleoff.png; sourceTree = "<group>"; };
 		940339DA195F755600FD9516 /* normalselection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalselection.png; path = ../../normalselection.png; sourceTree = "<group>"; };
 		940339E0195F78B300FD9516 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		940339E2195F864200FD9516 /* nightbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nightbackground.png; path = ../../../../../Downloads/Inside_The_Box/Night_Mode/nightbackground.png; sourceTree = "<group>"; };
@@ -134,7 +131,6 @@
 		94033A1A19634EE200FD9516 /* normalratebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalratebutton.png; path = ../normalratebutton.png; sourceTree = "<group>"; };
 		94033A1B19634EE200FD9516 /* strategyselection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = strategyselection.png; path = ../strategyselection.png; sourceTree = "<group>"; };
 		94033A1C19634EE200FD9516 /* toggle_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = toggle_sound.mp3; sourceTree = "<group>"; };
-		94033A2819635C7D00FD9516 /* nighttoggleoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nighttoggleoff.png; path = ../nighttoggleoff.png; sourceTree = "<group>"; };
 		94792A901958EBCF004A6404 /* Splashscreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Splashscreen.h; sourceTree = "<group>"; };
 		94792A911958EBCF004A6404 /* Splashscreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Splashscreen.m; sourceTree = "<group>"; };
 		94792A931958EBDC004A6404 /* ModeSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeSelect.h; sourceTree = "<group>"; };
@@ -186,8 +182,8 @@
 		94C7FEC3194E3CDF00270AE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94C7FEC4194E3CDF00270AE8 /* Bounce_ballTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bounce_ballTests.m; sourceTree = "<group>"; };
 		94C7FECE194E3DE600270AE8 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
-		94C7FED3194E3F1F00270AE8 /* SpaceShipScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpaceShipScene.h; sourceTree = "<group>"; };
-		94C7FED4194E3F1F00270AE8 /* SpaceShipScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpaceShipScene.m; sourceTree = "<group>"; };
+		94D31A46197236FE006E21C2 /* Normal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Normal.h; sourceTree = "<group>"; };
+		94D31A47197236FE006E21C2 /* Normal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Normal.m; sourceTree = "<group>"; };
 		94E19B92196C8F4600893DEE /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = ../Media.xcassets; sourceTree = "<group>"; };
 		94E19B94196C93C600893DEE /* Credits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Credits.h; sourceTree = "<group>"; };
 		94E19B95196C93C600893DEE /* Credits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Credits.m; sourceTree = "<group>"; };
@@ -266,8 +262,8 @@
 		94033A11196205B700FD9516 /* Normal Gameplay Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				94C7FED3194E3F1F00270AE8 /* SpaceShipScene.h */,
-				94C7FED4194E3F1F00270AE8 /* SpaceShipScene.m */,
+				94D31A46197236FE006E21C2 /* Normal.h */,
+				94D31A47197236FE006E21C2 /* Normal.m */,
 			);
 			name = "Normal Gameplay Scenes";
 			sourceTree = "<group>";
@@ -360,8 +356,6 @@
 				94792A9F1958EC02004A6404 /* nightbackgroundplain.png */,
 				94E19B99196C977100893DEE /* nightcredits.png */,
 				940339E819609C1B00FD9516 /* nightback.png */,
-				94033A2819635C7D00FD9516 /* nighttoggleoff.png */,
-				940339D6195F728C00FD9516 /* nighttoggleoff.png */,
 				94792AA01958EC02004A6404 /* nightmodebutton.png */,
 				94792AA11958EC02004A6404 /* nightplaybutton.png */,
 				94792AA21958EC02004A6404 /* nightsettings.png */,
@@ -558,7 +552,6 @@
 				94792AB91958EC02004A6404 /* nightmodebutton.png in Resources */,
 				94033A091960DA0400FD9516 /* AppIcon76x76.png in Resources */,
 				94033A031960DA0400FD9516 /* AppIcon57x57.png in Resources */,
-				94033A2919635C7D00FD9516 /* nighttoggleoff.png in Resources */,
 				94E19B98196C955200893DEE /* Prototype.ttf in Resources */,
 				94033A011960DA0400FD9516 /* AppIcon50x50.png in Resources */,
 				9400629A1963C40300B5D811 /* normalgo.png in Resources */,
@@ -593,7 +586,6 @@
 				940339DB195F755600FD9516 /* normalselection.png in Resources */,
 				94E19B93196C8F4600893DEE /* Media.xcassets in Resources */,
 				940339FF1960DA0400FD9516 /* AppIcon40x40.png in Resources */,
-				940339D8195F728C00FD9516 /* nighttoggleoff.png in Resources */,
 				940339FD1960DA0400FD9516 /* AppIcon29x29.png in Resources */,
 				94033A2319634EE200FD9516 /* strategyselection.png in Resources */,
 				94033A1D19634EE200FD9516 /* flickering_noise.mp3 in Resources */,
@@ -615,6 +607,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94D31A48197236FE006E21C2 /* Normal.m in Sources */,
 				947A9F5519589907006AE1C9 /* Menu.m in Sources */,
 				94792ADA195B7218004A6404 /* Settings.m in Sources */,
 				94E19B96196C93C600893DEE /* Credits.m in Sources */,
@@ -622,7 +615,6 @@
 				94033A14196205D200FD9516 /* NormalStrategic.m in Sources */,
 				94C7FEAE194E3CDF00270AE8 /* AppDelegate.m in Sources */,
 				94792A921958EBCF004A6404 /* Splashscreen.m in Sources */,
-				94C7FED5194E3F1F00270AE8 /* SpaceShipScene.m in Sources */,
 				94C7FEB4194E3CDF00270AE8 /* ViewController.m in Sources */,
 				94C7FEAB194E3CDF00270AE8 /* main.m in Sources */,
 				94792A951958EBDC004A6404 /* ModeSelect.m in Sources */,

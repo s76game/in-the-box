@@ -1,22 +1,22 @@
 //
-//  SpaceShipScene.m
-//  Bounce ball
+//  Normal.m
+//  Inside The Box
 //
-//  Created by Ryan Cobelli on 6/15/14.
-//  Copyright (c) 2014 Rybel. All rights reserved.
+//  Created by Ryan Cobelli on 7/12/14.
+//  Copyright (c) 2014 Rybel LLC. All rights reserved.
 //
 
-#import "SpaceShipScene.h"
+#import "Normal.h"
 
-@interface SpaceShipScene ()
+@interface Normal ()
 @property BOOL contentCreated;
 
-@property (weak, nonatomic) id <sceneDelegate> delegate;
+@property (weak, nonatomic) id <sceneDelegate, resetSKScene> delegate;
 
 @end
 
-@implementation SpaceShipScene
 
+@implementation Normal
 
 - (void)didMoveToView:(SKView *)view
 {
@@ -38,16 +38,16 @@
 {
 	[self screenSize];
 	
-	// Set up score and display
+	// Set up score
 	score = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth/2), 25, 300, 100)];
 	[self.view addSubview:score];
 	scoreNumber = 0;
 	score.text = @"Time";
 	[score setFont:[UIFont fontWithName:@"Prototype" size:25]];
-	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		score.textColor = [UIColor whiteColor];
 	}
+	
 	
 	
 	// Set up background texture
@@ -59,15 +59,13 @@
 	else {
 		textureName = @"normalbackground.png";
 	}
-
+	
 	SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%@", textureName]];
 	SKSpriteNode *background = [SKSpriteNode spriteNodeWithTexture:backgroundTexture size:self.view.frame.size];
 	background.position = (CGPoint) {CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame)};
 	[self addChild:background];
 	
 	// Add start game button
-	
-	NSLog(@"%f", screenWidth);
 	
 	start = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[start addTarget:self action:@selector(start:) forControlEvents:UIControlEventTouchUpInside];
@@ -143,44 +141,102 @@
 
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-
+	
+	NSLog(gameOver ? @"Game Over Yes" : @"Game Over No");
+	NSLog(dotDrawn ? @"Dot drawn Yes" : @"Dot drawn No");
+	NSLog(gameStarted ? @"Game Started Yes" : @"Game Started No");
+	
+	
 	if (!gameOver && !dotDrawn && gameStarted) {
-			
-			[self removeLine];
-			
-			dotDrawn = YES;
-	
-			UITouch* touch = [touches anyObject];
-			CGPoint positionInScene = [touch locationInNode:self];
-	
-			pos1x = positionInScene.x;
-			pos1y = positionInScene.y;
-			
-			pos2x = positionInScene.x;
-			pos2y = positionInScene.y;
 		
-			line = [[SKSpriteNode alloc] init];
-			
-			NSString *textureName;
-			
-			if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-				textureName = @"normalball.png";
-			}
-			else {
-				textureName = @"normalball.png";
-			}
-			
-			
-			[line setTexture:[SKTexture textureWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@", textureName]]]];
-			line.size = CGSizeMake(15, 15);
-			line.position = CGPointMake(pos2x, pos2y);
-			[self addChild:line];
-			line.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:7.5];
-			line.physicsBody.dynamic = NO;
-			line.physicsBody.categoryBitMask = lineCategory;
-			line.physicsBody.collisionBitMask = ballCategory;
-			line.physicsBody.contactTestBitMask = lineCategory;
+		[self removeLine];
+		
+		dotDrawn = YES;
+		
+		UITouch* touch = [touches anyObject];
+		CGPoint positionInScene = [touch locationInNode:self];
+		
+		pos1x = positionInScene.x;
+		pos1y = positionInScene.y;
+		
+		NSLog(@"First touch");
 	}
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+	
+	[self removeLine];
+	
+	UITouch* touch = [touches anyObject];
+	CGPoint positionInScene = [touch locationInNode:self];
+	
+	pos2x = positionInScene.x;
+	pos2y = positionInScene.y;
+	
+	
+	NSString *textureName;
+	
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+		textureName = @"normalball.png";
+	}
+	else {
+		textureName = @"normalball.png";
+	}
+	
+	
+	lines = [SKShapeNode node];
+	
+	CGMutablePathRef path = CGPathCreateMutable();
+	CGPathMoveToPoint(path, NULL, pos1x, pos1y);
+	CGPathAddLineToPoint(path, NULL, pos2x, pos2y);
+	
+	lines.path = path;
+	[lines setStrokeColor:[UIColor grayColor]];
+	[lines setLineWidth:3];
+	
+	[self addChild:lines];
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	
+	[self removeLine];
+	
+	UITouch* touch = [touches anyObject];
+	CGPoint positionInScene = [touch locationInNode:self];
+	
+	pos2x = positionInScene.x;
+	pos2y = positionInScene.y;
+	
+	
+	NSString *textureName;
+	
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+		textureName = @"normalball.png";
+	}
+	else {
+		textureName = @"normalball.png";
+	}
+	
+	
+	line = [[SKSpriteNode alloc] init];
+	[self addChild:line];
+	line.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(pos1x, pos1y) toPoint:CGPointMake(pos2x-line.position.x, pos2y-line.position.y)];
+	line.physicsBody.dynamic = NO;
+	line.physicsBody.categoryBitMask = lineCategory;
+	line.physicsBody.collisionBitMask = ballCategory;
+	line.physicsBody.contactTestBitMask = lineCategory;
+	
+	lines = [SKShapeNode node];
+	
+	CGMutablePathRef path = CGPathCreateMutable();
+	CGPathMoveToPoint(path, NULL, pos1x, pos1y);
+	CGPathAddLineToPoint(path, NULL, pos2x, pos2y);
+	
+	lines.path = path;
+	[lines setStrokeColor:[UIColor blackColor]];
+	[lines setLineWidth:3];
+	
+	[self addChild:lines];
 }
 
 
@@ -274,8 +330,8 @@
 	menu.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		 [menu setBackgroundColor:[UIColor whiteColor]];
-		 [menu setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		[menu setBackgroundColor:[UIColor whiteColor]];
+		[menu setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	}
 	else {
 		[menu setBackgroundColor:[UIColor blackColor]];
@@ -299,25 +355,29 @@
 
 -(void)menuButton:(UIButton *)button {
 	
+	gameOver = NO;
+	gameStarted = NO;
+	gameTime = 0;
+	
+	[self removeElements];
+	
 	[self.view presentScene:nil];
-	returnToMenu = YES;
-//	[self.delegate showDifferentView];
+	
+	[self.delegate showDifferentView];
 	
 }
 
 -(void)restartButton:(UIButton *)button {
 	
-	NSLog(@"%i", scoreNumber);
+	gameOver = NO;
+	gameStarted = NO;
+	gameTime = 0;
 	
 	[self removeElements];
 	
-	gameOver = NO;
-	gameStarted = NO;
+	[self.view presentScene:nil];
 	
-	// Restarts the scene
-	SKScene *nextScene = [[SpaceShipScene alloc] initWithSize:self.size];
-	SKTransition *doors = [SKTransition doorsOpenHorizontalWithDuration:0.5];
-	[self.view presentScene:nextScene transition:doors];
+	[self.delegate showScene];
 }
 
 -(void)removeElements {
@@ -333,8 +393,7 @@
 - (void) speedUp:(NSTimer *)timer
 {
 	if (!gameOver) {
-	[ball.physicsBody applyImpulse:CGVectorMake(2, 2)];
-	NSLog(@"Speed increased");
+		[ball.physicsBody applyImpulse:CGVectorMake(2, 2)];
 	}
 }
 
@@ -346,8 +405,6 @@
 	[start removeFromSuperview];
 	
 	[ball.physicsBody applyImpulse:CGVectorMake(x, y)];
-	NSLog(@"Ball moved");
-	NSLog(@"%@", NSStringFromCGPoint(ball.position));
 	//Calls ball speed up method
 	[NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(speedUp:) userInfo:nil repeats:YES];
 	// Start Timer
@@ -372,23 +429,20 @@
 
 -(void)removeLine {
 	[line runAction:remove];
+	[lines runAction:remove];
 	dotDrawn = NO;
 }
 
 -(void)timer:(NSTimer *)timer {
 	
 	if (!gameOver) {
-	
+		
 		gameTime = gameTime + 0.1;
-	
+		
 		gameTime = (float) ((int) (gameTime * 100.0)) / 100.0;
 		
 		score.text = [NSString stringWithFormat:@"%.01f", gameTime];
-	
+		
 	}
 	
 }
-
-
-
-@end

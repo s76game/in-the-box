@@ -52,7 +52,7 @@
 }
 
 -(void)spaceShipScene {
-	SpaceShipScene* hello = [[SpaceShipScene alloc] initWithSize:screenSize];
+	Normal* hello = [[Normal alloc] initWithSize:screenSize];
 	spriteView = (SKView *) self.view;
 	hello.delegate = self;
 	lastPlayed = @"normal";
@@ -83,7 +83,7 @@
 		[spriteView presentScene: hello];
 	}
 	else if ([lastPlayed isEqualToString:@"normal"]) {
-		SpaceShipScene* hello = [[SpaceShipScene alloc] initWithSize:screenSize];
+		Normal* hello = [[Normal alloc] initWithSize:screenSize];
 		spriteView = (SKView *) self.view;
 		hello.delegate = self;
 		lastPlayed = @"normal";
