@@ -107,6 +107,9 @@
 
 
 - (IBAction)feedback:(id)sender {
+	
+	[self judgeAchievementComplete];
+	
 	if ([MFMailComposeViewController canSendMail])
 	{
 		MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
@@ -171,4 +174,23 @@
 	
 //	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"OUR URL HERE"]];
 }
+
+- (void)judgeAchievementComplete {
+	GKAchievement *achievement1 = [[GKAchievement alloc] initWithIdentifier: @"judge"];
+	achievement1.percentComplete = 100.0;
+	NSArray *achievementsToComplete = [NSArray arrayWithObjects:achievement1, nil];
+	NSLog(@"Attempt to report %@", achievement1.identifier);
+	[GKAchievement reportAchievements: achievementsToComplete withCompletionHandler:^(NSError *error)
+	 {
+		 if (error != nil)
+		 {
+			 NSLog(@"Error in reporting achievements: %@", error);
+		 }
+		 else {
+			 [GKNotificationBanner showBannerWithTitle:@"The Judge!" message:@"Rate/Leave feedback on the game" completionHandler:^{}];
+		 }
+	 }];
+}
+
+
 @end

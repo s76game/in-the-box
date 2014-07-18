@@ -11,11 +11,12 @@
 #import <QuartzCore/QuartzCore.h>
 #import <GameKit/GameKit.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import <MessageUI/MessageUI.h>
 #import <iAd/iAd.h>
 
 
 
-@interface ViewController : UIViewController <GKGameCenterControllerDelegate, ADBannerViewDelegate> {
+@interface ViewController : UIViewController <GKGameCenterControllerDelegate, ADBannerViewDelegate, MFMailComposeViewControllerDelegate> {
 	
 	
 }
@@ -27,7 +28,9 @@
 @property (strong, nonatomic) IBOutlet UIImageView *frame;
 @property (strong, nonatomic) IBOutlet UIImageView *background;
 @property (strong, nonatomic) IBOutlet ADBannerView *banner;
+- (IBAction)gameCenterButton:(id)sender;
 
+- (IBAction)resetGameCenter:(id)sender;
 
 @end
 

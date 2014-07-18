@@ -38,6 +38,9 @@
 {
 	[self screenSize];
 	
+	[self spawnGoal];
+	
+	
 	// Set up score
 	score = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth/2)-25, 25, 300, 50)];
 	[self.view addSubview:score];
@@ -224,9 +227,8 @@
 		line.physicsBody.categoryBitMask = lineCategory;
 		line.physicsBody.collisionBitMask = ballCategory;
 		line.physicsBody.contactTestBitMask = lineCategory;
-		
-		lines = [SKShapeNode node];
 	
+		lines = [SKShapeNode node];
 		CGMutablePathRef path = CGPathCreateMutable();
 		CGPathMoveToPoint(path, NULL, pos1x, pos1y);
 		CGPathAddLineToPoint(path, NULL, pos2x, pos2y);
@@ -261,8 +263,8 @@
 	ballSprite.physicsBody.linearDamping = 0;
 	ballSprite.physicsBody.angularDamping = 0;
 	ballSprite.physicsBody.restitution = 1;
-	ballSprite.physicsBody.collisionBitMask = lineCategory | edgeCategory;
-	ballSprite.physicsBody.contactTestBitMask = lineCategory | edgeCategory;
+	ballSprite.physicsBody.collisionBitMask = lineCategory | goalCategory | edgeCategory;
+	ballSprite.physicsBody.contactTestBitMask = lineCategory | goalCategory | edgeCategory;
 	return ballSprite;
 }
 
@@ -288,14 +290,24 @@
 	
 	if ((firstBody.categoryBitMask & lineCategory) != 0)
 	{
+		NSLog(@"Alpha");
 		// Ball hits line
 		[self removeLine];
 		scoreNumber = scoreNumber + 1;
 	}
-	else {
+	else if ((firstBody.categoryBitMask & edgeCategory) != 0)
+	{
+		NSLog(@"Bravo");
 		// Ball hits wall
 		[ball.physicsBody setVelocity:CGVectorMake(0, 0)];
 		[self gameOver];
+	}
+	else {
+		NSLog(@"Charlie");
+		[goal removeFromParent];
+		[self spawnGoal];
+		goalsHit = goalsHit + 1;
+		
 	}
 }
 
@@ -444,6 +456,28 @@
 		
 	}
 	
+}
+
+-(void)spawnGoal {
+	
+	goal = [[SKSpriteNode alloc] init];
+	goal.position = [self chooseLocation];
+	[self addChild:goal];
+	goal.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"goal.png"] alphaThreshold:0.5 size:CGSizeMake(100, 100)];
+	goal.physicsBody.dynamic = NO;
+	goal.physicsBody.categoryBitMask = goalCategory;
+	goal.physicsBody.collisionBitMask = ballCategory;
+	goal.physicsBody.contactTestBitMask = goalCategory;
+	
+	
+}
+
+-(CGPoint)chooseLocation {
+	
+	int xloc = 1 + arc4random() %((int)screenWidth);
+	int yloc = 1 + arc4random() %((int)screenHeight);
+	
+	return CGPointMake(xloc, yloc);
 }
 
 

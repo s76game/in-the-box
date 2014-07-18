@@ -21,6 +21,7 @@ BOOL gameStarted;
 int x;
 int y;
 BOOL dotDrawn;
+int goalsHit;
 
 @protocol sceneDelegate <NSObject>
 -(void)showDifferentView;
@@ -29,6 +30,7 @@ BOOL dotDrawn;
 @protocol resetSKScene <NSObject>
 -(void)showScene;
 @end
+
 
 @interface NormalStrategic : SKScene <SKPhysicsContactDelegate, NSObject> {
 	
@@ -42,6 +44,9 @@ BOOL dotDrawn;
 	UIImageView *screenCrack;
 	SystemSoundID breaking;
 	SKSpriteNode *line;
+	
+	SKSpriteNode *goal;
+	
 	SKAction *remove;
 	SKSpriteNode *ball;
 	UILabel *score;

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="14A283o" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ldl-JU-9JG">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
     <scenes>
@@ -192,6 +191,22 @@
                                         <exclude reference="qUF-fR-DDh"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="gameCenterButton:" destination="gwX-Fy-fTi" eventType="touchUpInside" id="qJ7-Bn-2rf"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WkA-k4-NaT">
+                                <rect key="frame" x="309" y="373" width="40" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="dGT-XV-7oh"/>
+                                    <constraint firstAttribute="width" constant="40" id="smd-E5-EDF"/>
+                                </constraints>
+                                <state key="normal" title="Reset">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetGameCenter:" destination="gwX-Fy-fTi" eventType="touchUpInside" id="jmb-Q0-2kh"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -209,11 +224,13 @@
                             <constraint firstItem="3My-7v-QYU" firstAttribute="leading" secondItem="9UL-5T-3bC" secondAttribute="leading" id="59c-OK-cba"/>
                             <constraint firstItem="xqi-ax-2Yf" firstAttribute="top" secondItem="ex4-yH-36a" secondAttribute="bottom" id="9mx-Ez-GU7"/>
                             <constraint firstItem="R1u-V2-AnK" firstAttribute="top" secondItem="HxP-g4-uju" secondAttribute="bottom" constant="8" id="AO0-nS-So3"/>
+                            <constraint firstItem="WkA-k4-NaT" firstAttribute="leading" secondItem="0NB-FS-Kca" secondAttribute="trailing" constant="8" id="AOp-Jj-PLt"/>
                             <constraint firstAttribute="trailing" secondItem="R1u-V2-AnK" secondAttribute="trailing" constant="172" id="Bac-Kz-0Ft"/>
                             <constraint firstItem="CVx-Kg-DRB" firstAttribute="top" secondItem="aJm-7I-hmB" secondAttribute="bottom" constant="23" id="Bd7-gb-t0v">
                                 <variation key="heightClass=regular-widthClass=regular" constant="31"/>
                             </constraint>
                             <constraint firstAttribute="trailing" secondItem="3My-7v-QYU" secondAttribute="trailing" id="DOZ-Mk-eWj"/>
+                            <constraint firstItem="WkA-k4-NaT" firstAttribute="centerY" secondItem="0NB-FS-Kca" secondAttribute="centerY" id="GVn-zF-7q7"/>
                             <constraint firstAttribute="trailing" secondItem="0NB-FS-Kca" secondAttribute="trailing" constant="209" id="Lgh-sQ-IYx"/>
                             <constraint firstItem="xqi-ax-2Yf" firstAttribute="top" secondItem="3My-7v-QYU" secondAttribute="bottom" id="Ls7-76-CCe"/>
                             <constraint firstItem="CVx-Kg-DRB" firstAttribute="top" secondItem="aJm-7I-hmB" secondAttribute="bottom" constant="23" id="MZJ-hc-KtP">

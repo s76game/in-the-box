@@ -7,8 +7,15 @@
 //
 
 #import "ViewController.h"
+@class GameCenterManager;
 
 @interface ViewController ()
+
+@property (nonatomic) BOOL gameCenterEnabled;
+@property (nonatomic, strong) NSString *leaderboardIdentifier;
+@property(assign, nonatomic) BOOL showsCompletionBanner;
+-(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard;
+-(void)authenticateLocalPlayer;
 
 @end
 @implementation ViewController
@@ -31,31 +38,6 @@
 	}
 }
 
-//- (void)bannerViewDidLoadAd:(ADBannerView *)banner
-//{
-//	
-//	NSLog(@"Alpha");
-//	if (!bannerIsVisible)
-//	{
-//		NSLog(@"Alpha Bravo");
-//		_banner.hidden = NO;
-//		bannerIsVisible = YES;
-//	}
-//	
-//}
-//
-//- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
-//{
-//	NSLog(@"Bravo");
-//	if (bannerIsVisible)
-//	{
-//		NSLog(@"Bravo Bravo");
-//		// assumes the banner view is at the top of the screen.
-//		_banner.hidden = YES;
-//		bannerIsVisible = NO;
-//	}
-//}
-
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -69,6 +51,15 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	
+	_gameCenterEnabled = NO;
+	_leaderboardIdentifier = @"com.rybel.in-the-box";
+	_showsCompletionBanner = YES;
+	
+	
+	[self authenticateLocalPlayer];
+	
+	
 	
 	_banner.delegate = self;
 	
@@ -88,7 +79,7 @@
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasPerformedFirstLaunch"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		
-		// Tutorial code goes here
+		// Showing tutorial code goes here
 		
 		
 	}
@@ -167,7 +158,7 @@
 			// Show UIALert View
 			
 			UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Rate my app" message:@"If you enjoy using Inside the Box would you mind taking a moment to rate it? It won't take more than a minute. Thanks for the support!"
-														delegate:self cancelButtonTitle:@"Remind me later" otherButtonTitles:@"Rate it now",@"No, thanks", nil];
+														delegate:self cancelButtonTitle:@"Remind me later" otherButtonTitles:@"Rate it now", @"Give feedback", @"No, thanks", nil];
 			[alert show];
 		}
 	}
@@ -186,86 +177,123 @@
 		// Open app App Store URL
 //		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.google.com"]];
 	}
+	else if (buttonIndex == 2) {
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+		NSLog(@"Feedback");
+		[self mail];
+	}
 	else {
 		NSLog(@"No, thanks");
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
 	}
 }
 
+-(void)mail {
+	if ([MFMailComposeViewController canSendMail])
+	{
+		MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
+		
+		mailer.mailComposeDelegate = self;
+		
+		[mailer setSubject:@"Feedback/Suggestions Inside The Box"];
+		
+		NSArray *toRecipients = [NSArray arrayWithObjects:@"rybelllc@gmail.com", nil];
+		[mailer setToRecipients:toRecipients];
+		
+		NSString *emailBody = @"Leave your feedback or suggestions here and we will do our best to take them into consideration and make the app even better! If you want support regarding the app then go to http://www.rybel-llc.com/support Thank you for the feedback!";
+		[mailer setMessageBody:emailBody isHTML:YES];
+		
+		[self presentViewController:mailer animated:YES completion:nil];
+	}
+	else
+	{
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mail Incompatibility"
+														message:@"Your device doesn't support the mail composer sheet"
+													   delegate:nil
+											  cancelButtonTitle:@"OK"
+											  otherButtonTitles: nil];
+		[alert show];
+	}
+}
+
+- (IBAction)gameCenterButton:(id)sender {
+	[self showLeaderboardAndAchievements:NO];
+}
+
+- (IBAction)resetGameCenter:(id)sender {
+	// Development only, DO NOT INCLUDE
+	// Resets game center achivevments
+	[self resetAchievements];
+}
 
 #pragma mark Game Center
-//- (IBAction)gameCenter:(id)sender {
-//	[self showGameCenter];
-//}
-//
-//- (void) showGameCenter
-//{
-//	GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
-//	if (gameCenterController != nil)
-//	{
-//		gameCenterController.gameCenterDelegate = self;
-//		[self presentViewController: gameCenterController animated: YES completion:nil];
-//	}
-//}
-//
-//- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
-//{
-//	[self dismissViewControllerAnimated:YES completion:nil];
-//}
-//
-//-(void)authenticateLocalPlayer
-//{
-//	GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
-//	__weak GKLocalPlayer *blockLocalPlayer = localPlayer;
-//	
-//	//Block is called each time GameKit automatically authenticates
-//	localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error)
-//	{
-//		[self setLastError:error];
-//		if (viewController)
-//		{
-//			self.authenticationViewController = viewController;
-//			[self disableGameCenter];
-//		}
-//		else if (blockLocalPlayer.isAuthenticated)
-//		{
-//			[self authenticatedPlayer:blockLocalPlayer];
-//		}
-//		else
-//		{
-//			[self disableGameCenter];
-//		}
-//	};
-//}
-//
-//-(void)authenticatedPlayer:(GKLocalPlayer*)localPlayer
-//{
-//	self.isAuthenticated = YES;
-//	[[NSNotificationCenter defaultCenter]postNotificationName:AUTHENTICATED_NOTIFICATION object:nil];
-//	[[GKLocalPlayer localPlayer]registerListener:self];
-//	NSLog(@"Local player:%@ authenticated into game center",localPlayer.playerID);
-//}
-//
-//-(void)disableGameCenter
-//{
-//	//A notification so that every observer responds appropriately to disable game center features
-//	self.isAuthenticated = NO;
-//	[[NSNotificationCenter defaultCenter]postNotificationName:UNAUTHENTICATED_NOTIFICATION object:nil];
-//	NSLog(@"Disabled game center");
-//}
-//
-//- (void) loadPlayerData: (NSArray *) identifiers
-//{
-//	[GKPlayer loadPlayersForIdentifiers:identifiers withCompletionHandler:^(NSArray *players, NSError *error) {
-//		if (error != nil)
-//		{
-//			// Handle the error.
-//		}
-//		if (players != nil)
-//		{
-//			// Process the array of GKPlayer objects.
-//		}
-//	}];
-//}
+
+-(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+	[gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
+	GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
+	
+	gcViewController.gameCenterDelegate = self;
+	
+	if (shouldShowLeaderboard) {
+		gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+		gcViewController.leaderboardIdentifier = _leaderboardIdentifier;
+	}
+	else{
+		gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
+	}
+	
+	[self presentViewController:gcViewController animated:YES completion:nil];
+}
+
+
+-(void)authenticateLocalPlayer{
+	GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+	
+	localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error){
+		if (viewController != nil) {
+			[self presentViewController:viewController animated:YES completion:nil];
+		}
+		else{
+			if ([GKLocalPlayer localPlayer].authenticated) {
+				_gameCenterEnabled = YES;
+				
+				// Get the default leaderboard identifier.
+				[[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
+					
+					if (error != nil) {
+						NSLog(@"%@", [error localizedDescription]);
+					}
+					else{
+						_leaderboardIdentifier = leaderboardIdentifier;
+					}
+				}];
+				
+				NSLog(@"Gamecenter Enabled");
+			}
+			
+			else{
+				NSLog(@"Gamecenter Not Enabled");
+			}
+		}
+	};
+}
+
+
+- (void) resetAchievements
+{
+	NSLog(@"Attempt to reset game center achievements");
+	// Clear all progress saved on Game Center.
+	[GKAchievement resetAchievementsWithCompletionHandler:^(NSError *error)
+	 {
+		 if (error != nil){
+			 NSLog(@"Error: %@", error);
+		 }
+			 
+    }];
+}
 
 @end
