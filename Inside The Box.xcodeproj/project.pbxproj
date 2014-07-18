@@ -76,6 +76,10 @@
 		94C7FEB7194E3CDF00270AE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94C7FEB5194E3CDF00270AE8 /* Main.storyboard */; };
 		94C7FEC5194E3CDF00270AE8 /* Bounce_ballTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C7FEC4194E3CDF00270AE8 /* Bounce_ballTests.m */; };
 		94C7FECF194E3DE600270AE8 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C7FECE194E3DE600270AE8 /* SpriteKit.framework */; };
+		94C9B6BA1979AC9F00AE4BF2 /* nightquote1.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C9B6B61979AC9F00AE4BF2 /* nightquote1.png */; };
+		94C9B6BB1979AC9F00AE4BF2 /* nightquote2.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C9B6B71979AC9F00AE4BF2 /* nightquote2.png */; };
+		94C9B6BC1979AC9F00AE4BF2 /* normalquote1.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C9B6B81979AC9F00AE4BF2 /* normalquote1.png */; };
+		94C9B6BD1979AC9F00AE4BF2 /* normalquote2.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C9B6B91979AC9F00AE4BF2 /* normalquote2.png */; };
 		94D31A48197236FE006E21C2 /* Normal.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D31A47197236FE006E21C2 /* Normal.m */; };
 		94D31A4B1972390C006E21C2 /* nighttoggleon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D31A491972390C006E21C2 /* nighttoggleon.png */; };
 		94D31A4C1972390C006E21C2 /* nighttoggleoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D31A4A1972390C006E21C2 /* nighttoggleoff.png */; };
@@ -183,6 +187,10 @@
 		94C7FEC3194E3CDF00270AE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94C7FEC4194E3CDF00270AE8 /* Bounce_ballTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bounce_ballTests.m; sourceTree = "<group>"; };
 		94C7FECE194E3DE600270AE8 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		94C9B6B61979AC9F00AE4BF2 /* nightquote1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nightquote1.png; sourceTree = "<group>"; };
+		94C9B6B71979AC9F00AE4BF2 /* nightquote2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nightquote2.png; sourceTree = "<group>"; };
+		94C9B6B81979AC9F00AE4BF2 /* normalquote1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalquote1.png; sourceTree = "<group>"; };
+		94C9B6B91979AC9F00AE4BF2 /* normalquote2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalquote2.png; sourceTree = "<group>"; };
 		94D31A46197236FE006E21C2 /* Normal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Normal.h; sourceTree = "<group>"; };
 		94D31A47197236FE006E21C2 /* Normal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Normal.m; sourceTree = "<group>"; };
 		94D31A491972390C006E21C2 /* nighttoggleon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nighttoggleon.png; sourceTree = "<group>"; };
@@ -317,6 +325,10 @@
 		949104701971C4110070273A /* Splash Screen */ = {
 			isa = PBXGroup;
 			children = (
+				94C9B6B61979AC9F00AE4BF2 /* nightquote1.png */,
+				94C9B6B71979AC9F00AE4BF2 /* nightquote2.png */,
+				94C9B6B81979AC9F00AE4BF2 /* normalquote1.png */,
+				94C9B6B91979AC9F00AE4BF2 /* normalquote2.png */,
 				94D31A4F1972483E006E21C2 /* strategyproceed.png */,
 				9400629B1964AE0700B5D811 /* normalproceed.png */,
 			);
@@ -575,6 +587,7 @@
 				94033A091960DA0400FD9516 /* AppIcon76x76.png in Resources */,
 				94033A031960DA0400FD9516 /* AppIcon57x57.png in Resources */,
 				94D31A531972483E006E21C2 /* strategyproceed.png in Resources */,
+				94C9B6BD1979AC9F00AE4BF2 /* normalquote2.png in Resources */,
 				94D31A4B1972390C006E21C2 /* nighttoggleon.png in Resources */,
 				94E19B98196C955200893DEE /* Prototype.ttf in Resources */,
 				94033A011960DA0400FD9516 /* AppIcon50x50.png in Resources */,
@@ -586,6 +599,7 @@
 				94E19B9C196C977200893DEE /* normalcredits.png in Resources */,
 				94033A1E19634EE200FD9516 /* goal.png in Resources */,
 				940339EA19609C1B00FD9516 /* nightback.png in Resources */,
+				94C9B6BC1979AC9F00AE4BF2 /* normalquote1.png in Resources */,
 				94792ABB1958EC02004A6404 /* nightsettings.png in Resources */,
 				94033A061960DA0400FD9516 /* AppIcon60x60@2x.png in Resources */,
 				940339EB19609C1B00FD9516 /* normalback.png in Resources */,
@@ -609,9 +623,11 @@
 				940339DB195F755600FD9516 /* normalselection.png in Resources */,
 				94D31A541972483E006E21C2 /* strategytitle.png in Resources */,
 				94E19B93196C8F4600893DEE /* Media.xcassets in Resources */,
+				94C9B6BA1979AC9F00AE4BF2 /* nightquote1.png in Resources */,
 				940339FF1960DA0400FD9516 /* AppIcon40x40.png in Resources */,
 				940339FD1960DA0400FD9516 /* AppIcon29x29.png in Resources */,
 				94033A2319634EE200FD9516 /* strategyselection.png in Resources */,
+				94C9B6BB1979AC9F00AE4BF2 /* nightquote2.png in Resources */,
 				94D31A511972483E006E21C2 /* strategymodebutton.png in Resources */,
 				94033A1D19634EE200FD9516 /* flickering_noise.mp3 in Resources */,
 				94033A2119634EE200FD9516 /* normalcreditsbutton.png in Resources */,
