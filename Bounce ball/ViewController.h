@@ -14,7 +14,7 @@
 #import <MessageUI/MessageUI.h>
 #import <iAd/iAd.h>
 
-
+NSArray *gameCenterData;
 
 @interface ViewController : UIViewController <GKGameCenterControllerDelegate, ADBannerViewDelegate, MFMailComposeViewControllerDelegate> {
 	

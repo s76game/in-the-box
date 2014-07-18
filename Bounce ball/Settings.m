@@ -108,7 +108,7 @@
 
 - (IBAction)feedback:(id)sender {
 	
-	[self judgeAchievementComplete];
+	[self achievementComplete:@"judge" percentComplete:100];
 	
 	if ([MFMailComposeViewController canSendMail])
 	{
@@ -135,6 +135,10 @@
 											  otherButtonTitles: nil];
 		[alert show];
 	}
+}
+
+- (IBAction)credits:(id)sender {
+	[self achievementComplete:@"credits" percentComplete:100];
 }
 
 // Goes along with mail modal view controller
@@ -170,14 +174,19 @@
 
 - (IBAction)rate:(id)sender {
 	
+	[self achievementComplete:@"judge" percentComplete:100];
+	
 	// Open appstore app URL
 	
 //	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"OUR URL HERE"]];
 }
 
-- (void)judgeAchievementComplete {
-	GKAchievement *achievement1 = [[GKAchievement alloc] initWithIdentifier: @"judge"];
-	achievement1.percentComplete = 100.0;
+#pragma mark Game Center Code
+
+- (void)achievementComplete:(NSString *)achievementID percentComplete: (int)percent {
+	GKAchievement *achievement1 = [[GKAchievement alloc] initWithIdentifier: [NSString stringWithFormat:@"%@", achievementID]];
+	achievement1.percentComplete = percent;
+	achievement1.showsCompletionBanner = YES;
 	NSArray *achievementsToComplete = [NSArray arrayWithObjects:achievement1, nil];
 	NSLog(@"Attempt to report %@", achievement1.identifier);
 	[GKAchievement reportAchievements: achievementsToComplete withCompletionHandler:^(NSError *error)
@@ -186,11 +195,9 @@
 		 {
 			 NSLog(@"Error in reporting achievements: %@", error);
 		 }
-		 else {
-			 [GKNotificationBanner showBannerWithTitle:@"The Judge!" message:@"Rate/Leave feedback on the game" completionHandler:^{}];
-		 }
 	 }];
 }
+
 
 
 @end

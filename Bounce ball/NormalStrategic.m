@@ -201,6 +201,9 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	
+	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"linesDrawn"]+1 forKey:@"linesDrawn"];
+
+	
 		[self removeLine];
 	
 		UITouch* touch = [touches anyObject];
@@ -312,6 +315,10 @@
 }
 
 -(void)gameOver {
+	
+	// Runs game center code block
+	[self gameCenter];
+	
 	[self removeLine];
 	gameOver = YES;
 	
@@ -321,7 +328,8 @@
 	
 	
 	hits = [[UILabel alloc] init];
-	[hits setText:[NSString stringWithFormat:@"%i/%0.1f = %0.3f", scoreNumber, gameTime, (scoreNumber / gameTime)]];
+	totalScore = gameTime;
+	[hits setText:[NSString stringWithFormat:@"Score: %0.1f seconds", totalScore]];
 	hits.frame = CGRectMake(80.0, 310.0, 160.0, 40.0);
 	hits.textAlignment = NSTextAlignmentCenter;
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
@@ -480,7 +488,66 @@
 	return CGPointMake(xloc, yloc);
 }
 
+#pragma mark Game Center Code
 
+
+// Checks all game center stuff
+-(void)gameCenter {
+	
+	
+	
+	// Achievement: Afraid of the dark
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"] && totalScore == 0) {
+		[self achievementComplete:@"afraid_dark" percentComplete:100];
+	}
+	
+	// Achievement: Nocturnal
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+		
+		int nocturnal = totalScore;
+		
+		if (nocturnal > 100) {
+			nocturnal = 100;
+		}
+		
+		NSLog(@"%i", nocturnal);
+		[self achievementComplete:@"nocturnal" percentComplete:nocturnal];
+	}
+	
+	// Achievement: Artist
+	[self achievementComplete:@"artist" percentComplete:[[NSUserDefaults standardUserDefaults] integerForKey:@"linesDrawn"] * .1];
+	
+	// Achievement: Balling
+	[self achievementComplete:@"balling" percentComplete:(int)[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]];
+	
+	// Achievement: Survivor
+	float survivor = gameTime / 60;
+	
+	if (survivor >= 2) {
+		[self achievementComplete:@"survivor" percentComplete:100];
+	}
+	else {
+		[self achievementComplete:@"survivor" percentComplete:survivor * 60];
+	}
+	
+	
+	
+}
+
+- (void)achievementComplete:(NSString *)achievementID percentComplete: (int)percent {
+	GKAchievement *achievement1 = [[GKAchievement alloc] initWithIdentifier: [NSString stringWithFormat:@"%@", achievementID]];
+	achievement1.percentComplete = percent;
+	achievement1.showsCompletionBanner = YES;
+	NSArray *achievementsToComplete = [NSArray arrayWithObjects:achievement1, nil];
+	NSLog(@"Attempt to report %@", achievement1.identifier);
+	[GKAchievement reportAchievements: achievementsToComplete withCompletionHandler:^(NSError *error)
+	 {
+		 if (error != nil)
+		 {
+			 NSLog(@"Error in reporting achievements: %@", error);
+		 }
+	 }];
+}
 
 
 @end

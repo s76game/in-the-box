@@ -22,6 +22,7 @@ int x;
 int y;
 BOOL dotDrawn;
 int goalsHit;
+float totalScore;
 
 @protocol sceneDelegate <NSObject>
 -(void)showDifferentView;

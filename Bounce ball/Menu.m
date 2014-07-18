@@ -56,6 +56,7 @@
 	spriteView = (SKView *) self.view;
 	hello.delegate = self;
 	lastPlayed = @"normal";
+	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
 	[spriteView presentScene: hello];
 }
 
@@ -65,6 +66,7 @@
 	spriteView = (SKView *) self.view;
 	hello.delegate = self;
 	lastPlayed = @"normalStrategy";
+	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
 	[spriteView presentScene: hello];
 }
 
@@ -79,6 +81,7 @@
 		spriteView = (SKView *) self.view;
 		hello.delegate = self;
 		lastPlayed = @"normalStrategy";
+		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
 		[spriteView presentScene: hello];
 	}
 	else if ([lastPlayed isEqualToString:@"normal"]) {
@@ -86,6 +89,7 @@
 		spriteView = (SKView *) self.view;
 		hello.delegate = self;
 		lastPlayed = @"normal";
+		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
 		[spriteView presentScene: hello];
 	}
 }

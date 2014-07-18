@@ -58,6 +58,7 @@
 	
 	
 	[self authenticateLocalPlayer];
+	[self retrieveAchievmentMetadata];
 	
 	
 	
@@ -294,6 +295,21 @@
 		 }
 			 
     }];
+}
+
+- (void) retrieveAchievmentMetadata
+{
+	[GKAchievementDescription loadAchievementDescriptionsWithCompletionHandler:
+	 ^(NSArray *descriptions, NSError *error) {
+		 if (error != nil)
+		 {
+			 NSLog(@"Error: %@", error);
+		 }
+		 if (descriptions != nil)
+		 {
+			 gameCenterData = descriptions;
+		 }
+	 }];
 }
 
 @end

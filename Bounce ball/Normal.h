@@ -21,6 +21,7 @@ BOOL gameStarted;
 int x;
 int y;
 BOOL dotDrawn;
+float totalScore;
 
 static const uint32_t ballCategory     =  0x1 << 0;
 static const uint32_t lineCategory     =  0x1 << 1;

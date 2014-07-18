@@ -104,12 +104,13 @@
 	
 	[self playSound];
 	
-	if (![switchState isOn]) {
-		[[NSUserDefaults standardUserDefaults] setObject:@"night" forKey:@"UI"];
-		[_nightImage setBackgroundImage:[UIImage imageNamed:@"nighttoggleoff.png"] forState:UIControlStateNormal];
-	} else {
+	if ([switchState isOn]) {
 		[[NSUserDefaults standardUserDefaults] setObject:@"normal" forKey:@"UI"];
 		[_nightImage setBackgroundImage:[UIImage imageNamed:@"nighttoggleon.png"] forState:UIControlStateNormal];
+	} else {
+		[self achievementComplete:@"lights_out" percentComplete:100];
+		[[NSUserDefaults standardUserDefaults] setObject:@"night" forKey:@"UI"];
+		[_nightImage setBackgroundImage:[UIImage imageNamed:@"nighttoggleoff.png"] forState:UIControlStateNormal];
 	}
 	[self updateInterface];
 }
@@ -153,7 +154,22 @@
 	}
 }
 
+#pragma mark Game Center Code
 
+- (void)achievementComplete:(NSString *)achievementID percentComplete: (int)percent {
+	GKAchievement *achievement1 = [[GKAchievement alloc] initWithIdentifier: [NSString stringWithFormat:@"%@", achievementID]];
+	achievement1.percentComplete = percent;
+	achievement1.showsCompletionBanner = YES;
+	NSArray *achievementsToComplete = [NSArray arrayWithObjects:achievement1, nil];
+	NSLog(@"Attempt to report %@", achievement1.identifier);
+	[GKAchievement reportAchievements: achievementsToComplete withCompletionHandler:^(NSError *error)
+	 {
+		 if (error != nil)
+		 {
+			 NSLog(@"Error in reporting achievements: %@", error);
+		 }
+	 }];
+}
 
 
 @end

@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+
+
 @interface Settings : ViewController <MFMailComposeViewControllerDelegate>{
 	
 }
@@ -16,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *settingsIcon;
 @property (strong, nonatomic) IBOutlet UILabel *soundFXLabel;
 - (IBAction)feedback:(id)sender;
+- (IBAction)credits:(id)sender;
 - (IBAction)rate:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *creditsOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *rateOutlet;

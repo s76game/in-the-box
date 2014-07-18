@@ -65,9 +65,6 @@
 		94792ADE195CDE23004A6404 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94792ADD195CDE23004A6404 /* AudioToolbox.framework */; };
 		94792AE0195CDFB2004A6404 /* break.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 94792ADF195CDFB2004A6404 /* break.mp3 */; };
 		947A9F5519589907006AE1C9 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 947A9F5419589907006AE1C9 /* Menu.m */; };
-		9491046C1971C3D60070273A /* nightquote1.png in Resources */ = {isa = PBXBuildFile; fileRef = 949104691971C3D60070273A /* nightquote1.png */; };
-		9491046D1971C3D60070273A /* nightquote2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9491046A1971C3D60070273A /* nightquote2.png */; };
-		9491046E1971C3D60070273A /* normalquote2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9491046B1971C3D60070273A /* normalquote2.png */; };
 		94BDFF49196B745100723965 /* nightcreditsbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94BDFF45196B745100723965 /* nightcreditsbutton.png */; };
 		94BDFF4A196B745100723965 /* nightratebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94BDFF46196B745100723965 /* nightratebutton.png */; };
 		94BDFF4B196B745100723965 /* settingsicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94BDFF47196B745100723965 /* settingsicon.png */; };
@@ -169,9 +166,6 @@
 		94792ADF195CDFB2004A6404 /* break.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = break.mp3; sourceTree = "<group>"; };
 		947A9F5319589907006AE1C9 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		947A9F5419589907006AE1C9 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
-		949104691971C3D60070273A /* nightquote1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nightquote1.png; path = ../../nightquote1.png; sourceTree = "<group>"; };
-		9491046A1971C3D60070273A /* nightquote2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nightquote2.png; path = ../../nightquote2.png; sourceTree = "<group>"; };
-		9491046B1971C3D60070273A /* normalquote2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalquote2.png; path = ../../normalquote2.png; sourceTree = "<group>"; };
 		94BDFF45196B745100723965 /* nightcreditsbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nightcreditsbutton.png; path = ../nightcreditsbutton.png; sourceTree = "<group>"; };
 		94BDFF46196B745100723965 /* nightratebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nightratebutton.png; path = ../nightratebutton.png; sourceTree = "<group>"; };
 		94BDFF47196B745100723965 /* settingsicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingsicon.png; path = ../settingsicon.png; sourceTree = "<group>"; };
@@ -325,9 +319,6 @@
 			children = (
 				94D31A4F1972483E006E21C2 /* strategyproceed.png */,
 				9400629B1964AE0700B5D811 /* normalproceed.png */,
-				949104691971C3D60070273A /* nightquote1.png */,
-				9491046A1971C3D60070273A /* nightquote2.png */,
-				9491046B1971C3D60070273A /* normalquote2.png */,
 			);
 			name = "Splash Screen";
 			path = Other_Images;
@@ -562,12 +553,10 @@
 			files = (
 				94792AD0195B6FEA004A6404 /* iPad2iPadmini.png in Resources */,
 				94033A0C1960DA0400FD9516 /* iTunesArtwork@2x.png in Resources */,
-				9491046D1971C3D60070273A /* nightquote2.png in Resources */,
 				94BDFF4B196B745100723965 /* settingsicon.png in Resources */,
 				94D31A521972483E006E21C2 /* strategyplaybutton.png in Resources */,
 				94792ABF1958EC02004A6404 /* normalmodebutton.png in Resources */,
 				94792AD3195B6FEA004A6404 /* iPodiPhone5.png in Resources */,
-				9491046C1971C3D60070273A /* nightquote1.png in Resources */,
 				94792AD1195B6FEA004A6404 /* iPadiPadmini.png in Resources */,
 				94D31A4C1972390C006E21C2 /* nighttoggleoff.png in Resources */,
 				94792AB31958EC02004A6404 /* nightmodetitle.png in Resources */,
@@ -600,7 +589,6 @@
 				94792ABB1958EC02004A6404 /* nightsettings.png in Resources */,
 				94033A061960DA0400FD9516 /* AppIcon60x60@2x.png in Resources */,
 				940339EB19609C1B00FD9516 /* normalback.png in Resources */,
-				9491046E1971C3D60070273A /* normalquote2.png in Resources */,
 				940339FE1960DA0400FD9516 /* AppIcon29x29@2x.png in Resources */,
 				94792ABA1958EC02004A6404 /* nightplaybutton.png in Resources */,
 				94792AC01958EC02004A6404 /* normalplaybutton.png in Resources */,
