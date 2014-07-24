@@ -134,11 +134,11 @@
 
 -(void)updateInterface {
 	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"bannerVisible"]) {
-		_banner.hidden = NO;
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"adsLoaded"]) {
+		_AdBanner.hidden = NO;
 	}
 	else {
-	_banner.hidden = YES;
+		_AdBanner.hidden = YES;
 	}
 		
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {

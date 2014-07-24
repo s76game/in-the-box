@@ -15,6 +15,7 @@
 #import <iAd/iAd.h>
 
 NSArray *gameCenterData;
+BOOL gameCenterEnabled;
 
 @interface ViewController : UIViewController <GKGameCenterControllerDelegate, ADBannerViewDelegate, MFMailComposeViewControllerDelegate> {
 	
@@ -31,6 +32,9 @@ NSArray *gameCenterData;
 - (IBAction)gameCenterButton:(id)sender;
 
 - (IBAction)resetGameCenter:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *gamecenterOutlet;
+
+
 
 @end
 

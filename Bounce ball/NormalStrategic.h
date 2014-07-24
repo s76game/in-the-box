@@ -15,6 +15,7 @@ int pos1y;
 int pos2x;
 int pos2y;
 float gameTime;
+NSString *goalTimeString;
 int scoreNumber;
 BOOL gameOver;
 BOOL gameStarted;
@@ -23,6 +24,13 @@ int y;
 BOOL dotDrawn;
 int goalsHit;
 float totalScore;
+int kMinDistanceFromBall;
+
+int goalSize;
+
+NSTimer *speedUpTimer;
+NSTimer *timer;
+
 
 @protocol sceneDelegate <NSObject>
 -(void)showDifferentView;
@@ -31,6 +39,14 @@ float totalScore;
 @protocol resetSKScene <NSObject>
 -(void)showScene;
 @end
+
+static inline CGFloat skRandf() {
+	return rand() / (CGFloat) RAND_MAX;
+}
+
+static inline CGFloat skRand(CGFloat low, CGFloat high) {
+	return skRandf() * (high - low) + low;
+}
 
 
 @interface NormalStrategic : SKScene <SKPhysicsContactDelegate, NSObject> {
@@ -47,6 +63,7 @@ float totalScore;
 	SKSpriteNode *line;
 	
 	SKSpriteNode *goal;
+	SKSpriteNode *detect;
 	
 	SKAction *remove;
 	SKSpriteNode *ball;

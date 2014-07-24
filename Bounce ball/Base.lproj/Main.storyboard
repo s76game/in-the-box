@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="14A283o" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ldl-JU-9JG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ldl-JU-9JG">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
@@ -93,12 +93,15 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <adBannerView appearanceType="aqua" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="ex4-yH-36a">
+                            <adBannerView appearanceType="aqua" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="ex4-yH-36a">
                                 <rect key="frame" x="80" y="430" width="320" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="0w6-Jt-s9u"/>
                                     <constraint firstAttribute="width" constant="320" id="dfI-In-sIn"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="gwX-Fy-fTi" id="nkR-pD-f9T"/>
+                                </connections>
                             </adBannerView>
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVx-Kg-DRB">
                                 <rect key="frame" x="180" y="363" width="50" height="50"/>
@@ -373,6 +376,7 @@
                         <outlet property="ball" destination="c4C-q0-CgQ" id="Mwe-98-lhd"/>
                         <outlet property="banner" destination="ex4-yH-36a" id="d1p-0R-eTa"/>
                         <outlet property="frame" destination="HxP-g4-uju" id="6dV-pR-J2K"/>
+                        <outlet property="gamecenterOutlet" destination="0NB-FS-Kca" id="jdP-nQ-RZX"/>
                         <outlet property="mode" destination="R1u-V2-AnK" id="pYr-E2-cn2"/>
                         <outlet property="play" destination="aJm-7I-hmB" id="Ech-S7-2D7"/>
                         <outlet property="settings" destination="CVx-Kg-DRB" id="vV1-NT-3x1"/>
@@ -431,7 +435,7 @@
                                     <constraint firstAttribute="width" constant="125" id="HTR-xP-evO"/>
                                     <constraint firstAttribute="height" constant="50" id="s6u-NT-4pu"/>
                                 </constraints>
-                                <state key="normal" title="Rate" backgroundImage="normalratebutton.png">
+                                <state key="normal" backgroundImage="normalratebutton.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -444,7 +448,7 @@
                                     <constraint firstAttribute="height" constant="50" id="P9p-iZ-etK"/>
                                     <constraint firstAttribute="width" constant="125" id="eEa-qQ-n5t"/>
                                 </constraints>
-                                <state key="normal" title="Feedback" backgroundImage="normalratebutton.png">
+                                <state key="normal" backgroundImage="normalratebutton.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -508,8 +512,8 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
+                        <outlet property="AdBanner" destination="mhx-3y-gqU" id="c3m-7L-d8m"/>
                         <outlet property="backOutlet" destination="pig-Ib-eRU" id="Um5-tx-Cqp"/>
-                        <outlet property="banner" destination="mhx-3y-gqU" id="0N8-oz-Z8O"/>
                         <outlet property="creditsOutlet" destination="quz-ki-qLs" id="hWo-Is-gwy"/>
                         <outlet property="feedbackOutlet" destination="vLp-xh-hyR" id="XfE-BV-jDg"/>
                         <outlet property="label" destination="6cu-9o-hfK" id="G0P-9q-GFW"/>
@@ -553,13 +557,6 @@
                                     <constraint firstAttribute="height" constant="100" id="oPy-Jc-6ZU"/>
                                 </constraints>
                             </imageView>
-                            <adBannerView appearanceType="aqua" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="2mN-8g-2yS">
-                                <rect key="frame" x="81" y="430" width="320" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="9JW-5d-dHE"/>
-                                    <constraint firstAttribute="width" constant="320" id="vFb-6X-Cgh"/>
-                                </constraints>
-                            </adBannerView>
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u6b-RG-Aqt">
                                 <rect key="frame" x="211" y="370" width="59" height="45"/>
                                 <constraints>
@@ -578,14 +575,12 @@
                         <constraints>
                             <constraint firstItem="lqr-V4-TYc" firstAttribute="top" secondItem="5PS-EJ-zCy" secondAttribute="bottom" id="3F6-j4-Rpo"/>
                             <constraint firstItem="jCu-Mn-mcg" firstAttribute="centerX" secondItem="5PS-EJ-zCy" secondAttribute="centerX" constant="2" id="4MP-uw-YAT"/>
-                            <constraint firstItem="2mN-8g-2yS" firstAttribute="centerX" secondItem="5PS-EJ-zCy" secondAttribute="centerX" constant="1" id="5H1-ao-sTB"/>
                             <constraint firstItem="lqr-V4-TYc" firstAttribute="top" secondItem="u6b-RG-Aqt" secondAttribute="bottom" constant="65" id="A8b-RK-hWV"/>
                             <constraint firstItem="5PS-EJ-zCy" firstAttribute="centerX" secondItem="gWi-AQ-Bfh" secondAttribute="centerX" constant="1" id="HDu-pm-vzR"/>
                             <constraint firstItem="jCu-Mn-mcg" firstAttribute="centerY" secondItem="5PS-EJ-zCy" secondAttribute="centerY" constant="-54" id="Jbj-PE-YQK"/>
                             <constraint firstItem="5PS-EJ-zCy" firstAttribute="centerX" secondItem="u6b-RG-Aqt" secondAttribute="centerX" constant="-0.5" id="KG8-at-flF"/>
                             <constraint firstItem="5PS-EJ-zCy" firstAttribute="centerY" secondItem="gWi-AQ-Bfh" secondAttribute="centerY" constant="-54" id="Lk5-Go-JL8"/>
                             <constraint firstAttribute="trailing" secondItem="5PS-EJ-zCy" secondAttribute="trailing" id="PQi-ho-q43"/>
-                            <constraint firstItem="lqr-V4-TYc" firstAttribute="top" secondItem="2mN-8g-2yS" secondAttribute="bottom" id="cBZ-9d-jcw"/>
                             <constraint firstItem="5PS-EJ-zCy" firstAttribute="leading" secondItem="s0o-wf-Fnq" secondAttribute="leading" id="nRi-IA-eBk"/>
                             <constraint firstItem="5PS-EJ-zCy" firstAttribute="top" secondItem="s0o-wf-Fnq" secondAttribute="top" id="qw8-aW-KQz"/>
                         </constraints>
@@ -594,7 +589,6 @@
                     <navigationItem key="navigationItem" id="0uI-3W-9sq"/>
                     <connections>
                         <outlet property="advanceOulet" destination="u6b-RG-Aqt" id="ijV-Ct-hAA"/>
-                        <outlet property="banner" destination="2mN-8g-2yS" id="e75-4r-XaI"/>
                         <outlet property="quote" destination="jCu-Mn-mcg" id="98a-g1-M6D"/>
                         <outlet property="quote2" destination="gWi-AQ-Bfh" id="aAE-Wp-j6z"/>
                         <outlet property="splashImage" destination="5PS-EJ-zCy" id="KEP-iH-mJA"/>
@@ -715,8 +709,8 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
+                        <outlet property="AdBanner" destination="oOH-fv-pLH" id="s1P-b7-ZLk"/>
                         <outlet property="back" destination="OAu-b8-yCT" id="VJb-JE-k6p"/>
-                        <outlet property="banner" destination="oOH-fv-pLH" id="qSx-Jd-PaM"/>
                         <outlet property="modeBackground" destination="gsb-NZ-A4q" id="WyX-9r-McG"/>
                         <outlet property="modeTitle" destination="8jP-iN-g85" id="5Jx-a9-qdo"/>
                         <outlet property="nightImage" destination="fqn-Ng-Oa6" id="k3l-OP-Y5q"/>
@@ -809,7 +803,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="banner" destination="Fqe-yt-fKq" id="Zjh-7R-fLG"/>
+                        <outlet property="AdBanner" destination="Fqe-yt-fKq" id="6PE-pr-lMx"/>
                         <outlet property="credits" destination="bk3-u5-chw" id="IEa-oa-3mK"/>
                         <outlet property="creditsBack" destination="CO4-4B-Xni" id="rDh-Vx-G6n"/>
                         <outlet property="creditsBackground" destination="1fN-ke-XLH" id="91c-eP-hy9"/>

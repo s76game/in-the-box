@@ -35,7 +35,7 @@
 
 -(void)updateInterface {
 	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"bannerVisible"]) {
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"adsLoaded"]) {
 		_AdBanner.hidden = NO;
 	}
 	else {

@@ -57,7 +57,7 @@
 
 -(void)updateInterface {
 	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"bannerVisible"]) {
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"adsLoaded"]) {
 		_AdBanner.hidden = NO;
 	}
 	else {
@@ -70,7 +70,7 @@
 		[_backOutlet setBackgroundImage:[UIImage imageNamed:@"nightback.png"] forState:UIControlStateNormal];
 		[_settingsBackground setImage:[UIImage imageNamed:@"nightbackground.png"]];
 		[_settingsIcon setImage:[UIImage imageNamed:@"settingsnighticon.png"]];
-		[_feedbackOutlet setBackgroundImage:[UIImage imageNamed:@"nightratebutton.png"] forState:UIControlStateNormal];
+		[_feedbackOutlet setBackgroundImage:[UIImage imageNamed:@"nightfeedbackbutton.png"] forState:UIControlStateNormal];
 		[_label setTextColor:[UIColor whiteColor]];
 	}
 	else {
@@ -79,7 +79,7 @@
 		[_backOutlet setBackgroundImage:[UIImage imageNamed:@"normalback.png"] forState:UIControlStateNormal];
 		[_settingsBackground setImage:[UIImage imageNamed:@"normalbackground.png"]];
 		[_settingsIcon setImage:[UIImage imageNamed:@"settingsicon.png"]];
-		[_feedbackOutlet setBackgroundImage:[UIImage imageNamed:@"normalratebutton.png"] forState:UIControlStateNormal];
+		[_feedbackOutlet setBackgroundImage:[UIImage imageNamed:@"strategyfeedbackbutton.png"] forState:UIControlStateNormal];
 		[_label setTextColor:[UIColor blackColor]];
 	}
 }

@@ -38,14 +38,14 @@
 {
 	[self screenSize];
 	
-	[self spawnGoal];
-	
+	// Set starting goal size
+	goalSize = 50;
 	
 	// Set up score
-	score = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth/2)-25, 25, 300, 50)];
+	score = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth/2)-25, 25, 100, 50)];
 	[self.view addSubview:score];
 	scoreNumber = 0;
-	score.text = @"Time";
+	score.text = @"Goals Hit";
 	[score setFont:[UIFont fontWithName:@"Prototype" size:25]];
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		score.textColor = [UIColor whiteColor];
@@ -112,6 +112,8 @@
 	ball.position = CGPointMake(CGRectGetMidX(self.frame),                              CGRectGetMidY(self.frame));
 	[self addChild:ball];
 	
+	[self spawnGoal];
+	
 	remove = [SKAction removeFromParent];
 	
 	// Start random direction code
@@ -167,6 +169,9 @@
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	
+	
+	if (!gameOver && gameStarted) {
+		
 		[self removeLine];
 	
 		UITouch* touch = [touches anyObject];
@@ -197,10 +202,12 @@
 		[lines setLineWidth:3];
 	
 		[self addChild:lines];
+	}
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	
+	if (!gameOver && gameStarted) {
 	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"linesDrawn"]+1 forKey:@"linesDrawn"];
 
 	
@@ -241,6 +248,7 @@
 		[lines setLineWidth:3];
 	
 		[self addChild:lines];
+	}
 }
 
 
@@ -266,8 +274,8 @@
 	ballSprite.physicsBody.linearDamping = 0;
 	ballSprite.physicsBody.angularDamping = 0;
 	ballSprite.physicsBody.restitution = 1;
-	ballSprite.physicsBody.collisionBitMask = lineCategory | goalCategory | edgeCategory;
-	ballSprite.physicsBody.contactTestBitMask = lineCategory | goalCategory | edgeCategory;
+	ballSprite.physicsBody.collisionBitMask = lineCategory | goalCategory | edgeCategory | pointGoalCategory;
+	ballSprite.physicsBody.contactTestBitMask = lineCategory | goalCategory | edgeCategory | pointGoalCategory;
 	return ballSprite;
 }
 
@@ -293,23 +301,34 @@
 	
 	if ((firstBody.categoryBitMask & lineCategory) != 0)
 	{
-		NSLog(@"Alpha");
 		// Ball hits line
 		[self removeLine];
-		scoreNumber = scoreNumber + 1;
 	}
 	else if ((firstBody.categoryBitMask & edgeCategory) != 0)
 	{
-		NSLog(@"Bravo");
 		// Ball hits wall
 		[ball.physicsBody setVelocity:CGVectorMake(0, 0)];
 		[self gameOver];
 	}
-	else {
-		NSLog(@"Charlie");
+	else if ((firstBody.categoryBitMask & goalCategory) != 0)
+	{
+		// Ball hits goal
 		[goal removeFromParent];
+		[detect removeFromParent];
 		[self spawnGoal];
 		goalsHit = goalsHit + 1;
+		score.text = [NSString stringWithFormat:@"%i", goalsHit];
+		if (!goalSize <= 10) {
+			goalSize = goalSize - 2;
+		}
+		else {
+			NSLog(@"Ball would be too small");
+		}
+		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"goalsHit"]+1 forKey:@"goalsHit"];
+	}
+	else {
+		// Should never get here
+		NSLog(@"Alpha");
 		
 	}
 }
@@ -328,8 +347,8 @@
 	
 	
 	hits = [[UILabel alloc] init];
-	totalScore = gameTime;
-	[hits setText:[NSString stringWithFormat:@"Score: %0.1f seconds", totalScore]];
+	totalScore = goalsHit;
+	[hits setText:[NSString stringWithFormat:@"Score: %i goals", (int)totalScore]];
 	hits.frame = CGRectMake(80.0, 310.0, 160.0, 40.0);
 	hits.textAlignment = NSTextAlignmentCenter;
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
@@ -375,7 +394,7 @@
 	
 	gameOver = NO;
 	gameStarted = NO;
-	gameTime = 0;
+	goalsHit = 0;
 	
 	[self removeElements];
 	
@@ -395,6 +414,9 @@
 	
 	[self.view presentScene:nil];
 	
+	[timer invalidate];
+	[speedUpTimer invalidate];
+	
 	[self.delegate showScene];
 }
 
@@ -405,13 +427,32 @@
 	[screenCrack removeFromSuperview];
 	[score removeFromSuperview];
 	[hits removeFromSuperview];
+	[goal removeFromParent];
+	[detect removeFromParent];
 }
 
 // Ball speed up method
 - (void) speedUp:(NSTimer *)timer
 {
+	int xImpluse;
+	int yImpluse;
+	
+	if (ball.physicsBody.velocity.dx > 0) {
+		xImpluse = 2;
+	}
+	else {
+		xImpluse = -2;
+	}
+	
+	if (ball.physicsBody.velocity.dy > 0) {
+		yImpluse = 2;
+	}
+	else {
+		yImpluse = -2;
+	}
+	
 	if (!gameOver) {
-		[ball.physicsBody applyImpulse:CGVectorMake(2, 2)];
+		[ball.physicsBody applyImpulse:CGVectorMake(xImpluse, yImpluse)];
 	}
 }
 
@@ -419,7 +460,7 @@
 // Done to avoid extremely low FPS at load of scene
 -(void)start:(UIButton *)button {
 	
-	gameTime = 0;
+	goalsHit = 0;
 	
 	gameStarted = YES;
 	// Remove button from parent
@@ -429,7 +470,7 @@
 	//Calls ball speed up method
 	[NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(speedUp:) userInfo:nil repeats:YES];
 	// Start Timer
-	[NSTimer scheduledTimerWithTimeInterval:0.1
+	[NSTimer scheduledTimerWithTimeInterval:1.0
 									 target:self
 								   selector:@selector(timer:)
 								   userInfo:nil
@@ -458,34 +499,91 @@
 	
 	if (!gameOver) {
 		
-		gameTime = gameTime + 0.1;
+		int minutesTimer;
+		int secondsTimer;
 		
-		score.text = [NSString stringWithFormat:@"%.01f", gameTime];
+		minutesTimer = gameTime/60;
+		secondsTimer = gameTime-(minutesTimer * 60);
 		
+		gameTime = gameTime + 1;
+
+		goalTimeString = [NSString stringWithFormat:@"%01d:%02d", minutesTimer, secondsTimer];
 	}
 	
 }
 
 -(void)spawnGoal {
+//	goal = [SKSpriteNode spriteNodeWithImageNamed:@"goal.png"];
+//	goal.size = CGSizeMake(150, 75);
+//	goal.position = [self chooseLocation];
+//	goal.zRotation = M_PI*2*(arc4random() / (float)UINT32_MAX);
+//	goal.color = [UIColor brownColor];
+//	[self addChild:goal];
+//	goal.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"goal.png"] alphaThreshold:0.5 size:CGSizeMake(150, 75)];
+//	goal.physicsBody.dynamic = NO;
+//	goal.physicsBody.categoryBitMask = goalCategory;
+//	goal.physicsBody.collisionBitMask = ballCategory;
+//	goal.physicsBody.contactTestBitMask = goalCategory;
+//	
+//	detect = [SKSpriteNode node];
+//	detect.zRotation = goal.zRotation;
+//	[self addChild:detect];
+//	detect.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:goal.position	toPoint:goal.position];
+//	detect.physicsBody.dynamic = NO;
+//	detect.physicsBody.categoryBitMask = pointGoalCategory;
+//	detect.physicsBody.collisionBitMask = ballCategory;
+//	detect.physicsBody.contactTestBitMask = pointGoalCategory;
+//	
+//	CGPoint anchor = CGPointMake(100, 100);
+//	SKPhysicsJointFixed* fixedJoint = [SKPhysicsJointFixed jointWithBodyA:goal.physicsBody
+//																	bodyB:detect.physicsBody
+//																   anchor:anchor];
+//	[self.scene.physicsWorld addJoint:fixedJoint];
 	
-	goal = [[SKSpriteNode alloc] init];
+	goal = [SKSpriteNode spriteNodeWithImageNamed:@"goalCircle.png"];
+	goal.size = CGSizeMake(goalSize, goalSize);
 	goal.position = [self chooseLocation];
 	[self addChild:goal];
-	goal.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"goal.png"] alphaThreshold:0.5 size:CGSizeMake(100, 100)];
+	
+	float goalSizes = (float)goalSize / 2.0;
+	
+	goal.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:goalSizes];
 	goal.physicsBody.dynamic = NO;
 	goal.physicsBody.categoryBitMask = goalCategory;
 	goal.physicsBody.collisionBitMask = ballCategory;
 	goal.physicsBody.contactTestBitMask = goalCategory;
 	
 	
+	
+	
+	
 }
 
 -(CGPoint)chooseLocation {
 	
-	int xloc = 1 + arc4random() %((int)screenWidth);
-	int yloc = 1 + arc4random() %((int)screenHeight);
+	kMinDistanceFromBall = 50;
 	
-	return CGPointMake(xloc, yloc);
+	CGFloat goalWidth = goal.size.width;
+	CGFloat goalHeight = goal.size.height;
+	
+	CGFloat maxX = screenWidth - goalWidth;
+	CGFloat maxY = screenHeight - goalHeight;
+	
+	CGFloat dx = MAX(maxX-kMinDistanceFromBall-ball.position.x, 0) + MAX(ball.position.x-kMinDistanceFromBall, 0);
+	CGFloat dy = MAX(maxY-kMinDistanceFromBall-ball.position.y, 0) + MAX(ball.position.y-kMinDistanceFromBall, 0);
+	
+	CGFloat newX = ball.position.x + MIN(maxX-ball.position.x, kMinDistanceFromBall) + skRand(0, dx);
+	CGFloat newY = ball.position.y + MIN(maxY-ball.position.y, kMinDistanceFromBall) + skRand(0, dy);
+	
+	if (newX > maxX) {
+		newX -= maxX;
+	}
+	
+	if (newY > maxY) {
+		newY -= maxY;
+	}
+	
+	return CGPointMake(newX+goalWidth/2, newY+goalHeight/2);
 }
 
 #pragma mark Game Center Code
@@ -493,9 +591,6 @@
 
 // Checks all game center stuff
 -(void)gameCenter {
-	
-	
-	
 	// Achievement: Afraid of the dark
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"] && totalScore == 0) {
 		[self achievementComplete:@"afraid_dark" percentComplete:100];
@@ -504,13 +599,12 @@
 	// Achievement: Nocturnal
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		
-		int nocturnal = totalScore;
+		float nocturnal = gameTime * 4;
 		
 		if (nocturnal > 100) {
 			nocturnal = 100;
 		}
 		
-		NSLog(@"%i", nocturnal);
 		[self achievementComplete:@"nocturnal" percentComplete:nocturnal];
 	}
 	
@@ -519,6 +613,10 @@
 	
 	// Achievement: Balling
 	[self achievementComplete:@"balling" percentComplete:(int)[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]];
+	
+	// Achievement: Goal
+	[self achievementComplete:@"goal" percentComplete:[[NSUserDefaults standardUserDefaults] integerForKey:@"goalsHit"] * .1];
+
 	
 	// Achievement: Survivor
 	float survivor = gameTime / 60;

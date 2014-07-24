@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) id <sceneDelegate, resetSKScene> delegate;
 
+
 @end
 
 
@@ -162,6 +163,7 @@
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	
+	if (!gameOver && gameStarted) {
 	[self removeLine];
 	
 	UITouch* touch = [touches anyObject];
@@ -192,10 +194,12 @@
 	[lines setLineWidth:3];
 	
 	[self addChild:lines];
+	}
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	
+	if (!gameOver && gameStarted) {
 	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"linesDrawn"]+1 forKey:@"linesDrawn"];
 	
 	[self removeLine];
@@ -236,6 +240,7 @@
 	[lines setLineWidth:3];
 	
 	[self addChild:lines];
+	}
 }
 
 
@@ -380,6 +385,8 @@
 	
 	[self.view presentScene:nil];
 	
+	[timer invalidate];
+	[speedUpTimer invalidate];
 	[self.delegate showScene];
 }
 
@@ -395,8 +402,25 @@
 // Ball speed up method
 - (void) speedUp:(NSTimer *)timer
 {
+	int xImpluse;
+	int yImpluse;
+	
+	if (ball.physicsBody.velocity.dx > 0) {
+		xImpluse = 2;
+	}
+	else {
+		xImpluse = -2;
+	}
+	
+	if (ball.physicsBody.velocity.dy > 0) {
+		yImpluse = 2;
+	}
+	else {
+		yImpluse = -2;
+	}
+	
 	if (!gameOver) {
-		[ball.physicsBody applyImpulse:CGVectorMake(2, 2)];
+		[ball.physicsBody applyImpulse:CGVectorMake(xImpluse, yImpluse)];
 	}
 }
 
@@ -412,9 +436,10 @@
 	
 	[ball.physicsBody applyImpulse:CGVectorMake(x, y)];
 	//Calls ball speed up method
-	[NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(speedUp:) userInfo:nil repeats:YES];
+	score.text = @"0:00";
+	speedUpTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(speedUp:) userInfo:nil repeats:YES];
 	// Start Timer
-	[NSTimer scheduledTimerWithTimeInterval:0.1
+	timer = [NSTimer scheduledTimerWithTimeInterval:1.0
 									 target:self
 								   selector:@selector(timer:)
 								   userInfo:nil
@@ -443,10 +468,15 @@
 	
 	if (!gameOver) {
 		
-		gameTime = gameTime + 0.1;
+	int minutesTimer;
+	int secondsTimer;
+
+	minutesTimer = gameTime/60;
+	secondsTimer = gameTime-(minutesTimer * 60);
 		
-		score.text = [NSString stringWithFormat:@"%.01f", gameTime];
-		
+	gameTime = gameTime + 1;
+	// Minutes:Seconds
+	score.text = [NSString stringWithFormat:@"%01d:%02d", minutesTimer, secondsTimer];
 	}
 	
 }
@@ -461,20 +491,19 @@
 	
 	
 	// Achievement: Afraid of the dark
-	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"] && totalScore == 0) {
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"] && gameTime <= 5) {
 		[self achievementComplete:@"afraid_dark" percentComplete:100];
 	}
 	
 	// Achievement: Nocturnal
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		
-		int nocturnal = totalScore;
+		float nocturnal = gameTime * 4;
 		
 		if (nocturnal > 100) {
 			nocturnal = 100;
 		}
 		
-		NSLog(@"%i", nocturnal);
 		[self achievementComplete:@"nocturnal" percentComplete:nocturnal];
 	}
 	

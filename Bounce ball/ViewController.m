@@ -22,20 +22,22 @@
 
 
 
--(void)viewDidAppear:(BOOL)animated{
-	[NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(executeiAd:) userInfo:nil repeats:NO];
+#pragma mark iAd Code
+
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner {
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:1];
+	[banner setAlpha:1];
+	[UIView commitAnimations];
+	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"adsLoaded"];
 }
 
--(void)executeiAd:(NSTimer *)timer {
-	if (!_banner.isBannerLoaded) {
-		_banner.hidden = YES;
-		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"bannerVisible"];
-	}
-	else {
-		_banner.hidden = NO;
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"bannerVisible"];
-
-	}
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:1];
+	[banner setAlpha:0];
+	[UIView commitAnimations];
+	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"adsLoaded"];
 }
 
 
@@ -125,6 +127,14 @@
 
 
 -(void)viewWillAppear:(BOOL)animated {
+	
+	if (!gameCenterEnabled) {
+		_gamecenterOutlet.hidden = YES;
+	}
+	else {
+		_gamecenterOutlet.hidden = NO;
+	}
+	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		// Night UI code
 		[_mode setBackgroundImage:[UIImage imageNamed:@"nightmodebutton.png"] forState:UIControlStateNormal];
@@ -274,10 +284,12 @@
 				}];
 				
 				NSLog(@"Gamecenter Enabled");
+				gameCenterEnabled = YES;
 			}
 			
 			else{
 				NSLog(@"Gamecenter Not Enabled");
+				gameCenterEnabled = NO;
 			}
 		}
 	};

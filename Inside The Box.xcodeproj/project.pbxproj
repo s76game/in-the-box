@@ -39,7 +39,7 @@
 		94141A0F197DC95A00AC8FCB /* nightfeedbackbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94141A0C197DC95A00AC8FCB /* nightfeedbackbutton.png */; };
 		94141A10197DC95A00AC8FCB /* normalfeedbackbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94141A0D197DC95A00AC8FCB /* normalfeedbackbutton.png */; };
 		94141A11197DC95A00AC8FCB /* strategyfeedbackbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94141A0E197DC95A00AC8FCB /* strategyfeedbackbutton.png */; };
-		94141A13197DC97400AC8FCB /* strategyselection.png in Resources */ = {isa = PBXBuildFile; fileRef = 94141A12197DC97400AC8FCB /* strategyselection.png */; };
+		94141A15197DCEA800AC8FCB /* goal.png in Resources */ = {isa = PBXBuildFile; fileRef = 94141A14197DCEA800AC8FCB /* goal.png */; };
 		94792A921958EBCF004A6404 /* Splashscreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 94792A911958EBCF004A6404 /* Splashscreen.m */; };
 		94792A951958EBDC004A6404 /* ModeSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 94792A941958EBDC004A6404 /* ModeSelect.m */; };
 		94792AB31958EC02004A6404 /* nightmodetitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 94792A991958EC02004A6404 /* nightmodetitle.png */; };
@@ -55,7 +55,6 @@
 		94792AC01958EC02004A6404 /* normalplaybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94792AA81958EC02004A6404 /* normalplaybutton.png */; };
 		94792AC11958EC02004A6404 /* normalsettings.png in Resources */ = {isa = PBXBuildFile; fileRef = 94792AA91958EC02004A6404 /* normalsettings.png */; };
 		94792AC21958EC02004A6404 /* normaltitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 94792AAA1958EC02004A6404 /* normaltitle.png */; };
-		94792AC31958EC02004A6404 /* glassoverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 94792AAC1958EC02004A6404 /* glassoverlay.png */; };
 		94792AC91958F7C9004A6404 /* normalball.png in Resources */ = {isa = PBXBuildFile; fileRef = 94792AC81958F7C9004A6404 /* normalball.png */; };
 		94792ACB1958FA17004A6404 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94792ACA1958FA17004A6404 /* QuartzCore.framework */; };
 		94792AD0195B6FEA004A6404 /* iPad2iPadmini.png in Resources */ = {isa = PBXBuildFile; fileRef = 94792ACC195B6FEA004A6404 /* iPad2iPadmini.png */; };
@@ -67,6 +66,21 @@
 		94792ADE195CDE23004A6404 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94792ADD195CDE23004A6404 /* AudioToolbox.framework */; };
 		94792AE0195CDFB2004A6404 /* break.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 94792ADF195CDFB2004A6404 /* break.mp3 */; };
 		947A9F5519589907006AE1C9 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 947A9F5419589907006AE1C9 /* Menu.m */; };
+		949B4F0D1981C788007A9692 /* glassoverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F0C1981C788007A9692 /* glassoverlay.png */; };
+		949B4F1B1981C809007A9692 /* bestlabel.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F0F1981C809007A9692 /* bestlabel.png */; };
+		949B4F1C1981C809007A9692 /* bronzemedal.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F101981C809007A9692 /* bronzemedal.png */; };
+		949B4F1D1981C809007A9692 /* gcicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F111981C809007A9692 /* gcicon.png */; };
+		949B4F1E1981C809007A9692 /* goldmedal.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F121981C809007A9692 /* goldmedal.png */; };
+		949B4F1F1981C809007A9692 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F131981C809007A9692 /* mask.png */; };
+		949B4F201981C809007A9692 /* menubutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F141981C809007A9692 /* menubutton.png */; };
+		949B4F211981C809007A9692 /* playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F151981C809007A9692 /* playbutton.png */; };
+		949B4F221981C809007A9692 /* resultstitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F161981C809007A9692 /* resultstitle.png */; };
+		949B4F231981C809007A9692 /* scorelabel.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F171981C809007A9692 /* scorelabel.png */; };
+		949B4F241981C809007A9692 /* shareicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F181981C809007A9692 /* shareicon.png */; };
+		949B4F251981C809007A9692 /* silvermedal.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F191981C809007A9692 /* silvermedal.png */; };
+		949B4F261981C809007A9692 /* timelabel.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F1A1981C809007A9692 /* timelabel.png */; };
+		949B4F281981C9F4007A9692 /* strategyselection.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F271981C9F4007A9692 /* strategyselection.png */; };
+		949B4F2A1981CACD007A9692 /* goalCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F291981CACD007A9692 /* goalCircle.png */; };
 		94BDFF49196B745100723965 /* nightcreditsbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94BDFF45196B745100723965 /* nightcreditsbutton.png */; };
 		94BDFF4A196B745100723965 /* nightratebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94BDFF46196B745100723965 /* nightratebutton.png */; };
 		94BDFF4B196B745100723965 /* settingsicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94BDFF47196B745100723965 /* settingsicon.png */; };
@@ -142,7 +156,7 @@
 		94141A0C197DC95A00AC8FCB /* nightfeedbackbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nightfeedbackbutton.png; path = ../nightfeedbackbutton.png; sourceTree = "<group>"; };
 		94141A0D197DC95A00AC8FCB /* normalfeedbackbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalfeedbackbutton.png; path = ../normalfeedbackbutton.png; sourceTree = "<group>"; };
 		94141A0E197DC95A00AC8FCB /* strategyfeedbackbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strategyfeedbackbutton.png; sourceTree = "<group>"; };
-		94141A12197DC97400AC8FCB /* strategyselection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strategyselection.png; sourceTree = "<group>"; };
+		94141A14197DCEA800AC8FCB /* goal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goal.png; sourceTree = "<group>"; };
 		94792A901958EBCF004A6404 /* Splashscreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Splashscreen.h; sourceTree = "<group>"; };
 		94792A911958EBCF004A6404 /* Splashscreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Splashscreen.m; sourceTree = "<group>"; };
 		94792A931958EBDC004A6404 /* ModeSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeSelect.h; sourceTree = "<group>"; };
@@ -160,7 +174,6 @@
 		94792AA81958EC02004A6404 /* normalplaybutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalplaybutton.png; path = ../Normal_Mode/normalplaybutton.png; sourceTree = "<group>"; };
 		94792AA91958EC02004A6404 /* normalsettings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalsettings.png; path = ../Normal_Mode/normalsettings.png; sourceTree = "<group>"; };
 		94792AAA1958EC02004A6404 /* normaltitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normaltitle.png; path = ../Normal_Mode/normaltitle.png; sourceTree = "<group>"; };
-		94792AAC1958EC02004A6404 /* glassoverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glassoverlay.png; path = ../Other_Images/glassoverlay.png; sourceTree = "<group>"; };
 		94792AC81958F7C9004A6404 /* normalball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalball.png; path = ../normalball.png; sourceTree = "<group>"; };
 		94792ACA1958FA17004A6404 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		94792ACC195B6FEA004A6404 /* iPad2iPadmini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iPad2iPadmini.png; path = ../iPad2iPadmini.png; sourceTree = "<group>"; };
@@ -174,6 +187,21 @@
 		94792ADF195CDFB2004A6404 /* break.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = break.mp3; sourceTree = "<group>"; };
 		947A9F5319589907006AE1C9 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		947A9F5419589907006AE1C9 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
+		949B4F0C1981C788007A9692 /* glassoverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glassoverlay.png; sourceTree = "<group>"; };
+		949B4F0F1981C809007A9692 /* bestlabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bestlabel.png; sourceTree = "<group>"; };
+		949B4F101981C809007A9692 /* bronzemedal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bronzemedal.png; sourceTree = "<group>"; };
+		949B4F111981C809007A9692 /* gcicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gcicon.png; sourceTree = "<group>"; };
+		949B4F121981C809007A9692 /* goldmedal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goldmedal.png; sourceTree = "<group>"; };
+		949B4F131981C809007A9692 /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask.png; sourceTree = "<group>"; };
+		949B4F141981C809007A9692 /* menubutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menubutton.png; sourceTree = "<group>"; };
+		949B4F151981C809007A9692 /* playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playbutton.png; sourceTree = "<group>"; };
+		949B4F161981C809007A9692 /* resultstitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = resultstitle.png; sourceTree = "<group>"; };
+		949B4F171981C809007A9692 /* scorelabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorelabel.png; sourceTree = "<group>"; };
+		949B4F181981C809007A9692 /* shareicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareicon.png; sourceTree = "<group>"; };
+		949B4F191981C809007A9692 /* silvermedal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silvermedal.png; sourceTree = "<group>"; };
+		949B4F1A1981C809007A9692 /* timelabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timelabel.png; sourceTree = "<group>"; };
+		949B4F271981C9F4007A9692 /* strategyselection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strategyselection.png; sourceTree = "<group>"; };
+		949B4F291981CACD007A9692 /* goalCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goalCircle.png; sourceTree = "<group>"; };
 		94BDFF45196B745100723965 /* nightcreditsbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nightcreditsbutton.png; path = ../nightcreditsbutton.png; sourceTree = "<group>"; };
 		94BDFF46196B745100723965 /* nightratebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nightratebutton.png; path = ../nightratebutton.png; sourceTree = "<group>"; };
 		94BDFF47196B745100723965 /* settingsicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settingsicon.png; path = ../settingsicon.png; sourceTree = "<group>"; };
@@ -292,6 +320,8 @@
 		94033A2519634F1000FD9516 /* Strategy Images */ = {
 			isa = PBXGroup;
 			children = (
+				949B4F291981CACD007A9692 /* goalCircle.png */,
+				94141A14197DCEA800AC8FCB /* goal.png */,
 				94141A0E197DC95A00AC8FCB /* strategyfeedbackbutton.png */,
 				94D31A4D1972483E006E21C2 /* strategymodebutton.png */,
 				94D31A4E1972483E006E21C2 /* strategyplaybutton.png */,
@@ -314,8 +344,8 @@
 		94792A961958EC02004A6404 /* UI Images */ = {
 			isa = PBXGroup;
 			children = (
-				94141A12197DC97400AC8FCB /* strategyselection.png */,
-				94792AAC1958EC02004A6404 /* glassoverlay.png */,
+				949B4F271981C9F4007A9692 /* strategyselection.png */,
+				949B4F0C1981C788007A9692 /* glassoverlay.png */,
 				940339DA195F755600FD9516 /* normalselection.png */,
 				94792A9D1958EC02004A6404 /* gamcentericon.png */,
 				94033A2519634F1000FD9516 /* Strategy Images */,
@@ -397,6 +427,25 @@
 			path = ../Night_Mode;
 			sourceTree = "<group>";
 		};
+		949B4F0E1981C809007A9692 /* Post_Game */ = {
+			isa = PBXGroup;
+			children = (
+				949B4F0F1981C809007A9692 /* bestlabel.png */,
+				949B4F101981C809007A9692 /* bronzemedal.png */,
+				949B4F111981C809007A9692 /* gcicon.png */,
+				949B4F121981C809007A9692 /* goldmedal.png */,
+				949B4F131981C809007A9692 /* mask.png */,
+				949B4F141981C809007A9692 /* menubutton.png */,
+				949B4F151981C809007A9692 /* playbutton.png */,
+				949B4F161981C809007A9692 /* resultstitle.png */,
+				949B4F171981C809007A9692 /* scorelabel.png */,
+				949B4F181981C809007A9692 /* shareicon.png */,
+				949B4F191981C809007A9692 /* silvermedal.png */,
+				949B4F1A1981C809007A9692 /* timelabel.png */,
+			);
+			path = Post_Game;
+			sourceTree = "<group>";
+		};
 		94C7FE9C194E3CDF00270AE8 = {
 			isa = PBXGroup;
 			children = (
@@ -445,6 +494,7 @@
 		94C7FEA8194E3CDF00270AE8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				949B4F0E1981C809007A9692 /* Post_Game */,
 				94033A2619634F1F00FD9516 /* Sound Effects */,
 				949104711971C4220070273A /* Launch Images */,
 				940339EC1960DA0400FD9516 /* App Icons */,
@@ -569,26 +619,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				949B4F1D1981C809007A9692 /* gcicon.png in Resources */,
+				949B4F1E1981C809007A9692 /* goldmedal.png in Resources */,
 				94792AD0195B6FEA004A6404 /* iPad2iPadmini.png in Resources */,
 				94033A0C1960DA0400FD9516 /* iTunesArtwork@2x.png in Resources */,
 				94BDFF4B196B745100723965 /* settingsicon.png in Resources */,
 				94D31A521972483E006E21C2 /* strategyplaybutton.png in Resources */,
 				94792ABF1958EC02004A6404 /* normalmodebutton.png in Resources */,
+				949B4F261981C809007A9692 /* timelabel.png in Resources */,
+				949B4F221981C809007A9692 /* resultstitle.png in Resources */,
 				94792AD3195B6FEA004A6404 /* iPodiPhone5.png in Resources */,
 				94792AD1195B6FEA004A6404 /* iPadiPadmini.png in Resources */,
-				94141A13197DC97400AC8FCB /* strategyselection.png in Resources */,
 				94D31A4C1972390C006E21C2 /* nighttoggleoff.png in Resources */,
 				94792AB31958EC02004A6404 /* nightmodetitle.png in Resources */,
 				94033A071960DA0400FD9516 /* AppIcon72x72.png in Resources */,
 				94033A021960DA0400FD9516 /* AppIcon50x50@2x.png in Resources */,
+				949B4F201981C809007A9692 /* menubutton.png in Resources */,
 				94792AB61958EC02004A6404 /* gamcentericon.png in Resources */,
 				94C7FEB7194E3CDF00270AE8 /* Main.storyboard in Resources */,
-				94792AC31958EC02004A6404 /* glassoverlay.png in Resources */,
 				94792AD2195B6FEA004A6404 /* iPodiPhone4.png in Resources */,
 				94033A081960DA0400FD9516 /* AppIcon72x72@2x.png in Resources */,
 				94033A2219634EE200FD9516 /* normalratebutton.png in Resources */,
 				94033A2419634EE200FD9516 /* toggle_sound.mp3 in Resources */,
 				94792AC11958EC02004A6404 /* normalsettings.png in Resources */,
+				949B4F281981C9F4007A9692 /* strategyselection.png in Resources */,
 				94792ABE1958EC02004A6404 /* normalbackground.png in Resources */,
 				94792AB91958EC02004A6404 /* nightmodebutton.png in Resources */,
 				94141A11197DC95A00AC8FCB /* strategyfeedbackbutton.png in Resources */,
@@ -606,11 +660,18 @@
 				940339E3195F864200FD9516 /* nightbackground.png in Resources */,
 				94E19B9C196C977200893DEE /* normalcredits.png in Resources */,
 				940339EA19609C1B00FD9516 /* nightback.png in Resources */,
+				94141A15197DCEA800AC8FCB /* goal.png in Resources */,
+				949B4F251981C809007A9692 /* silvermedal.png in Resources */,
 				94C9B6BC1979AC9F00AE4BF2 /* normalquote1.png in Resources */,
+				949B4F231981C809007A9692 /* scorelabel.png in Resources */,
 				94792ABB1958EC02004A6404 /* nightsettings.png in Resources */,
+				949B4F1B1981C809007A9692 /* bestlabel.png in Resources */,
+				949B4F211981C809007A9692 /* playbutton.png in Resources */,
 				94033A061960DA0400FD9516 /* AppIcon60x60@2x.png in Resources */,
+				949B4F1C1981C809007A9692 /* bronzemedal.png in Resources */,
 				940339EB19609C1B00FD9516 /* normalback.png in Resources */,
 				940339FE1960DA0400FD9516 /* AppIcon29x29@2x.png in Resources */,
+				949B4F241981C809007A9692 /* shareicon.png in Resources */,
 				94792ABA1958EC02004A6404 /* nightplaybutton.png in Resources */,
 				94792AC01958EC02004A6404 /* normalplaybutton.png in Resources */,
 				94033A0A1960DA0400FD9516 /* AppIcon76x76@2x.png in Resources */,
@@ -629,10 +690,13 @@
 				94792AC91958F7C9004A6404 /* normalball.png in Resources */,
 				94033A0B1960DA0400FD9516 /* iTunesArtwork.png in Resources */,
 				940339DB195F755600FD9516 /* normalselection.png in Resources */,
+				949B4F2A1981CACD007A9692 /* goalCircle.png in Resources */,
 				94141A0F197DC95A00AC8FCB /* nightfeedbackbutton.png in Resources */,
 				94D31A541972483E006E21C2 /* strategytitle.png in Resources */,
+				949B4F0D1981C788007A9692 /* glassoverlay.png in Resources */,
 				94E19B93196C8F4600893DEE /* Media.xcassets in Resources */,
 				94C9B6BA1979AC9F00AE4BF2 /* nightquote1.png in Resources */,
+				949B4F1F1981C809007A9692 /* mask.png in Resources */,
 				940339FF1960DA0400FD9516 /* AppIcon40x40.png in Resources */,
 				940339FD1960DA0400FD9516 /* AppIcon29x29.png in Resources */,
 				94C9B6BB1979AC9F00AE4BF2 /* nightquote2.png in Resources */,
@@ -783,14 +847,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: James Cobelli (ZVNPCX7729)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Bounce ball/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "48026672-4654-464F-8781-1F89AD321127";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -807,7 +871,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "48026672-4654-464F-8781-1F89AD321127";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
