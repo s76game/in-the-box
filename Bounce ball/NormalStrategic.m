@@ -388,6 +388,11 @@
 	}
 	
 	[self.view addSubview:replay];
+	
+	// Add remaning Post Game UI Elements
+	
+	// Implement the animation sequence
+	
 }
 
 -(void)menuButton:(UIButton *)button {
@@ -513,32 +518,6 @@
 }
 
 -(void)spawnGoal {
-//	goal = [SKSpriteNode spriteNodeWithImageNamed:@"goal.png"];
-//	goal.size = CGSizeMake(150, 75);
-//	goal.position = [self chooseLocation];
-//	goal.zRotation = M_PI*2*(arc4random() / (float)UINT32_MAX);
-//	goal.color = [UIColor brownColor];
-//	[self addChild:goal];
-//	goal.physicsBody = [SKPhysicsBody bodyWithTexture:[SKTexture textureWithImageNamed:@"goal.png"] alphaThreshold:0.5 size:CGSizeMake(150, 75)];
-//	goal.physicsBody.dynamic = NO;
-//	goal.physicsBody.categoryBitMask = goalCategory;
-//	goal.physicsBody.collisionBitMask = ballCategory;
-//	goal.physicsBody.contactTestBitMask = goalCategory;
-//	
-//	detect = [SKSpriteNode node];
-//	detect.zRotation = goal.zRotation;
-//	[self addChild:detect];
-//	detect.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:goal.position	toPoint:goal.position];
-//	detect.physicsBody.dynamic = NO;
-//	detect.physicsBody.categoryBitMask = pointGoalCategory;
-//	detect.physicsBody.collisionBitMask = ballCategory;
-//	detect.physicsBody.contactTestBitMask = pointGoalCategory;
-//	
-//	CGPoint anchor = CGPointMake(100, 100);
-//	SKPhysicsJointFixed* fixedJoint = [SKPhysicsJointFixed jointWithBodyA:goal.physicsBody
-//																	bodyB:detect.physicsBody
-//																   anchor:anchor];
-//	[self.scene.physicsWorld addJoint:fixedJoint];
 	
 	goal = [SKSpriteNode spriteNodeWithImageNamed:@"goalCircle.png"];
 	goal.size = CGSizeMake(goalSize, goalSize);
@@ -552,10 +531,6 @@
 	goal.physicsBody.categoryBitMask = goalCategory;
 	goal.physicsBody.collisionBitMask = ballCategory;
 	goal.physicsBody.contactTestBitMask = goalCategory;
-	
-	
-	
-	
 	
 }
 
@@ -586,11 +561,26 @@
 	return CGPointMake(newX+goalWidth/2, newY+goalHeight/2);
 }
 
-#pragma mark Game Center Code
+
+#pragma mark Game Center Achievement Code
 
 
 // Checks all game center stuff
 -(void)gameCenter {
+	
+#pragma mark Leaderboard
+	GKScore *scores = [[GKScore alloc] initWithLeaderboardIdentifier:@"score"];
+	scores.value = goalsHit;
+	
+	NSLog(@"Attempt to report %@ of %lli", scores.leaderboardIdentifier, scores.value);
+	[GKScore reportScores:@[scores] withCompletionHandler:^(NSError *error) {
+		if (error != nil) {
+			NSLog(@"%@", [error localizedDescription]);
+		}
+	}];
+	
+#pragma mark Achievements
+
 	// Achievement: Afraid of the dark
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"] && totalScore == 0) {
 		[self achievementComplete:@"afraid_dark" percentComplete:100];

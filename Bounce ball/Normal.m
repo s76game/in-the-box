@@ -319,7 +319,7 @@
 	
 	hits = [[UILabel alloc] init];
 	totalScore = gameTime;
-	[hits setText:[NSString stringWithFormat:@"Score: %0.1f seconds", totalScore]];
+	[hits setText:[NSString stringWithFormat:@"Score: %@ seconds", score.text]];
 	hits.frame = CGRectMake(80.0, 310.0, 160.0, 40.0);
 	hits.textAlignment = NSTextAlignmentCenter;
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
@@ -482,11 +482,24 @@
 }
 
 
-#pragma mark Game Center Code
+#pragma mark Game Center Achievement Code
 
 
 // Checks all game center stuff
 -(void)gameCenter {
+	
+#pragma mark Leaderboard
+	GKScore *scores = [[GKScore alloc] initWithLeaderboardIdentifier:@"time"];
+	scores.value = gameTime;
+	
+	NSLog(@"Attempt to report %@ of %lli", scores.leaderboardIdentifier, scores.value);
+	[GKScore reportScores:@[scores] withCompletionHandler:^(NSError *error) {
+		if (error != nil) {
+			NSLog(@"%@", [error localizedDescription]);
+		}
+	}];
+	
+#pragma mark Achievements
 	
 	
 	

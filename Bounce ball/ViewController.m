@@ -125,15 +125,9 @@
 }
 
 
-
 -(void)viewWillAppear:(BOOL)animated {
 	
-	if (!gameCenterEnabled) {
-		_gamecenterOutlet.hidden = YES;
-	}
-	else {
-		_gamecenterOutlet.hidden = NO;
-	}
+	[self checkGameCenterStaus];
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		// Night UI code
@@ -239,9 +233,19 @@
 
 #pragma mark Game Center
 
+-(void)checkGameCenterStaus {
+	if (!gameCenterEnabled) {
+		_gamecenterOutlet.hidden = YES;
+	}
+	else {
+		_gamecenterOutlet.hidden = NO;
+	}
+}
+
 -(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
 	[gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+	[self checkGameCenterStaus];
 }
 
 -(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
