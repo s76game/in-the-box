@@ -72,8 +72,8 @@
 		949B4F1D1981C809007A9692 /* gcicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F111981C809007A9692 /* gcicon.png */; };
 		949B4F1E1981C809007A9692 /* goldmedal.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F121981C809007A9692 /* goldmedal.png */; };
 		949B4F1F1981C809007A9692 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F131981C809007A9692 /* mask.png */; };
-		949B4F201981C809007A9692 /* menubutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F141981C809007A9692 /* menubutton.png */; };
-		949B4F211981C809007A9692 /* playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F151981C809007A9692 /* playbutton.png */; };
+		949B4F201981C809007A9692 /* postmenubutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F141981C809007A9692 /* postmenubutton.png */; };
+		949B4F211981C809007A9692 /* postplaybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F151981C809007A9692 /* postplaybutton.png */; };
 		949B4F221981C809007A9692 /* resultstitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F161981C809007A9692 /* resultstitle.png */; };
 		949B4F231981C809007A9692 /* scorelabel.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F171981C809007A9692 /* scorelabel.png */; };
 		949B4F241981C809007A9692 /* shareicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F181981C809007A9692 /* shareicon.png */; };
@@ -193,8 +193,8 @@
 		949B4F111981C809007A9692 /* gcicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gcicon.png; sourceTree = "<group>"; };
 		949B4F121981C809007A9692 /* goldmedal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goldmedal.png; sourceTree = "<group>"; };
 		949B4F131981C809007A9692 /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask.png; sourceTree = "<group>"; };
-		949B4F141981C809007A9692 /* menubutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menubutton.png; sourceTree = "<group>"; };
-		949B4F151981C809007A9692 /* playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playbutton.png; sourceTree = "<group>"; };
+		949B4F141981C809007A9692 /* postmenubutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = postmenubutton.png; sourceTree = "<group>"; };
+		949B4F151981C809007A9692 /* postplaybutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = postplaybutton.png; sourceTree = "<group>"; };
 		949B4F161981C809007A9692 /* resultstitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = resultstitle.png; sourceTree = "<group>"; };
 		949B4F171981C809007A9692 /* scorelabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorelabel.png; sourceTree = "<group>"; };
 		949B4F181981C809007A9692 /* shareicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareicon.png; sourceTree = "<group>"; };
@@ -435,8 +435,8 @@
 				949B4F111981C809007A9692 /* gcicon.png */,
 				949B4F121981C809007A9692 /* goldmedal.png */,
 				949B4F131981C809007A9692 /* mask.png */,
-				949B4F141981C809007A9692 /* menubutton.png */,
-				949B4F151981C809007A9692 /* playbutton.png */,
+				949B4F141981C809007A9692 /* postmenubutton.png */,
+				949B4F151981C809007A9692 /* postplaybutton.png */,
 				949B4F161981C809007A9692 /* resultstitle.png */,
 				949B4F171981C809007A9692 /* scorelabel.png */,
 				949B4F181981C809007A9692 /* shareicon.png */,
@@ -634,7 +634,7 @@
 				94792AB31958EC02004A6404 /* nightmodetitle.png in Resources */,
 				94033A071960DA0400FD9516 /* AppIcon72x72.png in Resources */,
 				94033A021960DA0400FD9516 /* AppIcon50x50@2x.png in Resources */,
-				949B4F201981C809007A9692 /* menubutton.png in Resources */,
+				949B4F201981C809007A9692 /* postmenubutton.png in Resources */,
 				94792AB61958EC02004A6404 /* gamcentericon.png in Resources */,
 				94C7FEB7194E3CDF00270AE8 /* Main.storyboard in Resources */,
 				94792AD2195B6FEA004A6404 /* iPodiPhone4.png in Resources */,
@@ -666,7 +666,7 @@
 				949B4F231981C809007A9692 /* scorelabel.png in Resources */,
 				94792ABB1958EC02004A6404 /* nightsettings.png in Resources */,
 				949B4F1B1981C809007A9692 /* bestlabel.png in Resources */,
-				949B4F211981C809007A9692 /* playbutton.png in Resources */,
+				949B4F211981C809007A9692 /* postplaybutton.png in Resources */,
 				94033A061960DA0400FD9516 /* AppIcon60x60@2x.png in Resources */,
 				949B4F1C1981C809007A9692 /* bronzemedal.png in Resources */,
 				940339EB19609C1B00FD9516 /* normalback.png in Resources */,

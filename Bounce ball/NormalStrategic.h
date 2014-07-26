@@ -8,7 +8,9 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import <AudioToolBox/AudioToolbox.h>
+#import "ViewController.h"
 #import "Menu.h"
+
 
 int pos1x;
 int pos1y;
@@ -31,7 +33,7 @@ int goalSize;
 NSTimer *speedUpTimer;
 NSTimer *timer;
 
-
+// Menu View Controller Delegates
 @protocol sceneDelegate <NSObject>
 -(void)showDifferentView;
 @end
@@ -39,6 +41,17 @@ NSTimer *timer;
 @protocol resetSKScene <NSObject>
 -(void)showScene;
 @end
+
+@protocol shareTimeDelegate <NSObject>
+-(void)showShareTime;
+@end
+
+@protocol shareGoalDelegate <NSObject>
+-(void)showShareGoal;
+@end
+
+
+
 
 static inline CGFloat skRandf() {
 	return rand() / (CGFloat) RAND_MAX;
@@ -49,25 +62,35 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 }
 
 
-@interface NormalStrategic : SKScene <SKPhysicsContactDelegate, NSObject> {
+@interface NormalStrategic : SKScene <SKPhysicsContactDelegate, GKGameCenterControllerDelegate, NSObject> {
 	
+	// Post game stuff
 	UIButton *menu;
 	UIButton *replay;
-	UILabel *hits;
-	UIButton *start;
-	
-	SKShapeNode* border;
-	SKShapeNode* lines;
+	UILabel *title;
+	UILabel *currentScoreNumber;
+	UILabel *bestScoreNumber;
+	UILabel *currentScore;
+	UILabel *bestScore;
+	UIButton *gameCenter;
+	UIButton *share;
 	UIImageView *screenCrack;
 	SystemSoundID breaking;
-	SKSpriteNode *line;
+	UIView *postBackground;
 	
+	// In game stuff
+	SKShapeNode* border;
+	SKShapeNode* lines;
+	SKSpriteNode *line;
 	SKSpriteNode *goal;
 	SKSpriteNode *detect;
 	
 	SKAction *remove;
+	
+	// UI Stuff
 	SKSpriteNode *ball;
 	UILabel *score;
+	UIButton *start;
 	CGFloat screenWidth;
 	CGFloat screenHeight;
 }

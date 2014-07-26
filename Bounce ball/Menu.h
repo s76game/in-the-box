@@ -13,7 +13,8 @@
 BOOL returnToMenu;
 NSString *lastPlayed;
 
-@interface Menu : ViewController <SKSceneDelegate> {
+
+@interface Menu : UIViewController <SKSceneDelegate, NSObject> {
 	CGRect screenRect;
 	CGSize screenSize;
 	SKView *spriteView;

@@ -11,7 +11,7 @@
 @interface Normal ()
 @property BOOL contentCreated;
 
-@property (weak, nonatomic) id <sceneDelegate, resetSKScene> delegate;
+@property (weak, nonatomic) id <sceneDelegate, resetSKScene, shareTimeDelegate> delegate;
 
 
 @end
@@ -48,7 +48,8 @@
 		score.textColor = [UIColor whiteColor];
 	}
 	
-	
+	[speedUpTimer invalidate];
+	[timer invalidate];
 	
 	// Set up background texture
 	NSString *textureName;
@@ -137,10 +138,6 @@
   default:
 			break;
 	}
-	
-	// Alloc cracked view image
-	screenCrack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"glassoverlay.png"]];
-	screenCrack.frame = self.frame;
 	
 }
 
@@ -304,6 +301,8 @@
 	}
 }
 
+#pragma mark Game Over Code
+
 -(void)gameOver {
 	
 	// Runs game center code block
@@ -312,54 +311,158 @@
 	[self removeLine];
 	gameOver = YES;
 	
-	// Create game over UI
+	[self gameOverAnimation];
+	
+}
+
+-(void)gameOverAnimation {
+	
+	float highScore;
+	
+	screenCrack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"glassoverlay.png"]];
+	screenCrack.frame = self.frame;
 	[self.view addSubview:screenCrack];
 	[self playSound];
 	
+	postBackground = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight, screenWidth, screenHeight)];
+	postBackground.backgroundColor = [UIColor blackColor];
+	postBackground.alpha = 0.75;
+	[self.view addSubview:postBackground];
 	
-	hits = [[UILabel alloc] init];
-	totalScore = gameTime;
-	[hits setText:[NSString stringWithFormat:@"Score: %@ seconds", score.text]];
-	hits.frame = CGRectMake(80.0, 310.0, 160.0, 40.0);
-	hits.textAlignment = NSTextAlignmentCenter;
-	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		[hits setBackgroundColor:[UIColor whiteColor]];
-		[hits setTextColor:[UIColor blackColor]];
-	}
-	else {
-		[hits setBackgroundColor:[UIColor blackColor]];
-		[hits setTextColor:[UIColor whiteColor]];
-	}
-	[self.view addSubview:hits];
+	currentScore = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight+170, 150, 75)];
+	currentScore.text = @"TIME:";
+	currentScore.textAlignment = NSTextAlignmentRight;
+	[currentScore setFont:[UIFont fontWithName:@"Prototype" size:40]];
+	currentScore.textColor = [UIColor whiteColor];
+	[self.view addSubview:currentScore];
 	
-	menu = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[menu addTarget:self action:@selector(menuButton:) forControlEvents:UIControlEventTouchUpInside];
-	[menu setTitle:@"Go back" forState:UIControlStateNormal];
-	menu.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
+	bestScore = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight+245, 150, 75)];
+	bestScore.text = @"BEST:";
+	bestScore.textAlignment = NSTextAlignmentRight;
+	[bestScore setFont:[UIFont fontWithName:@"Prototype" size:40]];
+	bestScore.textColor = [UIColor whiteColor];
+	[self.view addSubview:bestScore];
 	
-	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		[menu setBackgroundColor:[UIColor whiteColor]];
-		[menu setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	highScore = [[NSUserDefaults standardUserDefaults] floatForKey:@"highScoreTime"];
+	
+	currentScoreNumber = [[UILabel alloc] initWithFrame:CGRectMake(currentScore.frame.origin.x+currentScore.frame.size.width+10, currentScore.frame.origin.y, 150, 75)];
+	currentScoreNumber.text = [NSString stringWithFormat:@"%@", score.text];
+	[currentScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:40]];
+	currentScoreNumber.textColor = [UIColor blueColor];
+	[self.view addSubview:currentScoreNumber];
+	
+	bestScoreNumber = [[UILabel alloc] initWithFrame:CGRectMake(bestScore.frame.origin.x+bestScore.frame.size.width+10, bestScore.frame.origin.y, 150, 75)];
+	
+		// Parse High Score Data
+		int minutesTimerHigh;
+		int secondsTimerHigh;
+	
+		minutesTimerHigh = (int)highScore/60;
+		secondsTimerHigh = (int)highScore-(minutesTimerHigh * 60);
+	
+	bestScoreNumber.text = [NSString stringWithFormat:@"%01d:%02d", minutesTimerHigh, secondsTimerHigh];
+	[bestScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:40]];
+	bestScoreNumber.textColor = [UIColor greenColor];
+	[self.view addSubview:bestScoreNumber];
+
+	
+	if (gameTime >= highScore) {
+		[[NSUserDefaults standardUserDefaults] setFloat:gameTime forKey:@"highScoreTime"];
+		currentScoreNumber.textColor = [UIColor greenColor];
+		// Minutes:Seconds
+		bestScoreNumber.text = [NSString stringWithFormat:@"%01d:%02d", minutesTimer, secondsTimer];
 	}
-	else {
-		[menu setBackgroundColor:[UIColor blackColor]];
-	}
-	[self.view addSubview:menu];
+	
+	title = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth/2)-150, screenHeight+50, 300, 75)];
+	title.text = @"RESULTS:";
+	title.textAlignment = NSTextAlignmentCenter;
+	[title setFont:[UIFont fontWithName:@"Prototype" size:50]];
+	title.textColor = [UIColor whiteColor];
+	[self.view addSubview:title];
 	
 	replay = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[replay addTarget:self action:@selector(restartButton:) forControlEvents:UIControlEventTouchUpInside];
-	[replay setTitle:@"Restart game" forState:UIControlStateNormal];
-	replay.frame = CGRectMake(80.0, 110.0, 160.0, 40.0);
-	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		[replay setBackgroundColor:[UIColor whiteColor]];
-		[replay setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	}
-	else {
-		[replay setBackgroundColor:[UIColor blackColor]];
+	[replay setBackgroundImage:[UIImage imageNamed:@"postplaybutton.png"] forState:UIControlStateNormal];
+	replay.frame = CGRectMake(80.0, screenHeight+375.0, 160.0, 50.0);
+	[self.view addSubview:replay];
+	
+	menu = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[menu addTarget:self action:@selector(menuButton:) forControlEvents:UIControlEventTouchUpInside];
+	[menu setBackgroundImage:[UIImage imageNamed:@"postmenubutton.png"] forState:UIControlStateNormal];
+	menu.frame = CGRectMake(80.0, replay.frame.origin.y+replay.frame.size.height+15, 160.0, 50.0);
+	[self.view addSubview:menu];
+	
+	share = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[share addTarget:self action:@selector(shareButton:) forControlEvents:UIControlEventTouchUpInside];
+	[share setBackgroundImage:[UIImage imageNamed:@"shareicon.png"] forState:UIControlStateNormal];
+	share.frame = CGRectMake(menu.frame.origin.x+menu.frame.size.width-50-15, menu.frame.origin.y+menu.frame.size.height+15, 50, 50);
+	[self.view addSubview:share];
+	
+	gameCenter = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[gameCenter addTarget:self action:@selector(gameCenterButton:) forControlEvents:UIControlEventTouchUpInside];
+	[gameCenter setBackgroundImage:[UIImage imageNamed:@"gcicon.png"] forState:UIControlStateNormal];
+	gameCenter.frame = CGRectMake(80+15, menu.frame.origin.y+menu.frame.size.height+15, 50, 50);
+	[self.view addSubview:gameCenter];
+	
+	// Begin Animation
+	
+	[UIView animateWithDuration:1.0
+						  delay:0.0
+						options: UIViewAnimationOptionCurveEaseOut
+					 animations:^
+	 {
+		 postBackground.frame = CGRectMake(0, 0, screenWidth, screenHeight);
+		 replay.frame = CGRectMake(replay.frame.origin.x, replay.frame.origin.y-screenHeight, replay.frame.size.width, replay.frame.size.height);
+		 menu.frame = CGRectMake(menu.frame.origin.x, menu.frame.origin.y-screenHeight, menu.frame.size.width, menu.frame.size.height);
+		 title.frame = CGRectMake(title.frame.origin.x, title.frame.origin.y-screenHeight, title.frame.size.width, title.frame.size.height);
+		 bestScore.frame = CGRectMake(bestScore.frame.origin.x, bestScore.frame.origin.y-screenHeight, bestScore.frame.size.width, bestScore.frame.size.height);
+		 currentScore.frame = CGRectMake(currentScore.frame.origin.x, currentScore.frame.origin.y-screenHeight, currentScore.frame.size.width, currentScore.frame.size.height);
+		 bestScoreNumber.frame = CGRectMake(bestScoreNumber.frame.origin.x, bestScoreNumber.frame.origin.y-screenHeight, bestScoreNumber.frame.size.width, bestScoreNumber.frame.size.height);
+		 currentScoreNumber.frame = CGRectMake(currentScoreNumber.frame.origin.x, currentScoreNumber.frame.origin.y-screenHeight, currentScoreNumber.frame.size.width, currentScoreNumber.frame.size.height);
+		 gameCenter.frame = CGRectMake(gameCenter.frame.origin.x, gameCenter.frame.origin.y-screenHeight, gameCenter.frame.size.width, gameCenter.frame.size.height);
+		 share.frame = CGRectMake(share.frame.origin.x, share.frame.origin.y-screenHeight, share.frame.size.width, share.frame.size.height);
+	 }
+					 completion:^(BOOL finished)
+	 {
+			// Completion Code
+	 }];
+	
+	
+	
+}
+
+-(void)shareButton:(UIButton *)button {
+	[self.delegate showShareTime];
+}
+
+-(void)gameCenterButton:(UIButton *)button {
+	
+	if ([GKLocalPlayer localPlayer].authenticated == NO) {
+		UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"You must enable Game Center!"
+														  message:@"Sign in through the Game Center app to enable all features"
+														 delegate:nil
+												cancelButtonTitle:@"OK"
+												otherButtonTitles:nil];
+		[message show];
+	} else {
+		GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+		if (gameCenterController != nil)
+		{
+			gameCenterController.gameCenterDelegate = self;
+			gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
+			UIViewController *vc = self.view.window.rootViewController;
+			[vc presentViewController: gameCenterController animated: YES completion:nil];
+		}
 	}
 	
-	[self.view addSubview:replay];
 }
+
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController*)gameCenterViewController {
+	
+	UIViewController *vc = self.view.window.rootViewController;
+	[vc dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 -(void)menuButton:(UIButton *)button {
 	
@@ -385,8 +488,6 @@
 	
 	[self.view presentScene:nil];
 	
-	[timer invalidate];
-	[speedUpTimer invalidate];
 	[self.delegate showScene];
 }
 
@@ -396,7 +497,14 @@
 	[menu removeFromSuperview];
 	[screenCrack removeFromSuperview];
 	[score removeFromSuperview];
-	[hits removeFromSuperview];
+	[title removeFromSuperview];
+	[currentScoreNumber removeFromSuperview];
+	[currentScore removeFromSuperview];
+	[bestScoreNumber removeFromSuperview];
+	[bestScore removeFromSuperview];
+	[gameCenter removeFromSuperview];
+	[share removeFromSuperview];
+	[postBackground removeFromSuperview];
 }
 
 // Ball speed up method
@@ -404,7 +512,6 @@
 {
 	int xImpluse;
 	int yImpluse;
-	
 	if (ball.physicsBody.velocity.dx > 0) {
 		xImpluse = 2;
 	}
@@ -467,9 +574,6 @@
 -(void)timer:(NSTimer *)timer {
 	
 	if (!gameOver) {
-		
-	int minutesTimer;
-	int secondsTimer;
 
 	minutesTimer = gameTime/60;
 	secondsTimer = gameTime-(minutesTimer * 60);

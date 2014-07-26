@@ -10,6 +10,7 @@
 
 @interface Menu ()
 
+
 @end
 
 @implementation Menu
@@ -95,5 +96,39 @@
 	}
 }
 
+-(void)showShareTime {
+	
+	float highScore = [[NSUserDefaults standardUserDefaults] floatForKey:@"highScoreTime"];
+	
+	// Parse High Score Data
+	int minutesTimerHigh;
+	int secondsTimerHigh;
+	
+	minutesTimerHigh = (int)highScore/60;
+	secondsTimerHigh = (int)highScore-(minutesTimerHigh * 60);
+	
+	NSArray *objectsToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Look at my High Score of %01d:%02d for Inside The Box!", minutesTimerHigh, secondsTimerHigh]];
+	
+	UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+	NSArray *excludedActivities = @[];
+	controller.excludedActivityTypes = excludedActivities;
+	[self presentViewController:controller animated:YES completion:nil];
+	
+	[self showDifferentView];
+}
+
+-(void)showShareGoal {
+	
+	int highScore = [[NSUserDefaults standardUserDefaults] floatForKey:@"highScoreGoals"];
+	
+	NSArray *objectsToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Look at my High Score of %i Goals for Inside The Box!", highScore]];
+	
+	UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+	NSArray *excludedActivities = @[];
+	controller.excludedActivityTypes = excludedActivities;
+	[self presentViewController:controller animated:YES completion:nil];
+	
+	[self showDifferentView];
+}
 
 @end

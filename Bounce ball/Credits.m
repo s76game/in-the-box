@@ -8,7 +8,10 @@
 
 #import "Credits.h"
 
+
 @interface Credits ()
+
+@property (weak, nonatomic) id <test> delegate;
 
 @end
 
@@ -27,10 +30,15 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+	
+	
+	
 }
 
 -(void)viewWillAppear:(BOOL)animated {
 	[self updateInterface];
+	
+	[self.delegate showLeaderboard];
 }
 
 -(void)updateInterface {

@@ -12,7 +12,6 @@
 @interface ViewController ()
 
 @property (nonatomic) BOOL gameCenterEnabled;
-@property (nonatomic, strong) NSString *leaderboardIdentifier;
 @property(assign, nonatomic) BOOL showsCompletionBanner;
 -(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard;
 -(void)authenticateLocalPlayer;
@@ -55,7 +54,6 @@
 	[super viewDidLoad];
 	
 	_gameCenterEnabled = NO;
-	_leaderboardIdentifier = @"com.rybel.in-the-box";
 	_showsCompletionBanner = YES;
 	
 	
@@ -244,8 +242,16 @@
 
 -(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
-	[gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
-	[self checkGameCenterStaus];
+	[gameCenterViewController dismissViewControllerAnimated:YES completion:^{
+		[self checkGameCenterStaus];
+	}];
+	
+}
+
+-(void)showLeaderboard {
+	NSLog(@"Bravo");
+	[self showLeaderboardAndAchievements:YES];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
@@ -255,7 +261,7 @@
 	
 	if (shouldShowLeaderboard) {
 		gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
-		gcViewController.leaderboardIdentifier = _leaderboardIdentifier;
+		gcViewController.leaderboardIdentifier = @"com.rybel.in-the-box";;
 	}
 	else{
 		gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
@@ -283,7 +289,7 @@
 						NSLog(@"%@", [error localizedDescription]);
 					}
 					else{
-						_leaderboardIdentifier = leaderboardIdentifier;
+						leaderboardIdentifier = @"com.rybel.in-the-box";;
 					}
 				}];
 				

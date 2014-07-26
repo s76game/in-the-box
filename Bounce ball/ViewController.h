@@ -14,6 +14,9 @@
 #import <MessageUI/MessageUI.h>
 #import <iAd/iAd.h>
 
+#import "Normal.h"
+#import "NormalStrategic.h"
+
 NSArray *gameCenterData;
 BOOL gameCenterEnabled;
 

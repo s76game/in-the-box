@@ -8,7 +8,11 @@
 
 #import "ViewController.h"
 
-@interface Credits : ViewController
+@protocol test <NSObject>
+-(void)showLeaderboard;
+@end
+
+@interface Credits : ViewController <NSObject>
 @property (strong, nonatomic) IBOutlet UIImageView *credits;
 @property (strong, nonatomic) IBOutlet UIImageView *creditsBackground;
 @property (strong, nonatomic) IBOutlet UIButton *creditsBack;

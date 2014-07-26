@@ -11,7 +11,7 @@
 @interface NormalStrategic ()
 @property BOOL contentCreated;
 
-@property (weak, nonatomic) id <sceneDelegate, resetSKScene> delegate;
+@property (weak, nonatomic) id <sceneDelegate, resetSKScene, shareGoalDelegate> delegate;
 
 @end
 
@@ -42,10 +42,11 @@
 	goalSize = 50;
 	
 	// Set up score
-	score = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth/2)-25, 25, 100, 50)];
+	score = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth/2)-50, 25, 100, 50)];
 	[self.view addSubview:score];
 	scoreNumber = 0;
-	score.text = @"Goals Hit";
+	score.textAlignment = NSTextAlignmentCenter;
+	score.text = @"Goals";
 	[score setFont:[UIFont fontWithName:@"Prototype" size:25]];
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		score.textColor = [UIColor whiteColor];
@@ -143,9 +144,7 @@
 			break;
 	}
 	
-	// Alloc cracked view image
-	screenCrack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"glassoverlay.png"]];
-	screenCrack.frame = self.frame;
+	
 	
 }
 
@@ -333,6 +332,8 @@
 	}
 }
 
+#pragma mark Game Over Code
+
 -(void)gameOver {
 	
 	// Runs game center code block
@@ -341,58 +342,146 @@
 	[self removeLine];
 	gameOver = YES;
 	
-	// Create game over UI
+	[self gameOverAnimation];
+	
+}
+
+-(void)gameOverAnimation {
+	
+	int highScore;
+	
+	screenCrack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"glassoverlay.png"]];
+	screenCrack.frame = self.frame;
 	[self.view addSubview:screenCrack];
 	[self playSound];
 	
+	postBackground = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight, screenWidth, screenHeight)];
+	postBackground.backgroundColor = [UIColor blackColor];
+	postBackground.alpha = 0.75;
+	[self.view addSubview:postBackground];
 	
-	hits = [[UILabel alloc] init];
-	totalScore = goalsHit;
-	[hits setText:[NSString stringWithFormat:@"Score: %i goals", (int)totalScore]];
-	hits.frame = CGRectMake(80.0, 310.0, 160.0, 40.0);
-	hits.textAlignment = NSTextAlignmentCenter;
-	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		[hits setBackgroundColor:[UIColor whiteColor]];
-		[hits setTextColor:[UIColor blackColor]];
+	currentScore = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight+170, 150, 75)];
+	currentScore.text = @"GOALS:";
+	currentScore.textAlignment = NSTextAlignmentRight;
+	[currentScore setFont:[UIFont fontWithName:@"Prototype" size:40]];
+	currentScore.textColor = [UIColor whiteColor];
+	[self.view addSubview:currentScore];
+	
+	bestScore = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight+245, 150, 75)];
+	bestScore.text = @"BEST:";
+	bestScore.textAlignment = NSTextAlignmentRight;
+	[bestScore setFont:[UIFont fontWithName:@"Prototype" size:40]];
+	bestScore.textColor = [UIColor whiteColor];
+	[self.view addSubview:bestScore];
+	
+	highScore = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"highScoreGoals"];
+	
+	currentScoreNumber = [[UILabel alloc] initWithFrame:CGRectMake(currentScore.frame.origin.x+currentScore.frame.size.width+10, currentScore.frame.origin.y, 150, 75)];
+	currentScoreNumber.text = [NSString stringWithFormat:@"%i", goalsHit];
+	[currentScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:40]];
+	currentScoreNumber.textColor = [UIColor blueColor];
+	[self.view addSubview:currentScoreNumber];
+	
+	bestScoreNumber = [[UILabel alloc] initWithFrame:CGRectMake(bestScore.frame.origin.x+bestScore.frame.size.width+10, bestScore.frame.origin.y, 150, 75)];
+	bestScoreNumber.text = [NSString stringWithFormat:@"%i", highScore];
+	[bestScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:40]];
+	bestScoreNumber.textColor = [UIColor greenColor];
+	[self.view addSubview:bestScoreNumber];
+	
+	if (goalsHit >= highScore) {
+		[[NSUserDefaults standardUserDefaults] setInteger:goalsHit forKey:@"highScoreGoals"];
+		currentScoreNumber.textColor = [UIColor greenColor];
+		bestScoreNumber.text = [NSString stringWithFormat:@"%i", goalsHit];
 	}
-	else {
-		[hits setBackgroundColor:[UIColor blackColor]];
-		[hits setTextColor:[UIColor whiteColor]];
-	}
-	[self.view addSubview:hits];
+	
+	title = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth/2)-150, screenHeight+50, 300, 75)];
+	title.text = @"RESULTS:";
+	title.textAlignment = NSTextAlignmentCenter;
+	[title setFont:[UIFont fontWithName:@"Prototype" size:50]];
+	title.textColor = [UIColor whiteColor];
+	[self.view addSubview:title];
+
+	replay = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[replay addTarget:self action:@selector(restartButton:) forControlEvents:UIControlEventTouchUpInside];
+	[replay setBackgroundImage:[UIImage imageNamed:@"postplaybutton.png"] forState:UIControlStateNormal];
+	replay.frame = CGRectMake(80.0, screenHeight+375.0, 160.0, 50.0);
+	[self.view addSubview:replay];
 	
 	menu = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[menu addTarget:self action:@selector(menuButton:) forControlEvents:UIControlEventTouchUpInside];
-	[menu setTitle:@"Go back" forState:UIControlStateNormal];
-	menu.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
-	
-	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		[menu setBackgroundColor:[UIColor whiteColor]];
-		[menu setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	}
-	else {
-		[menu setBackgroundColor:[UIColor blackColor]];
-	}
+	[menu setBackgroundImage:[UIImage imageNamed:@"postmenubutton.png"] forState:UIControlStateNormal];
+	menu.frame = CGRectMake(80.0, replay.frame.origin.y+replay.frame.size.height+15, 160.0, 50.0);
 	[self.view addSubview:menu];
 	
-	replay = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[replay addTarget:self action:@selector(restartButton:) forControlEvents:UIControlEventTouchUpInside];
-	[replay setTitle:@"Restart game" forState:UIControlStateNormal];
-	replay.frame = CGRectMake(80.0, 110.0, 160.0, 40.0);
-	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		[replay setBackgroundColor:[UIColor whiteColor]];
-		[replay setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	share = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[share addTarget:self action:@selector(shareButton:) forControlEvents:UIControlEventTouchUpInside];
+	[share setBackgroundImage:[UIImage imageNamed:@"shareicon.png"] forState:UIControlStateNormal];
+	share.frame = CGRectMake(menu.frame.origin.x+menu.frame.size.width-50-15, menu.frame.origin.y+menu.frame.size.height+15, 50, 50);
+	[self.view addSubview:share];
+	
+	gameCenter = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[gameCenter addTarget:self action:@selector(gameCenterButton:) forControlEvents:UIControlEventTouchUpInside];
+	[gameCenter setBackgroundImage:[UIImage imageNamed:@"gcicon.png"] forState:UIControlStateNormal];
+	gameCenter.frame = CGRectMake(80+15, menu.frame.origin.y+menu.frame.size.height+15, 50, 50);
+	[self.view addSubview:gameCenter];
+	
+	// Begin Animation
+	
+	[UIView animateWithDuration:1.0
+						  delay:0.0
+						options: UIViewAnimationOptionCurveEaseOut
+					 animations:^
+	 {
+		 postBackground.frame = CGRectMake(0, 0, screenWidth, screenHeight);
+		 replay.frame = CGRectMake(replay.frame.origin.x, replay.frame.origin.y-screenHeight, replay.frame.size.width, replay.frame.size.height);
+		 menu.frame = CGRectMake(menu.frame.origin.x, menu.frame.origin.y-screenHeight, menu.frame.size.width, menu.frame.size.height);
+		 title.frame = CGRectMake(title.frame.origin.x, title.frame.origin.y-screenHeight, title.frame.size.width, title.frame.size.height);
+		 bestScore.frame = CGRectMake(bestScore.frame.origin.x, bestScore.frame.origin.y-screenHeight, bestScore.frame.size.width, bestScore.frame.size.height);
+		 currentScore.frame = CGRectMake(currentScore.frame.origin.x, currentScore.frame.origin.y-screenHeight, currentScore.frame.size.width, currentScore.frame.size.height);
+		 bestScoreNumber.frame = CGRectMake(bestScoreNumber.frame.origin.x, bestScoreNumber.frame.origin.y-screenHeight, bestScoreNumber.frame.size.width, bestScoreNumber.frame.size.height);
+		 currentScoreNumber.frame = CGRectMake(currentScoreNumber.frame.origin.x, currentScoreNumber.frame.origin.y-screenHeight, currentScoreNumber.frame.size.width, currentScoreNumber.frame.size.height);
+		 gameCenter.frame = CGRectMake(gameCenter.frame.origin.x, gameCenter.frame.origin.y-screenHeight, gameCenter.frame.size.width, gameCenter.frame.size.height);
+		 share.frame = CGRectMake(share.frame.origin.x, share.frame.origin.y-screenHeight, share.frame.size.width, share.frame.size.height);
+	 }
+					 completion:^(BOOL finished)
+	 {
+			// Completion Code
+	 }];
+	
+	
+	
+}
+
+-(void)shareButton:(UIButton *)button {
+	[self.delegate showShareGoal];
+}
+
+-(void)gameCenterButton:(UIButton *)button {
+	
+	if ([GKLocalPlayer localPlayer].authenticated == NO) {
+		UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"You must enable Game Center!"
+														  message:@"Sign in through the Game Center app to enable all features"
+														 delegate:nil
+												cancelButtonTitle:@"OK"
+												otherButtonTitles:nil];
+		[message show];
+	} else {
+		GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+		if (gameCenterController != nil)
+		{
+			gameCenterController.gameCenterDelegate = self;
+			gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
+			UIViewController *vc = self.view.window.rootViewController;
+			[vc presentViewController: gameCenterController animated: YES completion:nil];
+		}
 	}
-	else {
-		[replay setBackgroundColor:[UIColor blackColor]];
-	}
 	
-	[self.view addSubview:replay];
+}
+
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController*)gameCenterViewController {
 	
-	// Add remaning Post Game UI Elements
-	
-	// Implement the animation sequence
-	
+	UIViewController *vc = self.view.window.rootViewController;
+	[vc dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)menuButton:(UIButton *)button {
@@ -431,9 +520,16 @@
 	[menu removeFromSuperview];
 	[screenCrack removeFromSuperview];
 	[score removeFromSuperview];
-	[hits removeFromSuperview];
 	[goal removeFromParent];
 	[detect removeFromParent];
+	[title removeFromSuperview];
+	[currentScoreNumber removeFromSuperview];
+	[currentScore removeFromSuperview];
+	[bestScoreNumber removeFromSuperview];
+	[bestScore removeFromSuperview];
+	[gameCenter removeFromSuperview];
+	[share removeFromSuperview];
+	[postBackground removeFromSuperview];
 }
 
 // Ball speed up method
@@ -466,6 +562,8 @@
 -(void)start:(UIButton *)button {
 	
 	goalsHit = 0;
+	
+	score.text = @"0";
 	
 	gameStarted = YES;
 	// Remove button from parent
