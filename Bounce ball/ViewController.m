@@ -60,28 +60,42 @@
 	[self authenticateLocalPlayer];
 	[self retrieveAchievmentMetadata];
 	
-	
+	// Debugging Purposes Only
+	_resetGameCenterOutlet.hidden = YES;
 	
 	_banner.delegate = self;
 	
-	_ball.layer.cornerRadius = 37.5;
 	
+#define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+	if (IPAD) {
+		_ball.layer.cornerRadius = 87.5;
+	} else {
+		_ball.layer.cornerRadius = 37.5;
+	}
+
+	
+#pragma mark First Launch Code
 	
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasPerformedFirstLaunch"]) {
+		
+		NSLog(@"First Launch!");
 		
 		// Set toBePlayed to normal
 		[[NSUserDefaults standardUserDefaults] setObject:@"normal" forKey:@"toBePlayed"];
 		
-		// Turn of sound effects
+		// Turn on sound effects
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"soundFX"];
 		
+		// Keep the intro on
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"intro"];
 		
-		// Set the "hasPerformedFirstLaunch" key so this block won't execute again
+		
+		// Set to current method isn't called again
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasPerformedFirstLaunch"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		
-		// Showing tutorial code goes here
-		
+		// Show tutorial code goes here
+			// No Tutorial!!!!! :-)
 		
 	}
 	
@@ -120,6 +134,10 @@
 	[self.navigationController pushViewController:menu animated:NO];
 
 
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+	[self checkGameCenterStaus];
 }
 
 

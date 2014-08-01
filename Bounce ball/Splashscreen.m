@@ -60,6 +60,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"intro"]) {
+		[self advanceScene];
+	}
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -70,7 +73,7 @@
 		[UIView animateWithDuration:1.0 delay:0.5 options:0 animations:^{
 			_quote2.alpha = 1.0f;
 		} completion:^(BOOL finished) {
-			[NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(advanceTimer:) userInfo:nil repeats:NO];		}];
+		}];
 	}];
 }
 

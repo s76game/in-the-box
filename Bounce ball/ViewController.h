@@ -33,6 +33,7 @@ BOOL gameCenterEnabled;
 @property (strong, nonatomic) IBOutlet UIImageView *background;
 @property (strong, nonatomic) IBOutlet ADBannerView *banner;
 - (IBAction)gameCenterButton:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *resetGameCenterOutlet;
 
 - (IBAction)resetGameCenter:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *gamecenterOutlet;

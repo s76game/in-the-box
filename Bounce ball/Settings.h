@@ -11,12 +11,14 @@
 
 
 @interface Settings : ViewController <MFMailComposeViewControllerDelegate>{
-	
+	SystemSoundID breaking;
 }
 @property (strong, nonatomic) IBOutlet UISwitch *soundFXOutlet;
+@property (strong, nonatomic) IBOutlet UISwitch *introOutlet;
 @property (strong, nonatomic) IBOutlet UIImageView *settingsBackground;
 @property (strong, nonatomic) IBOutlet UIImageView *settingsIcon;
 @property (strong, nonatomic) IBOutlet UILabel *soundFXLabel;
+@property (strong, nonatomic) IBOutlet UILabel *introLabel;
 - (IBAction)feedback:(id)sender;
 - (IBAction)credits:(id)sender;
 - (IBAction)rate:(id)sender;

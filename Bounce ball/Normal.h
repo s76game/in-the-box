@@ -15,6 +15,9 @@ int pos1x;
 int pos1y;
 int pos2x;
 int pos2y;
+int scoreiPad;
+int startiPad;
+int speediPad;
 float gameTime;
 int scoreNumber;
 BOOL gameOver;
@@ -23,12 +26,14 @@ int x;
 int y;
 BOOL dotDrawn;
 float totalScore;
+int countingAnimation;
 
 int minutesTimer;
 int secondsTimer;
 
 NSTimer *speedUpTimer;
 NSTimer *timer;
+NSTimer *countingTimer;
 
 static const uint32_t ballCategory     =  0x1 << 0;
 static const uint32_t lineCategory     =  0x1 << 1;
@@ -53,6 +58,8 @@ static const uint32_t edgeCategory     =  0x1 << 4;
 	UIImageView *screenCrack;
 	SystemSoundID breaking;
 	UIView *postBackground;
+	UIImageView *currentMedal;
+	UIImageView *bestMedal;
 	
 	UIButton *start;
 	

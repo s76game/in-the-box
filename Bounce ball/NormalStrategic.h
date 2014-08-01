@@ -27,6 +27,8 @@ BOOL dotDrawn;
 int goalsHit;
 float totalScore;
 int kMinDistanceFromBall;
+NSTimer *countingTimer;
+int countingAnimation;
 
 int goalSize;
 
@@ -77,6 +79,8 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 	UIImageView *screenCrack;
 	SystemSoundID breaking;
 	UIView *postBackground;
+	UIImageView *currentMedal;
+	UIImageView *bestMedal;
 	
 	// In game stuff
 	SKShapeNode* border;

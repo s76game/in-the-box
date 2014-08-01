@@ -116,7 +116,6 @@
 }
 
 -(void)playSound {
-	
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
 	// Create the sound ID
 		NSString* path = [[NSBundle mainBundle]
@@ -152,6 +151,23 @@
 		[_modeBackground setImage:[UIImage imageNamed:@"normalbackground.png"]];
 		[_back setBackgroundImage:[UIImage imageNamed:@"normalback.png"] forState:UIControlStateNormal];
 	}
+}
+
+- (IBAction)toggleNight:(id)sender {
+	
+	[self playSound];
+	
+	if (_nightMode.isOn) {
+		_nightMode.On = NO;
+		[[NSUserDefaults standardUserDefaults] setObject:@"night" forKey:@"UI"];
+		[_nightImage setBackgroundImage:[UIImage imageNamed:@"nighttoggleoff.png"] forState:UIControlStateNormal];
+	}
+	else {
+		_nightMode.on = YES;
+		[[NSUserDefaults standardUserDefaults] setObject:@"normal" forKey:@"UI"];
+		[_nightImage setBackgroundImage:[UIImage imageNamed:@"nighttoggleon.png"] forState:UIControlStateNormal];
+	}
+	[self updateInterface];
 }
 
 #pragma mark Game Center Code

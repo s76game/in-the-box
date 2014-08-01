@@ -27,10 +27,20 @@
 {
     [super viewDidLoad];
 	
-	[_soundFXOutlet addTarget:self action:@selector(stateChanged:) forControlEvents:UIControlEventValueChanged];
-	
 	//Only hide until URL has been received
 	_rateOutlet.hidden = YES;
+	
+	
+	// Set font sizes for iPad
+#define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+	if (IPAD) {
+		[_soundFXLabel setFont:[UIFont fontWithName:@"Prototype" size:66]];
+		[_introLabel setFont:[UIFont fontWithName:@"Prototype" size:66]];
+	}
+	
+	
+	// Configure switches from save
+	[_soundFXOutlet addTarget:self action:@selector(stateChanged1:) forControlEvents:UIControlEventValueChanged];
 	
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
 		_soundFXOutlet.on = YES;
@@ -39,6 +49,31 @@
 		_soundFXOutlet.on = NO;
 	}
 	
+	[_introOutlet addTarget:self action:@selector(stateChanged2:) forControlEvents:UIControlEventValueChanged];
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"intro"]) {
+		_introOutlet.on = YES;
+	}
+	else {
+		_introOutlet.on = NO;
+	}
+	
+}
+
+-(void)playSound {
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
+		// Create the sound ID
+		NSString* path = [[NSBundle mainBundle]
+						  pathForResource:@"toggle_sound" ofType:@"mp3"];
+		NSURL* url = [NSURL fileURLWithPath:path];
+		AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &breaking);
+		
+		// Play the sound
+		AudioServicesPlaySystemSound(breaking);
+	}
+	else {
+		NSLog(@"***Breaking Sound***");
+	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,13 +131,24 @@
 }
 */
 
--(void)stateChanged:(UISwitch *)switchState {
-	if (_soundFXOutlet.isOn) {
+-(void)stateChanged1:(UISwitch *)switchState {
+	if (switchState.isOn) {
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"soundFX"];
 	}
 	else {
 		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"soundFX"];
 	}
+	[self playSound];
+}
+
+-(void)stateChanged2:(UISwitch *)switchState {
+	if (switchState.isOn) {
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"intro"];
+	}
+	else {
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"intro"];
+	}
+	[self playSound];
 }
 
 

@@ -110,7 +110,7 @@
 	NSArray *objectsToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Look at my High Score of %01d:%02d for Inside The Box!", minutesTimerHigh, secondsTimerHigh]];
 	
 	UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
-	NSArray *excludedActivities = @[];
+	NSArray *excludedActivities = @[UIActivityTypeAirDrop];
 	controller.excludedActivityTypes = excludedActivities;
 	[self presentViewController:controller animated:YES completion:nil];
 	
@@ -124,7 +124,7 @@
 	NSArray *objectsToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Look at my High Score of %i Goals for Inside The Box!", highScore]];
 	
 	UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
-	NSArray *excludedActivities = @[];
+	NSArray *excludedActivities = @[UIActivityTypeAirDrop];
 	controller.excludedActivityTypes = excludedActivities;
 	[self presentViewController:controller animated:YES completion:nil];
 	
