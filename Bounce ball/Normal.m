@@ -8,6 +8,13 @@
 
 #import "Normal.h"
 
+
+@protocol GameSceneDelegate <NSObject>
+
+-(void)showDifferentView;
+
+@end
+
 @interface Normal ()
 @property BOOL contentCreated;
 
@@ -38,8 +45,7 @@
 - (void)createSceneContents
 {
 	[self screenSize];
-	
-	
+
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 	if (IPAD) {
 		scoreiPad = 50;
@@ -412,13 +418,13 @@
 	
 	
 	bestMedal = [[UIImageView alloc] initWithFrame:CGRectMake(bestScoreNumber.frame.origin.x+bestScoreNumber.frame.size.width+10, bestScoreNumber.frame.origin.y+10, 50, 50)];
-	if (highScore >= 5) {
+	if (highScore >= 30) {
 		bestMedal.image = [UIImage imageNamed:@"goldmedal.png"];
 	}
-	else if (highScore >= 4) {
+	else if (highScore >= 20) {
 		bestMedal.image = [UIImage imageNamed:@"silvermedal.png"];
 	}
-	else if (highScore >= 3 ) {
+	else if (highScore >= 10) {
 		bestMedal.image = [UIImage imageNamed:@"bronzemedal.png"];
 	}
 	else {
@@ -538,7 +544,8 @@
 }
 
 -(void)shareButton:(UIButton *)button {
-	[self.delegate showShareTime];
+	[[NSNotificationCenter defaultCenter]
+	 postNotificationName:@"shareTime" object:self];
 }
 
 -(void)gameCenterButton:(UIButton *)button {
@@ -579,10 +586,12 @@
 	[self removeElements];
 	
 	[self.view presentScene:nil];
-	
-	[self.delegate showDifferentView];
+
+	[[NSNotificationCenter defaultCenter]
+	 postNotificationName:@"GameOverNotification" object:self];
 	
 }
+
 
 -(void)restartButton:(UIButton *)button {
 	
@@ -594,7 +603,8 @@
 	
 	[self.view presentScene:nil];
 	
-	[self.delegate showScene];
+	[[NSNotificationCenter defaultCenter]
+	 postNotificationName:@"showScene" object:self];
 }
 
 -(void)removeElements {

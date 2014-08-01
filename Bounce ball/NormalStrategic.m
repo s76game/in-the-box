@@ -338,8 +338,7 @@
 	}
 	else {
 		// Should never get here
-		NSLog(@"Alpha");
-		
+		NSLog(@"Collision Issue");
 	}
 }
 
@@ -425,13 +424,13 @@
 	
 	
 	bestMedal = [[UIImageView alloc] initWithFrame:CGRectMake(bestScoreNumber.frame.origin.x+bestScoreNumber.frame.size.width-10, bestScoreNumber.frame.origin.y+10, 50, 50)];
-	if (highScore >= 5) {
+	if (highScore >= 30) {
 		bestMedal.image = [UIImage imageNamed:@"goldmedal.png"];
 	}
-	else if (highScore >= 4) {
+	else if (highScore >= 20) {
 		bestMedal.image = [UIImage imageNamed:@"silvermedal.png"];
 	}
-	else if (highScore >= 3 ) {
+	else if (highScore >= 10) {
 		bestMedal.image = [UIImage imageNamed:@"bronzemedal.png"];
 	}
 	else {
@@ -543,7 +542,8 @@
 }
 
 -(void)shareButton:(UIButton *)button {
-	[self.delegate showShareGoal];
+	[[NSNotificationCenter defaultCenter]
+	 postNotificationName:@"shareGoal" object:self];
 }
 
 -(void)gameCenterButton:(UIButton *)button {
@@ -584,7 +584,8 @@
 	
 	[self.view presentScene:nil];
 
-	[self.delegate showDifferentView];
+	[[NSNotificationCenter defaultCenter]
+	 postNotificationName:@"GameOverNotification" object:self];
 	
 }
 
@@ -601,7 +602,8 @@
 	[timer invalidate];
 	[speedUpTimer invalidate];
 	
-	[self.delegate showScene];
+	[[NSNotificationCenter defaultCenter]
+	 postNotificationName:@"showScene" object:self];
 }
 
 -(void)removeElements {

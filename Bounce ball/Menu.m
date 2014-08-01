@@ -10,10 +10,10 @@
 
 @interface Menu ()
 
-
 @end
 
 @implementation Menu
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -38,13 +38,30 @@
 
 - (void)viewDidLoad {
 	
-
+	[self setNotificationListeners];
 	[super viewDidLoad];
 	sceneView = (SKView *) self.view;
-	sceneView.showsPhysics = YES;
+	sceneView.showsPhysics = NO;
 }
 
-
+-(void)setNotificationListeners {
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(showDifferentView)
+												 name:@"GameOverNotification"
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(showScene)
+												 name:@"showScene"
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(showShareTime)
+												 name:@"shareTime"
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(showShareGoal)
+												 name:@"shareGoal"
+											   object:nil];
+}
 
 
 - (void)didReceiveMemoryWarning {
@@ -56,7 +73,6 @@
 -(void)spaceShipScene {
 	Normal* hello = [[Normal alloc] initWithSize:screenSize];
 	spriteView = (SKView *) self.view;
-	hello.delegate = self;
 	lastPlayed = @"normal";
 	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
 	[spriteView presentScene: hello];
@@ -66,11 +82,12 @@
 -(void)normalStrategy {
 	NormalStrategic* hello = [[NormalStrategic alloc] initWithSize:screenSize];
 	spriteView = (SKView *) self.view;
-	hello.delegate = self;
 	lastPlayed = @"normalStrategy";
 	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
 	[spriteView presentScene: hello];
 }
+
+
 
 -(void)showDifferentView
 {
@@ -81,7 +98,6 @@
 	if ([lastPlayed isEqualToString:@"normalStrategy"]) {
 		NormalStrategic* hello = [[NormalStrategic alloc] initWithSize:screenSize];
 		spriteView = (SKView *) self.view;
-		hello.delegate = self;
 		lastPlayed = @"normalStrategy";
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
 		[spriteView presentScene: hello];
@@ -89,7 +105,6 @@
 	else if ([lastPlayed isEqualToString:@"normal"]) {
 		Normal* hello = [[Normal alloc] initWithSize:screenSize];
 		spriteView = (SKView *) self.view;
-		hello.delegate = self;
 		lastPlayed = @"normal";
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
 		[spriteView presentScene: hello];

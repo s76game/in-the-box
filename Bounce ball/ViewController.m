@@ -267,7 +267,6 @@
 }
 
 -(void)showLeaderboard {
-	NSLog(@"Bravo");
 	[self showLeaderboardAndAchievements:YES];
 	[self.navigationController popViewControllerAnimated:YES];
 }

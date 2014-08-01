@@ -117,6 +117,11 @@
 		[_feedbackOutlet setBackgroundImage:[UIImage imageNamed:@"strategyfeedbackbutton.png"] forState:UIControlStateNormal];
 		[_label setTextColor:[UIColor blackColor]];
 	}
+	
+	if (![MFMailComposeViewController canSendMail])
+	{
+		_feedbackOutlet.hidden = YES;
+	}
 }
 
 
@@ -156,8 +161,6 @@
 	
 	[self achievementComplete:@"judge" percentComplete:100];
 	
-	if ([MFMailComposeViewController canSendMail])
-	{
 		MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
 		
 		mailer.mailComposeDelegate = self;
@@ -171,16 +174,16 @@
 		[mailer setMessageBody:emailBody isHTML:YES];
 		
 		[self presentViewController:mailer animated:YES completion:nil];
-	}
-	else
-	{
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mail Incompatibility"
-														message:@"Your device doesn't support the mail composer sheet"
-													   delegate:nil
-											  cancelButtonTitle:@"OK"
-											  otherButtonTitles: nil];
-		[alert show];
-	}
+//	}
+//	else
+//	{
+//		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mail Incompatibility"
+//														message:@"Your device doesn't support the mail composer sheet"
+//													   delegate:nil
+//											  cancelButtonTitle:@"OK"
+//											  otherButtonTitles: nil];
+//		[alert show];
+//	}
 }
 
 - (IBAction)credits:(id)sender {
