@@ -20,6 +20,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *nightImage;
 @property (strong, nonatomic) IBOutlet ADBannerView *AdBanner;
 - (IBAction)toggleNight:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *normalDescription;
+@property (strong, nonatomic) IBOutlet UILabel *strategyDescription;
 
 	
 

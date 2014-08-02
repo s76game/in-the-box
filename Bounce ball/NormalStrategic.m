@@ -254,7 +254,12 @@
 		CGPathAddLineToPoint(path, NULL, pos2x, pos2y);
 	
 		lines.path = path;
-		[lines setStrokeColor:[UIColor blackColor]];
+		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+			[lines setStrokeColor:[UIColor whiteColor]];
+		}
+		else {
+			[lines setStrokeColor:[UIColor blackColor]];
+		}
 		[lines setLineWidth:3];
 	
 		[self addChild:lines];

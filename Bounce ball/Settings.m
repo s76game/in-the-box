@@ -106,7 +106,8 @@
 		[_settingsBackground setImage:[UIImage imageNamed:@"nightbackground.png"]];
 		[_settingsIcon setImage:[UIImage imageNamed:@"settingsnighticon.png"]];
 		[_feedbackOutlet setBackgroundImage:[UIImage imageNamed:@"nightfeedbackbutton.png"] forState:UIControlStateNormal];
-		[_label setTextColor:[UIColor whiteColor]];
+		[_soundFXLabel setTextColor:[UIColor whiteColor]];
+		[_introLabel setTextColor:[UIColor whiteColor]];
 	}
 	else {
 		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"normalcreditsbutton.png"] forState:UIControlStateNormal];
@@ -115,7 +116,8 @@
 		[_settingsBackground setImage:[UIImage imageNamed:@"normalbackground.png"]];
 		[_settingsIcon setImage:[UIImage imageNamed:@"settingsicon.png"]];
 		[_feedbackOutlet setBackgroundImage:[UIImage imageNamed:@"strategyfeedbackbutton.png"] forState:UIControlStateNormal];
-		[_label setTextColor:[UIColor blackColor]];
+		[_soundFXLabel setTextColor:[UIColor blackColor]];
+		[_introLabel setTextColor:[UIColor blackColor]];
 	}
 	
 	if (![MFMailComposeViewController canSendMail])

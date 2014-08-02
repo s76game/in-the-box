@@ -312,11 +312,13 @@
 				
 				NSLog(@"Gamecenter Enabled");
 				gameCenterEnabled = YES;
+				[self checkGameCenterStaus];
 			}
 			
 			else{
 				NSLog(@"Gamecenter Not Enabled");
 				gameCenterEnabled = NO;
+				[self checkGameCenterStaus];
 			}
 		}
 	};
