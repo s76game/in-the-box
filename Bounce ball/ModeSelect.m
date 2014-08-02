@@ -144,12 +144,16 @@
 		[_modeTitle setImage:[UIImage imageNamed:@"nightmodetitle.png"]];
 		[_modeBackground setImage:[UIImage imageNamed:@"nightbackground.png"]];
 		[_back setBackgroundImage:[UIImage imageNamed:@"nightback.png"] forState:UIControlStateNormal];
+		[_normalDescription setTextColor:[UIColor whiteColor]];
+		[_strategyDescription setTextColor:[UIColor whiteColor]];
 		
 	}
 	else {
 		[_modeTitle setImage:[UIImage imageNamed:@"normalmodetitle.png"]];
 		[_modeBackground setImage:[UIImage imageNamed:@"normalbackground.png"]];
 		[_back setBackgroundImage:[UIImage imageNamed:@"normalback.png"] forState:UIControlStateNormal];
+		[_normalDescription setTextColor:[UIColor blackColor]];
+		[_strategyDescription setTextColor:[UIColor blackColor]];
 	}
 }
 
