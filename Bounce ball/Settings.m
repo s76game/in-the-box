@@ -72,7 +72,7 @@
 		AudioServicesPlaySystemSound(breaking);
 	}
 	else {
-		NSLog(@"***Breaking Sound***");
+		NSLog(@"***Breaking Sounds***");
 	}
 }
 
