@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ldl-JU-9JG">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -612,7 +611,7 @@
                                     </mask>
                                 </variation>
                             </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sound Effects" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="223" translatesAutoresizingMaskIntoConstraints="NO" id="6cu-9o-hfK">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sound Effects" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="229" translatesAutoresizingMaskIntoConstraints="NO" id="6cu-9o-hfK">
                                 <rect key="frame" x="165" y="200" width="223" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="223" id="41V-qu-AQm"/>
@@ -840,9 +839,6 @@
                     <view key="view" contentMode="scaleToFill" id="s0o-wf-Fnq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <userGuides>
-                            <userLayoutGuide location="296" affinity="minY"/>
-                        </userGuides>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="normalbackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="5PS-EJ-zCy">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -1011,13 +1007,13 @@
                                     <action selector="backButton:" destination="N7Y-jE-hdV" eventType="touchUpInside" id="qHd-Fu-PTz"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use lines to make the ball hit the goal. The more goals you get, the smaller your target gets!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="141" translatesAutoresizingMaskIntoConstraints="NO" id="PKk-bN-qt7">
-                                <rect key="frame" x="436" y="236" width="141" height="67"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use lines to make the ball hit the goal. The more goals you get, the smaller your target gets!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="170" translatesAutoresizingMaskIntoConstraints="NO" id="PKk-bN-qt7">
+                                <rect key="frame" x="456" y="236" width="144" height="67"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="67" id="9cZ-ZK-hqb">
                                         <variation key="heightClass=regular-widthClass=regular" constant="101"/>
                                     </constraint>
-                                    <constraint firstAttribute="width" constant="141" id="Vrt-IL-Rry">
+                                    <constraint firstAttribute="width" constant="144" id="Vrt-IL-Rry">
                                         <variation key="heightClass=regular-widthClass=regular" constant="170"/>
                                     </constraint>
                                 </constraints>
@@ -1049,11 +1045,15 @@
                                     <constraint firstAttribute="height" constant="31" id="uTn-3l-T4k"/>
                                 </constraints>
                             </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello World!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="132" translatesAutoresizingMaskIntoConstraints="NO" id="pQw-WD-ZM2">
-                                <rect key="frame" x="45" y="236" width="132" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Draw lines to hit the ball, and try to last as long as possible. But be careful: don't let the ball touch the screen edge!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="170" translatesAutoresizingMaskIntoConstraints="NO" id="pQw-WD-ZM2">
+                                <rect key="frame" x="17" y="236" width="144" height="79"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="PWm-aN-Kz6"/>
-                                    <constraint firstAttribute="width" constant="132" id="aKi-Xl-if2"/>
+                                    <constraint firstAttribute="height" constant="79" id="PWm-aN-Kz6">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="126"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="144" id="aKi-Xl-if2">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="170"/>
+                                    </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Prototype" family="Prototype" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1069,11 +1069,13 @@
                             <constraint firstItem="gsb-NZ-A4q" firstAttribute="centerX" secondItem="fqn-Ng-Oa6" secondAttribute="centerX" id="7pn-qa-F5n">
                                 <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                             </constraint>
-                            <constraint firstItem="PKk-bN-qt7" firstAttribute="centerX" secondItem="eTF-Q5-MAg" secondAttribute="centerX" constant="0.5" id="95v-03-Lz0">
+                            <constraint firstItem="PKk-bN-qt7" firstAttribute="centerX" secondItem="eTF-Q5-MAg" secondAttribute="centerX" constant="22" id="95v-03-Lz0">
                                 <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="PKk-bN-qt7" firstAttribute="top" secondItem="eTF-Q5-MAg" secondAttribute="bottom" constant="8" id="C7y-1D-nWr"/>
-                            <constraint firstItem="pQw-WD-ZM2" firstAttribute="centerX" secondItem="Zmq-LV-BQb" secondAttribute="centerX" id="FvI-yE-8XT"/>
+                            <constraint firstItem="pQw-WD-ZM2" firstAttribute="centerX" secondItem="Zmq-LV-BQb" secondAttribute="centerX" constant="-22" id="FvI-yE-8XT">
+                                <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                            </constraint>
                             <constraint firstItem="iv8-bD-AGg" firstAttribute="leading" secondItem="fqn-Ng-Oa6" secondAttribute="trailing" constant="-74" id="Hto-B7-RjX">
                                 <variation key="heightClass=regular-widthClass=regular" constant="-124"/>
                             </constraint>
@@ -1131,7 +1133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qcp-a5-bWu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2535" y="-392.25"/>
+            <point key="canvasLocation" x="2535" y="-393"/>
         </scene>
         <!--Game Play-->
         <scene sceneID="tne-QT-ifu">

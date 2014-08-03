@@ -133,6 +133,16 @@
 
 -(void)updateInterface {
 	
+#define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+	if (IPAD) {
+		[_normalDescription setFont:[UIFont fontWithName:@"prototype" size:17]];
+		[_strategyDescription setFont:[UIFont fontWithName:@"prototype" size:17]];
+	}
+	else {
+		[_normalDescription setFont:[UIFont fontWithName:@"prototype" size:12]];
+		[_strategyDescription setFont:[UIFont fontWithName:@"prototype" size:12]];
+	}
+	
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"adsLoaded"]) {
 		_AdBanner.hidden = NO;
 	}

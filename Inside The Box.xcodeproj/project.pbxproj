@@ -66,14 +66,14 @@
 		94792ADE195CDE23004A6404 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94792ADD195CDE23004A6404 /* AudioToolbox.framework */; };
 		94792AE0195CDFB2004A6404 /* break.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 94792ADF195CDFB2004A6404 /* break.mp3 */; };
 		947A9F5519589907006AE1C9 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 947A9F5419589907006AE1C9 /* Menu.m */; };
+		947F1E60198E7EE700673F98 /* postmenubutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 947F1E5E198E7EE700673F98 /* postmenubutton.png */; };
+		947F1E61198E7EE700673F98 /* postplaybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 947F1E5F198E7EE700673F98 /* postplaybutton.png */; };
 		949B4F0D1981C788007A9692 /* glassoverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F0C1981C788007A9692 /* glassoverlay.png */; };
 		949B4F1B1981C809007A9692 /* bestlabel.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F0F1981C809007A9692 /* bestlabel.png */; };
 		949B4F1C1981C809007A9692 /* bronzemedal.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F101981C809007A9692 /* bronzemedal.png */; };
 		949B4F1D1981C809007A9692 /* gcicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F111981C809007A9692 /* gcicon.png */; };
 		949B4F1E1981C809007A9692 /* goldmedal.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F121981C809007A9692 /* goldmedal.png */; };
 		949B4F1F1981C809007A9692 /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F131981C809007A9692 /* mask.png */; };
-		949B4F201981C809007A9692 /* postmenubutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F141981C809007A9692 /* postmenubutton.png */; };
-		949B4F211981C809007A9692 /* postplaybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F151981C809007A9692 /* postplaybutton.png */; };
 		949B4F221981C809007A9692 /* resultstitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F161981C809007A9692 /* resultstitle.png */; };
 		949B4F231981C809007A9692 /* scorelabel.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F171981C809007A9692 /* scorelabel.png */; };
 		949B4F241981C809007A9692 /* shareicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F181981C809007A9692 /* shareicon.png */; };
@@ -187,14 +187,14 @@
 		94792ADF195CDFB2004A6404 /* break.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = break.mp3; sourceTree = "<group>"; };
 		947A9F5319589907006AE1C9 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		947A9F5419589907006AE1C9 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
+		947F1E5E198E7EE700673F98 /* postmenubutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = postmenubutton.png; path = ../../postmenubutton.png; sourceTree = "<group>"; };
+		947F1E5F198E7EE700673F98 /* postplaybutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = postplaybutton.png; path = ../../postplaybutton.png; sourceTree = "<group>"; };
 		949B4F0C1981C788007A9692 /* glassoverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glassoverlay.png; sourceTree = "<group>"; };
 		949B4F0F1981C809007A9692 /* bestlabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bestlabel.png; sourceTree = "<group>"; };
 		949B4F101981C809007A9692 /* bronzemedal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bronzemedal.png; sourceTree = "<group>"; };
 		949B4F111981C809007A9692 /* gcicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gcicon.png; sourceTree = "<group>"; };
 		949B4F121981C809007A9692 /* goldmedal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goldmedal.png; sourceTree = "<group>"; };
 		949B4F131981C809007A9692 /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask.png; sourceTree = "<group>"; };
-		949B4F141981C809007A9692 /* postmenubutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = postmenubutton.png; sourceTree = "<group>"; };
-		949B4F151981C809007A9692 /* postplaybutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = postplaybutton.png; sourceTree = "<group>"; };
 		949B4F161981C809007A9692 /* resultstitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = resultstitle.png; sourceTree = "<group>"; };
 		949B4F171981C809007A9692 /* scorelabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorelabel.png; sourceTree = "<group>"; };
 		949B4F181981C809007A9692 /* shareicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareicon.png; sourceTree = "<group>"; };
@@ -348,6 +348,7 @@
 				949B4F0C1981C788007A9692 /* glassoverlay.png */,
 				940339DA195F755600FD9516 /* normalselection.png */,
 				94792A9D1958EC02004A6404 /* gamcentericon.png */,
+				949B4F0E1981C809007A9692 /* Post_Game */,
 				94033A2519634F1000FD9516 /* Strategy Images */,
 				949104731971C4B90070273A /* Night Images */,
 				949104721971C4880070273A /* Normal Images */,
@@ -430,20 +431,21 @@
 		949B4F0E1981C809007A9692 /* Post_Game */ = {
 			isa = PBXGroup;
 			children = (
+				947F1E5E198E7EE700673F98 /* postmenubutton.png */,
+				947F1E5F198E7EE700673F98 /* postplaybutton.png */,
 				949B4F0F1981C809007A9692 /* bestlabel.png */,
 				949B4F101981C809007A9692 /* bronzemedal.png */,
 				949B4F111981C809007A9692 /* gcicon.png */,
 				949B4F121981C809007A9692 /* goldmedal.png */,
 				949B4F131981C809007A9692 /* mask.png */,
-				949B4F141981C809007A9692 /* postmenubutton.png */,
-				949B4F151981C809007A9692 /* postplaybutton.png */,
 				949B4F161981C809007A9692 /* resultstitle.png */,
 				949B4F171981C809007A9692 /* scorelabel.png */,
 				949B4F181981C809007A9692 /* shareicon.png */,
 				949B4F191981C809007A9692 /* silvermedal.png */,
 				949B4F1A1981C809007A9692 /* timelabel.png */,
 			);
-			path = Post_Game;
+			name = Post_Game;
+			path = ../Post_Game;
 			sourceTree = "<group>";
 		};
 		94C7FE9C194E3CDF00270AE8 = {
@@ -494,7 +496,6 @@
 		94C7FEA8194E3CDF00270AE8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				949B4F0E1981C809007A9692 /* Post_Game */,
 				94033A2619634F1F00FD9516 /* Sound Effects */,
 				949104711971C4220070273A /* Launch Images */,
 				940339EC1960DA0400FD9516 /* App Icons */,
@@ -634,7 +635,6 @@
 				94792AB31958EC02004A6404 /* nightmodetitle.png in Resources */,
 				94033A071960DA0400FD9516 /* AppIcon72x72.png in Resources */,
 				94033A021960DA0400FD9516 /* AppIcon50x50@2x.png in Resources */,
-				949B4F201981C809007A9692 /* postmenubutton.png in Resources */,
 				94792AB61958EC02004A6404 /* gamcentericon.png in Resources */,
 				94C7FEB7194E3CDF00270AE8 /* Main.storyboard in Resources */,
 				94792AD2195B6FEA004A6404 /* iPodiPhone4.png in Resources */,
@@ -647,6 +647,7 @@
 				94792AB91958EC02004A6404 /* nightmodebutton.png in Resources */,
 				94141A11197DC95A00AC8FCB /* strategyfeedbackbutton.png in Resources */,
 				94033A091960DA0400FD9516 /* AppIcon76x76.png in Resources */,
+				947F1E61198E7EE700673F98 /* postplaybutton.png in Resources */,
 				94033A031960DA0400FD9516 /* AppIcon57x57.png in Resources */,
 				94D31A531972483E006E21C2 /* strategyproceed.png in Resources */,
 				94C9B6BD1979AC9F00AE4BF2 /* normalquote2.png in Resources */,
@@ -664,9 +665,9 @@
 				949B4F251981C809007A9692 /* silvermedal.png in Resources */,
 				94C9B6BC1979AC9F00AE4BF2 /* normalquote1.png in Resources */,
 				949B4F231981C809007A9692 /* scorelabel.png in Resources */,
+				947F1E60198E7EE700673F98 /* postmenubutton.png in Resources */,
 				94792ABB1958EC02004A6404 /* nightsettings.png in Resources */,
 				949B4F1B1981C809007A9692 /* bestlabel.png in Resources */,
-				949B4F211981C809007A9692 /* postplaybutton.png in Resources */,
 				94033A061960DA0400FD9516 /* AppIcon60x60@2x.png in Resources */,
 				949B4F1C1981C809007A9692 /* bronzemedal.png in Resources */,
 				940339EB19609C1B00FD9516 /* normalback.png in Resources */,
