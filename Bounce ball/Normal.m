@@ -72,7 +72,7 @@
 	
 	start = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[start addTarget:self action:@selector(start:) forControlEvents:UIControlEventTouchUpInside];
-	start.frame = CGRectMake(((screenWidth/2)-65*startiPad), 150*startiPad, 130*startiPad, 40*startiPad);
+	start.frame = CGRectMake(((screenWidth/2)-65*startiPad), 150*startiPad, 100*startiPad, 40*startiPad);
 	[start setBackgroundImage:[UIImage imageNamed:@"normalgo.png"] forState:UIControlStateNormal];
 	[self.view addSubview:start];
 
