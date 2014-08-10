@@ -173,9 +173,13 @@
 	
 #pragma mark Rate my app code
 	
+	NSLog(@"Check Rate my App code");
+	NSLog([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]] ? @"Yes" : @"No");
+	NSLog([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@CHECK",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]] ? @"Yes" : @"No");
+	
 	//Check if game has been played this version
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
-		if ([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@CHECK",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
+		if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@CHECK",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
 			// Show UIALert View
 			
 			UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Rate my app" message:@"If you enjoy using Inside the Box would you mind taking a moment to rate it? It won't take more than a minute. Thanks for the support!"
@@ -196,7 +200,7 @@
 		NSLog(@"Rate it now");
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
 		// Open app App Store URL
-//		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.google.com"]];
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/idcom.rybel.in-the-box"]];
 	}
 	else if (buttonIndex == 2) {
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
@@ -236,6 +240,36 @@
 		[alert show];
 	}
 }
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+ // Notifies users about errors associated with the interface
+ switch (result)
+ {
+	 case MFMailComposeResultCancelled:
+		 NSLog(@"Cancelled");
+		 break;
+	 case MFMailComposeResultSaved:
+		 NSLog(@"Saved");
+		 break;
+	 case MFMailComposeResultSent:
+		 NSLog(@"Sent");
+		 break;
+	 case MFMailComposeResultFailed:
+		 NSLog(@"Failed");
+		 break;
+		 
+	 default:
+	 {
+		 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Send Failure" message:@"Sending Failed - Unknown Error"
+														delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+		 [alert show];
+	 }
+		 
+		 break;
+ }
+ [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 - (IBAction)gameCenterButton:(id)sender {
 	[self showLeaderboardAndAchievements:NO];

@@ -228,8 +228,7 @@
 	[self achievementComplete:@"judge" percentComplete:100];
 	
 	// Open appstore app URL
-	
-//	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"OUR URL HERE"]];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/idcom.rybel.in-the-box"]];
 }
 
 #pragma mark Game Center Code
