@@ -554,8 +554,8 @@
 -(void)gameCenterButton:(UIButton *)button {
 	
 	if ([GKLocalPlayer localPlayer].authenticated == NO) {
-		UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"You must enable Game Center!"
-														  message:@"Sign in through the Game Center app to enable all features"
+		UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Game Center not enabled!"
+														  message:@"You are not the player we are looking for"
 														 delegate:nil
 												cancelButtonTitle:@"OK"
 												otherButtonTitles:nil];
