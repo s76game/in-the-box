@@ -25,7 +25,7 @@
 
 -(void)bannerViewDidLoadAd:(ADBannerView *)banner {
 	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:1];
+	[UIView setAnimationDuration:0.1];
 	[banner setAlpha:1];
 	[UIView commitAnimations];
 	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"adsLoaded"];
@@ -80,8 +80,8 @@
 		
 		NSLog(@"First Launch!");
 		
-		// Set toBePlayed to normal
-		[[NSUserDefaults standardUserDefaults] setObject:@"normal" forKey:@"toBePlayed"];
+		// Set toBePlayed to STRAGETY
+		[[NSUserDefaults standardUserDefaults] setObject:@"normalStrategy" forKey:@"toBePlayed"];
 		
 		// Turn on sound effects
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"soundFX"];
@@ -95,7 +95,7 @@
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		
 		// Show tutorial code goes here
-			// No Tutorial!!!!! :-)
+			// No Tutorial Yet
 		
 	}
 	
@@ -107,17 +107,8 @@
 	// Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
+#pragma mark Play Button
 - (IBAction)start:(id)sender {
 	
 	
@@ -200,7 +191,7 @@
 		NSLog(@"Rate it now");
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
 		// Open app App Store URL
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/idcom.rybel.in-the-box"]];
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://appsto.re/us/i1fu1.i"]];
 	}
 	else if (buttonIndex == 2) {
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
@@ -220,12 +211,12 @@
 		
 		mailer.mailComposeDelegate = self;
 		
-		[mailer setSubject:@"Feedback/Suggestions Inside The Box"];
+		[mailer setSubject:@"Feedback/Suggestions For Inside The Box"];
 		
 		NSArray *toRecipients = [NSArray arrayWithObjects:@"rybelllc@gmail.com", nil];
 		[mailer setToRecipients:toRecipients];
 		
-		NSString *emailBody = @"Leave your feedback or suggestions here and we will do our best to take them into consideration and make the app even better! If you want support regarding the app then go to http://www.rybel-llc.com/support Thank you for the feedback!";
+		NSString *emailBody = @"Give us your feedback or suggestions here!";
 		[mailer setMessageBody:emailBody isHTML:YES];
 		
 		[self presentViewController:mailer animated:YES completion:nil];
@@ -233,7 +224,7 @@
 	else
 	{
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mail Incompatibility"
-														message:@"Your device doesn't support the mail composer sheet"
+														message:@"Your device doesn't support the mail composer sheet :-("
 													   delegate:nil
 											  cancelButtonTitle:@"OK"
 											  otherButtonTitles: nil];

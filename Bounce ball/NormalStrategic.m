@@ -473,6 +473,9 @@
 	[gameCenter setBackgroundImage:[UIImage imageNamed:@"gcicon.png"] forState:UIControlStateNormal];
 	gameCenter.frame = CGRectMake(80+15, menu.frame.origin.y+menu.frame.size.height+15, 50, 50);
 	[self.view addSubview:gameCenter];
+	if (!gameCenterEnabled) {
+		gameCenter.hidden = YES;
+	}
 	
 	if (IPAD) {
 		[self adjustInterface];
@@ -502,7 +505,7 @@
 	 {
 			// Count up animation sqequence
 		 
-			float countUpTimer = 1 / (goalsHit - 1);
+			float countUpTimer = 1.5 / (goalsHit - 1);
 		 
 			countingTimer = [NSTimer scheduledTimerWithTimeInterval:countUpTimer target:self selector:@selector(countAnimation) userInfo:nil repeats:YES];
 	 }];

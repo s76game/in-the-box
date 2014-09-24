@@ -165,10 +165,6 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	
-	NSLog(gameOver ? @"Yes" : @"No");
-	NSLog(dotDrawn ? @"Yes" : @"No");
-	NSLog(gameStarted ? @"Yes" : @"No");
-	
 	if (!gameOver && !dotDrawn && gameStarted) {
 		
 		[self removeLine];
@@ -468,6 +464,9 @@
 	[gameCenter setBackgroundImage:[UIImage imageNamed:@"gcicon.png"] forState:UIControlStateNormal];
 	gameCenter.frame = CGRectMake(80+15, menu.frame.origin.y+menu.frame.size.height+15, 50, 50);
 	[self.view addSubview:gameCenter];
+	if (!gameCenterEnabled) {
+		gameCenter.hidden = YES;
+	}
 	
 	if (IPAD) {
 		[self adjustInterface];
@@ -497,7 +496,7 @@
 	 {
 			// Count up animation sqequence
 		 
-			float countUpTimer = 1 / (gameTime - 1);
+			float countUpTimer = 1.5 / (gameTime - 1);
 		 
 			countingTimer = [NSTimer scheduledTimerWithTimeInterval:countUpTimer target:self selector:@selector(countAnimation) userInfo:nil repeats:YES];
 	 }];
@@ -636,17 +635,37 @@
 	int xImpluse;
 	int yImpluse;
 	if (ball.physicsBody.velocity.dx > 0) {
-		xImpluse = 2;
+		if (IPAD) {
+			xImpluse = 25;
+		}
+		else {
+			xImpluse = 2;
+		}
 	}
 	else {
-		xImpluse = -2;
+		if (IPAD) {
+			xImpluse = -25;
+		}
+		else {
+			xImpluse = -2;
+		}
 	}
 	
 	if (ball.physicsBody.velocity.dy > 0) {
-		yImpluse = 2;
+		if (IPAD) {
+			yImpluse = 25;
+		}
+		else {
+			yImpluse = 2;
+		}
 	}
 	else {
-		yImpluse = -2;
+		if (IPAD) {
+			yImpluse = -25;
+		}
+		else {
+			yImpluse = -2;
+		}
 	}
 	
 	if (!gameOver) {

@@ -135,12 +135,12 @@
 	
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 	if (IPAD) {
-		[_normalDescription setFont:[UIFont fontWithName:@"prototype" size:17]];
-		[_strategyDescription setFont:[UIFont fontWithName:@"prototype" size:17]];
+		[_normalDescription setFont:[UIFont fontWithName:@"prototype" size:34]];
+		[_strategyDescription setFont:[UIFont fontWithName:@"prototype" size:34]];
 	}
 	else {
-		[_normalDescription setFont:[UIFont fontWithName:@"prototype" size:12]];
-		[_strategyDescription setFont:[UIFont fontWithName:@"prototype" size:12]];
+		[_normalDescription setFont:[UIFont fontWithName:@"prototype" size:17]];
+		[_strategyDescription setFont:[UIFont fontWithName:@"prototype" size:17]];
 	}
 	
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"adsLoaded"]) {

@@ -27,9 +27,6 @@
 {
     [super viewDidLoad];
 	
-	//Only hide until URL has been received
-	_rateOutlet.hidden = YES;
-	
 	
 	// Set font sizes for iPad
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
@@ -72,7 +69,7 @@
 		AudioServicesPlaySystemSound(breaking);
 	}
 	else {
-		NSLog(@"***Breaking Sounds***");
+		NSLog(@"***Toggling Sounds***");
 	}
 }
 
@@ -158,7 +155,7 @@
 	[self playSound];
 }
 
-
+#pragma mark Feedback Button
 - (IBAction)feedback:(id)sender {
 	
 	[self achievementComplete:@"judge" percentComplete:100];
@@ -167,12 +164,12 @@
 		
 		mailer.mailComposeDelegate = self;
 		
-		[mailer setSubject:@"Feedback/Suggestions Inside The Box"];
+		[mailer setSubject:@"Feedback/Suggestions For Inside The Box"];
 		
 		NSArray *toRecipients = [NSArray arrayWithObjects:@"rybelllc@gmail.com", nil];
 		[mailer setToRecipients:toRecipients];
 		
-		NSString *emailBody = @"Leave your feedback or suggestions here and we will do our best to take them into consideration and make the app even better! If you want support regarding the app then go to http://www.rybel-llc.com/support Thank you for the feedback!";
+		NSString *emailBody = @"Give us your feedback or suggestions here!";
 		[mailer setMessageBody:emailBody isHTML:YES];
 		
 		[self presentViewController:mailer animated:YES completion:nil];
@@ -228,7 +225,7 @@
 	[self achievementComplete:@"judge" percentComplete:100];
 	
 	// Open appstore app URL
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/idcom.rybel.in-the-box"]];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://appsto.re/us/i1fu1.i"]];
 }
 
 #pragma mark Game Center Code
