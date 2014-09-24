@@ -11,8 +11,6 @@
 		9400629C1964AE0700B5D811 /* normalproceed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9400629B1964AE0700B5D811 /* normalproceed.png */; };
 		940339DB195F755600FD9516 /* normalselection.png in Resources */ = {isa = PBXBuildFile; fileRef = 940339DA195F755600FD9516 /* normalselection.png */; };
 		940339E1195F78B300FD9516 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 940339E0195F78B300FD9516 /* StoreKit.framework */; };
-		940339E3195F864200FD9516 /* nightbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 940339E2195F864200FD9516 /* nightbackground.png */; };
-		940339E7195F892C00FD9516 /* nightball.png in Resources */ = {isa = PBXBuildFile; fileRef = 940339E6195F892C00FD9516 /* nightball.png */; };
 		940339EA19609C1B00FD9516 /* nightback.png in Resources */ = {isa = PBXBuildFile; fileRef = 940339E819609C1B00FD9516 /* nightback.png */; };
 		940339EB19609C1B00FD9516 /* normalback.png in Resources */ = {isa = PBXBuildFile; fileRef = 940339E919609C1B00FD9516 /* normalback.png */; };
 		940339FD1960DA0400FD9516 /* AppIcon29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = 940339ED1960DA0400FD9516 /* AppIcon29x29.png */; };
@@ -96,6 +94,7 @@
 		94C9B6BB1979AC9F00AE4BF2 /* nightquote2.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C9B6B71979AC9F00AE4BF2 /* nightquote2.png */; };
 		94C9B6BC1979AC9F00AE4BF2 /* normalquote1.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C9B6B81979AC9F00AE4BF2 /* normalquote1.png */; };
 		94C9B6BD1979AC9F00AE4BF2 /* normalquote2.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C9B6B91979AC9F00AE4BF2 /* normalquote2.png */; };
+		94CAA37019BFBCE0006AC4EA /* nightbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 94CAA36F19BFBCE0006AC4EA /* nightbackground.png */; };
 		94D31A48197236FE006E21C2 /* Normal.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D31A47197236FE006E21C2 /* Normal.m */; };
 		94D31A4B1972390C006E21C2 /* nighttoggleon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D31A491972390C006E21C2 /* nighttoggleon.png */; };
 		94D31A4C1972390C006E21C2 /* nighttoggleoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D31A4A1972390C006E21C2 /* nighttoggleoff.png */; };
@@ -127,8 +126,6 @@
 		9400629B1964AE0700B5D811 /* normalproceed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalproceed.png; path = ../normalproceed.png; sourceTree = "<group>"; };
 		940339DA195F755600FD9516 /* normalselection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalselection.png; path = ../../normalselection.png; sourceTree = "<group>"; };
 		940339E0195F78B300FD9516 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		940339E2195F864200FD9516 /* nightbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nightbackground.png; path = ../../../../../Downloads/Inside_The_Box/Night_Mode/nightbackground.png; sourceTree = "<group>"; };
-		940339E6195F892C00FD9516 /* nightball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nightball.png; path = ../../../../../Downloads/Inside_The_Box/Night_Mode/nightball.png; sourceTree = "<group>"; };
 		940339E819609C1B00FD9516 /* nightback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nightback.png; path = ../nightback.png; sourceTree = "<group>"; };
 		940339E919609C1B00FD9516 /* normalback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalback.png; path = ../normalback.png; sourceTree = "<group>"; };
 		940339ED1960DA0400FD9516 /* AppIcon29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon29x29.png; sourceTree = "<group>"; };
@@ -223,6 +220,7 @@
 		94C9B6B71979AC9F00AE4BF2 /* nightquote2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nightquote2.png; sourceTree = "<group>"; };
 		94C9B6B81979AC9F00AE4BF2 /* normalquote1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalquote1.png; sourceTree = "<group>"; };
 		94C9B6B91979AC9F00AE4BF2 /* normalquote2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalquote2.png; sourceTree = "<group>"; };
+		94CAA36F19BFBCE0006AC4EA /* nightbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nightbackground.png; sourceTree = "<group>"; };
 		94D31A46197236FE006E21C2 /* Normal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Normal.h; sourceTree = "<group>"; };
 		94D31A47197236FE006E21C2 /* Normal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Normal.m; sourceTree = "<group>"; };
 		94D31A491972390C006E21C2 /* nighttoggleon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nighttoggleon.png; sourceTree = "<group>"; };
@@ -411,12 +409,11 @@
 				94141A0C197DC95A00AC8FCB /* nightfeedbackbutton.png */,
 				94D31A491972390C006E21C2 /* nighttoggleon.png */,
 				94D31A4A1972390C006E21C2 /* nighttoggleoff.png */,
-				940339E2195F864200FD9516 /* nightbackground.png */,
-				940339E6195F892C00FD9516 /* nightball.png */,
 				94BDFF45196B745100723965 /* nightcreditsbutton.png */,
 				94BDFF46196B745100723965 /* nightratebutton.png */,
 				94BDFF48196B745100723965 /* settingsnighticon.png */,
 				94792A9F1958EC02004A6404 /* nightbackgroundplain.png */,
+				94CAA36F19BFBCE0006AC4EA /* nightbackground.png */,
 				94E19B99196C977100893DEE /* nightcredits.png */,
 				940339E819609C1B00FD9516 /* nightback.png */,
 				94792AA01958EC02004A6404 /* nightmodebutton.png */,
@@ -658,7 +655,6 @@
 				9400629C1964AE0700B5D811 /* normalproceed.png in Resources */,
 				94792AB81958EC02004A6404 /* nightbackgroundplain.png in Resources */,
 				94E19B9B196C977100893DEE /* nightcredits.png in Resources */,
-				940339E3195F864200FD9516 /* nightbackground.png in Resources */,
 				94E19B9C196C977200893DEE /* normalcredits.png in Resources */,
 				940339EA19609C1B00FD9516 /* nightback.png in Resources */,
 				94141A15197DCEA800AC8FCB /* goal.png in Resources */,
@@ -683,7 +679,7 @@
 				94792AE0195CDFB2004A6404 /* break.mp3 in Resources */,
 				94BDFF4A196B745100723965 /* nightratebutton.png in Resources */,
 				94033A051960DA0400FD9516 /* AppIcon60x60.png in Resources */,
-				940339E7195F892C00FD9516 /* nightball.png in Resources */,
+				94CAA37019BFBCE0006AC4EA /* nightbackground.png in Resources */,
 				94033A041960DA0400FD9516 /* AppIcon57x57@2x.png in Resources */,
 				94033A001960DA0400FD9516 /* AppIcon40x40@2x.png in Resources */,
 				94792AC21958EC02004A6404 /* normaltitle.png in Resources */,
