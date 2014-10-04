@@ -325,8 +325,6 @@
 	// Runs game center code block
 	[self gameCenter];
 
-	
-//	[self removeLine];
 	gameOver = YES;
 	
 	[self gameOverAnimation];
@@ -699,12 +697,6 @@
 //	AudioServicesPlaySystemSound(breaking);
 }
 
--(void)removeLine {
-	
-	NSLog(@"%@", NSStringFromSelector(_cmd));
-	
-	dotDrawn = NO;
-}
 
 -(void)timer:(NSTimer *)timer {
 	
