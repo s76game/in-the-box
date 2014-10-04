@@ -451,20 +451,11 @@
 	menu.frame = CGRectMake(80.0, replay.frame.origin.y+replay.frame.size.height+15, 160.0, 50.0);
 	[self.view addSubview:menu];
 	
-	share = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[share addTarget:self action:@selector(shareButton:) forControlEvents:UIControlEventTouchUpInside];
-	[share setBackgroundImage:[UIImage imageNamed:@"shareicon.png"] forState:UIControlStateNormal];
-	share.frame = CGRectMake(menu.frame.origin.x+menu.frame.size.width-50-15, menu.frame.origin.y+menu.frame.size.height+15, 50, 50);
-	[self.view addSubview:share];
-	
 	gameCenter = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[gameCenter addTarget:self action:@selector(gameCenterButton:) forControlEvents:UIControlEventTouchUpInside];
 	[gameCenter setBackgroundImage:[UIImage imageNamed:@"gcicon.png"] forState:UIControlStateNormal];
-	gameCenter.frame = CGRectMake(80+15, menu.frame.origin.y+menu.frame.size.height+15, 50, 50);
+	gameCenter.frame = CGRectMake(80+55, menu.frame.origin.y+menu.frame.size.height+15, 50, 50);
 	[self.view addSubview:gameCenter];
-	if (!gameCenterEnabled) {
-		gameCenter.hidden = YES;
-	}
 	
 	if (IPAD) {
 		[self adjustInterface];
@@ -488,8 +479,7 @@
 		 gameCenter.frame = CGRectMake(gameCenter.frame.origin.x, gameCenter.frame.origin.y-screenHeight, gameCenter.frame.size.width, gameCenter.frame.size.height);
 		 currentMedal.frame = CGRectMake(currentMedal.frame.origin.x, currentMedal.frame.origin.y-screenHeight, currentMedal.frame.size.width, currentMedal.frame.size.height);
 		 bestMedal.frame = CGRectMake(bestMedal.frame.origin.x, bestMedal.frame.origin.y-screenHeight, bestMedal.frame.size.width, bestMedal.frame.size.height);
-		 share.frame = CGRectMake(share.frame.origin.x, share.frame.origin.y-screenHeight, share.frame.size.width, share.frame.size.height);
-	 }
+		 	 }
 					 completion:^(BOOL finished)
 	 {
 			// Count up animation sqequence
@@ -519,7 +509,6 @@
 	[title setFont:[UIFont fontWithName:@"Prototype" size:100]];
 	replay.frame = CGRectMake((screenWidth/2)-160, screenHeight+650, 320, 100);
 	menu.frame = CGRectMake((screenWidth/2)-160, replay.frame.origin.y+replay.frame.size.height+30, 320, 100);
-	share.frame = CGRectMake(menu.frame.origin.x+menu.frame.size.width-100-30, menu.frame.origin.y+menu.frame.size.height+30, 100, 100);
 	gameCenter.frame = CGRectMake(menu.frame.origin.x+30, menu.frame.origin.y+menu.frame.size.height+30, 100, 100);
 	
 }
@@ -617,7 +606,6 @@
 	[bestScoreNumber removeFromSuperview];
 	[bestScore removeFromSuperview];
 	[gameCenter removeFromSuperview];
-	[share removeFromSuperview];
 	[postBackground removeFromSuperview];
 	[currentMedal removeFromSuperview];
 	[bestMedal removeFromSuperview];

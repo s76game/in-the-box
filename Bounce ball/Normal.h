@@ -56,7 +56,6 @@ static const uint32_t edgeCategory     =  0x1 << 4;
 	UILabel *currentScore;
 	UILabel *bestScore;
 	UIButton *gameCenter;
-	UIButton *share;
 	UIImageView *screenCrack;
 	SystemSoundID breaking;
 	UIView *postBackground;

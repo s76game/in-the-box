@@ -55,7 +55,7 @@
 	
 	_gameCenterEnabled = NO;
 	_showsCompletionBanner = YES;
-	
+	_banner.delegate = self;
 	
 	[self authenticateLocalPlayer];
 	[self retrieveAchievmentMetadata];
@@ -63,7 +63,6 @@
 	// Debugging Purposes Only
 	_resetGameCenterOutlet.hidden = YES;
 	
-	_banner.delegate = self;
 	
 	
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
@@ -127,14 +126,10 @@
 
 }
 
--(void)viewDidAppear:(BOOL)animated {
-	[self checkGameCenterStaus];
-}
 
 
 -(void)viewWillAppear:(BOOL)animated {
 	
-	[self checkGameCenterStaus];
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		// Night UI code
@@ -290,19 +285,10 @@
 
 #pragma mark Game Center
 
--(void)checkGameCenterStaus {
-	if (!gameCenterEnabled) {
-		_gamecenterOutlet.hidden = YES;
-	}
-	else {
-		_gamecenterOutlet.hidden = NO;
-	}
-}
-
 -(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
 	[gameCenterViewController dismissViewControllerAnimated:YES completion:^{
-		[self checkGameCenterStaus];
+		
 	}];
 	
 }
@@ -353,13 +339,11 @@
 				
 				NSLog(@"Gamecenter Enabled");
 				gameCenterEnabled = YES;
-				[self checkGameCenterStaus];
 			}
 			
 			else{
 				NSLog(@"Gamecenter Not Enabled");
 				gameCenterEnabled = NO;
-				[self checkGameCenterStaus];
 			}
 		}
 	};

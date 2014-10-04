@@ -75,7 +75,6 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 	UILabel *currentScore;
 	UILabel *bestScore;
 	UIButton *gameCenter;
-	UIButton *share;
 	UIImageView *screenCrack;
 	SystemSoundID breaking;
 	UIView *postBackground;
