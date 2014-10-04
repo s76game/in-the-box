@@ -27,6 +27,7 @@ int y;
 BOOL dotDrawn;
 float totalScore;
 int countingAnimation;
+BOOL night;
 
 int minutesTimer;
 int secondsTimer;
@@ -71,6 +72,8 @@ static const uint32_t edgeCategory     =  0x1 << 4;
 	UILabel *score;
 	CGFloat screenWidth;
 	CGFloat screenHeight;
+	
+	SKAction *wait;
 }
 
 @end

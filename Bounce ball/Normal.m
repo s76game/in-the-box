@@ -18,7 +18,7 @@
 @interface Normal ()
 @property BOOL contentCreated;
 
-@property (weak, nonatomic) id <sceneDelegate, resetSKScene, shareTimeDelegate> delegate;
+@property (nonatomic) id <sceneDelegate, resetSKScene, shareTimeDelegate> delegate;
 
 
 @end
@@ -45,6 +45,13 @@
 - (void)createSceneContents
 {
 	[self screenSize];
+	
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+		night = YES;
+	}
+	else {
+		night = NO;
+	}
 
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 	if (IPAD) {
@@ -115,7 +122,7 @@
 	CGPathAddLineToPoint(path, NULL, 1, 1);
 	
 	border.path = path;
-	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+	if (night) {
 		[border setStrokeColor:[UIColor whiteColor]];
 	}
 	else {
@@ -167,7 +174,7 @@
 	
 	if (!gameOver && !dotDrawn && gameStarted) {
 		
-		[self removeLine];
+		[line runAction:remove];
 		
 		dotDrawn = YES;
 		
@@ -179,36 +186,29 @@
 	}
 }
 
+
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	
 	if (!gameOver && gameStarted) {
-	[self removeLine];
-	
+		
+//	[lines runAction:[SKAction removeFromParent]];
+	dotDrawn = NO;
+
 	UITouch* touch = [touches anyObject];
 	CGPoint positionInScene = [touch locationInNode:self];
 	
 	pos2x = positionInScene.x;
 	pos2y = positionInScene.y;
 	
-	
-	NSString *textureName;
-	
-	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		textureName = @"normalball.png";
-	}
-	else {
-		textureName = @"normalball.png";
-	}
-	
-	
 	lines = [SKShapeNode node];
-	
+
 	CGMutablePathRef path = CGPathCreateMutable();
 	CGPathMoveToPoint(path, NULL, pos1x, pos1y);
 	CGPathAddLineToPoint(path, NULL, pos2x, pos2y);
-	
+
 	lines.path = path;
-	[lines setStrokeColor:[UIColor grayColor]];
+	CGPathRelease(path);
+	lines.strokeColor = [UIColor grayColor];
 	[lines setLineWidth:3];
 	
 	[self addChild:lines];
@@ -220,23 +220,13 @@
 	if (!gameOver && gameStarted) {
 	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"linesDrawn"]+1 forKey:@"linesDrawn"];
 	
-	[self removeLine];
+	[lines runAction:remove];
 	
 	UITouch* touch = [touches anyObject];
 	CGPoint positionInScene = [touch locationInNode:self];
 	
 	pos2x = positionInScene.x;
 	pos2y = positionInScene.y;
-	
-	
-	NSString *textureName;
-	
-	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		textureName = @"normalball.png";
-	}
-	else {
-		textureName = @"normalball.png";
-	}
 	
 	
 	line = [[SKSpriteNode alloc] init];
@@ -254,7 +244,7 @@
 	CGPathAddLineToPoint(path, NULL, pos2x, pos2y);
 	
 	lines.path = path;
-	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+	if (night) {
 		[lines setStrokeColor:[UIColor whiteColor]];
 	}
 	else {
@@ -273,12 +263,7 @@
 	
 	NSString *textureName;
 	
-	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		textureName = @"normalball.png";
-	}
-	else {
-		textureName = @"normalball.png";
-	}
+	textureName = @"normalball.png";
 	
 	SKSpriteNode *ballSprite = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"%@", textureName]];
 	ballSprite.size = CGSizeMake(75*startiPad, 75*startiPad);
@@ -300,17 +285,14 @@
 	// Handle contacts between two physics bodies.
 	
 	SKPhysicsBody *firstBody;
-	SKPhysicsBody *secondBody;
 	
 	if (contact.bodyA.categoryBitMask > contact.bodyB.categoryBitMask)
 	{
 		firstBody = contact.bodyA;
-		secondBody = contact.bodyB;
 	}
 	else
 	{
 		firstBody = contact.bodyB;
-		secondBody = contact.bodyA;
 	}
 	
 	
@@ -697,17 +679,20 @@
 
 -(void)playSound {
 	
-	// Create the sound ID
-	NSString* path = [[NSBundle mainBundle]
-					  pathForResource:@"break" ofType:@"mp3"];
-	NSURL* url = [NSURL fileURLWithPath:path];
-	AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &breaking);
- 
-	// Play the sound
-	AudioServicesPlaySystemSound(breaking);
+//	// Create the sound ID
+//	NSString* path = [[NSBundle mainBundle]
+//					  pathForResource:@"break" ofType:@"mp3"];
+//	NSURL* url = [NSURL fileURLWithPath:path];
+//	AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &breaking);
+// 
+//	// Play the sound
+//	AudioServicesPlaySystemSound(breaking);
 }
 
 -(void)removeLine {
+	
+	NSLog(@"%@", NSStringFromSelector(_cmd));
+	
 	[line runAction:remove];
 	[lines runAction:remove];
 	dotDrawn = NO;
