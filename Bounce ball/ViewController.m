@@ -263,7 +263,23 @@
 
 
 - (IBAction)gameCenterButton:(id)sender {
-	[self showLeaderboardAndAchievements:NO];
+	if ([GKLocalPlayer localPlayer].authenticated == NO) {
+		UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Game Center not enabled!"
+														  message:@"Please login for Game Center use"
+														 delegate:nil
+												cancelButtonTitle:@"OK"
+												otherButtonTitles:nil];
+		[message show];
+	} else {
+		GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+		if (gameCenterController != nil)
+		{
+			gameCenterController.gameCenterDelegate = self;
+			gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
+			UIViewController *vc = self.view.window.rootViewController;
+			[vc presentViewController: gameCenterController animated: YES completion:nil];
+		}
+	}
 }
 
 - (IBAction)resetGameCenter:(id)sender {

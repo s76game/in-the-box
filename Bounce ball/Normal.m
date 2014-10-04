@@ -546,7 +546,7 @@
 	
 	if ([GKLocalPlayer localPlayer].authenticated == NO) {
 		UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Game Center not enabled!"
-														  message:@"You are not the player we are looking for"
+														  message:@"Please login for Game Center use"
 														 delegate:nil
 												cancelButtonTitle:@"OK"
 												otherButtonTitles:nil];
