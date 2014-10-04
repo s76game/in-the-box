@@ -28,6 +28,7 @@ BOOL dotDrawn;
 float totalScore;
 int countingAnimation;
 BOOL night;
+BOOL touchStarted;
 
 int minutesTimer;
 int secondsTimer;

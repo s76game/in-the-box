@@ -36,6 +36,8 @@
 	}
 }
 
+
+
 -(void)screenSize {
 	CGRect screenRect = [[UIScreen mainScreen] bounds];
 	screenWidth = screenRect.size.width;
@@ -132,13 +134,9 @@
 	
 	[self addChild:border];
 	
-	
-	
 	ball = [self newBall];
 	ball.position = CGPointMake(CGRectGetMidX(self.frame),                              CGRectGetMidY(self.frame));
 	[self addChild:ball];
-	
-	remove = [SKAction removeFromParent];
 	
 	// Start random direction code
 	int smallest = 1;
@@ -172,9 +170,12 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	
-	if (!gameOver && !dotDrawn && gameStarted) {
-		
-		[line runAction:remove];
+	if (!gameOver && gameStarted) {
+
+		[line removeFromParent];
+		[lines removeFromParent];
+
+		touchStarted = YES;
 		
 		dotDrawn = YES;
 		
@@ -189,9 +190,10 @@
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	
-	if (!gameOver && gameStarted) {
+	if (!gameOver && gameStarted && touchStarted) {
 		
-//	[lines runAction:[SKAction removeFromParent]];
+	[lines removeFromParent];
+		
 	dotDrawn = NO;
 
 	UITouch* touch = [touches anyObject];
@@ -217,17 +219,17 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	
-	if (!gameOver && gameStarted) {
+	if (!gameOver && gameStarted && touchStarted) {
+		
 	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"linesDrawn"]+1 forKey:@"linesDrawn"];
 	
-	[lines runAction:remove];
-	
+	[lines removeFromParent];
+		
 	UITouch* touch = [touches anyObject];
 	CGPoint positionInScene = [touch locationInNode:self];
 	
 	pos2x = positionInScene.x;
 	pos2y = positionInScene.y;
-	
 	
 	line = [[SKSpriteNode alloc] init];
 	[self addChild:line];
@@ -253,6 +255,13 @@
 	[lines setLineWidth:3];
 	
 	[self addChild:lines];
+		
+		pos1x = 0;
+		pos2x = 0;
+		pos1y =	0;
+		pos2y = 0;
+		
+		touchStarted = NO;
 	}
 }
 
@@ -299,7 +308,7 @@
 	if ((firstBody.categoryBitMask & lineCategory) != 0)
 	{
 		// Ball hits line
-		[self removeLine];
+
 		scoreNumber = scoreNumber + 1;
 	}
 	else {
@@ -315,8 +324,9 @@
 	
 	// Runs game center code block
 	[self gameCenter];
+
 	
-	[self removeLine];
+//	[self removeLine];
 	gameOver = YES;
 	
 	[self gameOverAnimation];
@@ -693,8 +703,6 @@
 	
 	NSLog(@"%@", NSStringFromSelector(_cmd));
 	
-	[line runAction:remove];
-	[lines runAction:remove];
 	dotDrawn = NO;
 }
 
