@@ -66,6 +66,7 @@
 		947A9F5519589907006AE1C9 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 947A9F5419589907006AE1C9 /* Menu.m */; };
 		947F1E60198E7EE700673F98 /* postmenubutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 947F1E5E198E7EE700673F98 /* postmenubutton.png */; };
 		947F1E61198E7EE700673F98 /* postplaybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 947F1E5F198E7EE700673F98 /* postplaybutton.png */; };
+		94932F4619E1ADB800B533AA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 94932F4519E1ADB800B533AA /* Settings.bundle */; };
 		949B4F0D1981C788007A9692 /* glassoverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F0C1981C788007A9692 /* glassoverlay.png */; };
 		949B4F1B1981C809007A9692 /* bestlabel.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F0F1981C809007A9692 /* bestlabel.png */; };
 		949B4F1C1981C809007A9692 /* bronzemedal.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F101981C809007A9692 /* bronzemedal.png */; };
@@ -186,6 +187,7 @@
 		947A9F5419589907006AE1C9 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
 		947F1E5E198E7EE700673F98 /* postmenubutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = postmenubutton.png; path = ../../postmenubutton.png; sourceTree = "<group>"; };
 		947F1E5F198E7EE700673F98 /* postplaybutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = postplaybutton.png; path = ../../postplaybutton.png; sourceTree = "<group>"; };
+		94932F4519E1ADB800B533AA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = "Bounce Ball/Settings.bundle"; sourceTree = SOURCE_ROOT; };
 		949B4F0C1981C788007A9692 /* glassoverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glassoverlay.png; sourceTree = "<group>"; };
 		949B4F0F1981C809007A9692 /* bestlabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bestlabel.png; sourceTree = "<group>"; };
 		949B4F101981C809007A9692 /* bronzemedal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bronzemedal.png; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 		94C7FEA7194E3CDF00270AE8 /* Bounce ball */ = {
 			isa = PBXGroup;
 			children = (
+				94932F4519E1ADB800B533AA /* Settings.bundle */,
 				94C7FEAC194E3CDF00270AE8 /* AppDelegate.h */,
 				94C7FEAD194E3CDF00270AE8 /* AppDelegate.m */,
 				94C7FEB2194E3CDF00270AE8 /* ViewController.h */,
@@ -693,6 +696,7 @@
 				949B4F0D1981C788007A9692 /* glassoverlay.png in Resources */,
 				94E19B93196C8F4600893DEE /* Media.xcassets in Resources */,
 				94C9B6BA1979AC9F00AE4BF2 /* nightquote1.png in Resources */,
+				94932F4619E1ADB800B533AA /* Settings.bundle in Resources */,
 				949B4F1F1981C809007A9692 /* mask.png in Resources */,
 				940339FF1960DA0400FD9516 /* AppIcon40x40.png in Resources */,
 				940339FD1960DA0400FD9516 /* AppIcon29x29.png in Resources */,
