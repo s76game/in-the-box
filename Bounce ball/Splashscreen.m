@@ -84,6 +84,9 @@
 }
 
 
+- (IBAction)handleSwipeFrom:(UISwipeGestureRecognizer*)recognizer {
+	[self advanceScene];
+}
 
 /*
 #pragma mark - Navigation

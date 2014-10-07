@@ -842,6 +842,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="normalbackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="5PS-EJ-zCy">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <gestureRecognizers/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="normalquote1.png" translatesAutoresizingMaskIntoConstraints="NO" id="jCu-Mn-mcg">
                                 <rect key="frame" x="154" y="216" width="293" height="70"/>
@@ -884,6 +885,7 @@
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="lqr-V4-TYc" firstAttribute="top" secondItem="5PS-EJ-zCy" secondAttribute="bottom" id="3F6-j4-Rpo"/>
                             <constraint firstItem="jCu-Mn-mcg" firstAttribute="centerX" secondItem="5PS-EJ-zCy" secondAttribute="centerX" id="4MP-uw-YAT">
@@ -906,6 +908,9 @@
                             <constraint firstItem="5PS-EJ-zCy" firstAttribute="leading" secondItem="s0o-wf-Fnq" secondAttribute="leading" id="nRi-IA-eBk"/>
                             <constraint firstItem="5PS-EJ-zCy" firstAttribute="top" secondItem="s0o-wf-Fnq" secondAttribute="top" id="qw8-aW-KQz"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="0nu-Sm-it2" appends="YES" id="5HB-Bg-osf"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="0uI-3W-9sq"/>
                     <connections>
@@ -916,6 +921,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ViC-Y1-H6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer delaysTouchesEnded="NO" direction="right" id="0nu-Sm-it2">
+                    <connections>
+                        <action selector="handleSwipeFrom:" destination="QVP-yV-Eqj" id="CRe-Rd-pON"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1054.5" y="300"/>
         </scene>
