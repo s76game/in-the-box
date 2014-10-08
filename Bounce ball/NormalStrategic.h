@@ -7,7 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import <AudioToolBox/AudioToolbox.h>
+#import <AudioToolbox/AudioToolbox.h>
 #import "ViewController.h"
 #import "Menu.h"
 

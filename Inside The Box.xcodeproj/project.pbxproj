@@ -61,12 +61,12 @@
 		94792AD3195B6FEA004A6404 /* iPodiPhone5.png in Resources */ = {isa = PBXBuildFile; fileRef = 94792ACF195B6FEA004A6404 /* iPodiPhone5.png */; };
 		94792ADA195B7218004A6404 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 94792AD9195B7218004A6404 /* Settings.m */; };
 		94792ADC195BAA16004A6404 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94792ADB195BAA16004A6404 /* GameKit.framework */; };
-		94792ADE195CDE23004A6404 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94792ADD195CDE23004A6404 /* AudioToolbox.framework */; };
 		94792AE0195CDFB2004A6404 /* break.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 94792ADF195CDFB2004A6404 /* break.mp3 */; };
 		947A9F5519589907006AE1C9 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 947A9F5419589907006AE1C9 /* Menu.m */; };
 		947F1E60198E7EE700673F98 /* postmenubutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 947F1E5E198E7EE700673F98 /* postmenubutton.png */; };
 		947F1E61198E7EE700673F98 /* postplaybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 947F1E5F198E7EE700673F98 /* postplaybutton.png */; };
 		94932F4619E1ADB800B533AA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 94932F4519E1ADB800B533AA /* Settings.bundle */; };
+		94932F4919E4B54B00B533AA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94792ADD195CDE23004A6404 /* AudioToolbox.framework */; };
 		949B4F0D1981C788007A9692 /* glassoverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F0C1981C788007A9692 /* glassoverlay.png */; };
 		949B4F1B1981C809007A9692 /* bestlabel.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F0F1981C809007A9692 /* bestlabel.png */; };
 		949B4F1C1981C809007A9692 /* bronzemedal.png in Resources */ = {isa = PBXBuildFile; fileRef = 949B4F101981C809007A9692 /* bronzemedal.png */; };
@@ -188,6 +188,7 @@
 		947F1E5E198E7EE700673F98 /* postmenubutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = postmenubutton.png; path = ../../postmenubutton.png; sourceTree = "<group>"; };
 		947F1E5F198E7EE700673F98 /* postplaybutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = postplaybutton.png; path = ../../postplaybutton.png; sourceTree = "<group>"; };
 		94932F4519E1ADB800B533AA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = "Bounce Ball/Settings.bundle"; sourceTree = SOURCE_ROOT; };
+		94932F4719E4B20500B533AA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		949B4F0C1981C788007A9692 /* glassoverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glassoverlay.png; sourceTree = "<group>"; };
 		949B4F0F1981C809007A9692 /* bestlabel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bestlabel.png; sourceTree = "<group>"; };
 		949B4F101981C809007A9692 /* bronzemedal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bronzemedal.png; sourceTree = "<group>"; };
@@ -246,10 +247,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94932F4919E4B54B00B533AA /* AudioToolbox.framework in Frameworks */,
 				94D31A571972C392006E21C2 /* iAd.framework in Frameworks */,
 				94F843DD196E4EF100461256 /* MessageUI.framework in Frameworks */,
 				940339E1195F78B300FD9516 /* StoreKit.framework in Frameworks */,
-				94792ADE195CDE23004A6404 /* AudioToolbox.framework in Frameworks */,
 				94792ADC195BAA16004A6404 /* GameKit.framework in Frameworks */,
 				94792ACB1958FA17004A6404 /* QuartzCore.framework in Frameworks */,
 				94C7FECF194E3DE600270AE8 /* SpriteKit.framework in Frameworks */,
@@ -335,8 +336,8 @@
 			isa = PBXGroup;
 			children = (
 				94033A1519634EE200FD9516 /* flickering_noise.mp3 */,
-				94033A1C19634EE200FD9516 /* toggle_sound.mp3 */,
 				94792ADF195CDFB2004A6404 /* break.mp3 */,
+				94033A1C19634EE200FD9516 /* toggle_sound.mp3 */,
 			);
 			name = "Sound Effects";
 			sourceTree = "<group>";
@@ -528,6 +529,7 @@
 		94D31A5519724EA2006E21C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				94932F4719E4B20500B533AA /* AVFoundation.framework */,
 				94D31A561972C392006E21C2 /* iAd.framework */,
 				94F843DC196E4EF100461256 /* MessageUI.framework */,
 				940339E0195F78B300FD9516 /* StoreKit.framework */,

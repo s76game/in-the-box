@@ -674,15 +674,12 @@
 }
 
 -(void)playSound {
-	
-//	// Create the sound ID
-//	NSString* path = [[NSBundle mainBundle]
-//					  pathForResource:@"break" ofType:@"mp3"];
-//	NSURL* url = [NSURL fileURLWithPath:path];
-//	AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &breaking);
-// 
-//	// Play the sound
-//	AudioServicesPlaySystemSound(breaking);
+	SystemSoundID soundID;
+	NSString *soundFile = [[NSBundle mainBundle]
+						   pathForResource:@"break" ofType:@"mp3"];
+	AudioServicesCreateSystemSoundID((__bridge  CFURLRef)
+									 [NSURL fileURLWithPath:soundFile], & soundID);
+	AudioServicesPlaySystemSound(soundID);
 }
 
 
