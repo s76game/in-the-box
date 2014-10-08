@@ -41,7 +41,7 @@
 	[self setNotificationListeners];
 	[super viewDidLoad];
 	sceneView = (SKView *) self.view;
-	sceneView.showsPhysics = YES;
+	sceneView.showsPhysics = NO;
 }
 
 -(void)setNotificationListeners {

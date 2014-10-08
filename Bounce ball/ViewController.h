@@ -19,6 +19,7 @@
 
 NSArray *gameCenterData;
 BOOL gameCenterEnabled;
+UIAlertView *alert;
 
 @interface ViewController : UIViewController <GKGameCenterControllerDelegate, ADBannerViewDelegate, MFMailComposeViewControllerDelegate> {
 	

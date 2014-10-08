@@ -97,8 +97,25 @@
 			// No Tutorial Yet
 		
 	}
+	else {
+#pragma mark Update First Launch
 	
+	if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]]) {
+		NSLog(@"Update launch %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]);
+		
+		
+		UIAlertView *update = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Update %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] message:@"Fixed Gameplay Crash \n Other Bug Fixes \n UI Adjustments \n Increased iPad Dificulty \n Enhanced Feedback System \n Swipe Functionality on Intro Screen \n Default Gamemode Strategy \n \n Enjoy!" delegate:self cancelButtonTitle:@"Ok!" otherButtonTitles:nil];
+		[update show];
+		
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]];
+	
+		
+		// REMOVE LINE IN ALL FUTURE UPDATES!
+		[[NSUserDefaults standardUserDefaults] setObject:@"normalStrategy" forKey:@"toBePlayed"];
+	
+	}
 }
+	}
 
 - (void)didReceiveMemoryWarning
 {
@@ -168,8 +185,9 @@
 		if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@CHECK",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
 			// Show UIALert View
 			
-			UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Rate my app" message:@"If you enjoy using Inside the Box would you mind taking a moment to rate it? It won't take more than a minute. Thanks for the support!"
+			alert=[[UIAlertView alloc]initWithTitle:@"Rate my app" message:@"If you enjoy using Inside the Box would you mind taking a moment to rate it? It won't take more than a minute. Thanks for the support!"
 														delegate:self cancelButtonTitle:@"Remind me later" otherButtonTitles:@"Rate it now", @"Give feedback", @"No, thanks", nil];
+			alert.tag=101;
 			[alert show];
 		}
 	}
@@ -178,24 +196,26 @@
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if (buttonIndex == 0) {
-		NSLog(@"Remind me later");
-		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
-	}
-	else if (buttonIndex == 1){
-		NSLog(@"Rate it now");
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
-		// Open app App Store URL
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://appsto.re/us/i1fu1.i"]];
-	}
-	else if (buttonIndex == 2) {
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
-		NSLog(@"Feedback");
-		[self mail];
-	}
-	else {
-		NSLog(@"No, thanks");
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+	if (alert.tag==101) {
+		if (buttonIndex == 0) {
+			NSLog(@"Remind me later");
+			[[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+		}
+		else if (buttonIndex == 1){
+			NSLog(@"Rate it now");
+			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+			// Open app App Store URL
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://appsto.re/us/i1fu1.i"]];
+		}
+		else if (buttonIndex == 2) {
+			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+			NSLog(@"Feedback");
+			[self mail];
+		}
+		else {
+			NSLog(@"No, thanks");
+			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+		}
 	}
 }
 
