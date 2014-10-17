@@ -42,6 +42,7 @@
 	[super viewDidLoad];
 	sceneView = (SKView *) self.view;
 	sceneView.showsPhysics = NO;
+	sceneView.showsFPS = [[NSUserDefaults standardUserDefaults] boolForKey:@"FPS"];
 }
 
 -(void)setNotificationListeners {
