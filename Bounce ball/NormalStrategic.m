@@ -38,6 +38,13 @@
 {
 	[self screenSize];
 	
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+		night = YES;
+	}
+	else {
+		night = NO;
+	}
+	
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 	if (IPAD) {
 		scoreiPad = 50;
@@ -509,7 +516,7 @@
 	[title setFont:[UIFont fontWithName:@"Prototype" size:100]];
 	replay.frame = CGRectMake((screenWidth/2)-160, screenHeight+650, 320, 100);
 	menu.frame = CGRectMake((screenWidth/2)-160, replay.frame.origin.y+replay.frame.size.height+30, 320, 100);
-	gameCenter.frame = CGRectMake(menu.frame.origin.x+30, menu.frame.origin.y+menu.frame.size.height+30, 100, 100);
+	gameCenter.frame = CGRectMake(menu.frame.origin.x+120, menu.frame.origin.y+menu.frame.size.height+30, 100, 100);
 	
 }
 
