@@ -491,7 +491,7 @@
 	 {
 			// Count up animation sqequence
 		 
-			float countUpTimer = 1.5 / (goalsHit - 1);
+			float countUpTimer = 1.0 / (goalsHit - 1);
 		 
 			countingTimer = [NSTimer scheduledTimerWithTimeInterval:countUpTimer target:self selector:@selector(countAnimation) userInfo:nil repeats:YES];
 	 }];

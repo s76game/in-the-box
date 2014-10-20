@@ -104,14 +104,11 @@
 		NSLog(@"Update launch %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]);
 		
 		
-		UIAlertView *update = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Update %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] message:@"Fixed Gameplay Crash \n Other Bug Fixes \n UI Adjustments \n Increased iPad Dificulty \n Enhanced Feedback System \n Swipe Functionality on Intro Screen \n Default Gamemode Strategy \n \n Enjoy!" delegate:self cancelButtonTitle:@"Ok!" otherButtonTitles:nil];
+		UIAlertView *update = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Update %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] message:@"Minor bug fixes/enhancements\nAdded FPS Toggle \n \n Enjoy!" delegate:self cancelButtonTitle:@"Ok!" otherButtonTitles:nil];
 		[update show];
 		
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]];
 	
-		
-		// REMOVE LINE IN ALL FUTURE UPDATES!
-		[[NSUserDefaults standardUserDefaults] setObject:@"normalStrategy" forKey:@"toBePlayed"];
 	
 	}
 }
