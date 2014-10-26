@@ -74,6 +74,11 @@ static const uint32_t edgeCategory     =  0x1 << 4;
 	CGFloat screenHeight;
 	
 	SKAction *wait;
+	
+	SKEmitterNode *tail;
+	SKEmitterNode *explosion;
+	
+	CGPoint old;
 }
 
 @end

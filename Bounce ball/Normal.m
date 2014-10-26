@@ -32,10 +32,8 @@
 	{
 		[self createSceneContents];
 		self.contentCreated = YES;
-		
 	}
 }
-
 
 
 -(void)screenSize {
@@ -44,10 +42,34 @@
 	screenHeight = screenRect.size.height;
 }
 
+-(void)initExplosion {
+
+	explosion = [[SKEmitterNode alloc] init];
+	explosion = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"explode" ofType:@"sks"]];
+	[explosion setNumParticlesToEmit:200];
+	[explosion setParticleBirthRate:750];
+	[explosion setParticleLifetime:0.5];
+	[explosion setEmissionAngleRange:45];
+	[explosion setParticleSpeed:100];
+	[explosion setParticleSpeedRange:50];
+	[explosion setXAcceleration:0];
+	[explosion setYAcceleration:0];
+	[explosion setParticleAlpha:0.8];
+	[explosion setParticleAlphaRange:0.2];
+	[explosion setParticleAlphaSpeed:-0.5];
+	[explosion setParticleScale:0.75];
+	[explosion setParticleScaleRange:0.4];
+	[explosion setParticleScaleSpeed:-0.5];
+	[explosion setParticleRotation:0];
+	[explosion setParticleRotationRange:0];
+	[explosion setParticleRotationSpeed:0];
+	[explosion setPosition:ball.position];
+	[self addChild:explosion];
+}
+
 - (void)createSceneContents
 {
 	[self screenSize];
-	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		night = YES;
 	}
@@ -313,6 +335,9 @@
 	}
 	else {
 		// Ball hits wall
+		[self playSound];
+		[self initExplosion];
+		ball.hidden = YES;
 		[ball.physicsBody setVelocity:CGVectorMake(0, 0)];
 		[self gameOver];
 	}
@@ -326,9 +351,9 @@
 	[self gameCenter];
 
 	gameOver = YES;
-	
 	[self gameOverAnimation];
-	
+	[line removeFromParent];
+	[lines removeFromParent];
 }
 
 -(void)gameOverAnimation {
@@ -336,11 +361,7 @@
 	float highScore;
 	
 #pragma mark Create Post Game UI
-	
-	screenCrack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"glassoverlay.png"]];
-	screenCrack.frame = self.frame;
-	[self.view addSubview:screenCrack];
-	[self playSound];
+
 	
 	postBackground = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight, screenWidth, screenHeight)];
 	postBackground.backgroundColor = [UIColor blackColor];
@@ -594,7 +615,6 @@
 	// Removes elements not in the scene
 	[replay removeFromSuperview];
 	[menu removeFromSuperview];
-	[screenCrack removeFromSuperview];
 	[score removeFromSuperview];
 	[title removeFromSuperview];
 	[currentScoreNumber removeFromSuperview];
@@ -605,6 +625,7 @@
 	[postBackground removeFromSuperview];
 	[currentMedal removeFromSuperview];
 	[bestMedal removeFromSuperview];
+	[explosion removeFromParent];
 }
 
 // Ball speed up method
@@ -672,6 +693,7 @@
 								   userInfo:nil
 									repeats:YES];
 }
+
 
 -(void)playSound {
 	SystemSoundID soundID;

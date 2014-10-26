@@ -38,6 +38,8 @@
 		94141A10197DC95A00AC8FCB /* normalfeedbackbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94141A0D197DC95A00AC8FCB /* normalfeedbackbutton.png */; };
 		94141A11197DC95A00AC8FCB /* strategyfeedbackbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 94141A0E197DC95A00AC8FCB /* strategyfeedbackbutton.png */; };
 		94141A15197DCEA800AC8FCB /* goal.png in Resources */ = {isa = PBXBuildFile; fileRef = 94141A14197DCEA800AC8FCB /* goal.png */; };
+		945D89E119FC7A3500218159 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D89DF19FC7A3500218159 /* spark.png */; };
+		945D89E319FC7F9B00218159 /* explode.sks in Resources */ = {isa = PBXBuildFile; fileRef = 945D89E219FC7F9B00218159 /* explode.sks */; };
 		94792A921958EBCF004A6404 /* Splashscreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 94792A911958EBCF004A6404 /* Splashscreen.m */; };
 		94792A951958EBDC004A6404 /* ModeSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 94792A941958EBDC004A6404 /* ModeSelect.m */; };
 		94792AB31958EC02004A6404 /* nightmodetitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 94792A991958EC02004A6404 /* nightmodetitle.png */; };
@@ -155,6 +157,8 @@
 		94141A0D197DC95A00AC8FCB /* normalfeedbackbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalfeedbackbutton.png; path = ../normalfeedbackbutton.png; sourceTree = "<group>"; };
 		94141A0E197DC95A00AC8FCB /* strategyfeedbackbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strategyfeedbackbutton.png; sourceTree = "<group>"; };
 		94141A14197DCEA800AC8FCB /* goal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goal.png; sourceTree = "<group>"; };
+		945D89DF19FC7A3500218159 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../spark.png; sourceTree = "<group>"; };
+		945D89E219FC7F9B00218159 /* explode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = explode.sks; path = "Bounce Ball/explode.sks"; sourceTree = SOURCE_ROOT; };
 		94792A901958EBCF004A6404 /* Splashscreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Splashscreen.h; sourceTree = "<group>"; };
 		94792A911958EBCF004A6404 /* Splashscreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Splashscreen.m; sourceTree = "<group>"; };
 		94792A931958EBDC004A6404 /* ModeSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModeSelect.h; sourceTree = "<group>"; };
@@ -314,6 +318,8 @@
 			children = (
 				94D31A46197236FE006E21C2 /* Normal.h */,
 				94D31A47197236FE006E21C2 /* Normal.m */,
+				945D89E219FC7F9B00218159 /* explode.sks */,
+				945D89DF19FC7A3500218159 /* spark.png */,
 			);
 			name = "Normal Gameplay Scenes";
 			sourceTree = "<group>";
@@ -627,6 +633,7 @@
 				94792AD0195B6FEA004A6404 /* iPad2iPadmini.png in Resources */,
 				94033A0C1960DA0400FD9516 /* iTunesArtwork@2x.png in Resources */,
 				94BDFF4B196B745100723965 /* settingsicon.png in Resources */,
+				945D89E319FC7F9B00218159 /* explode.sks in Resources */,
 				94D31A521972483E006E21C2 /* strategyplaybutton.png in Resources */,
 				94792ABF1958EC02004A6404 /* normalmodebutton.png in Resources */,
 				949B4F261981C809007A9692 /* timelabel.png in Resources */,
@@ -696,6 +703,7 @@
 				94141A0F197DC95A00AC8FCB /* nightfeedbackbutton.png in Resources */,
 				94D31A541972483E006E21C2 /* strategytitle.png in Resources */,
 				949B4F0D1981C788007A9692 /* glassoverlay.png in Resources */,
+				945D89E119FC7A3500218159 /* spark.png in Resources */,
 				94E19B93196C8F4600893DEE /* Media.xcassets in Resources */,
 				94C9B6BA1979AC9F00AE4BF2 /* nightquote1.png in Resources */,
 				94932F4619E1ADB800B533AA /* Settings.bundle in Resources */,
