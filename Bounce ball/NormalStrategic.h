@@ -16,7 +16,6 @@ int pos1x;
 int pos1y;
 int pos2x;
 int pos2y;
-float gameTime;
 NSString *goalTimeString;
 int scoreNumber;
 BOOL gameOver;
@@ -69,17 +68,15 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 	// Post game stuff
 	UIButton *menu;
 	UIButton *replay;
-	UILabel *title;
+	UIButton *rate;
+	UIButton *gameCenter;
+	UIButton *share;
 	UILabel *currentScoreNumber;
 	UILabel *bestScoreNumber;
-	UILabel *currentScore;
 	UILabel *bestScore;
-	UIButton *gameCenter;
-	UIImageView *screenCrack;
 	SystemSoundID breaking;
-	UIView *postBackground;
-	UIImageView *currentMedal;
-	UIImageView *bestMedal;
+	UIImageView *postBackground;
+	UIImageView *bigImage;
 	
 	// In game stuff
 	SKShapeNode* border;
@@ -96,6 +93,8 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 	UIButton *start;
 	CGFloat screenWidth;
 	CGFloat screenHeight;
+	
+	SKEmitterNode *explosion;
 }
 
 @end

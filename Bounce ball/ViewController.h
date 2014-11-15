@@ -20,24 +20,31 @@
 NSArray *gameCenterData;
 BOOL gameCenterEnabled;
 UIAlertView *alert;
+NSString *alias;
+SystemSoundID toggle;
 
 @interface ViewController : UIViewController <GKGameCenterControllerDelegate, ADBannerViewDelegate, MFMailComposeViewControllerDelegate> {
 	
 	
 }
-- (IBAction)start:(id)sender;
-@property (strong, nonatomic) IBOutlet UIView *ball;
-@property (strong, nonatomic) IBOutlet UIButton *mode;
-@property (strong, nonatomic) IBOutlet UIButton *play;
-@property (strong, nonatomic) IBOutlet UIButton *settings;
-@property (strong, nonatomic) IBOutlet UIImageView *frame;
+- (IBAction)startButton:(id)sender;
+- (IBAction)gameCenterButton:(id)sender;
+- (IBAction)soundsButton:(id)sender;
+- (IBAction)gameTypeButton:(id)sender;
+- (IBAction)lightButton:(id)sender;
+- (IBAction)creditsButton:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *modeOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *startOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *gamecenterOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *soundOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *lightOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *creditsOutlet;
+
+
+@property (strong, nonatomic) IBOutlet UIImageView *titleOutlet;
 @property (strong, nonatomic) IBOutlet UIImageView *background;
 @property (strong, nonatomic) IBOutlet ADBannerView *banner;
-- (IBAction)gameCenterButton:(id)sender;
-@property (strong, nonatomic) IBOutlet UIButton *resetGameCenterOutlet;
 
-- (IBAction)resetGameCenter:(id)sender;
-@property (strong, nonatomic) IBOutlet UIButton *gamecenterOutlet;
 
 
 

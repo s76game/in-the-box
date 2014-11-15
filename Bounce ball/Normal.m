@@ -46,6 +46,15 @@
 
 	explosion = [[SKEmitterNode alloc] init];
 	explosion = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"explode" ofType:@"sks"]];
+	
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+		[explosion setParticleColor:[UIColor whiteColor]];
+		[explosion setParticleTexture:[SKTexture textureWithImage:[UIImage imageNamed:@"night_particle.png"]]];
+	}
+	else {
+		[explosion setParticleColor:[UIColor redColor]];
+		[explosion setParticleTexture:[SKTexture textureWithImage:[UIImage imageNamed:@"particle.png"]]];
+	}
 	[explosion setNumParticlesToEmit:200];
 	[explosion setParticleBirthRate:750];
 	[explosion setParticleLifetime:0.5];
@@ -57,7 +66,7 @@
 	[explosion setParticleAlpha:0.8];
 	[explosion setParticleAlphaRange:0.2];
 	[explosion setParticleAlphaSpeed:-0.5];
-	[explosion setParticleScale:0.75];
+	[explosion setParticleScale:0.25];
 	[explosion setParticleScaleRange:0.4];
 	[explosion setParticleScaleSpeed:-0.5];
 	[explosion setParticleRotation:0];
@@ -79,33 +88,29 @@
 
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 	if (IPAD) {
-		scoreiPad = 50;
+		scoreiPad = 100;
 		startiPad = 2;
 		speediPad = 115;
 	} else {
-		scoreiPad = 25;
+		scoreiPad = 50;
 		startiPad = 1;
 		speediPad = 15;
 	}
 
 	
 	// Set up score
-	score = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth/2)-scoreiPad, scoreiPad, 300, 50)];
+	score = [[UILabel alloc] initWithFrame:CGRectMake(0, scoreiPad/2, screenWidth, 50)];
 	[self.view addSubview:score];
 	scoreNumber = 0;
 	score.text = @"Time";
-	[score setFont:[UIFont fontWithName:@"Prototype" size:scoreiPad]];
+	score.textAlignment = NSTextAlignmentCenter;
+	[score setFont:[UIFont fontWithName:@"DS-Digital-BoldItalic" size:scoreiPad]];
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		score.textColor = [UIColor whiteColor];
 	}
-	
-	// Add start game button
-	
-	start = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[start addTarget:self action:@selector(start:) forControlEvents:UIControlEventTouchUpInside];
-	start.frame = CGRectMake(((screenWidth/2)-65*startiPad), 150*startiPad, 130*startiPad, 40*startiPad);
-	[start setBackgroundImage:[UIImage imageNamed:@"normalgo.png"] forState:UIControlStateNormal];
-	[self.view addSubview:start];
+	else {
+		score.textColor = [UIColor blueColor];
+	}
 
 	
 	[speedUpTimer invalidate];
@@ -115,10 +120,10 @@
 	NSString *textureName;
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		textureName = @"nightbackgroundplain.png";
+		textureName = @"night_background.png";
 	}
 	else {
-		textureName = @"normalbackground.png";
+		textureName = @"background.png";
 	}
 	
 	SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%@", textureName]];
@@ -152,7 +157,7 @@
 	else {
 		[border setStrokeColor:[UIColor blackColor]];
 	}
-	[border setLineWidth:5];
+	[border setLineWidth:0];
 	
 	[self addChild:border];
 	
@@ -163,8 +168,8 @@
 	// Start random direction code
 	int smallest = 1;
 	int largest = 2;
-	x = smallest + arc4random() %(largest+1-smallest);
-	y = smallest + arc4random() %(largest+1-smallest);
+	x = (int)smallest + (int)arc4random() %(largest+1-smallest);
+	y = (int)smallest + (int)arc4random() %(largest+1-smallest);
 	
 	switch (x) {
   case 1:
@@ -207,6 +212,9 @@
 		pos1x = positionInScene.x;
 		pos1y = positionInScene.y;
 	}
+	else if (!gameOver && !gameStarted) {
+		[self start];
+	}
 }
 
 
@@ -233,7 +241,7 @@
 	lines.path = path;
 	CGPathRelease(path);
 	lines.strokeColor = [UIColor grayColor];
-	[lines setLineWidth:3];
+	[lines setLineWidth:5];
 	
 	[self addChild:lines];
 	}
@@ -274,7 +282,7 @@
 	else {
 		[lines setStrokeColor:[UIColor blackColor]];
 	}
-	[lines setLineWidth:3];
+	[lines setLineWidth:5];
 	
 	[self addChild:lines];
 		
@@ -294,7 +302,12 @@
 	
 	NSString *textureName;
 	
-	textureName = @"normalball.png";
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+		textureName = @"night_ball.png";
+	}
+	else {
+		textureName = @"ball.png";
+	}
 	
 	SKSpriteNode *ballSprite = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"%@", textureName]];
 	ballSprite.size = CGSizeMake(75*startiPad, 75*startiPad);
@@ -330,12 +343,12 @@
 	if ((firstBody.categoryBitMask & lineCategory) != 0)
 	{
 		// Ball hits line
-
+		[self playBounce];
 		scoreNumber = scoreNumber + 1;
 	}
 	else {
 		// Ball hits wall
-		[self playSound];
+		[self playExplosion];
 		[self initExplosion];
 		ball.hidden = YES;
 		[ball.physicsBody setVelocity:CGVectorMake(0, 0)];
@@ -363,31 +376,29 @@
 #pragma mark Create Post Game UI
 
 	
-	postBackground = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight, screenWidth, screenHeight)];
-	postBackground.backgroundColor = [UIColor blackColor];
+	postBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, screenHeight, screenWidth, screenHeight)];
+	postBackground.image = [UIImage imageNamed:@"black_overlay.png"];
 	postBackground.alpha = 0.75;
 	[self.view addSubview:postBackground];
 	
-	currentScore = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight+170, 125, 75)];
-	currentScore.text = @"TIME:";
-	currentScore.textAlignment = NSTextAlignmentRight;
-	[currentScore setFont:[UIFont fontWithName:@"Prototype" size:40]];
-	currentScore.textColor = [UIColor whiteColor];
-	[self.view addSubview:currentScore];
+	bigImage = [[UIImageView alloc] initWithFrame:CGRectMake(25, screenHeight+20, screenWidth-50, screenWidth-50)];
+	bigImage.image = [UIImage imageNamed:@"clockscore.png"];
+	[self.view addSubview:bigImage];
 	
-	bestScore = [[UILabel alloc] initWithFrame:CGRectMake(10, screenHeight+245, 125, 75)];
+	bestScore = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight+bigImage.frame.size.height+5, 135, 75)];
 	bestScore.text = @"BEST:";
 	bestScore.textAlignment = NSTextAlignmentRight;
-	[bestScore setFont:[UIFont fontWithName:@"Prototype" size:40]];
+	[bestScore setFont:[UIFont fontWithName:@"DS-Digital-BoldItalic" size:40]];
 	bestScore.textColor = [UIColor whiteColor];
 	[self.view addSubview:bestScore];
 	
 	highScore = [[NSUserDefaults standardUserDefaults] floatForKey:@"highScoreTime"];
 	
-	currentScoreNumber = [[UILabel alloc] initWithFrame:CGRectMake(currentScore.frame.origin.x+currentScore.frame.size.width+10, currentScore.frame.origin.y, 100, 75)];
-	currentScoreNumber.text = [NSString stringWithFormat:@"0:00"];
-	[currentScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:40]];
-	currentScoreNumber.textColor = [UIColor blueColor];
+	currentScoreNumber = [[UILabel alloc] initWithFrame:CGRectMake(bigImage.frame.origin.x+bigImage.frame.size.height/2-75/2, bigImage.frame.origin.y+bigImage.frame.size.width/2-100/2+70, 100, 75)];
+	currentScoreNumber.text = [NSString stringWithFormat:@"%@", score.text];
+	currentScoreNumber.textAlignment = NSTextAlignmentCenter;
+	[currentScoreNumber setFont:[UIFont fontWithName:@"DS-Digital-BoldItalic" size:40]];
+	currentScoreNumber.textColor = [UIColor greenColor];
 	[self.view addSubview:currentScoreNumber];
 	
 	bestScoreNumber = [[UILabel alloc] initWithFrame:CGRectMake(bestScore.frame.origin.x+bestScore.frame.size.width+10, bestScore.frame.origin.y, 100, 75)];
@@ -400,7 +411,7 @@
 		secondsTimerHigh = (int)highScore-(minutesTimerHigh * 60);
 	
 	bestScoreNumber.text = [NSString stringWithFormat:@"%01d:%02d", minutesTimerHigh, secondsTimerHigh];
-	[bestScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:40]];
+	[bestScoreNumber setFont:[UIFont fontWithName:@"DS-Digital-BoldItalic" size:40]];
 	bestScoreNumber.textColor = [UIColor greenColor];
 	[self.view addSubview:bestScoreNumber];
 
@@ -412,63 +423,42 @@
 		bestScoreNumber.text = [NSString stringWithFormat:@"%01d:%02d", minutesTimer, secondsTimer];
 	}
 	
-	currentMedal = [[UIImageView alloc] initWithFrame:CGRectMake(currentScoreNumber.frame.origin.x+currentScoreNumber.frame.size.width+10, currentScoreNumber.frame.origin.y+10, 50, 50)];
-	if (gameTime-1 >= 30) {
-		currentMedal.image = [UIImage imageNamed:@"goldmedal.png"];
-	}
-	else if (gameTime-1 >= 20) {
-		currentMedal.image = [UIImage imageNamed:@"silvermedal.png"];
-	}
-	else if (gameTime-1 >= 10 ) {
-		currentMedal.image = [UIImage imageNamed:@"bronzemedal.png"];
-	}
-	else {
-		currentMedal.image = nil;
-	}
-	[self.view addSubview:currentMedal];
-	currentMedal.hidden = YES;
 	
-	
-	bestMedal = [[UIImageView alloc] initWithFrame:CGRectMake(bestScoreNumber.frame.origin.x+bestScoreNumber.frame.size.width+10, bestScoreNumber.frame.origin.y+10, 50, 50)];
-	if (highScore >= 30) {
-		bestMedal.image = [UIImage imageNamed:@"goldmedal.png"];
-	}
-	else if (highScore >= 20) {
-		bestMedal.image = [UIImage imageNamed:@"silvermedal.png"];
-	}
-	else if (highScore >= 10) {
-		bestMedal.image = [UIImage imageNamed:@"bronzemedal.png"];
-	}
-	else {
-		bestMedal.image = nil;
-	}
-	[self.view addSubview:bestMedal];
-	
-	
-	title = [[UILabel alloc] initWithFrame:CGRectMake((screenWidth/2)-150, screenHeight+50, 300, 75)];
-	title.text = @"RESULTS:";
-	title.textAlignment = NSTextAlignmentCenter;
-	[title setFont:[UIFont fontWithName:@"Prototype" size:50]];
-	title.textColor = [UIColor whiteColor];
-	[self.view addSubview:title];
+	// Start first row
 	
 	replay = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[replay addTarget:self action:@selector(restartButton:) forControlEvents:UIControlEventTouchUpInside];
-	[replay setBackgroundImage:[UIImage imageNamed:@"postplaybutton.png"] forState:UIControlStateNormal];
-	replay.frame = CGRectMake(80.0, screenHeight+375.0, 160.0, 50.0);
+	[replay setBackgroundImage:[UIImage imageNamed:@"post_replay.png"] forState:UIControlStateNormal];
+	replay.frame = CGRectMake(30.0, screenHeight+375.0, 75.0, 75.0);
 	[self.view addSubview:replay];
 	
 	menu = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[menu addTarget:self action:@selector(menuButton:) forControlEvents:UIControlEventTouchUpInside];
-	[menu setBackgroundImage:[UIImage imageNamed:@"postmenubutton.png"] forState:UIControlStateNormal];
-	menu.frame = CGRectMake(80.0, replay.frame.origin.y+replay.frame.size.height+15, 160.0, 50.0);
+	[menu setBackgroundImage:[UIImage imageNamed:@"post_exit.png"] forState:UIControlStateNormal];
+	menu.frame = CGRectMake(screenWidth/2-75/2, replay.frame.origin.y, 75.0, 75.0);
 	[self.view addSubview:menu];
+	
+	rate = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[rate addTarget:self action:@selector(rateButton:) forControlEvents:UIControlEventTouchUpInside];
+	[rate setBackgroundImage:[UIImage imageNamed:@"post_rate.png"] forState:UIControlStateNormal];
+	rate.frame = CGRectMake(screenWidth-30.0-75, replay.frame.origin.y, 75.0, 75.0);
+	[self.view addSubview:rate];
+	
+	
+	// Start second row
+	
 	
 	gameCenter = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[gameCenter addTarget:self action:@selector(gameCenterButton:) forControlEvents:UIControlEventTouchUpInside];
-	[gameCenter setBackgroundImage:[UIImage imageNamed:@"gcicon.png"] forState:UIControlStateNormal];
-	gameCenter.frame = CGRectMake(80+55, menu.frame.origin.y+menu.frame.size.height+15, 50, 50);
+	[gameCenter setBackgroundImage:[UIImage imageNamed:@"post_gamecenter.png"] forState:UIControlStateNormal];
+	gameCenter.frame = CGRectMake(replay.frame.origin.x+replay.frame.size.width/2+10, menu.frame.origin.y+menu.frame.size.height, 75, 75);
 	[self.view addSubview:gameCenter];
+	
+	share = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[share addTarget:self action:@selector(shareButton:) forControlEvents:UIControlEventTouchUpInside];
+	[share setBackgroundImage:[UIImage imageNamed:@"post_share.png"] forState:UIControlStateNormal];
+	share.frame = CGRectMake(rate.frame.origin.x-rate.frame.size.width/2-10, menu.frame.origin.y+menu.frame.size.height, 75.0, 75.0);
+	[self.view addSubview:share];
 	
 	if (IPAD) {
 		[self adjustInterface];
@@ -484,23 +474,17 @@
 		 postBackground.frame = CGRectMake(0, 0, screenWidth, screenHeight);
 		 replay.frame = CGRectMake(replay.frame.origin.x, replay.frame.origin.y-screenHeight, replay.frame.size.width, replay.frame.size.height);
 		 menu.frame = CGRectMake(menu.frame.origin.x, menu.frame.origin.y-screenHeight, menu.frame.size.width, menu.frame.size.height);
-		 title.frame = CGRectMake(title.frame.origin.x, title.frame.origin.y-screenHeight, title.frame.size.width, title.frame.size.height);
 		 bestScore.frame = CGRectMake(bestScore.frame.origin.x, bestScore.frame.origin.y-screenHeight, bestScore.frame.size.width, bestScore.frame.size.height);
-		 currentScore.frame = CGRectMake(currentScore.frame.origin.x, currentScore.frame.origin.y-screenHeight, currentScore.frame.size.width, currentScore.frame.size.height);
 		 bestScoreNumber.frame = CGRectMake(bestScoreNumber.frame.origin.x, bestScoreNumber.frame.origin.y-screenHeight, bestScoreNumber.frame.size.width, bestScoreNumber.frame.size.height);
 		 currentScoreNumber.frame = CGRectMake(currentScoreNumber.frame.origin.x, currentScoreNumber.frame.origin.y-screenHeight, currentScoreNumber.frame.size.width, currentScoreNumber.frame.size.height);
-		 bestMedal.frame = CGRectMake(bestMedal.frame.origin.x, bestMedal.frame.origin.y-screenHeight, bestMedal.frame.size.width, bestMedal.frame.size.height);
-		 currentMedal.frame = CGRectMake(currentMedal.frame.origin.x, currentMedal.frame.origin.y-screenHeight, currentMedal.frame.size.width, currentMedal.frame.size.height);
+		 rate.frame = CGRectMake(rate.frame.origin.x, rate.frame.origin.y-screenHeight, rate.frame.size.width, rate.frame.size.height);
+		 share.frame = CGRectMake(share.frame.origin.x, share.frame.origin.y-screenHeight, share.frame.size.width, share.frame.size.height);
+		 bigImage.frame = CGRectMake(bigImage.frame.origin.x, bigImage.frame.origin.y-screenHeight, bigImage.frame.size.width, bigImage.frame.size.height);
 		 gameCenter.frame = CGRectMake(gameCenter.frame.origin.x, gameCenter.frame.origin.y-screenHeight, gameCenter.frame.size.width, gameCenter.frame.size.height);
 		 	 }
 					 completion:^(BOOL finished)
 	 {
-			// Count up animation sqequence
-		 
-			float countUpTimer = 1.0 / (gameTime - 1);
-		 
-			countingTimer = [NSTimer scheduledTimerWithTimeInterval:countUpTimer target:self selector:@selector(countAnimation) userInfo:nil repeats:YES];
-	 }];
+}];
 	
 	
 	
@@ -508,18 +492,12 @@
 
 -(void)adjustInterface {
 	
-	currentScore.frame = CGRectMake(20, screenHeight+300, 250, 150);
-	[currentScore setFont:[UIFont fontWithName:@"Prototype" size:80]];
-	bestScore.frame = CGRectMake(20, screenHeight+450, 250, 150);
+	bestScore.frame = CGRectMake(20, screenHeight+450, 270, 150);
 	[bestScore setFont:[UIFont fontWithName:@"Prototype" size:80]];
-	currentScoreNumber.frame = CGRectMake(currentScore.frame.origin.x+currentScore.frame.size.width+20, currentScore.frame.origin.y, 200, 150);
+	currentScoreNumber.frame = CGRectMake(bestScore.frame.origin.x+bestScore.frame.size.width+20, bestScore.frame.origin.y, 200, 150);
 	[currentScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:80]];
 	bestScoreNumber.frame = CGRectMake(bestScore.frame.origin.x+bestScore.frame.size.width+20, bestScore.frame.origin.y, 200, 150);
 	[bestScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:80]];
-	currentMedal.frame = CGRectMake(currentScoreNumber.frame.origin.x+currentScoreNumber.frame.size.width+20, currentScoreNumber.frame.origin.y+20, 100, 100);
-	bestMedal.frame = CGRectMake(bestScoreNumber.frame.origin.x+bestScoreNumber.frame.size.width+20, bestScoreNumber.frame.origin.y+20, 100, 100);
-	title.frame = CGRectMake((screenWidth/2)-300, screenHeight+50, 600, 150);
-	[title setFont:[UIFont fontWithName:@"Prototype" size:100]];
 	replay.frame = CGRectMake((screenWidth/2)-160, screenHeight+650, 320, 100);
 	menu.frame = CGRectMake((screenWidth/2)-160, replay.frame.origin.y+replay.frame.size.height+30, 320, 100);
 	gameCenter.frame = CGRectMake(menu.frame.origin.x+120, menu.frame.origin.y+menu.frame.size.height+30, 100, 100);
@@ -543,7 +521,6 @@
 	else {
 		countingAnimation = 0;
 		[countingTimer invalidate];
-		currentMedal.hidden = NO;
 	}
 }
 
@@ -580,6 +557,9 @@
 	[vc dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(void)rateButton:(UIButton *)button {
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://appsto.re/us/i1fu1.i"]];
+}
 
 -(void)menuButton:(UIButton *)button {
 	
@@ -615,17 +595,17 @@
 	// Removes elements not in the scene
 	[replay removeFromSuperview];
 	[menu removeFromSuperview];
+	[rate removeFromSuperview];
 	[score removeFromSuperview];
-	[title removeFromSuperview];
+	[share removeFromSuperview];
 	[currentScoreNumber removeFromSuperview];
-	[currentScore removeFromSuperview];
 	[bestScoreNumber removeFromSuperview];
 	[bestScore removeFromSuperview];
 	[gameCenter removeFromSuperview];
 	[postBackground removeFromSuperview];
-	[currentMedal removeFromSuperview];
-	[bestMedal removeFromSuperview];
 	[explosion removeFromParent];
+	[bigImage removeFromSuperview];
+
 }
 
 // Ball speed up method
@@ -674,13 +654,11 @@
 
 // Start ball on user touch
 // Done to avoid extremely low FPS at load of scene
--(void)start:(UIButton *)button {
+-(void)start {
 	
 	gameTime = 0;
 	
 	gameStarted = YES;
-	// Remove button from parent
-	[start removeFromSuperview];
 	
 	[ball.physicsBody applyImpulse:CGVectorMake(x, y)];
 	//Calls ball speed up method
@@ -695,14 +673,36 @@
 }
 
 
--(void)playSound {
-	SystemSoundID soundID;
-	NSString *soundFile = [[NSBundle mainBundle]
-						   pathForResource:@"break" ofType:@"mp3"];
-	AudioServicesCreateSystemSoundID((__bridge  CFURLRef)
-									 [NSURL fileURLWithPath:soundFile], & soundID);
-	AudioServicesPlaySystemSound(soundID);
+#pragma mark Sounds
+
+-(void)playBounce {
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
+		SystemSoundID soundID;
+		NSString *soundFile = [[NSBundle mainBundle]
+							   pathForResource:@"bounce_sound" ofType:@"mp3"];
+		AudioServicesCreateSystemSoundID((__bridge  CFURLRef)
+										 [NSURL fileURLWithPath:soundFile], & soundID);
+		AudioServicesPlaySystemSound(soundID);
+	}
+	else {
+		NSLog(@"***Bouncing Sound***");
+	}
 }
+
+-(void)playExplosion {
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
+		SystemSoundID soundID;
+		NSString *soundFile = [[NSBundle mainBundle]
+							   pathForResource:@"end_noise" ofType:@"mp3"];
+		AudioServicesCreateSystemSoundID((__bridge  CFURLRef)
+										 [NSURL fileURLWithPath:soundFile], & soundID);
+		AudioServicesPlaySystemSound(soundID);
+	}
+	else {
+		NSLog(@"***Explosion Sound***");
+	}
+}
+
 
 
 -(void)timer:(NSTimer *)timer {

@@ -17,7 +17,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-	// State game has been played for this version
+	// Store game has been played for this version
 	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
 	
 	
@@ -28,11 +28,11 @@
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"normal"]) {
 // Normal gameplay
-			[self spaceShipScene];
+			[self normal];
 	}
 	else {
 // Strategic gameplay
-			[self normalStrategy];
+			[self strategy];
 	}
 }
 
@@ -67,24 +67,24 @@
 - (void)didReceiveMemoryWarning {
 	[super didReceiveMemoryWarning];
 	// Dispose of any resources that can be recreated.
-	NSLog(@"Memory Warning");
+	NSLog(@"Memory Warning!!!");
 }
 
--(void)spaceShipScene {
-	Normal* hello = [[Normal alloc] initWithSize:screenSize];
+-(void)normal {
+	Normal* scene = [[Normal alloc] initWithSize:screenSize];
 	spriteView = (SKView *) self.view;
 	lastPlayed = @"normal";
 	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
-	[spriteView presentScene: hello];
+	[spriteView presentScene: scene];
 }
 
 
--(void)normalStrategy {
-	NormalStrategic* hello = [[NormalStrategic alloc] initWithSize:screenSize];
+-(void)strategy {
+	NormalStrategic* scene = [[NormalStrategic alloc] initWithSize:screenSize];
 	spriteView = (SKView *) self.view;
-	lastPlayed = @"normalStrategy";
+	lastPlayed = @"strategy";
 	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
-	[spriteView presentScene: hello];
+	[spriteView presentScene: scene];
 }
 
 
@@ -95,10 +95,10 @@
 }
 
 -(void)showScene {
-	if ([lastPlayed isEqualToString:@"normalStrategy"]) {
+	if ([lastPlayed isEqualToString:@"strategy"]) {
 		NormalStrategic* hello = [[NormalStrategic alloc] initWithSize:screenSize];
 		spriteView = (SKView *) self.view;
-		lastPlayed = @"normalStrategy";
+		lastPlayed = @"strategy";
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
 		[spriteView presentScene: hello];
 	}
@@ -122,7 +122,7 @@
 	minutesTimerHigh = (int)highScore/60;
 	secondsTimerHigh = (int)highScore-(minutesTimerHigh * 60);
 	
-	NSArray *objectsToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Look at my High Score of %01d:%02d for Inside The Box!", minutesTimerHigh, secondsTimerHigh]];
+	NSArray *objectsToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Check out my high score of %01d:%02d for Inside The Box! https://appsto.re/us/i1fu1.i", minutesTimerHigh, secondsTimerHigh]];
 	
 	UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
 	NSArray *excludedActivities = @[UIActivityTypeAirDrop];
@@ -136,7 +136,7 @@
 	
 	int highScore = [[NSUserDefaults standardUserDefaults] floatForKey:@"highScoreGoals"];
 	
-	NSArray *objectsToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Look at my High Score of %i Goals for Inside The Box!", highScore]];
+	NSArray *objectsToShare = [NSArray arrayWithObject:[NSString stringWithFormat:@"Check out my high score of %i Goals for Inside The Box! https://appsto.re/us/i1fu1.i", highScore]];
 	
 	UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
 	NSArray *excludedActivities = @[UIActivityTypeAirDrop];

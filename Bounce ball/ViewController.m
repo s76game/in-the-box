@@ -25,7 +25,7 @@
 
 -(void)bannerViewDidLoadAd:(ADBannerView *)banner {
 	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0.1];
+	[UIView setAnimationDuration:0];
 	[banner setAlpha:1];
 	[UIView commitAnimations];
 	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"adsLoaded"];
@@ -33,7 +33,7 @@
 
 -(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
 	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0.1];
+	[UIView setAnimationDuration:0];
 	[banner setAlpha:0];
 	[UIView commitAnimations];
 	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"adsLoaded"];
@@ -49,6 +49,7 @@
 	return self;
 }
 
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
@@ -60,17 +61,9 @@
 	[self authenticateLocalPlayer];
 	[self retrieveAchievmentMetadata];
 	
-	// Debugging Purposes Only
-	_resetGameCenterOutlet.hidden = YES;
-	
-	
 	
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
-	if (IPAD) {
-		_ball.layer.cornerRadius = 87.5;
-	} else {
-		_ball.layer.cornerRadius = 37.5;
-	}
+
 
 	
 #pragma mark First Launch Code
@@ -80,14 +73,10 @@
 		NSLog(@"First Launch!");
 		
 		// Set toBePlayed to STRAGETY
-		[[NSUserDefaults standardUserDefaults] setObject:@"normalStrategy" forKey:@"toBePlayed"];
+		[[NSUserDefaults standardUserDefaults] setObject:@"strategy" forKey:@"toBePlayed"];
 		
 		// Turn on sound effects
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"soundFX"];
-		
-		// Keep the intro on
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"intro"];
-		
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"soundFX"];		
 		
 		// Set to current method isn't called again
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasPerformedFirstLaunch"];
@@ -103,8 +92,9 @@
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]]) {
 		NSLog(@"Update launch %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]);
 		
+		NSString *updateText = [NSString stringWithFormat:@"Update Text"];
 		
-		UIAlertView *update = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Update %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] message:@"Minor bug fixes/enhancements\nAdded FPS Toggle \n \n Enjoy!" delegate:self cancelButtonTitle:@"Ok!" otherButtonTitles:nil];
+		UIAlertView *update = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Update %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] message:[NSString stringWithFormat:@"%@", updateText] delegate:self cancelButtonTitle:@"Ok!" otherButtonTitles:nil];
 		[update show];
 		
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]];
@@ -122,8 +112,7 @@
 
 
 #pragma mark Play Button
-- (IBAction)start:(id)sender {
-	
+- (IBAction)startButton:(id)sender {
 	
 	ViewController *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"gamePlay"];
 	
@@ -144,39 +133,65 @@
 
 -(void)viewWillAppear:(BOOL)animated {
 	
-	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		// Night UI code
-		[_mode setBackgroundImage:[UIImage imageNamed:@"nightmodebutton.png"] forState:UIControlStateNormal];
-		[_play setBackgroundImage:[UIImage imageNamed:@"nightplaybutton.png"] forState:UIControlStateNormal];
-		[_settings setBackgroundImage:[UIImage imageNamed:@"nightsettings"] forState:UIControlStateNormal];
-		[_frame setImage:[UIImage imageNamed:@"nighttitle.png"]];
-		[_background setImage:[UIImage imageNamed:@"nightbackground.png"]];
-	}
-	else if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"strategy"] && ![[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"night"]) {
-		// Strategy UI Code
-		[_mode setBackgroundImage:[UIImage imageNamed:@"strategymodebutton.png"] forState:UIControlStateNormal];
-		[_play setBackgroundImage:[UIImage imageNamed:@"strategyplaybutton.png"] forState:UIControlStateNormal];
-		[_settings setBackgroundImage:[UIImage imageNamed:@"normalsettings"] forState:UIControlStateNormal];
-		[_frame setImage:[UIImage imageNamed:@"strategytitle.png"]];
-		[_background setImage:[UIImage imageNamed:@"normalbackground.png"]];
+		[_startOutlet setBackgroundImage:[UIImage imageNamed:@"night_play.png"] forState:UIControlStateNormal];
+		[_lightOutlet setBackgroundImage:[UIImage imageNamed:@"night_light.png"] forState:UIControlStateNormal];
+		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"night_rybel.png"] forState:UIControlStateNormal];
+		[_gamecenterOutlet setBackgroundImage:[UIImage imageNamed:@"night_gamecenter.png"] forState:UIControlStateNormal];
+		[_titleOutlet setImage:[UIImage imageNamed:@"night_title.png"]];
+		[_background setImage:[UIImage imageNamed:@"night_background.png"]];
+		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 	}
 	else {
 		// Normal UI code
-		[_mode setBackgroundImage:[UIImage imageNamed:@"normalmodebutton.png"] forState:UIControlStateNormal];
-		[_play setBackgroundImage:[UIImage imageNamed:@"normalplaybutton.png"] forState:UIControlStateNormal];
-		[_settings setBackgroundImage:[UIImage imageNamed:@"normalsettings"] forState:UIControlStateNormal];
-		[_frame setImage:[UIImage imageNamed:@"normaltitle.png"]];
-		[_background setImage:[UIImage imageNamed:@"normalbackground.png"]];
+		[_startOutlet setBackgroundImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
+		[_lightOutlet setBackgroundImage:[UIImage imageNamed:@"light.png"] forState:UIControlStateNormal];
+		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"rybel.png"] forState:UIControlStateNormal];
+		[_gamecenterOutlet setBackgroundImage:[UIImage imageNamed:@"gamecenter.png"] forState:UIControlStateNormal];
+		[_titleOutlet setImage:[UIImage imageNamed:@"title.png"]];
+		[_background setImage:[UIImage imageNamed:@"background.png"]];
+		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+	}
+	
+	
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"strategy"]) {
+		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+			[_modeOutlet setBackgroundImage:[UIImage imageNamed:@"night_strategy.png"] forState:UIControlStateNormal];
+		}
+		else {
+			[_modeOutlet setBackgroundImage:[UIImage imageNamed:@"strategy.png"] forState:UIControlStateNormal];
+		}
+	}
+	else {
+		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+			[_modeOutlet setBackgroundImage:[UIImage imageNamed:@"night_timed.png"] forState:UIControlStateNormal];
+		}
+		else {
+			[_modeOutlet setBackgroundImage:[UIImage imageNamed:@"timed.png"] forState:UIControlStateNormal];
+		}
+	}
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
+		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+			[_soundOutlet setBackgroundImage:[UIImage imageNamed:@"night_sound_on.png"] forState:UIControlStateNormal];
+		}
+		else {
+			[_soundOutlet setBackgroundImage:[UIImage imageNamed:@"sound_on.png"] forState:UIControlStateNormal];
+		}
+	}
+	else {
+		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+			[_soundOutlet setBackgroundImage:[UIImage imageNamed:@"night_sound_off.png"] forState:UIControlStateNormal];
+		}
+		else {
+			[_soundOutlet setBackgroundImage:[UIImage imageNamed:@"sound_off.png"] forState:UIControlStateNormal];
+		}
 	}
 	
 	
 #pragma mark Rate my app code
-	
-	NSLog(@"Check Rate my App code");
-	NSLog([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]] ? @"Yes" : @"No");
-	NSLog([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@CHECK",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]] ? @"Yes" : @"No");
-	
+
 	//Check if game has been played this version
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
 		if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@CHECK",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
@@ -190,6 +205,60 @@
 	}
 	
 	
+}
+
+
+-(IBAction)soundsButton:(id)sender {
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"soundFX"];
+	}
+	else {
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"soundFX"];
+	}
+	[self viewWillAppear:YES];
+	[self playSound];
+}
+
+-(IBAction)gameTypeButton:(id)sender {
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"strategy"]) {
+		[[NSUserDefaults standardUserDefaults] setObject:@"normal" forKey:@"toBePlayed"];
+	}
+	else {
+		[[NSUserDefaults standardUserDefaults] setObject:@"strategy" forKey:@"toBePlayed"];
+	}
+	[self viewWillAppear:YES];
+	[self playSound];
+}
+
+-(IBAction)lightButton:(id)sender {
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+		[[NSUserDefaults standardUserDefaults] setObject:@"normal" forKey:@"UI"];
+	}
+	else {
+		[[NSUserDefaults standardUserDefaults] setObject:@"night" forKey:@"UI"];
+	}
+	[self viewWillAppear:YES];
+	[self playSound];
+}
+
+-(IBAction)creditsButton:(id)sender {
+	
+}
+
+-(void)playSound {
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
+		// Create the sound ID
+		NSString* path = [[NSBundle mainBundle]
+						  pathForResource:@"toggle_sound" ofType:@"mp3"];
+		NSURL* url = [NSURL fileURLWithPath:path];
+		AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &toggle);
+		
+		// Play the sound
+		AudioServicesPlaySystemSound(toggle);
+	}
+	else {
+		NSLog(@"***Toggle Sound***");
+	}
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -236,9 +305,9 @@
 	else
 	{
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mail Incompatibility"
-														message:@"Your device doesn't support the mail composer sheet :-("
+														message:@"The dark lords of email have frowned upon you"
 													   delegate:nil
-											  cancelButtonTitle:@"OK"
+											  cancelButtonTitle:@"Ok"
 											  otherButtonTitles: nil];
 		[alert show];
 	}
@@ -263,8 +332,8 @@
 		 
 	 default:
 	 {
-		 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Send Failure" message:@"Sending Failed - Unknown Error"
-														delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+		 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Send Failure" message:@":-("
+														delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
 		 [alert show];
 	 }
 		 
@@ -292,12 +361,6 @@
 			[vc presentViewController: gameCenterController animated: YES completion:nil];
 		}
 	}
-}
-
-- (IBAction)resetGameCenter:(id)sender {
-	// Development only, DO NOT INCLUDE
-	// Resets game center achivevments
-	[self resetAchievements];
 }
 
 #pragma mark Game Center
@@ -355,6 +418,8 @@
 				}];
 				
 				NSLog(@"Gamecenter Enabled");
+				alias = [GKLocalPlayer localPlayer].alias;
+				[self specialUsernames];
 				gameCenterEnabled = YES;
 			}
 			
@@ -364,6 +429,22 @@
 			}
 		}
 	};
+}
+
+-(void)specialUsernames {
+	if ([alias isEqualToString:@"Alpha-Rybel"]) {
+		NSLog(@"SANDBOX");
+		[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+	}
+	else if ([alias isEqualToString:@"Camille hensley"]) {
+		[[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
+	}
+	else if ([alias isEqualToString:@"innovator013"]) {
+		[[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
+	}
+	else if ([alias isEqualToString:@"_!(ConnorC)!_"]) {
+		[[UIApplication sharedApplication] setApplicationIconBadgeNumber:69];
+	}
 }
 
 
@@ -384,10 +465,6 @@
 {
 	[GKAchievementDescription loadAchievementDescriptionsWithCompletionHandler:
 	 ^(NSArray *descriptions, NSError *error) {
-		 if (error != nil)
-		 {
-			 NSLog(@"Error: %@", error);
-		 }
 		 if (descriptions != nil)
 		 {
 			 gameCenterData = descriptions;

@@ -25,6 +25,7 @@
 	UIUserNotificationSettings* notificationSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
 	[[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
 	
+	
 	// Override point for customization after application launch.
 	return YES;
 }
@@ -151,7 +152,6 @@
 							   stringByReplacingOccurrencesOfString: @">" withString: @""]
 							  stringByReplacingOccurrencesOfString: @" " withString: @""];
 	NSString *url =[NSString stringWithFormat:@"http://rybel-llc.com/apns/add.php?name=%@", token];
-	NSLog(@"%@",url);
 	NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
 	[req setHTTPMethod:@"GET"]; // This might be redundant, I'm pretty sure GET is the default value
 	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:req delegate:self];

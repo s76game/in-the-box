@@ -50,19 +50,16 @@ static const uint32_t edgeCategory     =  0x1 << 4;
 	// Post game stuff
 	UIButton *menu;
 	UIButton *replay;
-	UILabel *title;
+	UIButton *rate;
+	UIButton *gameCenter;
+	UIButton *share;
 	UILabel *currentScoreNumber;
 	UILabel *bestScoreNumber;
-	UILabel *currentScore;
 	UILabel *bestScore;
-	UIButton *gameCenter;
-	UIImageView *screenCrack;
 	SystemSoundID breaking;
-	UIView *postBackground;
-	UIImageView *currentMedal;
-	UIImageView *bestMedal;
-	
-	UIButton *start;
+	UIImageView *postBackground;
+	UIImageView *bigImage;
+
 	
 	SKShapeNode* border;
 	SKShapeNode* lines;

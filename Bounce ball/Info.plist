@@ -15,16 +15,19 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.1</string>
+	<string>2.0.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>141019</string>
+	<string>141027</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Prototype.ttf</string>
+		<string>DS1.ttf</string>
+		<string>DS3.ttf</string>
+		<string>DS4.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string> </string>
@@ -40,5 +43,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

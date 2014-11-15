@@ -37,32 +37,22 @@
 	}
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		_splashImage.image = [UIImage imageNamed:@"nightbackground.png"];
-		_quote.image = [UIImage imageNamed:@"nightquote1.png"];
-		_quote2.image = [UIImage imageNamed:@"nightquote2.png"];
-		[_advanceOulet setBackgroundImage:[UIImage imageNamed:@"normalproceed.png"] forState:UIControlStateNormal];
-	}
-	else if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"strategy"] && ![[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"night"]) {
-		// Strategy UI Code
-		_splashImage.image = [UIImage imageNamed:@"normalbackground.png"];
-		_quote.image = [UIImage imageNamed:@"normalquote1.png"];
-		_quote2.image = [UIImage imageNamed:@"normalquote2.png"];
-		[_advanceOulet setBackgroundImage:[UIImage imageNamed:@"strategyproceed.png"] forState:UIControlStateNormal];
+		_splashImage.image = [UIImage imageNamed:@"night_background.png"];
+		_quote.image = [UIImage imageNamed:@"night_quote1.png"];
+		_quote2.image = [UIImage imageNamed:@"night_quote2.png"];
+		[_advanceOulet setBackgroundImage:[UIImage imageNamed:@"night_proceed.png"] forState:UIControlStateNormal];
 	}
 	else {
-		_splashImage.image = [UIImage imageNamed:@"normalbackground.png"];
-		_quote.image = [UIImage imageNamed:@"normalquote1.png"];
-		_quote2.image = [UIImage imageNamed:@"normalquote2.png"];
-		[_advanceOulet setBackgroundImage:[UIImage imageNamed:@"normalproceed.png"] forState:UIControlStateNormal];
+		_splashImage.image = [UIImage imageNamed:@"background.png"];
+		_quote.image = [UIImage imageNamed:@"quote1.png"];
+		_quote2.image = [UIImage imageNamed:@"quote2.png"];
+		[_advanceOulet setBackgroundImage:[UIImage imageNamed:@"proceed.png"] forState:UIControlStateNormal];
 	}
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"intro"]) {
-		[self advanceScene];
-	}
 }
 
 -(void)viewDidAppear:(BOOL)animated {
