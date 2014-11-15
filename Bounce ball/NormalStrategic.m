@@ -171,12 +171,38 @@
 	
 	pause = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[pause addTarget:self action:@selector(pauseButton:) forControlEvents:UIControlEventTouchUpInside];
-	[pause setBackgroundImage:[UIImage imageNamed:@"pause_button.png"] forState:UIControlStateNormal];
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+		[pause setBackgroundImage:[UIImage imageNamed:@"night_pause_button.png"] forState:UIControlStateNormal];
+	}
+	else {
+		[pause setBackgroundImage:[UIImage imageNamed:@"pause_button.png"] forState:UIControlStateNormal];
+	}
 	pause.frame = CGRectMake(screenWidth-50, 20, 50.0, 50.0);
 	[self.view addSubview:pause];
 	
 	pause.hidden = YES;
+	
+	[NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(tapToStart) userInfo:nil repeats:NO];
 }
+
+-(void)tapToStart {
+	if (!gameStarted) {
+		tapToStart = [[UILabel alloc] initWithFrame:CGRectMake(screenWidth/2-100, 75, 200, 75)];
+		tapToStart.text = [NSString stringWithFormat:@"Tap to start"];
+		tapToStart.textAlignment = NSTextAlignmentCenter;
+		[tapToStart setFont:[UIFont fontWithName:@"DS-Digital-BoldItalic" size:25]];
+		tapToStart.textColor = [UIColor grayColor];
+		tapToStart.alpha = 0;
+		[self.view addSubview:tapToStart];
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDuration:0.5];
+		[UIView setAnimationDelay:0.0];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+		tapToStart.alpha = 1;
+		[UIView commitAnimations];
+	}
+}
+
 
 -(void)initExplosion {
 	
@@ -739,6 +765,8 @@
 // Start ball on user touch
 // Done to avoid extremely low FPS at load of scene
 -(void)start {
+	
+	[tapToStart removeFromSuperview];
 	
 	goalsHit = 0;
 	

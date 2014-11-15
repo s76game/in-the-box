@@ -101,6 +101,7 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 	CGFloat screenWidth;
 	CGFloat screenHeight;
 	UIButton *pause;
+	UILabel *tapToStart;
 	
 	SKEmitterNode *explosion;
 }

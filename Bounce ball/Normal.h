@@ -77,6 +77,7 @@ static const uint32_t edgeCategory     =  0x1 << 4;
 	CGFloat screenWidth;
 	CGFloat screenHeight;
 	UIButton *pause;
+	UILabel *tapToStart;
 	
 	SKAction *wait;
 	
