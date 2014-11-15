@@ -79,6 +79,16 @@
 - (void)createSceneContents
 {
 	[self screenSize];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(pauseGame)
+												 name:@"PauseGameScene"
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(theAppIsActive:)
+												 name:@"appIsActive" object:nil];
+	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		night = YES;
 	}
@@ -173,24 +183,33 @@
 	
 	switch (x) {
   case 1:
-			x = speediPad;
+			x = speediPad*2;
 			break;
   case 2:
-			x = -speediPad;
+			x = -speediPad*2;
 			break;
   default:
 			break;
 	}
 	switch (y) {
   case 1:
-			y = speediPad;
+			y = speediPad*2;
 			break;
   case 2:
-			y = -speediPad;
+			y = -speediPad*2;
 			break;
   default:
 			break;
 	}
+	
+	
+	pause = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[pause addTarget:self action:@selector(pauseButton:) forControlEvents:UIControlEventTouchUpInside];
+	[pause setBackgroundImage:[UIImage imageNamed:@"pause_button.png"] forState:UIControlStateNormal];
+	pause.frame = CGRectMake(screenWidth-50, 20, 50.0, 50.0);
+	[self.view addSubview:pause];
+	
+	pause.hidden = YES;
 	
 }
 
@@ -214,6 +233,7 @@
 	}
 	else if (!gameOver && !gameStarted) {
 		[self start];
+		pause.hidden = NO;
 	}
 }
 
@@ -365,6 +385,7 @@
 
 	gameOver = YES;
 	[self gameOverAnimation];
+	pause.hidden = YES;
 	[line removeFromParent];
 	[lines removeFromParent];
 }
@@ -524,6 +545,8 @@
 	}
 }
 
+#pragma mark Buttons
+
 -(void)shareButton:(UIButton *)button {
 	[[NSNotificationCenter defaultCenter]
 	 postNotificationName:@"shareTime" object:self];
@@ -591,6 +614,88 @@
 	 postNotificationName:@"showScene" object:self];
 }
 
+#pragma mark Pause Menu Interface
+
+-(void)pauseButton:(UIButton *)button {
+	NSLog(@"Pause");
+	self.scene.view.paused = YES;
+	[self createPauseMenuInterface];
+	pause.hidden = YES;
+}
+
+-(void)createPauseMenuInterface {
+	
+	pauseBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+	pauseBackground.image = [UIImage imageNamed:@"black_overlay.png"];
+	pauseBackground.alpha = 0.75;
+	[self.view addSubview:pauseBackground];
+	
+	bigPauseImage = [[UIImageView alloc] initWithFrame:CGRectMake(75, 75, screenWidth-150, screenWidth-150)];
+	bigPauseImage.image = [UIImage imageNamed:@"pause_icon.png"];
+	[self.view addSubview:bigPauseImage];
+	
+	pauseRestart = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[pauseRestart addTarget:self action:@selector(pauseRestart) forControlEvents:UIControlEventTouchUpInside];
+	[pauseRestart setBackgroundImage:[UIImage imageNamed:@"pause_restart.png"] forState:UIControlStateNormal];
+	pauseRestart.frame = CGRectMake(30.0, screenHeight-275.0, 75.0, 75.0);
+	[self.view addSubview:pauseRestart];
+	
+	pauseExit = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[pauseExit addTarget:self action:@selector(menuButton:) forControlEvents:UIControlEventTouchUpInside];
+	[pauseExit setBackgroundImage:[UIImage imageNamed:@"pause_exit.png"] forState:UIControlStateNormal];
+	pauseExit.frame = CGRectMake(210, pauseRestart.frame.origin.y, 75.0, 75.0);
+	[self.view addSubview:pauseExit];
+	
+	pauseContinue = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[pauseContinue addTarget:self action:@selector(removePauseMenuInterface) forControlEvents:UIControlEventTouchUpInside];
+	[pauseContinue setBackgroundImage:[UIImage imageNamed:@"pause_resume.png"] forState:UIControlStateNormal];
+	pauseContinue.frame = CGRectMake(120, pauseRestart.frame.origin.y, 75.0, 75.0);
+	[self.view addSubview:pauseContinue];
+	
+}
+
+-(void)pauseRestart {
+	[self removePauseMenuInterface];
+	[self restartButton:pauseRestart];
+}
+
+-(void)removePauseMenuInterface {
+	[pauseBackground removeFromSuperview];
+	[bigPauseImage removeFromSuperview];
+	[pauseRestart removeFromSuperview];
+	[pauseExit removeFromSuperview];
+	[pauseContinue removeFromSuperview];
+	
+	self.scene.view.paused = NO;
+	pause.hidden = NO;
+}
+
+
+#pragma mark Deal with appDidResignActive and appDidBecomeActive
+-(void)pauseGame {
+	[self pauseButton:nil];
+}
+
+-(void)theAppIsActive:(NSNotification *)note
+{
+	self.view.paused = YES;
+	SKAction *pauseTimer= [SKAction sequence:@[
+											   [SKAction waitForDuration:0.1],
+											   [SKAction performSelector:@selector(pauseTimerfun)
+																onTarget:self]
+											   
+											   ]];
+	[self runAction:pauseTimer withKey:@"pauseTimer"];
+}
+
+-(void) pauseTimerfun
+{
+	self.view.paused = YES;
+	
+}
+
+
+
 -(void)removeElements {
 	// Removes elements not in the scene
 	[replay removeFromSuperview];
@@ -605,7 +710,7 @@
 	[postBackground removeFromSuperview];
 	[explosion removeFromParent];
 	[bigImage removeFromSuperview];
-
+	pause.hidden = YES;
 }
 
 // Ball speed up method

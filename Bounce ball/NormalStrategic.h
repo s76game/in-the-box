@@ -78,6 +78,13 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 	UIImageView *postBackground;
 	UIImageView *bigImage;
 	
+	// Pause menu stuff
+	UIImageView *pauseBackground;
+	UIImageView *bigPauseImage;
+	UIButton *pauseContinue;
+	UIButton *pauseRestart;
+	UIButton *pauseExit;
+	
 	// In game stuff
 	SKShapeNode* border;
 	SKShapeNode* lines;
@@ -93,6 +100,7 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 	UIButton *start;
 	CGFloat screenWidth;
 	CGFloat screenHeight;
+	UIButton *pause;
 	
 	SKEmitterNode *explosion;
 }

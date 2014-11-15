@@ -59,8 +59,15 @@ static const uint32_t edgeCategory     =  0x1 << 4;
 	SystemSoundID breaking;
 	UIImageView *postBackground;
 	UIImageView *bigImage;
-
 	
+	// Pause menu stuff
+	UIImageView *pauseBackground;
+	UIImageView *bigPauseImage;
+	UIButton *pauseContinue;
+	UIButton *pauseRestart;
+	UIButton *pauseExit;
+
+	// UI stuff
 	SKShapeNode* border;
 	SKShapeNode* lines;
 	SKSpriteNode *line;
@@ -69,6 +76,7 @@ static const uint32_t edgeCategory     =  0x1 << 4;
 	UILabel *score;
 	CGFloat screenWidth;
 	CGFloat screenHeight;
+	UIButton *pause;
 	
 	SKAction *wait;
 	
