@@ -418,6 +418,16 @@
 
 -(void)gameOver {
 	
+	[self touchesEnded:nil withEvent:nil];
+	
+	[line removeFromParent];
+	[lines removeFromParent];
+	
+	pos1x = nil;
+	pos2x = nil;
+	pos1y = nil;
+	pos2y = nil;
+	
 	// Runs game center code block
 	[self gameCenter];
 	
@@ -766,6 +776,8 @@
 // Done to avoid extremely low FPS at load of scene
 -(void)start {
 	
+	self.scene.paused = NO;
+	
 	[tapToStart removeFromSuperview];
 	
 	goalsHit = 0;
@@ -774,7 +786,7 @@
 	
 	gameStarted = YES;
 	
-	[ball.physicsBody applyImpulse:CGVectorMake(x, y)];
+	[ball.physicsBody applyImpulse:CGVectorMake(35, 35)];
 	//Calls ball speed up method
 	[NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(speedUp:) userInfo:nil repeats:YES];
 }

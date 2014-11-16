@@ -95,6 +95,7 @@
 		9482145A1A10466900B0FAAB /* DS1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 948214551A0FF5AA00B0FAAB /* DS1.ttf */; };
 		9482145B1A10466900B0FAAB /* DS3.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 948214521A0FF59F00B0FAAB /* DS3.ttf */; };
 		9482145C1A10466900B0FAAB /* DS4.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 948214531A0FF59F00B0FAAB /* DS4.ttf */; };
+		94911A4E1A19173200B0FCAD /* night_strategy.png in Resources */ = {isa = PBXBuildFile; fileRef = 94911A4D1A19173200B0FCAD /* night_strategy.png */; };
 		94932F4619E1ADB800B533AA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 94932F4519E1ADB800B533AA /* Settings.bundle */; };
 		94932F4919E4B54B00B533AA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94792ADD195CDE23004A6404 /* AudioToolbox.framework */; };
 		9497932E1A17CD3000876461 /* goal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9497932C1A17CD3000876461 /* goal.png */; };
@@ -225,6 +226,7 @@
 		948214521A0FF59F00B0FAAB /* DS3.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DS3.ttf; sourceTree = "<group>"; };
 		948214531A0FF59F00B0FAAB /* DS4.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DS4.ttf; sourceTree = "<group>"; };
 		948214541A0FF5AA00B0FAAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/DS1.ttf; sourceTree = "<group>"; };
+		94911A4D1A19173200B0FCAD /* night_strategy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = night_strategy.png; path = ../../night_strategy.png; sourceTree = "<group>"; };
 		94932F4519E1ADB800B533AA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = "Bounce Ball/Settings.bundle"; sourceTree = SOURCE_ROOT; };
 		94932F4719E4B20500B533AA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9497932C1A17CD3000876461 /* goal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goal.png; path = ../../goal.png; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				948213E31A0FF55E00B0FAAB /* night_background.png */,
+				94911A4D1A19173200B0FCAD /* night_strategy.png */,
 				949793301A17CDB200876461 /* night_goal.png */,
 				948213E41A0FF55E00B0FAAB /* night_ball.png */,
 				948213E51A0FF55E00B0FAAB /* night_credits.png */,
@@ -692,6 +695,7 @@
 				9482143F1A0FF59300B0FAAB /* exit.png in Resources */,
 				9422FD2619FDD5CF001FD0F6 /* boken.sks in Resources */,
 				94C7FEB7194E3CDF00270AE8 /* Main.storyboard in Resources */,
+				94911A4E1A19173200B0FCAD /* night_strategy.png in Resources */,
 				948214011A0FF55E00B0FAAB /* night_proceed.png in Resources */,
 				948214041A0FF55E00B0FAAB /* night_rate.png in Resources */,
 				948213D41A0FF53100B0FAAB /* AppIcon60x60@2x.png in Resources */,

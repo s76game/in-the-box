@@ -111,26 +111,6 @@
 }
 
 
-#pragma mark Play Button
-- (IBAction)startButton:(id)sender {
-	
-	ViewController *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"gamePlay"];
-	
-	CATransition* transition = [CATransition animation];
-	
-	transition.duration = 0.3;
-	transition.type = kCATransitionReveal;
-	transition.subtype = kCATransitionFromTop;
-	transition.duration = 1.0;
-	
-	[self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
-	[self.navigationController pushViewController:menu animated:NO];
-
-
-}
-
-
-
 -(void)viewWillAppear:(BOOL)animated {
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
@@ -203,6 +183,25 @@
 			[alert show];
 		}
 	}
+	
+	
+}
+
+
+#pragma mark Buttons
+- (IBAction)startButton:(id)sender {
+	
+	ViewController *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"gamePlay"];
+	
+	CATransition* transition = [CATransition animation];
+	
+	transition.duration = 0.3;
+	transition.type = kCATransitionReveal;
+	transition.subtype = kCATransitionFromTop;
+	transition.duration = 1.0;
+	
+	[self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
+	[self.navigationController pushViewController:menu animated:NO];
 	
 	
 }

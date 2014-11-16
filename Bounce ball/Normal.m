@@ -403,6 +403,16 @@
 
 -(void)gameOver {
 	
+	[self touchesEnded:nil withEvent:nil];
+	
+	[line removeFromParent];
+	[lines removeFromParent];
+	
+	pos1x = nil;
+	pos2x = nil;
+	pos1y = nil;
+	pos2y = nil;
+	
 	// Runs game center code block
 	[self gameCenter];
 
@@ -788,7 +798,7 @@
 	[tapToStart removeFromSuperview];
 	gameStarted = YES;
 	
-	[ball.physicsBody applyImpulse:CGVectorMake(x, y)];
+	[ball.physicsBody applyImpulse:CGVectorMake(35, 35)];
 	//Calls ball speed up method
 	score.text = @"0:00";
 	speedUpTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(speedUp:) userInfo:nil repeats:YES];
