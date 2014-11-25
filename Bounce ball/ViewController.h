@@ -39,6 +39,7 @@ SystemSoundID toggle;
 @property (strong, nonatomic) IBOutlet UIButton *soundOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *lightOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *creditsOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *storeOutlet;
 
 
 @property (strong, nonatomic) IBOutlet UIImageView *titleOutlet;

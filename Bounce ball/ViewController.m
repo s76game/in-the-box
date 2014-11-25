@@ -99,7 +99,9 @@
 		
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]];
 	
-	
+		[[NSUserDefaults standardUserDefaults] setFloat:0 forKey:@"highScoreTime"];
+		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"highScoreGoals"];
+		
 	}
 }
 	}
@@ -118,6 +120,7 @@
 		[_startOutlet setBackgroundImage:[UIImage imageNamed:@"night_play.png"] forState:UIControlStateNormal];
 		[_lightOutlet setBackgroundImage:[UIImage imageNamed:@"night_light.png"] forState:UIControlStateNormal];
 		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"night_rybel.png"] forState:UIControlStateNormal];
+		[_storeOutlet setBackgroundImage:[UIImage imageNamed:@"night_store_icon.png"] forState:UIControlStateNormal];
 		[_gamecenterOutlet setBackgroundImage:[UIImage imageNamed:@"night_gamecenter.png"] forState:UIControlStateNormal];
 		[_titleOutlet setImage:[UIImage imageNamed:@"night_title.png"]];
 		[_background setImage:[UIImage imageNamed:@"night_background.png"]];
@@ -129,6 +132,7 @@
 		[_lightOutlet setBackgroundImage:[UIImage imageNamed:@"light.png"] forState:UIControlStateNormal];
 		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"rybel.png"] forState:UIControlStateNormal];
 		[_gamecenterOutlet setBackgroundImage:[UIImage imageNamed:@"gamecenter.png"] forState:UIControlStateNormal];
+		[_storeOutlet setBackgroundImage:[UIImage imageNamed:@"store_icon.png"] forState:UIControlStateNormal];
 		[_titleOutlet setImage:[UIImage imageNamed:@"title.png"]];
 		[_background setImage:[UIImage imageNamed:@"background.png"]];
 		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
