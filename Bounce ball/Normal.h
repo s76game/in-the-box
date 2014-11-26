@@ -46,6 +46,7 @@ static const uint32_t lineCategory     =  0x1 << 1;
 static const uint32_t goalCategory     =  0x1 << 2;
 static const uint32_t pointGoalCategory = 0x1 << 3;
 static const uint32_t edgeCategory     =  0x1 << 4;
+static const uint32_t gemCategory     =  0x1 << 5;
 
 
 

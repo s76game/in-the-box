@@ -34,6 +34,7 @@ int triggered;
 int previousCost;
 
 int goalSize;
+int gemSize;
 
 NSTimer *speedUpTimer;
 NSTimer *timer;
@@ -100,6 +101,7 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 	SKShapeNode* border;
 	SKShapeNode* lines;
 	SKSpriteNode *line;
+	SKSpriteNode *gemSprite;
 	SKSpriteNode *goal;
 	SKSpriteNode *detect;
 	
