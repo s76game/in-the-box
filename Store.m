@@ -22,7 +22,7 @@
 	
 	gems = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"];
 	
-	_gemCount.text = [NSString stringWithFormat:@"%i", gems];
+	[self updateGems];
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		[_Gem15Outlet setBackgroundImage:[UIImage imageNamed:@"night_store_15.png"] forState:UIControlStateNormal];
@@ -53,6 +53,13 @@
 	
 }
 
+-(void)updateGems {
+	
+	_gemCount.text = [NSString stringWithFormat:@"%i", gems];
+	[[NSUserDefaults standardUserDefaults] setInteger:gems forKey:@"gems"];
+	
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -61,12 +68,10 @@
 
 - (void)requestProductData:(NSString *)identifier
 {
-	NSLog(@"Alpha");
 	NSSet *productIdentifiers = [NSSet setWithObject:[NSString stringWithFormat:@"com.rybel.IAP.%@", identifier]];
 	productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
 	productsRequest.delegate = self;
 	[productsRequest start];
-	NSLog(@"Bravo");
 }
 
 #pragma mark SKProductsRequestDelegate methods
@@ -82,12 +87,9 @@
 		NSLog(@"Product id: %@" , purchaseProduct.productIdentifier);
 		
 		
-		
 		SKProduct *product = purchaseProduct;
 		SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:product];
-		
 		[[SKPaymentQueue defaultQueue] addPayment:payment];
-		
 		
 	}
 	
@@ -111,10 +113,15 @@
 			case SKPaymentTransactionStateFailed:
 				NSLog(@"Failed");
 				break;
-			case SKPaymentTransactionStatePurchased:
+			case SKPaymentTransactionStatePurchased: {
 				NSLog(@"Purchased");
-				 [[SKPaymentQueue defaultQueue]finishTransaction:transaction];
+				[[SKPaymentQueue defaultQueue]finishTransaction:transaction];
+				NSString* quantity = [[purchaseProduct.localizedTitle stringByReplacingOccurrencesOfString:@"Gems" withString:@""] stringByReplacingOccurrencesOfString:@" " withString: @""];
+				NSLog(@"%@", quantity);
+				gems = gems + (int)[quantity integerValue];
+				[self updateGems];
 				break;
+			}
 			case SKPaymentTransactionStateRestored:
 				NSLog(@"Restored");
 				break;
@@ -150,6 +157,7 @@
 	[self requestProductData:@"gem_500"];
 }
 - (IBAction)ExitAction:(id)sender {
+	 [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
