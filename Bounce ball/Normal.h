@@ -34,6 +34,8 @@ int timesRevived;
 int triggered;
 int previousCost;
 
+int gemSize;
+
 int minutesTimer;
 int secondsTimer;
 
@@ -83,6 +85,7 @@ static const uint32_t gemCategory     =  0x1 << 5;
 	SKShapeNode* border;
 	SKShapeNode* lines;
 	SKSpriteNode *line;
+	SKSpriteNode *gemSprite;
 	SKAction *remove;
 	SKSpriteNode *ball;
 	UILabel *score;

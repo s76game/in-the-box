@@ -107,6 +107,7 @@
 		speediPad = 15;
 	}
 
+	gemSize = 25*startiPad;
 	
 	// Set up score
 	score = [[UILabel alloc] initWithFrame:CGRectMake(0, scoreiPad/2, screenWidth, 50)];
@@ -176,6 +177,8 @@
 	ball = [self newBall];
 	ball.position = CGPointMake(CGRectGetMidX(self.frame),                              CGRectGetMidY(self.frame));
 	[self addChild:ball];
+	
+	[self spawnGem];
 	
 	// Start random direction code
 	int smallest = 1;
@@ -363,8 +366,8 @@
 	ballSprite.physicsBody.linearDamping = 0;
 	ballSprite.physicsBody.angularDamping = 0;
 	ballSprite.physicsBody.restitution = 1;
-	ballSprite.physicsBody.collisionBitMask = lineCategory | edgeCategory;
-	ballSprite.physicsBody.contactTestBitMask = lineCategory | edgeCategory;
+	ballSprite.physicsBody.collisionBitMask = lineCategory | edgeCategory | gemCategory;
+	ballSprite.physicsBody.contactTestBitMask = lineCategory | edgeCategory | gemCategory;
 	return ballSprite;
 }
 
@@ -387,15 +390,25 @@
 	
 	if ((firstBody.categoryBitMask & lineCategory) != 0)
 	{
+		NSLog(@"Line");
 		// Ball hits line
 		[self playBounce];
 		scoreNumber = scoreNumber + 1;
 	}
-	else {
+	else if ((firstBody.categoryBitMask & edgeCategory) != 0)
+	{
+		NSLog(@"Wall");
 		// Ball hits wall
-
+		
 		[ball.physicsBody setVelocity:CGVectorMake(0, 0)];
 		[self gameOver];
+	}
+	else {
+		NSLog(@"Gem");
+		[self playGoal];
+		[gemSprite removeFromParent];
+		[self spawnGem];
+		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+1 forKey:@"gems"];
 	}
 }
 
@@ -926,6 +939,20 @@
 
 #pragma mark Sounds
 
+-(void)playGoal {
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
+		SystemSoundID soundID;
+		NSString *soundFile = [[NSBundle mainBundle]
+							   pathForResource:@"goal_contact" ofType:@"mp3"];
+		AudioServicesCreateSystemSoundID((__bridge  CFURLRef)
+										 [NSURL fileURLWithPath:soundFile], & soundID);
+		AudioServicesPlaySystemSound(soundID);
+	}
+	else {
+		NSLog(@"***Goal Sound***");
+	}
+}
+
 -(void)playBounce {
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
 		SystemSoundID soundID;
@@ -969,6 +996,51 @@
 	}
 	
 }
+
+-(void)spawnGem {
+	
+	gemSprite = [SKSpriteNode spriteNodeWithImageNamed:@"gem.png"];
+	gemSprite.size = CGSizeMake(gemSize, gemSize);
+	gemSprite.position = [self chooseLocationGem];
+	[self addChild:gemSprite];
+	
+	float gemSizes = (float)gemSize / 2.0;
+	
+	gemSprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:gemSizes];
+	gemSprite.physicsBody.dynamic = NO;
+	gemSprite.physicsBody.categoryBitMask = gemCategory;
+	gemSprite.physicsBody.collisionBitMask = ballCategory;
+	gemSprite.physicsBody.contactTestBitMask = gemCategory;
+	
+}
+
+-(CGPoint)chooseLocationGem {
+	
+	kMinDistanceFromBall = 50;
+	
+	CGFloat gemWidth = gemSprite.size.width;
+	CGFloat gemHeight = gemSprite.size.height;
+	
+	CGFloat maxX = screenWidth - gemWidth*3;
+	CGFloat maxY = screenHeight - gemHeight*3;
+	
+	CGFloat dx = MAX(maxX-kMinDistanceFromBall-ball.position.x, 0) + MAX(ball.position.x-kMinDistanceFromBall, 0);
+	CGFloat dy = MAX(maxY-kMinDistanceFromBall-ball.position.y, 0) + MAX(ball.position.y-kMinDistanceFromBall, 0);
+	
+	CGFloat newX = ball.position.x + MIN(maxX-ball.position.x, kMinDistanceFromBall) + skRand(0, dx);
+	CGFloat newY = ball.position.y + MIN(maxY-ball.position.y, kMinDistanceFromBall) + skRand(0, dy);
+	
+	if (newX > maxX) {
+		newX -= maxX;
+	}
+	
+	if (newY > maxY) {
+		newY -= maxY;
+	}
+	
+	return CGPointMake(newX+gemWidth/2, newY+gemHeight/2);
+}
+
 
 
 #pragma mark Game Center Achievement Code
