@@ -29,6 +29,10 @@ int kMinDistanceFromBall;
 NSTimer *countingTimer;
 int countingAnimation;
 
+int timesRevived;
+int triggered;
+int previousCost;
+
 int goalSize;
 
 NSTimer *speedUpTimer;
@@ -84,6 +88,13 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 	UIButton *pauseContinue;
 	UIButton *pauseRestart;
 	UIButton *pauseExit;
+	
+	// Revive Menu stuff
+	UIButton *reviveButton;
+	UIButton *continueButton;
+	UIImageView *reviveAngel;
+	UILabel *gemCount;
+	UIImageView *gem;
 	
 	// In game stuff
 	SKShapeNode* border;

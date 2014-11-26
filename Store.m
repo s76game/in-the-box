@@ -117,7 +117,6 @@
 				NSLog(@"Purchased");
 				[[SKPaymentQueue defaultQueue]finishTransaction:transaction];
 				NSString* quantity = [[purchaseProduct.localizedTitle stringByReplacingOccurrencesOfString:@"Gems" withString:@""] stringByReplacingOccurrencesOfString:@" " withString: @""];
-				NSLog(@"%@", quantity);
 				gems = gems + (int)[quantity integerValue];
 				[self updateGems];
 				break;

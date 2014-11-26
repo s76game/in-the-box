@@ -28,7 +28,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uCK-Vu-eef">
-                                <rect key="frame" x="136" y="142" width="328" height="438"/>
+                                <rect key="frame" x="136" y="142" width="328" height="458"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sLq-ah-omy">
                                         <rect key="frame" x="-8" y="8" width="345" height="522"/>
@@ -101,11 +101,28 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="328" id="Qha-nX-Kfn"/>
-                                    <constraint firstAttribute="height" constant="438" id="TBd-Xg-Tqb"/>
+                                    <constraint firstAttribute="height" constant="458" id="TBd-Xg-Tqb"/>
                                 </constraints>
                             </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2XY-Yd-p5X">
+                                <rect key="frame" x="304" y="26" width="88" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="Nhz-Sc-X2t"/>
+                                    <constraint firstAttribute="width" constant="88" id="eMs-QW-7yV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="DINbekBlack" family="DINbek Black" pointSize="50"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gem.png" translatesAutoresizingMaskIntoConstraints="NO" id="nxT-fN-FAh">
+                                <rect key="frame" x="400" y="33" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ccS-m7-RVu"/>
+                                    <constraint firstAttribute="width" constant="50" id="d2q-hI-q9w"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwi-cJ-0tp">
-                                <rect key="frame" x="145" y="20" width="75" height="75"/>
+                                <rect key="frame" x="145" y="28" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="51y-yj-bIb"/>
                                     <constraint firstAttribute="height" constant="75" id="hGS-Pd-1Dc"/>
@@ -118,32 +135,15 @@
                                     <action selector="backButton:" destination="vAb-VW-64Y" eventType="touchUpInside" id="HBF-V9-fa6"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gem.png" translatesAutoresizingMaskIntoConstraints="NO" id="nxT-fN-FAh">
-                                <rect key="frame" x="400" y="33" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="ccS-m7-RVu"/>
-                                    <constraint firstAttribute="width" constant="50" id="d2q-hI-q9w"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2XY-Yd-p5X">
-                                <rect key="frame" x="304" y="26" width="88" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="Nhz-Sc-X2t"/>
-                                    <constraint firstAttribute="width" constant="88" id="eMs-QW-7yV"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="DINbekBlack" family="DINbek Black" pointSize="50"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="6q1-kF-Fw1" secondAttribute="trailing" constant="-16" id="5tu-Hv-5E5"/>
-                            <constraint firstItem="QM4-S1-7Q5" firstAttribute="top" secondItem="uCK-Vu-eef" secondAttribute="bottom" constant="20" id="6yc-rN-ubp"/>
+                            <constraint firstItem="QM4-S1-7Q5" firstAttribute="top" secondItem="uCK-Vu-eef" secondAttribute="bottom" id="6yc-rN-ubp"/>
                             <constraint firstItem="2XY-Yd-p5X" firstAttribute="centerY" secondItem="nxT-fN-FAh" secondAttribute="centerY" id="AGG-4H-igO"/>
                             <constraint firstItem="6q1-kF-Fw1" firstAttribute="top" secondItem="dk8-Ml-19G" secondAttribute="topMargin" id="C66-wK-yur"/>
                             <constraint firstItem="6q1-kF-Fw1" firstAttribute="leading" secondItem="dk8-Ml-19G" secondAttribute="leadingMargin" constant="-16" id="Uae-7i-cpR"/>
-                            <constraint firstItem="hwi-cJ-0tp" firstAttribute="top" secondItem="1Xj-l0-4Ds" secondAttribute="bottom" id="UuH-4j-G3K"/>
+                            <constraint firstItem="hwi-cJ-0tp" firstAttribute="top" secondItem="1Xj-l0-4Ds" secondAttribute="bottom" constant="8" id="UuH-4j-G3K"/>
                             <constraint firstAttribute="centerX" secondItem="uCK-Vu-eef" secondAttribute="centerX" id="VP0-ui-6fU"/>
                             <constraint firstAttribute="centerX" secondItem="hwi-cJ-0tp" secondAttribute="centerX" constant="117.5" id="e6s-2v-AxP"/>
                             <constraint firstItem="nxT-fN-FAh" firstAttribute="leading" secondItem="2XY-Yd-p5X" secondAttribute="trailing" constant="8" id="eMr-MD-3sc"/>
