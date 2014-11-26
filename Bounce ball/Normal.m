@@ -121,6 +121,8 @@
 	else {
 		score.textColor = [UIColor blueColor];
 	}
+	
+	previousCost = 1;
 
 	
 	[speedUpTimer invalidate];
@@ -391,9 +393,7 @@
 	}
 	else {
 		// Ball hits wall
-		[self playExplosion];
-		[self initExplosion];
-		ball.hidden = YES;
+
 		[ball.physicsBody setVelocity:CGVectorMake(0, 0)];
 		[self gameOver];
 	}
@@ -402,6 +402,118 @@
 #pragma mark Game Over Code
 
 -(void)gameOver {
+	
+	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"gems"] >= previousCost*2 ) {
+		
+		pause.hidden = YES;
+		
+		reviveButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+		[reviveButton addTarget:self action:@selector(revive) forControlEvents:UIControlEventTouchUpInside];
+		[reviveButton setBackgroundImage:[UIImage imageNamed:@"revive.png"] forState:UIControlStateNormal];
+		reviveButton.frame = CGRectMake(screenWidth/2-100, screenHeight+375.0, 200.0, 75.0);
+		[self.view addSubview:reviveButton];
+		
+		continueButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+		[continueButton addTarget:self action:@selector(reviveContinue) forControlEvents:UIControlEventTouchUpInside];
+		[continueButton setBackgroundImage:[UIImage imageNamed:@"continue.png"] forState:UIControlStateNormal];
+		continueButton.frame = CGRectMake(screenWidth/2-100, screenHeight+475.0, 200.0, 75.0);
+		[self.view addSubview:continueButton];
+		
+		reviveAngel = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth/2)-(250/2), screenHeight+150, 250, 200)];
+		reviveAngel.image = [UIImage imageNamed:@"angel.png"];
+		[self.view addSubview:reviveAngel];
+		
+		gemCount = [[UILabel alloc] initWithFrame:CGRectMake(reviveAngel.frame.origin.x+reviveAngel.frame.size.height/2-100/2, reviveAngel.frame.origin.y+reviveAngel.frame.size.height-75, 100, 75)];
+		gemCount.text = [NSString stringWithFormat:@"%li", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]];
+		gemCount.textAlignment = NSTextAlignmentCenter;
+		[gemCount setFont:[UIFont fontWithName:@"DINbekBlack" size:50]];
+		gemCount.textColor = [UIColor blackColor];
+		[self.view addSubview:gemCount];
+		
+		gem = [[UIImageView alloc] initWithFrame:CGRectMake(gemCount.frame.origin.x+gemCount.frame.size.width-10, gemCount.frame.origin.y+15, 50, 50)];
+		gem.image = [UIImage imageNamed:@"gem.png"];
+		[self.view addSubview:gem];
+		
+		
+		[UIView animateWithDuration:1.0
+							  delay:0.0
+							options: UIViewAnimationOptionCurveEaseOut
+						 animations:^
+		 {
+			 reviveButton.frame = CGRectMake(reviveButton.frame.origin.x, reviveButton.frame.origin.y-screenHeight, reviveButton.frame.size.width, reviveButton.frame.size.height);
+			 continueButton.frame = CGRectMake(continueButton.frame.origin.x, continueButton.frame.origin.y-screenHeight, continueButton.frame.size.width, continueButton.frame.size.height);
+			 reviveAngel.frame = CGRectMake(reviveAngel.frame.origin.x, reviveAngel.frame.origin.y-screenHeight, reviveAngel.frame.size.width, reviveAngel.frame.size.height);
+			 gem.frame = CGRectMake(gem.frame.origin.x, gem.frame.origin.y-screenHeight, gem.frame.size.width, gem.frame.size.height);
+			 gemCount.frame = CGRectMake(gemCount.frame.origin.x, gemCount.frame.origin.y-screenHeight, gemCount.frame.size.width, gemCount.frame.size.height);
+		 }
+						 completion:^(BOOL finished)
+		 {
+		 }];
+		
+		[self performSelector:@selector(reviveContinue) withObject:self afterDelay:3];
+	}
+	else {
+		
+		[self endGame];
+		
+	}
+}
+
+-(void)revive {
+	
+	previousCost = previousCost*2;
+	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]-previousCost forKey:@"gems"];
+	
+	gemCount.text = [NSString stringWithFormat:@"%li", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]];
+	
+	[UIView animateWithDuration:1.0
+						  delay:0.25
+						options: UIViewAnimationOptionCurveEaseOut
+					 animations:^
+	 {
+		 reviveButton.frame = CGRectMake(reviveButton.frame.origin.x, reviveButton.frame.origin.y-screenHeight, reviveButton.frame.size.width, reviveButton.frame.size.height);
+		 continueButton.frame = CGRectMake(continueButton.frame.origin.x, continueButton.frame.origin.y-screenHeight, continueButton.frame.size.width, continueButton.frame.size.height);
+		 reviveAngel.frame = CGRectMake(reviveAngel.frame.origin.x, reviveAngel.frame.origin.y-screenHeight, reviveAngel.frame.size.width, reviveAngel.frame.size.height);
+		 gem.frame = CGRectMake(gem.frame.origin.x, gem.frame.origin.y-screenHeight, gem.frame.size.width, gem.frame.size.height);
+		 gemCount.frame = CGRectMake(gemCount.frame.origin.x, gemCount.frame.origin.y-screenHeight, gemCount.frame.size.width, gemCount.frame.size.height);
+		 ball.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+	 }
+					 completion:^(BOOL finished)
+	 {
+	 }];
+	
+	triggered = 1;
+	
+	[self performSelector:@selector(restart) withObject:self afterDelay:2];
+}
+
+-(void)restart {
+	triggered = 0;
+	pause.hidden = NO;
+	[ball.physicsBody applyImpulse:CGVectorMake(35, 35)];
+	
+}
+
+-(void)reviveContinue {
+	NSLog(@"Revive Continue");
+	if (triggered == 0) {
+		triggered = 1;
+		[self endGame];
+	}
+	
+}
+
+
+-(void)endGame {
+	
+	[reviveButton removeFromSuperview];
+	[continueButton removeFromSuperview];
+	[reviveAngel removeFromSuperview];
+	[gemCount removeFromSuperview];
+	[gem removeFromSuperview];
+	
+	[self initExplosion];
+	ball.hidden = YES;
 	
 	[self touchesEnded:nil withEvent:nil];
 	
@@ -415,19 +527,22 @@
 	
 	// Runs game center code block
 	[self gameCenter];
-
+	
 	gameOver = YES;
+	
 	[self gameOverAnimation];
 	pause.hidden = YES;
-	[line removeFromParent];
-	[lines removeFromParent];
+	
 }
+
 
 -(void)gameOverAnimation {
 	
 	float highScore;
 	
 #pragma mark Create Post Game UI
+	
+	[self playExplosion];
 
 	
 	postBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, screenHeight, screenWidth, screenHeight)];
@@ -635,6 +750,8 @@
 
 -(void)restartButton:(UIButton *)button {
 	
+	triggered = 0;
+	
 	gameOver = NO;
 	gameStarted = NO;
 	gameTime = 0;
@@ -783,10 +900,6 @@
 		else {
 			yImpluse = -2;
 		}
-	}
-	
-	if (!gameOver) {
-		[ball.physicsBody applyImpulse:CGVectorMake(xImpluse, yImpluse)];
 	}
 }
 

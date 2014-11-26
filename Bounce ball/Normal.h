@@ -30,6 +30,10 @@ int countingAnimation;
 BOOL night;
 BOOL touchStarted;
 
+int timesRevived;
+int triggered;
+int previousCost;
+
 int minutesTimer;
 int secondsTimer;
 
@@ -66,6 +70,13 @@ static const uint32_t edgeCategory     =  0x1 << 4;
 	UIButton *pauseContinue;
 	UIButton *pauseRestart;
 	UIButton *pauseExit;
+	
+	// Revive Menu stuff
+	UIButton *reviveButton;
+	UIButton *continueButton;
+	UIImageView *reviveAngel;
+	UILabel *gemCount;
+	UIImageView *gem;
 
 	// UI stuff
 	SKShapeNode* border;

@@ -509,10 +509,9 @@
 }
 
 -(void)reviveContinue {
-	
 	if (triggered == 0) {
-		[self endGame];
 		triggered = 1;
+		[self endGame];
 	}
 	
 }
