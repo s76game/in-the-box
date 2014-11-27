@@ -105,6 +105,8 @@
 	background.position = (CGPoint) {CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame)};
 	[self addChild:background];
 	
+	[speedUpTimer invalidate];
+	[timer invalidate];
 	
 	// Set up scene
 	
@@ -514,7 +516,7 @@
 -(void)restart {
 	triggered = 0;
 	pause.hidden = NO;
-	[ball.physicsBody applyImpulse:CGVectorMake(35, 35)];
+	[ball.physicsBody applyImpulse:CGVectorMake(25, 25)];
 	
 }
 
@@ -889,6 +891,45 @@
 	pause.hidden = YES;
 }
 
+// Ball speed up method
+- (void) speedUp:(NSTimer *)timer
+{
+	int xImpluse;
+	int yImpluse;
+	if (ball.physicsBody.velocity.dx > 0) {
+		if (IPAD) {
+			xImpluse = 25;
+		}
+		else {
+			xImpluse = 2;
+		}
+	}
+	else {
+		if (IPAD) {
+			xImpluse = -25;
+		}
+		else {
+			xImpluse = -2;
+		}
+	}
+	
+	if (ball.physicsBody.velocity.dy > 0) {
+		if (IPAD) {
+			yImpluse = 25;
+		}
+		else {
+			yImpluse = 2;
+		}
+	}
+	else {
+		if (IPAD) {
+			yImpluse = -25;
+		}
+		else {
+			yImpluse = -2;
+		}
+	}
+}
 
 // Start ball on user touch
 // Done to avoid extremely low FPS at load of scene
@@ -906,6 +947,26 @@
 	
 	[ball.physicsBody applyImpulse:CGVectorMake(25, 25)];
 	//Calls ball speed up method
+	speedUpTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(speedUp:) userInfo:nil repeats:YES];
+	// Start Timer
+	timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+											 target:self
+										   selector:@selector(timer:)
+										   userInfo:nil
+											repeats:YES];
+}
+
+-(void)timer:(NSTimer *)timer {
+	
+	if (!gameOver) {
+		
+		minutesTimer = gameTime/60;
+		secondsTimer = gameTime-(minutesTimer * 60);
+		
+		gameTime = gameTime + 1;
+		// Minutes:Seconds
+	}
+	
 }
 
 #pragma mark Sounds

@@ -80,13 +80,11 @@
 
 
 -(void)strategy {
-	NSLog(@"Charlie");
 	NormalStrategic* scene = [[NormalStrategic alloc] initWithSize:screenSize];
 	spriteView = (SKView *) self.view;
 	lastPlayed = @"strategy";
 	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
 	[spriteView presentScene: scene];
-	NSLog(@"Delta");
 }
 
 
@@ -97,9 +95,7 @@
 }
 
 -(void)showScene {
-	NSLog(@"Bravo");
 	if ([lastPlayed isEqualToString:@"strategy"]) {
-		NSLog(@"Strategy");
 		NormalStrategic* hello = [[NormalStrategic alloc] initWithSize:screenSize];
 		spriteView = (SKView *) self.view;
 		lastPlayed = @"strategy";
