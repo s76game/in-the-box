@@ -87,6 +87,7 @@
 	}
 	
 	previousCost = 1;
+	triggered = 0;
 	
 	
 	// Set up background texture
@@ -113,28 +114,6 @@
 	self.physicsBody.contactTestBitMask = edgeCategory;
 	self.physicsWorld.contactDelegate = self;
 	self.physicsWorld.gravity = CGVectorMake(0.0, 0.0);
-	
-	// Set up border graphics
-	border = [SKShapeNode node];
-	
-	CGMutablePathRef path = CGPathCreateMutable();
-	CGPathMoveToPoint(path, NULL, 1, 1);
-	CGPathAddLineToPoint(path, NULL, 1, (screenHeight-1));
-	CGPathAddLineToPoint(path, NULL, (screenWidth-1), (screenHeight-1));
-	CGPathAddLineToPoint(path, NULL, (screenWidth-1), 1);
-	CGPathAddLineToPoint(path, NULL, 1, 1);
-	
-	border.path = path;
-	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		[border setStrokeColor:[UIColor whiteColor]];
-	}
-	else {
-		[border setStrokeColor:[UIColor blackColor]];
-	}
-	[border setLineWidth:1];
-	
-	[self addChild:border];
-	
 	
 	
 	ball = [self newBall];
@@ -181,7 +160,7 @@
 	else {
 		[pause setBackgroundImage:[UIImage imageNamed:@"pause_button.png"] forState:UIControlStateNormal];
 	}
-	pause.frame = CGRectMake(screenWidth-40, 10, 30.0, 30.0);
+	pause.frame = CGRectMake(screenWidth-40, 20, 30.0, 30.0);
 	[self.view addSubview:pause];
 	
 	pause.hidden = YES;
@@ -190,7 +169,7 @@
 }
 
 -(void)tapToStart {
-	if (!gameStarted) {
+	if (!gameStarted && !self.scene.view.paused) {
 		tapToStart = [[UILabel alloc] initWithFrame:CGRectMake(screenWidth/2-100, 75, 200, 75)];
 		tapToStart.text = [NSString stringWithFormat:@"Tap to start"];
 		tapToStart.textAlignment = NSTextAlignmentCenter;
@@ -367,7 +346,7 @@
 	ballSprite.physicsBody.linearDamping = 0;
 	ballSprite.physicsBody.angularDamping = 0;
 	ballSprite.physicsBody.restitution = 1;
-	ballSprite.physicsBody.collisionBitMask = lineCategory | goalCategory | edgeCategory | pointGoalCategory | gemCategory;
+	ballSprite.physicsBody.collisionBitMask = lineCategory | goalCategory | edgeCategory | pointGoalCategory;
 	ballSprite.physicsBody.contactTestBitMask = lineCategory | goalCategory | edgeCategory | pointGoalCategory | gemCategory;
 	return ballSprite;
 }
@@ -396,14 +375,12 @@
 	{
 		// Ball hits line
 		[self playBounce];
-		NSLog(@"Line");
 	}
 	else if ((firstBody.categoryBitMask & edgeCategory) != 0)
 	{
 		// Ball hits wall
 		[ball.physicsBody setVelocity:CGVectorMake(0, 0)];
 		[self gameOver];
-		NSLog(@"Wall");
 	}
 	else if ((firstBody.categoryBitMask & goalCategory) != 0)
 	{
@@ -415,20 +392,23 @@
 		goalsHit = goalsHit + 1;
 		score.text = [NSString stringWithFormat:@"%i", goalsHit];
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"goalsHit"]+1 forKey:@"goalsHit"];
-		NSLog(@"Goal");
 	}
-	else {
-		NSLog(@"Gem");
+	else if ((firstBody.categoryBitMask & gemCategory) != 0) {
 		[self playGoal];
 		[gemSprite removeFromParent];
 		[self spawnGem];
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+1 forKey:@"gems"];
+	}
+	else {
+		NSLog(@"Da fuq!");
 	}
 }
 
 #pragma mark Game Over Code
 
 -(void)gameOver {
+	
+	gameOver = YES;
 	
 	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"gems"] >= previousCost*2 ) {
 		
@@ -498,6 +478,8 @@
 	}
 }
 
+#pragma mark Revive Shit
+
 -(void)revive {
 	
 	previousCost = previousCost*2;
@@ -525,7 +507,7 @@
 	 }];
 	
 	triggered = 1;
-	
+	gameOver = NO;
 	[self performSelector:@selector(restart) withObject:self afterDelay:2];
 }
 
@@ -570,8 +552,6 @@
 	
 	// Runs game center code block
 	[self gameCenter];
-	
-	gameOver = YES;
 	
 	[self gameOverAnimation];
 	pause.hidden = YES;
@@ -783,18 +763,38 @@
 	
 	[self.view presentScene:nil];
 	
-	[timer invalidate];
-	[speedUpTimer invalidate];
+	NSLog(@"Alpha");
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"showScene" object:self];
+	NSLog(@"alpha 2");
+}
+
+#pragma mark Deal with appDidResignActive and appDidBecomeActive
+-(void)pauseGame {
+	[self pauseButton:nil];
+}
+
+-(void)theAppIsActive:(NSNotification *)note
+{
+	self.view.paused = YES;
+	SKAction *pauseTimer= [SKAction sequence:@[
+											   [SKAction performSelector:@selector(pauseTimerfun)
+																onTarget:self]
+											   
+											   ]];
+	[self runAction:pauseTimer withKey:@"pauseTimer"];
+}
+
+-(void) pauseTimerfun
+{
+	self.view.paused = YES;
 	
-	[[NSNotificationCenter defaultCenter]
-	 postNotificationName:@"showScene" object:self];
 }
 
 #pragma mark Pause Menu Interface
 
 -(void)pauseButton:(UIButton *)button {
 	NSLog(@"Pause");
-	self.scene.view.paused = YES;
+	self.view.paused = YES;
 	[self createPauseMenuInterface];
 	pause.hidden = YES;
 }
@@ -826,7 +826,30 @@
 	[pauseContinue addTarget:self action:@selector(removePauseMenuInterface) forControlEvents:UIControlEventTouchUpInside];
 	[pauseContinue setBackgroundImage:[UIImage imageNamed:@"pause_resume.png"] forState:UIControlStateNormal];
 	pauseContinue.frame = CGRectMake(120, pauseRestart.frame.origin.y, 75.0, 75.0);
+	pauseContinue.hidden = YES;
+	pauseContinue.enabled = NO;
 	[self.view addSubview:pauseContinue];
+	
+	
+	[self performSelector:@selector(showResume) withObject:self afterDelay:2];
+}
+
+-(void)showResume {
+	
+	pauseContinue.alpha = 0;
+	pauseContinue.hidden = NO;
+	
+	[UIView animateWithDuration:1.5
+						  delay:1.0
+						options: UIViewAnimationOptionCurveEaseOut
+					 animations:^
+	 {
+		 pauseContinue.alpha = 1;
+	 }
+					 completion:^(BOOL finished)
+	 {
+		 pauseContinue.enabled = YES;
+	 }];
 	
 }
 
@@ -847,29 +870,6 @@
 }
 
 
-#pragma mark Deal with appDidResignActive and appDidBecomeActive
--(void)pauseGame {
-	[self pauseButton:nil];
-}
-
--(void)theAppIsActive:(NSNotification *)note
-{
-	self.view.paused = YES;
-	SKAction *pauseTimer= [SKAction sequence:@[
-											   [SKAction waitForDuration:0.1],
-											   [SKAction performSelector:@selector(pauseTimerfun)
-																onTarget:self]
-											   
-											   ]];
-	[self runAction:pauseTimer withKey:@"pauseTimer"];
-}
-
--(void) pauseTimerfun
-{
-	self.view.paused = YES;
-	
-}
-
 -(void)removeElements {
 	// Removes elements not in the scene
 	[replay removeFromSuperview];
@@ -889,26 +889,6 @@
 	pause.hidden = YES;
 }
 
-// Ball speed up method
-- (void) speedUp:(NSTimer *)timer
-{
-	int xImpluse;
-	int yImpluse;
-	
-	if (ball.physicsBody.velocity.dx > 0) {
-		xImpluse = 2;
-	}
-	else {
-		xImpluse = -2;
-	}
-	
-	if (ball.physicsBody.velocity.dy > 0) {
-		yImpluse = 2;
-	}
-	else {
-		yImpluse = -2;
-	}
-}
 
 // Start ball on user touch
 // Done to avoid extremely low FPS at load of scene
@@ -924,9 +904,8 @@
 	
 	gameStarted = YES;
 	
-	[ball.physicsBody applyImpulse:CGVectorMake(35, 35)];
+	[ball.physicsBody applyImpulse:CGVectorMake(25, 25)];
 	//Calls ball speed up method
-	[NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(speedUp:) userInfo:nil repeats:YES];
 }
 
 #pragma mark Sounds
@@ -973,23 +952,6 @@
 	}
 }
 
-
--(void)timer:(NSTimer *)timer {
-	
-	if (!gameOver) {
-		
-		int minutesTimer;
-		int secondsTimer;
-		
-		minutesTimer = gameTime/60;
-		secondsTimer = gameTime-(minutesTimer * 60);
-		
-		gameTime = gameTime + 1;
-
-		goalTimeString = [NSString stringWithFormat:@"%01d:%02d", minutesTimer, secondsTimer];
-	}
-	
-}
 
 -(void)spawnGoal {
 	
@@ -1132,18 +1094,6 @@
 	
 	// Achievement: Goal
 	[self achievementComplete:@"goal" percentComplete:[[NSUserDefaults standardUserDefaults] integerForKey:@"goalsHit"] * .1];
-
-	
-	// Achievement: Survivor
-	float survivor = gameTime / 60;
-	
-	if (survivor >= 2) {
-		[self achievementComplete:@"survivor" percentComplete:100];
-	}
-	else {
-		[self achievementComplete:@"survivor" percentComplete:survivor * 60];
-	}
-	
 	
 	
 }

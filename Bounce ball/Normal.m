@@ -483,6 +483,8 @@
 	}
 }
 
+#pragma mark Revive Shit
+
 -(void)revive {
 	
 	previousCost = previousCost*2;
