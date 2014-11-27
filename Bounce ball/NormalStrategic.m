@@ -418,32 +418,57 @@
 		
 		reviveButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 		[reviveButton addTarget:self action:@selector(revive) forControlEvents:UIControlEventTouchUpInside];
-		[reviveButton setBackgroundImage:[UIImage imageNamed:@"revive.png"] forState:UIControlStateNormal];
+		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+			[reviveButton setBackgroundImage:[UIImage imageNamed:@"night_revive.png"] forState:UIControlStateNormal];
+		}
+		else {
+			[reviveButton setBackgroundImage:[UIImage imageNamed:@"revive.png"] forState:UIControlStateNormal];
+		}
 		reviveButton.frame = CGRectMake(screenWidth/2-(163.3/2), screenHeight+375.0, 163.3, 45.0);
 		[self.view addSubview:reviveButton];
 		
 		continueButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 		[continueButton addTarget:self action:@selector(reviveContinue) forControlEvents:UIControlEventTouchUpInside];
-		[continueButton setBackgroundImage:[UIImage imageNamed:@"continue.png"] forState:UIControlStateNormal];
+		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+			[continueButton setBackgroundImage:[UIImage imageNamed:@"night_continue.png"] forState:UIControlStateNormal];
+		}
+		else {
+			[continueButton setBackgroundImage:[UIImage imageNamed:@"continue.png"] forState:UIControlStateNormal];
+		}
 		continueButton.frame = CGRectMake(screenWidth/2-(163.3/2), screenHeight+375+55, 163.3, 45.0);
 		[self.view addSubview:continueButton];
 		
 		reviveAngel = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth/2)-(250/2), screenHeight+150, 250, 175)];
-		reviveAngel.image = [UIImage imageNamed:@"angel.png"];
+		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+			reviveAngel.image = [UIImage imageNamed:@"night_angel.png"];
+		}
+		else {
+			reviveAngel.image = [UIImage imageNamed:@"angel.png"];
+		}
 		[self.view addSubview:reviveAngel];
 		
 		gemCount = [[UILabel alloc] initWithFrame:CGRectMake(reviveAngel.frame.origin.x+reviveAngel.frame.size.height/2-100/2, reviveAngel.frame.origin.y-reviveAngel.frame.size.height+75, 100, 75)];
 		gemCount.text = [NSString stringWithFormat:@"%li", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]];
 		gemCount.textAlignment = NSTextAlignmentRight;
 		[gemCount setFont:[UIFont fontWithName:@"DINbekBlack" size:40]];
-		gemCount.textColor = [UIColor blackColor];
+		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+			gemCount.textColor = [UIColor whiteColor];
+		}
+		else {
+			gemCount.textColor = [UIColor blackColor];
+		}
 		[self.view addSubview:gemCount];
 		
 		gemCost = [[UILabel alloc] initWithFrame:CGRectMake(reviveAngel.frame.origin.x+reviveAngel.frame.size.height/2-100/2, reviveAngel.frame.origin.y+reviveAngel.frame.size.height-50, 100, 75)];
 		gemCost.text = [NSString stringWithFormat:@"%i", previousCost*2];
 		gemCost.textAlignment = NSTextAlignmentRight;
 		[gemCost setFont:[UIFont fontWithName:@"DINbekBlack" size:40]];
-		gemCost.textColor = [UIColor blackColor];
+		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+			gemCost.textColor = [UIColor whiteColor];
+		}
+		else {
+			gemCost.textColor = [UIColor blackColor];
+		}
 		[self.view addSubview:gemCost];
 		
 		gemCountImage = [[UIImageView alloc] initWithFrame:CGRectMake(gemCount.frame.origin.x+gemCount.frame.size.width, gemCount.frame.origin.y+15, 50, 43)];
