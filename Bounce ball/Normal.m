@@ -100,17 +100,17 @@
 	if (IPAD) {
 		scoreiPad = 100;
 		startiPad = 2;
-		speediPad = 115;
+		speediPad = 5;
 	} else {
 		scoreiPad = 50;
 		startiPad = 1;
-		speediPad = 15;
+		speediPad = 1;
 	}
 
 	gemSize = 25*startiPad;
 	
 	// Set up score
-	score = [[UILabel alloc] initWithFrame:CGRectMake(0, scoreiPad/2, screenWidth, 50)];
+	score = [[UILabel alloc] initWithFrame:CGRectMake(0, scoreiPad/2, screenWidth, 75)];
 	[self.view addSubview:score];
 	scoreNumber = 0;
 	score.text = @"Time";
@@ -528,7 +528,7 @@
 -(void)restart {
 	triggered = 0;
 	pause.hidden = NO;
-	[ball.physicsBody applyImpulse:CGVectorMake(25, 25)];
+	[ball.physicsBody applyImpulse:CGVectorMake(25*speediPad, 25*speediPad)];
 	
 }
 
@@ -701,13 +701,18 @@
 	
 	bestScore.frame = CGRectMake(20, screenHeight+450, 270, 150);
 	[bestScore setFont:[UIFont fontWithName:@"Prototype" size:80]];
-	currentScoreNumber.frame = CGRectMake(bestScore.frame.origin.x+bestScore.frame.size.width+20, bestScore.frame.origin.y, 200, 150);
 	[currentScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:80]];
-	bestScoreNumber.frame = CGRectMake(bestScore.frame.origin.x+bestScore.frame.size.width+20, bestScore.frame.origin.y, 200, 150);
 	[bestScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:80]];
-	replay.frame = CGRectMake((screenWidth/2)-160, screenHeight+650, 320, 100);
-	menu.frame = CGRectMake((screenWidth/2)-160, replay.frame.origin.y+replay.frame.size.height+30, 320, 100);
-	gameCenter.frame = CGRectMake(menu.frame.origin.x+120, menu.frame.origin.y+menu.frame.size.height+30, 100, 100);
+	postBackground.frame = CGRectMake(0, 0, screenWidth, screenHeight);
+	replay.frame = CGRectMake(replay.frame.origin.x, replay.frame.origin.y, replay.frame.size.width, replay.frame.size.height);
+	menu.frame = CGRectMake(menu.frame.origin.x, menu.frame.origin.y, menu.frame.size.width, menu.frame.size.height);
+	bestScore.frame = CGRectMake(bestScore.frame.origin.x, bestScore.frame.origin.y, bestScore.frame.size.width, bestScore.frame.size.height);
+	bestScoreNumber.frame = CGRectMake(bestScoreNumber.frame.origin.x, bestScoreNumber.frame.origin.y, bestScoreNumber.frame.size.width, bestScoreNumber.frame.size.height);
+	currentScoreNumber.frame = CGRectMake(currentScoreNumber.frame.origin.x, currentScoreNumber.frame.origin.y, currentScoreNumber.frame.size.width, currentScoreNumber.frame.size.height);
+	rate.frame = CGRectMake(rate.frame.origin.x, rate.frame.origin.y, rate.frame.size.width, rate.frame.size.height);
+	share.frame = CGRectMake(share.frame.origin.x, share.frame.origin.y, share.frame.size.width, share.frame.size.height);
+	bigImage.frame = CGRectMake(bigImage.frame.origin.x, bigImage.frame.origin.y, bigImage.frame.size.width, bigImage.frame.size.height);
+	gameCenter.frame = CGRectMake(gameCenter.frame.origin.x, gameCenter.frame.origin.y, gameCenter.frame.size.width, gameCenter.frame.size.height);
 	
 }
 
@@ -970,7 +975,7 @@
 	[tapToStart removeFromSuperview];
 	gameStarted = YES;
 	
-	[ball.physicsBody applyImpulse:CGVectorMake(25, 25)];
+	[ball.physicsBody applyImpulse:CGVectorMake(25*speediPad, 25*speediPad)];
 	//Calls ball speed up method
 	score.text = @"0:00";
 	speedUpTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(speedUp:) userInfo:nil repeats:YES];
