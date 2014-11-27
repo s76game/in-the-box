@@ -48,5 +48,6 @@ int gems;
 
 @property (strong, nonatomic) IBOutlet UILabel *gemCount;
 
+@property (strong, nonatomic) IBOutlet UILabel *storeLabel;
 
 @end

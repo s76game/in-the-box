@@ -37,6 +37,7 @@
 		[_ExitOutlet setBackgroundImage:[UIImage imageNamed:@"night_store_exit.png"] forState:UIControlStateNormal];
 		[_background setImage:[UIImage imageNamed:@"night_background.png"]];
 		_gemCount.textColor = [UIColor whiteColor];
+		_storeLabel.textColor = [UIColor whiteColor];
 	}
 	else {
 		[_Gem15Outlet setBackgroundImage:[UIImage imageNamed:@"store_15.png"] forState:UIControlStateNormal];
@@ -51,6 +52,7 @@
 		[_ExitOutlet setBackgroundImage:[UIImage imageNamed:@"store_exit.png"] forState:UIControlStateNormal];
 		[_background setImage:[UIImage imageNamed:@"background.png"]];
 		_gemCount.textColor = [UIColor blackColor];
+		_storeLabel.textColor = [UIColor blackColor];
 	}
 	
 	[[SKPaymentQueue defaultQueue] addTransactionObserver:self];

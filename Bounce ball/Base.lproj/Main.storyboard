@@ -9,6 +9,7 @@
     <customFonts key="customFonts">
         <mutableArray key="dinbek-black.ttf">
             <string>DINbekBlack</string>
+            <string>DINbekBlack</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -24,40 +25,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background.png" translatesAutoresizingMaskIntoConstraints="NO" id="6q1-kF-Fw1">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.png" translatesAutoresizingMaskIntoConstraints="NO" id="6q1-kF-Fw1">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2XY-Yd-p5X">
-                                <rect key="frame" x="271" y="20" width="143" height="52"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STORE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89p-F5-Qdw">
+                                <rect key="frame" x="195" y="23" width="138" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="3Il-Np-SkQ"/>
-                                    <constraint firstAttribute="width" constant="143" id="CvY-9Y-c28"/>
+                                    <constraint firstAttribute="width" constant="138" id="9f7-66-iGY"/>
+                                    <constraint firstAttribute="height" constant="50" id="lnD-5I-HMV"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="DINbekBlack" family="DINbek Black" pointSize="34"/>
+                                <fontDescription key="fontDescription" name="DINbekBlack" family="DINbek Black" pointSize="40"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gem.png" translatesAutoresizingMaskIntoConstraints="NO" id="nxT-fN-FAh">
-                                <rect key="frame" x="417" y="33" width="33" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="33" id="SkD-ag-K0y"/>
-                                    <constraint firstAttribute="height" constant="29" id="TCf-zz-4Jd"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwi-cJ-0tp">
-                                <rect key="frame" x="147" y="28" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="uMk-Se-pQj"/>
-                                    <constraint firstAttribute="width" constant="40" id="woC-Mo-iv8"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="exit.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="ExitAction:" destination="2NZ-AU-wDY" eventType="touchUpInside" id="2xJ-wt-kvx"/>
-                                    <action selector="backButton:" destination="vAb-VW-64Y" eventType="touchUpInside" id="HBF-V9-fa6"/>
-                                </connections>
-                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uCK-Vu-eef">
                                 <rect key="frame" x="136" y="80" width="328" height="524"/>
                                 <subviews>
@@ -152,18 +132,55 @@
                                     <constraint firstAttribute="width" constant="328" id="hLX-AJ-89G"/>
                                 </constraints>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwi-cJ-0tp">
+                                <rect key="frame" x="147" y="28" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="uMk-Se-pQj"/>
+                                    <constraint firstAttribute="width" constant="40" id="woC-Mo-iv8"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="exit.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="ExitAction:" destination="2NZ-AU-wDY" eventType="touchUpInside" id="2xJ-wt-kvx"/>
+                                    <action selector="backButton:" destination="vAb-VW-64Y" eventType="touchUpInside" id="HBF-V9-fa6"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gem.png" translatesAutoresizingMaskIntoConstraints="NO" id="nxT-fN-FAh">
+                                <rect key="frame" x="417" y="33" width="33" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="33" id="SkD-ag-K0y"/>
+                                    <constraint firstAttribute="height" constant="29" id="TCf-zz-4Jd"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2XY-Yd-p5X">
+                                <rect key="frame" x="271" y="22" width="143" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="3Il-Np-SkQ"/>
+                                    <constraint firstAttribute="width" constant="143" id="CvY-9Y-c28"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="DINbekBlack" family="DINbek Black" pointSize="34"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="2XY-Yd-p5X" secondAttribute="centerX" constant="-42.5" id="0VC-v3-hxC"/>
                             <constraint firstAttribute="centerX" secondItem="hwi-cJ-0tp" secondAttribute="centerX" constant="133" id="A6I-um-6Ea"/>
-                            <constraint firstItem="2XY-Yd-p5X" firstAttribute="top" secondItem="1Xj-l0-4Ds" secondAttribute="bottom" id="APQ-Yc-z13"/>
+                            <constraint firstItem="2XY-Yd-p5X" firstAttribute="top" secondItem="1Xj-l0-4Ds" secondAttribute="bottom" constant="2" id="APQ-Yc-z13"/>
                             <constraint firstItem="nxT-fN-FAh" firstAttribute="top" secondItem="1Xj-l0-4Ds" secondAttribute="bottom" constant="13" id="Ab1-ky-Uky"/>
-                            <constraint firstItem="uCK-Vu-eef" firstAttribute="top" secondItem="2XY-Yd-p5X" secondAttribute="bottom" constant="8" id="Zlk-0B-hB8"/>
+                            <constraint firstItem="89p-F5-Qdw" firstAttribute="leading" secondItem="hwi-cJ-0tp" secondAttribute="trailing" constant="8" id="FPd-mR-zxX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6q1-kF-Fw1" secondAttribute="trailing" constant="-16" id="J4b-Oo-aGp"/>
+                            <constraint firstItem="6q1-kF-Fw1" firstAttribute="leading" secondItem="dk8-Ml-19G" secondAttribute="leadingMargin" constant="-16" id="QUL-cP-4b6"/>
+                            <constraint firstItem="uCK-Vu-eef" firstAttribute="top" secondItem="2XY-Yd-p5X" secondAttribute="bottom" constant="6" id="Zlk-0B-hB8"/>
                             <constraint firstItem="nxT-fN-FAh" firstAttribute="leading" secondItem="2XY-Yd-p5X" secondAttribute="trailing" constant="3" id="czz-ZH-FjI"/>
                             <constraint firstItem="hwi-cJ-0tp" firstAttribute="top" secondItem="1Xj-l0-4Ds" secondAttribute="bottom" constant="8" id="fym-Of-2RT"/>
                             <constraint firstAttribute="centerX" secondItem="uCK-Vu-eef" secondAttribute="centerX" id="jjk-kH-hp1"/>
+                            <constraint firstItem="89p-F5-Qdw" firstAttribute="centerY" secondItem="hwi-cJ-0tp" secondAttribute="centerY" id="skS-e2-SWm"/>
                             <constraint firstAttribute="bottomMargin" secondItem="uCK-Vu-eef" secondAttribute="bottom" constant="-4" id="uzP-XP-8cz"/>
+                            <constraint firstItem="QM4-S1-7Q5" firstAttribute="top" secondItem="6q1-kF-Fw1" secondAttribute="bottom" id="wWC-iM-a5x"/>
+                            <constraint firstItem="6q1-kF-Fw1" firstAttribute="top" secondItem="dk8-Ml-19G" secondAttribute="topMargin" id="yFd-88-1Kj"/>
                         </constraints>
                     </view>
                     <connections>
@@ -180,6 +197,7 @@
                         <outlet property="Scroller" destination="uCK-Vu-eef" id="Xwi-sm-4CQ"/>
                         <outlet property="background" destination="6q1-kF-Fw1" id="22f-2o-3A3"/>
                         <outlet property="gemCount" destination="2XY-Yd-p5X" id="VCu-16-1Lz"/>
+                        <outlet property="storeLabel" destination="89p-F5-Qdw" id="9tB-Ev-fZY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T6p-CT-KzR" userLabel="First Responder" sceneMemberID="firstResponder"/>
