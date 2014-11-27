@@ -95,7 +95,9 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 	UIButton *continueButton;
 	UIImageView *reviveAngel;
 	UILabel *gemCount;
-	UIImageView *gem;
+	UILabel *gemCost;
+	UIImageView *gemCostImage;
+	UIImageView *gemCountImage;
 	
 	// In game stuff
 	SKShapeNode* border;

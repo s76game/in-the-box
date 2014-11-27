@@ -437,29 +437,40 @@
 		reviveButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 		[reviveButton addTarget:self action:@selector(revive) forControlEvents:UIControlEventTouchUpInside];
 		[reviveButton setBackgroundImage:[UIImage imageNamed:@"revive.png"] forState:UIControlStateNormal];
-		reviveButton.frame = CGRectMake(screenWidth/2-100, screenHeight+375.0, 163.3, 45.0);
+		reviveButton.frame = CGRectMake(screenWidth/2-(163.3/2), screenHeight+375.0, 163.3, 45.0);
 		[self.view addSubview:reviveButton];
 		
 		continueButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 		[continueButton addTarget:self action:@selector(reviveContinue) forControlEvents:UIControlEventTouchUpInside];
 		[continueButton setBackgroundImage:[UIImage imageNamed:@"continue.png"] forState:UIControlStateNormal];
-		continueButton.frame = CGRectMake(screenWidth/2-100, screenHeight+475.0, 163.3, 45.0);
+		continueButton.frame = CGRectMake(screenWidth/2-(163.3/2), screenHeight+375+55, 163.3, 45.0);
 		[self.view addSubview:continueButton];
 		
 		reviveAngel = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth/2)-(250/2), screenHeight+150, 250, 175)];
 		reviveAngel.image = [UIImage imageNamed:@"angel.png"];
 		[self.view addSubview:reviveAngel];
 		
-		gemCount = [[UILabel alloc] initWithFrame:CGRectMake(reviveAngel.frame.origin.x+reviveAngel.frame.size.height/2-100/2, reviveAngel.frame.origin.y+reviveAngel.frame.size.height-75, 100, 75)];
+		gemCount = [[UILabel alloc] initWithFrame:CGRectMake(reviveAngel.frame.origin.x+reviveAngel.frame.size.height/2-100/2, reviveAngel.frame.origin.y-reviveAngel.frame.size.height+75, 100, 75)];
 		gemCount.text = [NSString stringWithFormat:@"%li", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]];
-		gemCount.textAlignment = NSTextAlignmentCenter;
+		gemCount.textAlignment = NSTextAlignmentRight;
 		[gemCount setFont:[UIFont fontWithName:@"DINbekBlack" size:40]];
 		gemCount.textColor = [UIColor blackColor];
 		[self.view addSubview:gemCount];
 		
-		gem = [[UIImageView alloc] initWithFrame:CGRectMake(gemCount.frame.origin.x+gemCount.frame.size.width-10, gemCount.frame.origin.y+15, 50, 43)];
-		gem.image = [UIImage imageNamed:@"gem.png"];
-		[self.view addSubview:gem];
+		gemCost = [[UILabel alloc] initWithFrame:CGRectMake(reviveAngel.frame.origin.x+reviveAngel.frame.size.height/2-100/2, reviveAngel.frame.origin.y+reviveAngel.frame.size.height-50, 100, 75)];
+		gemCost.text = [NSString stringWithFormat:@"%i", previousCost*2];
+		gemCost.textAlignment = NSTextAlignmentRight;
+		[gemCost setFont:[UIFont fontWithName:@"DINbekBlack" size:40]];
+		gemCost.textColor = [UIColor blackColor];
+		[self.view addSubview:gemCost];
+		
+		gemCountImage = [[UIImageView alloc] initWithFrame:CGRectMake(gemCount.frame.origin.x+gemCount.frame.size.width, gemCount.frame.origin.y+15, 50, 43)];
+		gemCountImage.image = [UIImage imageNamed:@"gem.png"];
+		[self.view addSubview:gemCountImage];
+		
+		gemCostImage = [[UIImageView alloc] initWithFrame:CGRectMake(gemCost.frame.origin.x+gemCost.frame.size.width, gemCost.frame.origin.y+15, 50, 43)];
+		gemCostImage.image = [UIImage imageNamed:@"gem.png"];
+		[self.view addSubview:gemCostImage];
 		
 		
 		[UIView animateWithDuration:1.0
@@ -470,7 +481,9 @@
 			 reviveButton.frame = CGRectMake(reviveButton.frame.origin.x, reviveButton.frame.origin.y-screenHeight, reviveButton.frame.size.width, reviveButton.frame.size.height);
 			 continueButton.frame = CGRectMake(continueButton.frame.origin.x, continueButton.frame.origin.y-screenHeight, continueButton.frame.size.width, continueButton.frame.size.height);
 			 reviveAngel.frame = CGRectMake(reviveAngel.frame.origin.x, reviveAngel.frame.origin.y-screenHeight, reviveAngel.frame.size.width, reviveAngel.frame.size.height);
-			 gem.frame = CGRectMake(gem.frame.origin.x, gem.frame.origin.y-screenHeight, gem.frame.size.width, gem.frame.size.height);
+			 gemCountImage.frame = CGRectMake(gemCountImage.frame.origin.x, gemCountImage.frame.origin.y-screenHeight, gemCountImage.frame.size.width, gemCountImage.frame.size.height);
+			 gemCostImage.frame = CGRectMake(gemCostImage.frame.origin.x, gemCostImage.frame.origin.y-screenHeight, gemCostImage.frame.size.width, gemCostImage.frame.size.height);
+			 gemCost.frame = CGRectMake(gemCost.frame.origin.x, gemCost.frame.origin.y-screenHeight, gemCost.frame.size.width, gemCost.frame.size.height);
 			 gemCount.frame = CGRectMake(gemCount.frame.origin.x, gemCount.frame.origin.y-screenHeight, gemCount.frame.size.width, gemCount.frame.size.height);
 		 }
 						 completion:^(BOOL finished)
@@ -500,9 +513,12 @@
 		 reviveButton.frame = CGRectMake(reviveButton.frame.origin.x, reviveButton.frame.origin.y-screenHeight, reviveButton.frame.size.width, reviveButton.frame.size.height);
 		 continueButton.frame = CGRectMake(continueButton.frame.origin.x, continueButton.frame.origin.y-screenHeight, continueButton.frame.size.width, continueButton.frame.size.height);
 		 reviveAngel.frame = CGRectMake(reviveAngel.frame.origin.x, reviveAngel.frame.origin.y-screenHeight, reviveAngel.frame.size.width, reviveAngel.frame.size.height);
-		 gem.frame = CGRectMake(gem.frame.origin.x, gem.frame.origin.y-screenHeight, gem.frame.size.width, gem.frame.size.height);
+		 gemCountImage.frame = CGRectMake(gemCountImage.frame.origin.x, gemCountImage.frame.origin.y-screenHeight, gemCountImage.frame.size.width, gemCountImage.frame.size.height);
+		 gemCostImage.frame = CGRectMake(gemCostImage.frame.origin.x, gemCostImage.frame.origin.y-screenHeight, gemCostImage.frame.size.width, gemCostImage.frame.size.height);
+		 gemCost.frame = CGRectMake(gemCost.frame.origin.x, gemCost.frame.origin.y-screenHeight, gemCost.frame.size.width, gemCost.frame.size.height);
 		 gemCount.frame = CGRectMake(gemCount.frame.origin.x, gemCount.frame.origin.y-screenHeight, gemCount.frame.size.width, gemCount.frame.size.height);
-		 ball.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+		 
+		 ball.position = CGPointMake(screenWidth/2, screenHeight/2);
 	 }
 					 completion:^(BOOL finished)
 	 {
@@ -535,7 +551,9 @@
 	[continueButton removeFromSuperview];
 	[reviveAngel removeFromSuperview];
 	[gemCount removeFromSuperview];
-	[gem removeFromSuperview];
+	[gemCostImage removeFromSuperview];
+	[gemCountImage removeFromSuperview];
+	[gemCost removeFromSuperview];
 	
 	[self initExplosion];
 	ball.hidden = YES;

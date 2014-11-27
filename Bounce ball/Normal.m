@@ -216,7 +216,7 @@
 	else {
 		[pause setBackgroundImage:[UIImage imageNamed:@"pause_button.png"] forState:UIControlStateNormal];
 	}
-	pause.frame = CGRectMake(screenWidth-50, 20, 50.0, 50.0);
+	pause.frame = CGRectMake(screenWidth-40, 10, 30.0, 30.0);
 	[self.view addSubview:pause];
 	
 	pause.hidden = YES;
@@ -462,8 +462,6 @@
 						 completion:^(BOOL finished)
 		 {
 		 }];
-		
-		[self performSelector:@selector(reviveContinue) withObject:self afterDelay:3];
 	}
 	else {
 		
@@ -793,7 +791,7 @@
 	pauseBackground.alpha = 0.75;
 	[self.view addSubview:pauseBackground];
 	
-	bigPauseImage = [[UIImageView alloc] initWithFrame:CGRectMake(75, 75, screenWidth-150, screenWidth-150)];
+	bigPauseImage = [[UIImageView alloc] initWithFrame:CGRectMake(75, 75, screenWidth-150, screenWidth-110)];
 	bigPauseImage.image = [UIImage imageNamed:@"pause_icon.png"];
 	[self.view addSubview:bigPauseImage];
 	
