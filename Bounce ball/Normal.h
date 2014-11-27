@@ -79,7 +79,9 @@ static const uint32_t gemCategory     =  0x1 << 5;
 	UIButton *continueButton;
 	UIImageView *reviveAngel;
 	UILabel *gemCount;
-	UIImageView *gem;
+	UILabel *gemCost;
+	UIImageView *gemCostImage;
+	UIImageView *gemCountImage;
 
 	// UI stuff
 	SKShapeNode* border;
