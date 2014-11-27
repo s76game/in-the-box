@@ -36,6 +36,10 @@ int gems;
 - (IBAction)Gem400Action:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *Gem500Outlet;
 - (IBAction)Gem500Action:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *Gem1250Outlet;
+- (IBAction)Gem1250Action:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *Gem2750Outlet;
+- (IBAction)Gem2750Action:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UIButton *ExitOutlet;
 - (IBAction)ExitAction:(id)sender;

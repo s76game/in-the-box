@@ -181,7 +181,7 @@
 	else {
 		[pause setBackgroundImage:[UIImage imageNamed:@"pause_button.png"] forState:UIControlStateNormal];
 	}
-	pause.frame = CGRectMake(screenWidth-50, 20, 50.0, 50.0);
+	pause.frame = CGRectMake(screenWidth-40, 10, 30.0, 30.0);
 	[self.view addSubview:pause];
 	
 	pause.hidden = YES;
@@ -437,27 +437,27 @@
 		reviveButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 		[reviveButton addTarget:self action:@selector(revive) forControlEvents:UIControlEventTouchUpInside];
 		[reviveButton setBackgroundImage:[UIImage imageNamed:@"revive.png"] forState:UIControlStateNormal];
-		reviveButton.frame = CGRectMake(screenWidth/2-100, screenHeight+375.0, 200.0, 75.0);
+		reviveButton.frame = CGRectMake(screenWidth/2-100, screenHeight+375.0, 163.3, 45.0);
 		[self.view addSubview:reviveButton];
 		
 		continueButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 		[continueButton addTarget:self action:@selector(reviveContinue) forControlEvents:UIControlEventTouchUpInside];
 		[continueButton setBackgroundImage:[UIImage imageNamed:@"continue.png"] forState:UIControlStateNormal];
-		continueButton.frame = CGRectMake(screenWidth/2-100, screenHeight+475.0, 200.0, 75.0);
+		continueButton.frame = CGRectMake(screenWidth/2-100, screenHeight+475.0, 163.3, 45.0);
 		[self.view addSubview:continueButton];
 		
-		reviveAngel = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth/2)-(250/2), screenHeight+150, 250, 200)];
+		reviveAngel = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth/2)-(250/2), screenHeight+150, 250, 175)];
 		reviveAngel.image = [UIImage imageNamed:@"angel.png"];
 		[self.view addSubview:reviveAngel];
 		
 		gemCount = [[UILabel alloc] initWithFrame:CGRectMake(reviveAngel.frame.origin.x+reviveAngel.frame.size.height/2-100/2, reviveAngel.frame.origin.y+reviveAngel.frame.size.height-75, 100, 75)];
 		gemCount.text = [NSString stringWithFormat:@"%li", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]];
 		gemCount.textAlignment = NSTextAlignmentCenter;
-		[gemCount setFont:[UIFont fontWithName:@"DINbekBlack" size:50]];
+		[gemCount setFont:[UIFont fontWithName:@"DINbekBlack" size:40]];
 		gemCount.textColor = [UIColor blackColor];
 		[self.view addSubview:gemCount];
 		
-		gem = [[UIImageView alloc] initWithFrame:CGRectMake(gemCount.frame.origin.x+gemCount.frame.size.width-10, gemCount.frame.origin.y+15, 50, 50)];
+		gem = [[UIImageView alloc] initWithFrame:CGRectMake(gemCount.frame.origin.x+gemCount.frame.size.width-10, gemCount.frame.origin.y+15, 50, 43)];
 		gem.image = [UIImage imageNamed:@"gem.png"];
 		[self.view addSubview:gem];
 		
@@ -477,7 +477,6 @@
 		 {
 		 }];
 		
-		[self performSelector:@selector(reviveContinue) withObject:self afterDelay:3];
 	}
 	else {
 		
@@ -789,7 +788,7 @@
 	pauseBackground.alpha = 0.75;
 	[self.view addSubview:pauseBackground];
 	
-	bigPauseImage = [[UIImageView alloc] initWithFrame:CGRectMake(75, 75, screenWidth-150, screenWidth-150)];
+	bigPauseImage = [[UIImageView alloc] initWithFrame:CGRectMake(75, 75, screenWidth-150, screenWidth-110)];
 	bigPauseImage.image = [UIImage imageNamed:@"pause_icon.png"];
 	[self.view addSubview:bigPauseImage];
 	

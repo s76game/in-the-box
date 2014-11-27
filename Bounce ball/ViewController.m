@@ -52,6 +52,7 @@
 
 - (void)viewDidLoad
 {
+	
 	[super viewDidLoad];
 	
 	_gameCenterEnabled = NO;
@@ -101,6 +102,9 @@
 	
 		[[NSUserDefaults standardUserDefaults] setFloat:0 forKey:@"highScoreTime"];
 		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"highScoreGoals"];
+		
+		
+		
 		
 	}
 }

@@ -32,6 +32,8 @@
 		[_Gem285Outlet setBackgroundImage:[UIImage imageNamed:@"night_store_285.png"] forState:UIControlStateNormal];
 		[_Gem400Outlet setBackgroundImage:[UIImage imageNamed:@"night_store_400.png"] forState:UIControlStateNormal];
 		[_Gem500Outlet setBackgroundImage:[UIImage imageNamed:@"night_store_500.png"] forState:UIControlStateNormal];
+		[_Gem1250Outlet setBackgroundImage:[UIImage imageNamed:@"night_store_1250.png"] forState:UIControlStateNormal];
+		[_Gem2750Outlet setBackgroundImage:[UIImage imageNamed:@"night_store_2750.png"] forState:UIControlStateNormal];
 		[_ExitOutlet setBackgroundImage:[UIImage imageNamed:@"night_store_exit.png"] forState:UIControlStateNormal];
 		[_background setImage:[UIImage imageNamed:@"night_background.png"]];
 		_gemCount.textColor = [UIColor whiteColor];
@@ -44,6 +46,8 @@
 		[_Gem285Outlet setBackgroundImage:[UIImage imageNamed:@"store_285.png"] forState:UIControlStateNormal];
 		[_Gem400Outlet setBackgroundImage:[UIImage imageNamed:@"store_400.png"] forState:UIControlStateNormal];
 		[_Gem500Outlet setBackgroundImage:[UIImage imageNamed:@"store_500.png"] forState:UIControlStateNormal];
+		[_Gem1250Outlet setBackgroundImage:[UIImage imageNamed:@"store_1250.png"] forState:UIControlStateNormal];
+		[_Gem2750Outlet setBackgroundImage:[UIImage imageNamed:@"store_2750.png"] forState:UIControlStateNormal];
 		[_ExitOutlet setBackgroundImage:[UIImage imageNamed:@"store_exit.png"] forState:UIControlStateNormal];
 		[_background setImage:[UIImage imageNamed:@"background.png"]];
 		_gemCount.textColor = [UIColor blackColor];
@@ -154,6 +158,12 @@
 }
 - (IBAction)Gem500Action:(id)sender {
 	[self requestProductData:@"gem_500"];
+}
+- (IBAction)Gem1250Action:(id)sender {
+	[self requestProductData:@"gem_1250"];
+}
+- (IBAction)Gem2750Action:(id)sender {
+	[self requestProductData:@"gem_2750"];
 }
 - (IBAction)ExitAction:(id)sender {
 	 [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
