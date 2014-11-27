@@ -158,7 +158,7 @@
 	ball.position = CGPointMake(CGRectGetMidX(self.frame),                              CGRectGetMidY(self.frame));
 	[self addChild:ball];
 	
-	[self spawnGem];
+	[self spawn];
 	
 	// Start random direction code
 	int smallest = 1;
@@ -373,6 +373,7 @@
 		// Ball hits line
 		[self playBounce];
 		scoreNumber = scoreNumber + 1;
+		[self spawn];
 	}
 	else if ((firstBody.categoryBitMask & edgeCategory) != 0)
 	{
@@ -384,7 +385,7 @@
 	else if ((firstBody.categoryBitMask & gemCategory) != 0) {
 		[self playGoal];
 		[gemSprite removeFromParent];
-		[self spawnGem];
+		[self spawn];
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+1 forKey:@"gems"];
 	}
 	else {
@@ -1040,6 +1041,16 @@
 	score.text = [NSString stringWithFormat:@"%01d:%02d", minutesTimer, secondsTimer];
 	}
 	
+}
+
+
+#pragma mark Spawning Methods
+
+-(void)spawn {
+	int i = arc4random() % 25;
+	if (i == 1) {
+		[self spawnGem];
+	}
 }
 
 -(void)spawnGem {

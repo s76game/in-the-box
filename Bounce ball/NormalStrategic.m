@@ -123,7 +123,7 @@
 	[self addChild:ball];
 	
 	[self spawnGoal];
-	[self spawnGem];
+	[self spawn];
 	
 	remove = [SKAction removeFromParent];
 	
@@ -391,6 +391,7 @@
 		[goal removeFromParent];
 		[detect removeFromParent];
 		[self spawnGoal];
+		[self spawn];
 		goalsHit = goalsHit + 1;
 		score.text = [NSString stringWithFormat:@"%i", goalsHit];
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"goalsHit"]+1 forKey:@"goalsHit"];
@@ -398,7 +399,7 @@
 	else if ((firstBody.categoryBitMask & gemCategory) != 0) {
 		[self playGoal];
 		[gemSprite removeFromParent];
-		[self spawnGem];
+		[self spawn];
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+1 forKey:@"gems"];
 	}
 	else {
@@ -1038,6 +1039,14 @@
 	}
 }
 
+#pragma mark Spawning Methods
+
+-(void)spawn {
+	int i = arc4random() % 25;
+	if (i == 1) {
+		[self spawnGem];
+	}
+}
 
 -(void)spawnGoal {
 	
