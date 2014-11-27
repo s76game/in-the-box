@@ -60,11 +60,11 @@
 	if (IPAD) {
 		scoreiPad = 100;
 		startiPad = 2;
-		speediPad = 115;
+		speediPad = 5;
 	} else {
 		scoreiPad = 50;
 		startiPad = 1;
-		speediPad = 15;
+		speediPad = 1;
 	}
 	
 	// Set starting goal size
@@ -73,7 +73,7 @@
 	gemSize = 25*startiPad;
 	
 	// Set up score
-	score = [[UILabel alloc] initWithFrame:CGRectMake(0, scoreiPad/2, screenWidth, 50)];
+	score = [[UILabel alloc] initWithFrame:CGRectMake(0, scoreiPad/2, screenWidth, 75)];
 	[self.view addSubview:score];
 	scoreNumber = 0;
 	score.text = @"Goals";
@@ -542,7 +542,7 @@
 -(void)restart {
 	triggered = 0;
 	pause.hidden = NO;
-	[ball.physicsBody applyImpulse:CGVectorMake(25, 25)];
+	[ball.physicsBody applyImpulse:CGVectorMake(25*speediPad, 25*speediPad)];
 	
 }
 
@@ -971,7 +971,7 @@
 	
 	gameStarted = YES;
 	
-	[ball.physicsBody applyImpulse:CGVectorMake(25, 25)];
+	[ball.physicsBody applyImpulse:CGVectorMake(25*speediPad, 25*speediPad)];
 	//Calls ball speed up method
 	speedUpTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(speedUp:) userInfo:nil repeats:YES];
 	// Start Timer

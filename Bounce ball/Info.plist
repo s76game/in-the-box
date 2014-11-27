@@ -22,6 +22,8 @@
 	<string>141027</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSMainNibFile~ipad</key>
+	<string>iPad</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Prototype.ttf</string>
@@ -33,7 +35,9 @@
 	<key>UILaunchStoryboardName</key>
 	<string> </string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<string>iPhone</string>
+	<key>UIMainStoryboardFile~ipad</key>
+	<string>iPad</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

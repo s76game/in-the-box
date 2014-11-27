@@ -10,6 +10,7 @@
 		9400629C1964AE0700B5D811 /* normalproceed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9400629B1964AE0700B5D811 /* normalproceed.png */; };
 		940339E1195F78B300FD9516 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 940339E0195F78B300FD9516 /* StoreKit.framework */; };
 		94033A14196205D200FD9516 /* NormalStrategic.m in Sources */ = {isa = PBXBuildFile; fileRef = 94033A13196205D200FD9516 /* NormalStrategic.m */; };
+		9410DA431A27E34D00E2AE3D /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9410DA421A27E34D00E2AE3D /* iPad.storyboard */; };
 		9422FD2619FDD5CF001FD0F6 /* boken.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9422FD2419FDD5CF001FD0F6 /* boken.sks */; };
 		9422FD2719FDD5CF001FD0F6 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 9422FD2519FDD5CF001FD0F6 /* bokeh.png */; };
 		945D89E119FC7A3500218159 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D89DF19FC7A3500218159 /* spark.png */; };
@@ -138,7 +139,7 @@
 		94C7FEAE194E3CDF00270AE8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C7FEAD194E3CDF00270AE8 /* AppDelegate.m */; };
 		94C7FEB1194E3CDF00270AE8 /* Bounce_ball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94C7FEAF194E3CDF00270AE8 /* Bounce_ball.xcdatamodeld */; };
 		94C7FEB4194E3CDF00270AE8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C7FEB3194E3CDF00270AE8 /* ViewController.m */; };
-		94C7FEB7194E3CDF00270AE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94C7FEB5194E3CDF00270AE8 /* Main.storyboard */; };
+		94C7FEB7194E3CDF00270AE8 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94C7FEB5194E3CDF00270AE8 /* iPhone.storyboard */; };
 		94C7FEC5194E3CDF00270AE8 /* Bounce_ballTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C7FEC4194E3CDF00270AE8 /* Bounce_ballTests.m */; };
 		94C7FECF194E3DE600270AE8 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C7FECE194E3DE600270AE8 /* SpriteKit.framework */; };
 		94C9B6BA1979AC9F00AE4BF2 /* nightquote1.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C9B6B61979AC9F00AE4BF2 /* nightquote1.png */; };
@@ -169,6 +170,7 @@
 		940339E0195F78B300FD9516 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		94033A12196205D200FD9516 /* NormalStrategic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalStrategic.h; sourceTree = "<group>"; };
 		94033A13196205D200FD9516 /* NormalStrategic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalStrategic.m; sourceTree = "<group>"; };
+		9410DA421A27E34D00E2AE3D /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		9422FD2419FDD5CF001FD0F6 /* boken.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = boken.sks; path = "Bounce Ball/boken.sks"; sourceTree = SOURCE_ROOT; };
 		9422FD2519FDD5CF001FD0F6 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bokeh.png; path = "Bounce Ball/bokeh.png"; sourceTree = SOURCE_ROOT; };
 		945D89DF19FC7A3500218159 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../spark.png; sourceTree = "<group>"; };
@@ -305,7 +307,7 @@
 		94C7FEB0194E3CDF00270AE8 /* Bounce_ball.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bounce_ball.xcdatamodel; sourceTree = "<group>"; };
 		94C7FEB2194E3CDF00270AE8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		94C7FEB3194E3CDF00270AE8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		94C7FEB6194E3CDF00270AE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		94C7FEB6194E3CDF00270AE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 		94C7FEBE194E3CDF00270AE8 /* Bounce ballTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bounce ballTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94C7FEC3194E3CDF00270AE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94C7FEC4194E3CDF00270AE8 /* Bounce_ballTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bounce_ballTests.m; sourceTree = "<group>"; };
@@ -624,7 +626,8 @@
 				94C7FEAD194E3CDF00270AE8 /* AppDelegate.m */,
 				94C7FEB2194E3CDF00270AE8 /* ViewController.h */,
 				94C7FEB3194E3CDF00270AE8 /* ViewController.m */,
-				94C7FEB5194E3CDF00270AE8 /* Main.storyboard */,
+				94C7FEB5194E3CDF00270AE8 /* iPhone.storyboard */,
+				9410DA421A27E34D00E2AE3D /* iPad.storyboard */,
 				94E19B94196C93C600893DEE /* Credits.h */,
 				94E19B95196C93C600893DEE /* Credits.m */,
 				946E19FA1A2418290069C44B /* Store.h */,
@@ -773,6 +776,7 @@
 				9482145A1A10466900B0FAAB /* DS1.ttf in Resources */,
 				946E19F31A2411780069C44B /* store_75.png in Resources */,
 				946E19D81A2411780069C44B /* continue.png in Resources */,
+				9410DA431A27E34D00E2AE3D /* iPad.storyboard in Resources */,
 				946E19E41A2411780069C44B /* night_store_285.png in Resources */,
 				9482145B1A10466900B0FAAB /* DS3.ttf in Resources */,
 				946E19D91A2411780069C44B /* gem.png in Resources */,
@@ -824,7 +828,7 @@
 				9422FD2619FDD5CF001FD0F6 /* boken.sks in Resources */,
 				946E19E61A2411780069C44B /* night_store_400.png in Resources */,
 				946E19F51A2411780069C44B /* store_icon.png in Resources */,
-				94C7FEB7194E3CDF00270AE8 /* Main.storyboard in Resources */,
+				94C7FEB7194E3CDF00270AE8 /* iPhone.storyboard in Resources */,
 				94911A4E1A19173200B0FCAD /* night_strategy.png in Resources */,
 				948214011A0FF55E00B0FAAB /* night_proceed.png in Resources */,
 				948214041A0FF55E00B0FAAB /* night_rate.png in Resources */,
@@ -953,12 +957,12 @@
 			name = DS1.ttf;
 			sourceTree = "<group>";
 		};
-		94C7FEB5194E3CDF00270AE8 /* Main.storyboard */ = {
+		94C7FEB5194E3CDF00270AE8 /* iPhone.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				94C7FEB6194E3CDF00270AE8 /* Base */,
 			);
-			name = Main.storyboard;
+			name = iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
