@@ -19,11 +19,9 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>141027</string>
+	<string>141129</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSMainNibFile~ipad</key>
-	<string>iPad</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Prototype.ttf</string>
