@@ -1058,7 +1058,7 @@
 -(void)spawnGem {
 	
 	gemSprite = [SKSpriteNode spriteNodeWithImageNamed:@"gem.png"];
-	gemSprite.size = CGSizeMake(gemSize, gemSize-4);
+	gemSprite.size = CGSizeMake(gemSize, gemSize-(4*startiPad));
 	gemSprite.position = [self chooseLocationGem];
 	[self addChild:gemSprite];
 	gemSpawned = YES;

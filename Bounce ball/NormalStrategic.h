@@ -35,6 +35,7 @@ int previousCost;
 
 int goalSize;
 int gemSize;
+BOOL gemSpawned;
 
 NSTimer *speedUpTimer;
 NSTimer *timer;
