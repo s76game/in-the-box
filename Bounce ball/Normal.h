@@ -35,6 +35,7 @@ int triggered;
 int previousCost;
 
 int gemSize;
+BOOL gemSpawned;
 
 int minutesTimer;
 int secondsTimer;

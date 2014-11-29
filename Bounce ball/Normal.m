@@ -100,7 +100,7 @@
 	if (IPAD) {
 		scoreiPad = 100;
 		startiPad = 2;
-		speediPad = 5;
+		speediPad = 8;
 	} else {
 		scoreiPad = 50;
 		startiPad = 1;
@@ -197,7 +197,6 @@
 		[pause setBackgroundImage:[UIImage imageNamed:@"pause_button.png"] forState:UIControlStateNormal];
 	}
 	pause.frame = CGRectMake(screenWidth-40, 20, 30.0, 30.0);
-	[self.view addSubview:pause];
 	
 	pause.hidden = YES;
 	
@@ -385,6 +384,7 @@
 	else if ((firstBody.categoryBitMask & gemCategory) != 0) {
 		[self playGoal];
 		[gemSprite removeFromParent];
+		gemSpawned = NO;
 		[self spawn];
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+1 forKey:@"gems"];
 	}
@@ -434,7 +434,7 @@
 		}
 		[self.view addSubview:reviveAngel];
 		
-		gemCount = [[UILabel alloc] initWithFrame:CGRectMake(reviveAngel.frame.origin.x+reviveAngel.frame.size.height/2-100/2, reviveAngel.frame.origin.y-reviveAngel.frame.size.height+75, 100, 75)];
+		gemCount = [[UILabel alloc] initWithFrame:CGRectMake(reviveAngel.frame.origin.x+reviveAngel.frame.size.height/2-100/2, reviveAngel.frame.origin.y-reviveAngel.frame.size.height+100, 100, 75)];
 		gemCount.text = [NSString stringWithFormat:@"%li", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]];
 		gemCount.textAlignment = NSTextAlignmentRight;
 		[gemCount setFont:[UIFont fontWithName:@"DINbekBlack" size:40]];
@@ -865,21 +865,18 @@
 	[pauseContinue addTarget:self action:@selector(removePauseMenuInterface) forControlEvents:UIControlEventTouchUpInside];
 	[pauseContinue setBackgroundImage:[UIImage imageNamed:@"pause_resume.png"] forState:UIControlStateNormal];
 	pauseContinue.frame = CGRectMake(120, pauseRestart.frame.origin.y, 75.0, 75.0);
-	pauseContinue.hidden = YES;
+	pauseContinue.alpha = .5;
 	pauseContinue.enabled = NO;
 	[self.view addSubview:pauseContinue];
 	
 	
-	[self performSelector:@selector(showResume) withObject:self afterDelay:2];
+	[self performSelector:@selector(showResume) withObject:self afterDelay:1];
 }
 
 -(void)showResume {
 	
-	pauseContinue.alpha = 0;
-	pauseContinue.hidden = NO;
-	
-	[UIView animateWithDuration:1.5
-						  delay:1.0
+	[UIView animateWithDuration:0.75
+						  delay:0.5
 						options: UIViewAnimationOptionCurveEaseOut
 					 animations:^
 	 {
@@ -1053,7 +1050,7 @@
 
 -(void)spawn {
 	int i = arc4random() % 25;
-	if (i == 1) {
+	if (i == 1 && !gemSpawned) {
 		[self spawnGem];
 	}
 }
@@ -1061,9 +1058,10 @@
 -(void)spawnGem {
 	
 	gemSprite = [SKSpriteNode spriteNodeWithImageNamed:@"gem.png"];
-	gemSprite.size = CGSizeMake(gemSize, gemSize);
+	gemSprite.size = CGSizeMake(gemSize, gemSize-4);
 	gemSprite.position = [self chooseLocationGem];
 	[self addChild:gemSprite];
+	gemSpawned = YES;
 	
 	float gemSizes = (float)gemSize / 2.0;
 	

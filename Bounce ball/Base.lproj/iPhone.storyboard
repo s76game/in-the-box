@@ -92,7 +92,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0g-qy-anA">
                                                 <rect key="frame" x="20" y="8" width="305" height="46"/>
                                                 <state key="normal" backgroundImage="store_15.png">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="Gem15Action:" destination="2NZ-AU-wDY" eventType="touchUpInside" id="ocv-dQ-Ueb"/>

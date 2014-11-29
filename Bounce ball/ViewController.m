@@ -62,6 +62,17 @@
 	[self authenticateLocalPlayer];
 	[self retrieveAchievmentMetadata];
 	
+#pragma mark iPhone 4s Check
+	
+	if ([[ UIScreen mainScreen ]bounds].size.height < 568) {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"iPhone 4s"
+														message:@"This game is not recommended for the iPhone 4s. Use at your own risk!"
+													   delegate:self
+											  cancelButtonTitle:@"Ok"
+											  otherButtonTitles:nil];
+		[alert show];
+	}
+
 	
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 
@@ -93,13 +104,15 @@
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]]) {
 		NSLog(@"Update launch %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]);
 		
-		NSString *updateText = [NSString stringWithFormat:@"Update Text"];
+		NSString *updateText = [NSString stringWithFormat:@"Redesigned \n Intuitive Interface Gems for Revival \n Gem Store \n Pause Feature \n Bug Fixes"];
 		
 		UIAlertView *update = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Update %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] message:[NSString stringWithFormat:@"%@", updateText] delegate:self cancelButtonTitle:@"Ok!" otherButtonTitles:nil];
 		[update show];
 		
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]];
 	
+		
+		//Update dependant code
 		[[NSUserDefaults standardUserDefaults] setFloat:0 forKey:@"highScoreTime"];
 		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"highScoreGoals"];
 		
@@ -118,6 +131,15 @@
 
 
 -(void)viewWillAppear:(BOOL)animated {
+	
+#pragma mark Jailbreak Check
+	NSString *filePath = @"/Applications/Cydia.app";
+	if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+	{
+		NSLog(@"Jailbroken");
+		NSURL* url = [NSURL URLWithString:@"cydia://package/com.example.package"];
+		[[UIApplication sharedApplication] canOpenURL:url];
+	}
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		// Night UI code

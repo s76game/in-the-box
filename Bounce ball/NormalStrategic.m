@@ -60,7 +60,7 @@
 	if (IPAD) {
 		scoreiPad = 100;
 		startiPad = 2;
-		speediPad = 5;
+		speediPad = 10;
 	} else {
 		scoreiPad = 50;
 		startiPad = 1;
