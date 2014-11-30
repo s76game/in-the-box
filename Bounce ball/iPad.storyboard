@@ -570,10 +570,10 @@
                                 </connections>
                             </button>
                             <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="ex4-yH-36a">
-                                <rect key="frame" x="140" y="550" width="320" height="50"/>
+                                <rect key="frame" x="60" y="568" width="480" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="9XZ-uA-tNh"/>
-                                    <constraint firstAttribute="height" constant="50" id="dde-jy-nX8"/>
+                                    <constraint firstAttribute="width" constant="480" id="9XZ-uA-tNh"/>
+                                    <constraint firstAttribute="height" constant="32" id="dde-jy-nX8"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="gwX-Fy-fTi" id="nkR-pD-f9T"/>
@@ -600,7 +600,7 @@
                             <constraint firstAttribute="trailing" secondItem="HxP-g4-uju" secondAttribute="trailing" constant="107" id="Zx3-p2-4DK">
                                 <variation key="heightClass=regular-widthClass=regular" constant="39"/>
                             </constraint>
-                            <constraint firstItem="ex4-yH-36a" firstAttribute="top" secondItem="GeY-Yb-7zh" secondAttribute="bottom" constant="8" id="bec-3y-4x5"/>
+                            <constraint firstItem="ex4-yH-36a" firstAttribute="top" secondItem="GeY-Yb-7zh" secondAttribute="bottom" constant="26" id="bec-3y-4x5"/>
                             <constraint firstItem="Rdf-Vb-Wzo" firstAttribute="centerY" secondItem="ytw-S5-Th7" secondAttribute="centerY" id="eEW-Yn-yn9"/>
                             <constraint firstItem="GeY-Yb-7zh" firstAttribute="leading" secondItem="odT-52-KZY" secondAttribute="trailing" constant="8" id="fS3-6G-Xa2"/>
                             <constraint firstItem="ytw-S5-Th7" firstAttribute="leading" secondItem="Rdf-Vb-Wzo" secondAttribute="trailing" constant="8" id="iUY-Sx-V4b"/>
@@ -882,7 +882,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Om4-nJ-LXy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1715" y="1011"/>
+            <point key="canvasLocation" x="1689" y="1017"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lnq-8K-EYq">

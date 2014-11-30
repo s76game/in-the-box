@@ -205,7 +205,7 @@
 
 -(void)tapToStart {
 	if (!gameStarted && !self.scene.view.paused) {
-		tapToStart = [[UILabel alloc] initWithFrame:CGRectMake(screenWidth/2-100, 75, 200, 75)];
+		tapToStart = [[UILabel alloc] initWithFrame:CGRectMake(screenWidth/2-100, 75*startiPad, 200, 75)];
 		tapToStart.text = [NSString stringWithFormat:@"Tap to start"];
 		tapToStart.textAlignment = NSTextAlignmentCenter;
 		[tapToStart setFont:[UIFont fontWithName:@"DS-Digital-BoldItalic" size:25]];
@@ -849,25 +849,25 @@
 	bigPauseImage.image = [UIImage imageNamed:@"pause_icon.png"];
 	[self.view addSubview:bigPauseImage];
 	
+	pauseContinue = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[pauseContinue addTarget:self action:@selector(removePauseMenuInterface) forControlEvents:UIControlEventTouchUpInside];
+	[pauseContinue setBackgroundImage:[UIImage imageNamed:@"pause_resume.png"] forState:UIControlStateNormal];
+	pauseContinue.frame = CGRectMake(bigPauseImage.frame.origin.x+(bigPauseImage.frame.size.width/2)-((75*startiPad)/2), bigPauseImage.frame.origin.y+bigPauseImage.frame.size.height+(40*startiPad), 75.0*startiPad, 75.0*startiPad);
+	pauseContinue.alpha = .5;
+	pauseContinue.enabled = NO;
+	[self.view addSubview:pauseContinue];
+	
 	pauseRestart = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[pauseRestart addTarget:self action:@selector(pauseRestart) forControlEvents:UIControlEventTouchUpInside];
 	[pauseRestart setBackgroundImage:[UIImage imageNamed:@"pause_restart.png"] forState:UIControlStateNormal];
-	pauseRestart.frame = CGRectMake(30.0, screenHeight-275.0, 75.0, 75.0);
+	pauseRestart.frame = CGRectMake(pauseContinue.frame.origin.x-(15*startiPad)-(75*startiPad), pauseContinue.frame.origin.y, 75.0*startiPad, 75.0*startiPad);
 	[self.view addSubview:pauseRestart];
 	
 	pauseExit = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[pauseExit addTarget:self action:@selector(menuButton:) forControlEvents:UIControlEventTouchUpInside];
 	[pauseExit setBackgroundImage:[UIImage imageNamed:@"pause_exit.png"] forState:UIControlStateNormal];
-	pauseExit.frame = CGRectMake(210, pauseRestart.frame.origin.y, 75.0, 75.0);
+	pauseExit.frame = CGRectMake(pauseContinue.frame.origin.x+(15*startiPad)+(75*startiPad), pauseContinue.frame.origin.y, 75.0*startiPad, 75.0*startiPad);
 	[self.view addSubview:pauseExit];
-	
-	pauseContinue = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[pauseContinue addTarget:self action:@selector(removePauseMenuInterface) forControlEvents:UIControlEventTouchUpInside];
-	[pauseContinue setBackgroundImage:[UIImage imageNamed:@"pause_resume.png"] forState:UIControlStateNormal];
-	pauseContinue.frame = CGRectMake(120, pauseRestart.frame.origin.y, 75.0, 75.0);
-	pauseContinue.alpha = .5;
-	pauseContinue.enabled = NO;
-	[self.view addSubview:pauseContinue];
 	
 	
 	[self performSelector:@selector(showResume) withObject:self afterDelay:1];
@@ -1033,7 +1033,7 @@
 
 -(void)timer:(NSTimer *)timer {
 	
-	if (!gameOver) {
+	if (!gameOver && !self.view.scene.paused) {
 
 	minutesTimer = gameTime/60;
 	secondsTimer = gameTime-(minutesTimer * 60);

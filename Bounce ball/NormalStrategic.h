@@ -33,6 +33,8 @@ int timesRevived;
 int triggered;
 int previousCost;
 
+BOOL gameEnded;
+
 int goalSize;
 int gemSize;
 BOOL gemSpawned;

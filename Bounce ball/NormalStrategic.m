@@ -171,7 +171,7 @@
 
 -(void)tapToStart {
 	if (!gameStarted && !self.scene.view.paused) {
-		tapToStart = [[UILabel alloc] initWithFrame:CGRectMake(screenWidth/2-100, 75, 200, 75)];
+		tapToStart = [[UILabel alloc] initWithFrame:CGRectMake(screenWidth/2-100, 75*startiPad, 200, 75)];
 		tapToStart.text = [NSString stringWithFormat:@"Tap to start"];
 		tapToStart.textAlignment = NSTextAlignmentCenter;
 		[tapToStart setFont:[UIFont fontWithName:@"DS-Digital-BoldItalic" size:25]];
@@ -557,40 +557,42 @@
 
 -(void)endGame {
 	
-	[reviveButton removeFromSuperview];
-	[continueButton removeFromSuperview];
-	[reviveAngel removeFromSuperview];
-	[gemCount removeFromSuperview];
-	[gemCostImage removeFromSuperview];
-	[gemCountImage removeFromSuperview];
-	[gemCost removeFromSuperview];
+	if (!gameEnded) {
+		gameEnded = YES;
+		[reviveButton removeFromSuperview];
+		[continueButton removeFromSuperview];
+		[reviveAngel removeFromSuperview];
+		[gemCount removeFromSuperview];
+		[gemCostImage removeFromSuperview];
+		[gemCountImage removeFromSuperview];
+		[gemCost removeFromSuperview];
 	
-	[self initExplosion];
-	ball.hidden = YES;
+		[self initExplosion];
+		ball.hidden = YES;
 	
-	[self touchesEnded:nil withEvent:nil];
+		[self touchesEnded:nil withEvent:nil];
 	
-	[line removeFromParent];
-	[lines removeFromParent];
+		[line removeFromParent];
+		[lines removeFromParent];
+		
+		pos1x = nil;
+		pos2x = nil;
+		pos1y = nil;
+		pos2y = nil;
 	
-	pos1x = nil;
-	pos2x = nil;
-	pos1y = nil;
-	pos2y = nil;
+		// Runs game center code block
+		[self gameCenter];
 	
-	// Runs game center code block
-	[self gameCenter];
-	
-	[self gameOverAnimation];
-	pause.hidden = YES;
-	
+		[self gameOverAnimation];
+		pause.hidden = YES;
+	}
 }
+
+#pragma mark Create Post Game UI
 
 -(void)gameOverAnimation {
 	
 	int highScore;
-	
-#pragma mark Create Post Game UI
 	
 	[self playExplosion];
 	
@@ -603,7 +605,7 @@
 	bigImage.image = [UIImage imageNamed:@"goalscore.png"];
 	[self.view addSubview:bigImage];
 	
-	bestScore = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight+bigImage.frame.size.height+5, 135, 75)];
+	bestScore = [[UILabel alloc] initWithFrame:CGRectMake(bigImage.frame.origin.x+bigImage.frame.size.width/2-135*startiPad, screenHeight+bigImage.frame.size.height+5, 135*startiPad, 75*startiPad)];
 	bestScore.text = @"BEST:";
 	bestScore.textAlignment = NSTextAlignmentRight;
 	[bestScore setFont:[UIFont fontWithName:@"DS-Digital-BoldItalic" size:40]];
@@ -614,7 +616,7 @@
 	
 	currentScoreNumber = [[UILabel alloc] initWithFrame:CGRectMake(bigImage.frame.origin.x+bigImage.frame.size.height/2-75/2, bigImage.frame.origin.y+bigImage.frame.size.width/2-100/2, 100, 75)];
 	currentScoreNumber.text = [NSString stringWithFormat:@"%@", score.text];
-	currentScoreNumber.textAlignment = NSTextAlignmentCenter;
+	currentScoreNumber.textAlignment = NSTextAlignmentLeft;
 	[currentScoreNumber setFont:[UIFont fontWithName:@"DS-Digital-BoldItalic" size:100]];
 	currentScoreNumber.textColor = [UIColor greenColor];
 	[self.view addSubview:currentScoreNumber];
@@ -636,7 +638,7 @@
 	replay = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[replay addTarget:self action:@selector(restartButton:) forControlEvents:UIControlEventTouchUpInside];
 	[replay setBackgroundImage:[UIImage imageNamed:@"post_replay.png"] forState:UIControlStateNormal];
-	replay.frame = CGRectMake(30.0, screenHeight+375.0, 75.0, 75.0);
+	replay.frame = CGRectMake(30.0, bestScore.frame.origin.y+bestScore.frame.size.height, 75.0, 75.0);
 	[self.view addSubview:replay];
 	
 	menu = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -669,6 +671,8 @@
 	
 	if (IPAD) {
 		[self adjustInterface];
+		share.enabled = NO;
+		share.alpha = 0.5;
 	}
 	
 	// Begin Animation
@@ -699,16 +703,18 @@
 
 -(void)adjustInterface {
 	
-	bestScore.frame = CGRectMake(20, screenHeight+450, 270, 150);
-	[bestScore setFont:[UIFont fontWithName:@"Prototype" size:80]];
-	currentScoreNumber.frame = CGRectMake(bestScore.frame.origin.x+bestScore.frame.size.width+20, bestScore.frame.origin.y, 200, 150);
-	[currentScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:80]];
-	bestScoreNumber.frame = CGRectMake(bestScore.frame.origin.x+bestScore.frame.size.width+20, bestScore.frame.origin.y, 200, 150);
-	[bestScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:80]];
-	replay.frame = CGRectMake((screenWidth/2)-160, screenHeight+650, 320, 100);
-	menu.frame = CGRectMake((screenWidth/2)-160, replay.frame.origin.y+replay.frame.size.height+30, 320, 100);
-	gameCenter.frame = CGRectMake(menu.frame.origin.x+120, menu.frame.origin.y+menu.frame.size.height+30, 100, 100);
+	// iPad Screen Adjustments
 	
+	[bestScore setFont:[UIFont fontWithName:@"Prototype" size:80]];
+	[currentScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:200]];
+	[currentScoreNumber setFrame:CGRectMake(bigImage.frame.origin.x+bigImage.frame.size.height/2-150/2, bigImage.frame.origin.y+bigImage.frame.size.width/2-200/2, 200, 150)];
+	[bestScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:80]];
+	[bestScoreNumber setFrame:CGRectMake(bestScore.frame.origin.x+bestScore.frame.size.width+10, bestScore.frame.origin.y+35, 100, 75)];
+	[replay setFrame:CGRectMake(menu.frame.origin.x-75-15, replay.frame.origin.y-5, replay.frame.size.width, replay.frame.size.height)];
+	[menu setFrame:CGRectMake(menu.frame.origin.x, menu.frame.origin.y-5, menu.frame.size.width, menu.frame.size.height)];
+	[share setFrame:CGRectMake(menu.frame.origin.x+45, share.frame.origin.y-5, share.frame.size.width, share.frame.size.height)];
+	[rate setFrame:CGRectMake(menu.frame.origin.x+75+15, rate.frame.origin.y-5, rate.frame.size.width, rate.frame.size.height)];
+	[gameCenter setFrame:CGRectMake(menu.frame.origin.x-45, gameCenter.frame.origin.y-5, gameCenter.frame.size.width, gameCenter.frame.size.height)];
 }
 
 -(void)countAnimation {
@@ -781,6 +787,8 @@
 
 -(void)restartButton:(UIButton *)button {
 	
+	gameEnded = NO;
+	
 	triggered = 0;
 	
 	gameOver = NO;
@@ -838,25 +846,25 @@
 	bigPauseImage.image = [UIImage imageNamed:@"pause_icon.png"];
 	[self.view addSubview:bigPauseImage];
 	
+	pauseContinue = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[pauseContinue addTarget:self action:@selector(removePauseMenuInterface) forControlEvents:UIControlEventTouchUpInside];
+	[pauseContinue setBackgroundImage:[UIImage imageNamed:@"pause_resume.png"] forState:UIControlStateNormal];
+	pauseContinue.frame = CGRectMake(bigPauseImage.frame.origin.x+(bigPauseImage.frame.size.width/2)-((75*startiPad)/2), bigPauseImage.frame.origin.y+bigPauseImage.frame.size.height+(40*startiPad), 75.0*startiPad, 75.0*startiPad);
+	pauseContinue.alpha = 0.5;
+	pauseContinue.enabled = NO;
+	[self.view addSubview:pauseContinue];
+	
 	pauseRestart = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[pauseRestart addTarget:self action:@selector(pauseRestart) forControlEvents:UIControlEventTouchUpInside];
 	[pauseRestart setBackgroundImage:[UIImage imageNamed:@"pause_restart.png"] forState:UIControlStateNormal];
-	pauseRestart.frame = CGRectMake(30.0, screenHeight-275.0, 75.0, 75.0);
+	pauseRestart.frame = CGRectMake(pauseContinue.frame.origin.x-(15*startiPad)-(75*startiPad), pauseContinue.frame.origin.y, 75.0*startiPad, 75.0*startiPad);
 	[self.view addSubview:pauseRestart];
 	
 	pauseExit = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[pauseExit addTarget:self action:@selector(menuButton:) forControlEvents:UIControlEventTouchUpInside];
 	[pauseExit setBackgroundImage:[UIImage imageNamed:@"pause_exit.png"] forState:UIControlStateNormal];
-	pauseExit.frame = CGRectMake(210, pauseRestart.frame.origin.y, 75.0, 75.0);
+	pauseExit.frame = CGRectMake(pauseContinue.frame.origin.x+(15*startiPad)+(75*startiPad), pauseContinue.frame.origin.y, 75.0*startiPad, 75.0*startiPad);
 	[self.view addSubview:pauseExit];
-	
-	pauseContinue = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[pauseContinue addTarget:self action:@selector(removePauseMenuInterface) forControlEvents:UIControlEventTouchUpInside];
-	[pauseContinue setBackgroundImage:[UIImage imageNamed:@"pause_resume.png"] forState:UIControlStateNormal];
-	pauseContinue.frame = CGRectMake(120, pauseRestart.frame.origin.y, 75.0, 75.0);
-	pauseContinue.alpha = 0.5;
-	pauseContinue.enabled = NO;
-	[self.view addSubview:pauseContinue];
 	
 	
 	[self performSelector:@selector(showResume) withObject:self afterDelay:1];
