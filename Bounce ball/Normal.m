@@ -543,42 +543,43 @@
 
 
 -(void)endGame {
+	if (!gameEnded) {
+		gameEnded = YES;
+		[reviveButton removeFromSuperview];
+		[continueButton removeFromSuperview];
+		[reviveAngel removeFromSuperview];
+		[gemCount removeFromSuperview];
+		[gemCostImage removeFromSuperview];
+		[gemCountImage removeFromSuperview];
+		[gemCost removeFromSuperview];
 	
-	[reviveButton removeFromSuperview];
-	[continueButton removeFromSuperview];
-	[reviveAngel removeFromSuperview];
-	[gemCount removeFromSuperview];
-	[gemCostImage removeFromSuperview];
-	[gemCountImage removeFromSuperview];
-	[gemCost removeFromSuperview];
+		[self initExplosion];
+		ball.hidden = YES;
 	
-	[self initExplosion];
-	ball.hidden = YES;
+		[self touchesEnded:nil withEvent:nil];
 	
-	[self touchesEnded:nil withEvent:nil];
+		[line removeFromParent];
+		[lines removeFromParent];
 	
-	[line removeFromParent];
-	[lines removeFromParent];
+		pos1x = nil;
+		pos2x = nil;
+		pos1y = nil;
+		pos2y = nil;
 	
-	pos1x = nil;
-	pos2x = nil;
-	pos1y = nil;
-	pos2y = nil;
+		// Runs game center code block
+		[self gameCenter];
 	
-	// Runs game center code block
-	[self gameCenter];
-	
-	[self gameOverAnimation];
-	pause.hidden = YES;
-	
+		[self gameOverAnimation];
+		pause.hidden = YES;
+	}
 }
 
+
+#pragma mark Create Post Game UI
 
 -(void)gameOverAnimation {
 	
 	float highScore;
-	
-#pragma mark Create Post Game UI
 	
 	[self playExplosion];
 
@@ -669,6 +670,8 @@
 	
 	if (IPAD) {
 		[self adjustInterface];
+		share.enabled = NO;
+		share.alpha = 0.5;
 	}
 	
 	// Begin Animation
@@ -699,20 +702,18 @@
 
 -(void)adjustInterface {
 	
-	bestScore.frame = CGRectMake(20, screenHeight+450, 270, 150);
+	//iPad Screen Adjustments
+	
 	[bestScore setFont:[UIFont fontWithName:@"Prototype" size:80]];
-	[currentScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:80]];
+	[currentScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:200]];
+	[currentScoreNumber setFrame:CGRectMake(bigImage.frame.origin.x+bigImage.frame.size.height/2-150/2, bigImage.frame.origin.y+bigImage.frame.size.width/2-200/2, 200, 150)];
 	[bestScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:80]];
-	postBackground.frame = CGRectMake(0, 0, screenWidth, screenHeight);
-	replay.frame = CGRectMake(replay.frame.origin.x, replay.frame.origin.y, replay.frame.size.width, replay.frame.size.height);
-	menu.frame = CGRectMake(menu.frame.origin.x, menu.frame.origin.y, menu.frame.size.width, menu.frame.size.height);
-	bestScore.frame = CGRectMake(bestScore.frame.origin.x, bestScore.frame.origin.y, bestScore.frame.size.width, bestScore.frame.size.height);
-	bestScoreNumber.frame = CGRectMake(bestScoreNumber.frame.origin.x, bestScoreNumber.frame.origin.y, bestScoreNumber.frame.size.width, bestScoreNumber.frame.size.height);
-	currentScoreNumber.frame = CGRectMake(currentScoreNumber.frame.origin.x, currentScoreNumber.frame.origin.y, currentScoreNumber.frame.size.width, currentScoreNumber.frame.size.height);
-	rate.frame = CGRectMake(rate.frame.origin.x, rate.frame.origin.y, rate.frame.size.width, rate.frame.size.height);
-	share.frame = CGRectMake(share.frame.origin.x, share.frame.origin.y, share.frame.size.width, share.frame.size.height);
-	bigImage.frame = CGRectMake(bigImage.frame.origin.x, bigImage.frame.origin.y, bigImage.frame.size.width, bigImage.frame.size.height);
-	gameCenter.frame = CGRectMake(gameCenter.frame.origin.x, gameCenter.frame.origin.y, gameCenter.frame.size.width, gameCenter.frame.size.height);
+	[bestScoreNumber setFrame:CGRectMake(bestScore.frame.origin.x+bestScore.frame.size.width+10, bestScore.frame.origin.y+35, 100, 75)];
+	[replay setFrame:CGRectMake(menu.frame.origin.x-75-15, replay.frame.origin.y-5, replay.frame.size.width, replay.frame.size.height)];
+	[menu setFrame:CGRectMake(menu.frame.origin.x, menu.frame.origin.y-5, menu.frame.size.width, menu.frame.size.height)];
+	[share setFrame:CGRectMake(menu.frame.origin.x+45, share.frame.origin.y-5, share.frame.size.width, share.frame.size.height)];
+	[rate setFrame:CGRectMake(menu.frame.origin.x+75+15, rate.frame.origin.y-5, rate.frame.size.width, rate.frame.size.height)];
+	[gameCenter setFrame:CGRectMake(menu.frame.origin.x-45, gameCenter.frame.origin.y-5, gameCenter.frame.size.width, gameCenter.frame.size.height)];
 	
 }
 
@@ -792,6 +793,8 @@
 
 
 -(void)restartButton:(UIButton *)button {
+	
+	gameEnded = NO;
 	
 	triggered = 0;
 	

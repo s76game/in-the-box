@@ -37,6 +37,8 @@ int previousCost;
 int gemSize;
 BOOL gemSpawned;
 
+BOOL gameEnded;
+
 int minutesTimer;
 int secondsTimer;
 
