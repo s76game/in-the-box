@@ -705,15 +705,19 @@
 	//iPad Screen Adjustments
 	
 	[bestScore setFont:[UIFont fontWithName:@"Prototype" size:80]];
-	[currentScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:200]];
-	[currentScoreNumber setFrame:CGRectMake(bigImage.frame.origin.x+bigImage.frame.size.height/2-150/2, bigImage.frame.origin.y+bigImage.frame.size.width/2-200/2, 200, 150)];
+	[currentScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:80]];
+	
+	[currentScoreNumber setFrame:CGRectMake(bigImage.frame.origin.x+bigImage.frame.size.height/2-150/2, bigImage.frame.origin.y+bigImage.frame.size.width/2-200/2+175, 200, 150)];
+	
 	[bestScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:80]];
-	[bestScoreNumber setFrame:CGRectMake(bestScore.frame.origin.x+bestScore.frame.size.width+10, bestScore.frame.origin.y+35, 100, 75)];
-	[replay setFrame:CGRectMake(menu.frame.origin.x-75-15, replay.frame.origin.y-5, replay.frame.size.width, replay.frame.size.height)];
-	[menu setFrame:CGRectMake(menu.frame.origin.x, menu.frame.origin.y-5, menu.frame.size.width, menu.frame.size.height)];
-	[share setFrame:CGRectMake(menu.frame.origin.x+45, share.frame.origin.y-5, share.frame.size.width, share.frame.size.height)];
-	[rate setFrame:CGRectMake(menu.frame.origin.x+75+15, rate.frame.origin.y-5, rate.frame.size.width, rate.frame.size.height)];
-	[gameCenter setFrame:CGRectMake(menu.frame.origin.x-45, gameCenter.frame.origin.y-5, gameCenter.frame.size.width, gameCenter.frame.size.height)];
+	[bestScore setFrame:CGRectMake(screenWidth/2-100*(startiPad*2), bigImage.frame.origin.y+bigImage.frame.size.height+5, 100*(startiPad*2), 75)];
+	[bestScoreNumber setFrame:CGRectMake(bestScore.frame.origin.x+bestScore.frame.size.width+10, bestScore.frame.origin.y, 100*startiPad, 75)];
+	[menu setFrame:CGRectMake(menu.frame.origin.x, bestScore.frame.origin.y+bestScore.frame.size.height+10, menu.frame.size.width, menu.frame.size.height)];
+	[replay setFrame:CGRectMake(menu.frame.origin.x-75-15, menu.frame.origin.y, replay.frame.size.width, replay.frame.size.height)];
+	[rate setFrame:CGRectMake(menu.frame.origin.x+75+15, menu.frame.origin.y, rate.frame.size.width, rate.frame.size.height)];
+	//Start Second Row
+	[share setFrame:CGRectMake(menu.frame.origin.x+45, menu.frame.origin.y+menu.frame.size.height, share.frame.size.width, share.frame.size.height)];
+	[gameCenter setFrame:CGRectMake(menu.frame.origin.x-45, menu.frame.origin.y+menu.frame.size.height, gameCenter.frame.size.width, gameCenter.frame.size.height)];
 	
 }
 
