@@ -61,21 +61,21 @@
 	
 	[self authenticateLocalPlayer];
 	[self retrieveAchievmentMetadata];
-	
-#pragma mark iPhone 4s Check
-	
-	if ([[ UIScreen mainScreen ]bounds].size.height < 568) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"iPhone 4s"
-														message:@"This game is not recommended for the iPhone 4s. Use at your own risk!"
-													   delegate:self
-											  cancelButtonTitle:@"Ok"
-											  otherButtonTitles:nil];
-		[alert show];
-	}
 
 	
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 
+#pragma mark Check Reward Code
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"reward"]) {
+		UIAlertView *reward = [[UIAlertView alloc] initWithTitle:@"5 Gems"
+														message:@"Thanks for giving us a rating! Here is your reward!"
+													   delegate:self
+											  cancelButtonTitle:@"Ok"
+											  otherButtonTitles:nil];
+		[reward show];
+		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+5 forKey:@"gems"];
+	}
 
 	
 #pragma mark First Launch Code
@@ -95,7 +95,7 @@
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		
 		// Show tutorial code goes here
-			// No Tutorial Yet
+			// No Tutorial Yet :-( (maybe ever)
 		
 	}
 	else {
@@ -115,7 +115,7 @@
 		//Update dependant code
 		[[NSUserDefaults standardUserDefaults] setFloat:0 forKey:@"highScoreTime"];
 		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"highScoreGoals"];
-		
+		[[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"gems"];
 		
 		
 		
@@ -136,7 +136,7 @@
 	NSString *filePath = @"/Applications/Cydia.app";
 	if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
 	{
-		NSLog(@"Jailbroken");
+		NSLog(@"Jailbroken!!!!");
 		NSURL* url = [NSURL URLWithString:@"cydia://package/com.example.package"];
 		[[UIApplication sharedApplication] canOpenURL:url];
 	}
@@ -207,7 +207,7 @@
 		if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@CHECK",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
 			// Show UIALert View
 			
-			alert=[[UIAlertView alloc]initWithTitle:@"Rate my app" message:@"If you enjoy using Inside the Box would you mind taking a moment to rate it? It won't take more than a minute. Thanks for the support!"
+			alert=[[UIAlertView alloc]initWithTitle:@"Rate my app" message:@"Want 5 Gems? Who doesn't? Go ahead and give us a rating on the App Store and collect your reward!"
 														delegate:self cancelButtonTitle:@"Remind me later" otherButtonTitles:@"Rate it now", @"Give feedback", @"No, thanks", nil];
 			alert.tag=101;
 			[alert show];
@@ -215,6 +215,31 @@
 	}
 	
 	
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (alert.tag==101) {
+		if (buttonIndex == 0) {
+			NSLog(@"Remind me later");
+			[[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+		}
+		else if (buttonIndex == 1){
+			NSLog(@"Rate it now");
+			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"reward"];
+			// Open app App Store URL
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://appsto.re/us/i1fu1.i"]];
+		}
+		else if (buttonIndex == 2) {
+			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+			NSLog(@"Feedback");
+			[self mail];
+		}
+		else {
+			NSLog(@"No, thanks");
+			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+		}
+	}
 }
 
 
@@ -287,30 +312,6 @@
 	}
 	else {
 		NSLog(@"***Toggle Sound***");
-	}
-}
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if (alert.tag==101) {
-		if (buttonIndex == 0) {
-			NSLog(@"Remind me later");
-			[[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
-		}
-		else if (buttonIndex == 1){
-			NSLog(@"Rate it now");
-			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
-			// Open app App Store URL
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://appsto.re/us/i1fu1.i"]];
-		}
-		else if (buttonIndex == 2) {
-			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
-			NSLog(@"Feedback");
-			[self mail];
-		}
-		else {
-			NSLog(@"No, thanks");
-			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
-		}
 	}
 }
 
