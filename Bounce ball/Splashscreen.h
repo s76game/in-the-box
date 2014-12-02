@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "Connection.h"
 
 @interface Splashscreen : ViewController{
 	

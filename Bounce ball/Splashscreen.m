@@ -9,7 +9,7 @@
 #import "Splashscreen.h"
 
 @interface Splashscreen () {
-
+	
 }
 
 @end
@@ -26,7 +26,6 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-
 	
 	_quote.alpha = 0.0;
 	_quote2.alpha = 0.0;
