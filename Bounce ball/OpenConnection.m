@@ -33,4 +33,13 @@
 	
 }
 
+//
+//Code to implement class
+//
+//OpenConnection *_openConnection;
+//
+//_openConnection = [[OpenConnection alloc] init];
+//NSLog(@"%@", [_openConnection getStringFromURL:@"http://192.168.1.246/~ryan/index.php"]);
+//
+
 @end
