@@ -8,7 +8,9 @@
 
 #import "Splashscreen.h"
 
-@interface Splashscreen ()
+@interface Splashscreen () {
+	OpenConnection *_openConnection;
+}
 
 @end
 
@@ -24,6 +26,10 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+	
+	_openConnection = [[OpenConnection alloc] init];
+	NSLog(@"%@", [_openConnection getStringFromURL:@"http://192.168.1.246/~ryan/index.php"]);
+	
 	
 	_quote.alpha = 0.0;
 	_quote2.alpha = 0.0;
