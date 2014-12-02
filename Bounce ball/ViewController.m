@@ -65,18 +65,6 @@
 	
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 
-#pragma mark Check Reward Code
-	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"reward"]) {
-		UIAlertView *reward = [[UIAlertView alloc] initWithTitle:@"5 Gems"
-														message:@"Thanks for giving us a rating! Here is your reward!"
-													   delegate:self
-											  cancelButtonTitle:@"Ok"
-											  otherButtonTitles:nil];
-		[reward show];
-		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+5 forKey:@"gems"];
-	}
-
 	
 #pragma mark First Launch Code
 	
@@ -131,6 +119,19 @@
 
 
 -(void)viewWillAppear:(BOOL)animated {
+	
+#pragma mark Check Reward Code
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"reward"]) {
+		UIAlertView *reward = [[UIAlertView alloc] initWithTitle:@"5 Gems"
+														 message:@"Thanks for giving us a rating! Here is your reward!"
+														delegate:self
+											   cancelButtonTitle:@"Ok"
+											   otherButtonTitles:nil];
+		[reward show];
+		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+5 forKey:@"gems"];
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"reward"];
+	}
 	
 #pragma mark Jailbreak Check
 	NSString *filePath = @"/Applications/Cydia.app";

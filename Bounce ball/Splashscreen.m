@@ -8,7 +8,9 @@
 
 #import "Splashscreen.h"
 
-@interface Splashscreen ()
+@interface Splashscreen () {
+	Connection *_openURL;
+}
 
 @end
 
@@ -24,6 +26,9 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+	
+	_openURL = [[Connection alloc] init];
+//	[_openURL openConnection:@"http://www.google.com"];
 	
 	_quote.alpha = 0.0;
 	_quote2.alpha = 0.0;
