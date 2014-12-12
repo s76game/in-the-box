@@ -102,9 +102,7 @@
 	
 		
 		//Update dependant code
-		[[NSUserDefaults standardUserDefaults] setFloat:0 forKey:@"highScoreTime"];
-		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"highScoreGoals"];
-		[[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"gems"];
+		
 		
 		
 		
