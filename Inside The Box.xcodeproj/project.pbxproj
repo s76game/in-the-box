@@ -10,8 +10,15 @@
 		9400629C1964AE0700B5D811 /* normalproceed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9400629B1964AE0700B5D811 /* normalproceed.png */; };
 		940339E1195F78B300FD9516 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 940339E0195F78B300FD9516 /* StoreKit.framework */; };
 		94033A14196205D200FD9516 /* NormalStrategic.m in Sources */ = {isa = PBXBuildFile; fileRef = 94033A13196205D200FD9516 /* NormalStrategic.m */; };
+		940855591A32659B0067935D /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 940855581A32659B0067935D /* ShareView.m */; };
 		9410DA431A27E34D00E2AE3D /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9410DA421A27E34D00E2AE3D /* iPad.storyboard */; };
 		9410DA4C1A2D736900E2AE3D /* OpenConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9410DA4B1A2D736900E2AE3D /* OpenConnection.m */; };
+		9410DA511A2EB4DD00E2AE3D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9410DA501A2EB4DD00E2AE3D /* CoreGraphics.framework */; };
+		9410DA531A2EB4EA00E2AE3D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9410DA521A2EB4EA00E2AE3D /* CoreMedia.framework */; };
+		9410DA551A2EB4F400E2AE3D /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9410DA541A2EB4F400E2AE3D /* CoreVideo.framework */; };
+		9410DA571A2EB50400E2AE3D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9410DA561A2EB50400E2AE3D /* SystemConfiguration.framework */; };
+		9410DA591A2EB63100E2AE3D /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9410DA581A2EB63100E2AE3D /* AVKit.framework */; };
+		9410DA5D1A2EB87800E2AE3D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9410DA5C1A2EB87800E2AE3D /* Security.framework */; };
 		9422FD2619FDD5CF001FD0F6 /* boken.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9422FD2419FDD5CF001FD0F6 /* boken.sks */; };
 		9422FD2719FDD5CF001FD0F6 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 9422FD2519FDD5CF001FD0F6 /* bokeh.png */; };
 		945D89E119FC7A3500218159 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D89DF19FC7A3500218159 /* spark.png */; };
@@ -136,6 +143,7 @@
 		949793311A17CDB200876461 /* night_goal.png in Resources */ = {isa = PBXBuildFile; fileRef = 949793301A17CDB200876461 /* night_goal.png */; };
 		949793341A17D47300876461 /* end_noise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 949793321A17D47300876461 /* end_noise.mp3 */; };
 		949793351A17D47300876461 /* goal_contact.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 949793331A17D47300876461 /* goal_contact.mp3 */; };
+		94B541881A34A5C800AE771F /* DismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B541871A34A5C800AE771F /* DismissSegue.m */; };
 		94C7FEAB194E3CDF00270AE8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C7FEAA194E3CDF00270AE8 /* main.m */; };
 		94C7FEAE194E3CDF00270AE8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C7FEAD194E3CDF00270AE8 /* AppDelegate.m */; };
 		94C7FEB1194E3CDF00270AE8 /* Bounce_ball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94C7FEAF194E3CDF00270AE8 /* Bounce_ball.xcdatamodeld */; };
@@ -171,9 +179,17 @@
 		940339E0195F78B300FD9516 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		94033A12196205D200FD9516 /* NormalStrategic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalStrategic.h; sourceTree = "<group>"; };
 		94033A13196205D200FD9516 /* NormalStrategic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalStrategic.m; sourceTree = "<group>"; };
+		940855571A32659B0067935D /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
+		940855581A32659B0067935D /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		9410DA421A27E34D00E2AE3D /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		9410DA4A1A2D736900E2AE3D /* OpenConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenConnection.h; path = "Bounce Ball/OpenConnection.h"; sourceTree = SOURCE_ROOT; };
 		9410DA4B1A2D736900E2AE3D /* OpenConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenConnection.m; path = "Bounce Ball/OpenConnection.m"; sourceTree = SOURCE_ROOT; };
+		9410DA501A2EB4DD00E2AE3D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9410DA521A2EB4EA00E2AE3D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		9410DA541A2EB4F400E2AE3D /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		9410DA561A2EB50400E2AE3D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9410DA581A2EB63100E2AE3D /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		9410DA5C1A2EB87800E2AE3D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9422FD2419FDD5CF001FD0F6 /* boken.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = boken.sks; path = "Bounce Ball/boken.sks"; sourceTree = SOURCE_ROOT; };
 		9422FD2519FDD5CF001FD0F6 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bokeh.png; path = "Bounce Ball/bokeh.png"; sourceTree = SOURCE_ROOT; };
 		945D89DF19FC7A3500218159 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../spark.png; sourceTree = "<group>"; };
@@ -302,6 +318,8 @@
 		949793301A17CDB200876461 /* night_goal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = night_goal.png; path = "../../../Bounce Ball/Mode_Selection/Night_Mode/night_goal.png"; sourceTree = "<group>"; };
 		949793321A17D47300876461 /* end_noise.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = end_noise.mp3; sourceTree = "<group>"; };
 		949793331A17D47300876461 /* goal_contact.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = goal_contact.mp3; sourceTree = "<group>"; };
+		94B541861A34A5C800AE771F /* DismissSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissSegue.h; sourceTree = "<group>"; };
+		94B541871A34A5C800AE771F /* DismissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissSegue.m; sourceTree = "<group>"; };
 		94C7FEA5194E3CDF00270AE8 /* Bounce ball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bounce ball.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94C7FEA9194E3CDF00270AE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94C7FEAA194E3CDF00270AE8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -335,6 +353,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9410DA5D1A2EB87800E2AE3D /* Security.framework in Frameworks */,
+				9410DA591A2EB63100E2AE3D /* AVKit.framework in Frameworks */,
+				9410DA571A2EB50400E2AE3D /* SystemConfiguration.framework in Frameworks */,
+				9410DA551A2EB4F400E2AE3D /* CoreVideo.framework in Frameworks */,
+				9410DA531A2EB4EA00E2AE3D /* CoreMedia.framework in Frameworks */,
+				9410DA511A2EB4DD00E2AE3D /* CoreGraphics.framework in Frameworks */,
 				94932F4919E4B54B00B533AA /* AudioToolbox.framework in Frameworks */,
 				94D31A571972C392006E21C2 /* iAd.framework in Frameworks */,
 				94F843DD196E4EF100461256 /* MessageUI.framework in Frameworks */,
@@ -391,6 +415,8 @@
 			children = (
 				9410DA4A1A2D736900E2AE3D /* OpenConnection.h */,
 				9410DA4B1A2D736900E2AE3D /* OpenConnection.m */,
+				94B541861A34A5C800AE771F /* DismissSegue.h */,
+				94B541871A34A5C800AE771F /* DismissSegue.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -640,6 +666,8 @@
 				94C7FEB3194E3CDF00270AE8 /* ViewController.m */,
 				94C7FEB5194E3CDF00270AE8 /* iPhone.storyboard */,
 				9410DA421A27E34D00E2AE3D /* iPad.storyboard */,
+				940855571A32659B0067935D /* ShareView.h */,
+				940855581A32659B0067935D /* ShareView.m */,
 				94E19B94196C93C600893DEE /* Credits.h */,
 				94E19B95196C93C600893DEE /* Credits.m */,
 				946E19FA1A2418290069C44B /* Store.h */,
@@ -692,6 +720,12 @@
 		94D31A5519724EA2006E21C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9410DA5C1A2EB87800E2AE3D /* Security.framework */,
+				9410DA581A2EB63100E2AE3D /* AVKit.framework */,
+				9410DA561A2EB50400E2AE3D /* SystemConfiguration.framework */,
+				9410DA541A2EB4F400E2AE3D /* CoreVideo.framework */,
+				9410DA521A2EB4EA00E2AE3D /* CoreMedia.framework */,
+				9410DA501A2EB4DD00E2AE3D /* CoreGraphics.framework */,
 				94932F4719E4B20500B533AA /* AVFoundation.framework */,
 				94D31A561972C392006E21C2 /* iAd.framework */,
 				94F843DC196E4EF100461256 /* MessageUI.framework */,
@@ -934,7 +968,9 @@
 				947A9F5519589907006AE1C9 /* Menu.m in Sources */,
 				94E19B96196C93C600893DEE /* Credits.m in Sources */,
 				946E19FC1A2418290069C44B /* Store.m in Sources */,
+				940855591A32659B0067935D /* ShareView.m in Sources */,
 				94C7FEB1194E3CDF00270AE8 /* Bounce_ball.xcdatamodeld in Sources */,
+				94B541881A34A5C800AE771F /* DismissSegue.m in Sources */,
 				94033A14196205D200FD9516 /* NormalStrategic.m in Sources */,
 				94C7FEAE194E3CDF00270AE8 /* AppDelegate.m in Sources */,
 				9410DA4C1A2D736900E2AE3D /* OpenConnection.m in Sources */,
@@ -1073,6 +1109,11 @@
 				CLANG_WARN_INT_CONVERSION = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Bounce",
+					ball,
+				);
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = NO;
 				GCC_WARN_SHADOW = NO;
@@ -1101,6 +1142,11 @@
 				CLANG_WARN_INT_CONVERSION = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Bounce",
+					ball,
+				);
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = NO;
 				GCC_WARN_SHADOW = NO;

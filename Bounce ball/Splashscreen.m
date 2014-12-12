@@ -7,9 +7,10 @@
 //
 
 #import "Splashscreen.h"
+#import "OpenConnection.h"
 
 @interface Splashscreen () {
-	
+	OpenConnection *_openConnection;
 }
 
 @end
@@ -26,6 +27,9 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+	
+	_openConnection = [[OpenConnection alloc] init];	
+	
 	
 	_quote.alpha = 0.0;
 	_quote2.alpha = 0.0;
@@ -118,5 +122,6 @@
 - (IBAction)advance:(id)sender {
 	[self advanceScene];
 }
+
 
 @end

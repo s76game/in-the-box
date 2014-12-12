@@ -80,10 +80,10 @@
 {
 	[self screenSize];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(pauseGame)
-												 name:@"PauseGameScene"
-											   object:nil];
+//	[[NSNotificationCenter defaultCenter] addObserver:self
+//											 selector:@selector(pauseGame)
+//												 name:@"PauseGameScene"
+//											   object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(theAppIsActive:)
@@ -519,7 +519,7 @@
 	 {
 	 }];
 	
-	triggered = 1;
+//	triggered = 1;
 	gameOver = NO;
 	
 	[self performSelector:@selector(restart) withObject:self afterDelay:2];
@@ -533,11 +533,11 @@
 }
 
 -(void)reviveContinue {
-	NSLog(@"Revive Continue");
-	if (triggered == 0) {
-		triggered = 1;
+	NSLog(@"%i", triggered);
+//	if (triggered == 0) {
+//		triggered = 1;
 		[self endGame];
-	}
+//	}
 	
 }
 
@@ -785,6 +785,7 @@
 	gameOver = NO;
 	gameStarted = NO;
 	gameTime = 0;
+	gameEnded = NO;
 	
 	[self removeElements];
 	
@@ -815,6 +816,7 @@
 
 #pragma mark Deal with appDidResignActive and appDidBecomeActive
 -(void)pauseGame {
+	NSLog(@"ALPHA");
 	[self pauseButton:nil];
 }
 

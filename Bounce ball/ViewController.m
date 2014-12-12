@@ -7,9 +7,13 @@
 //
 
 #import "ViewController.h"
+#import "OpenConnection.h"
 @class GameCenterManager;
 
-@interface ViewController ()
+@interface ViewController () {
+	
+	OpenConnection *_openConnection;
+}
 
 @property (nonatomic) BOOL gameCenterEnabled;
 @property(assign, nonatomic) BOOL showsCompletionBanner;
@@ -54,6 +58,9 @@
 {
 	
 	[super viewDidLoad];
+
+	[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@", [_openConnection getStringFromURL:@"http://192.168.1.246/~ryan/assign_code.php"]] forKey:@"sharingKey"];
+	NSLog(@"%@", [_openConnection getStringFromURL:@"http://192.168.1.246/~ryan/assign_code.php"]);
 	
 	_gameCenterEnabled = NO;
 	_showsCompletionBanner = YES;
@@ -61,12 +68,13 @@
 	
 	[self authenticateLocalPlayer];
 	[self retrieveAchievmentMetadata];
+	
+	_openConnection = [[OpenConnection alloc] init];
 
 	
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 
 
-	
 #pragma mark First Launch Code
 	
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasPerformedFirstLaunch"]) {
@@ -83,6 +91,12 @@
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasPerformedFirstLaunch"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		
+		// Get sharing key
+//		[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@", [_openConnection getStringFromURL:@"http://192.168.1.246/~ryan/assign_code.php"]] forKey:@"sharingKey"];
+		
+		// Show initial sharing screen
+		
+		
 		// Show tutorial code goes here
 			// No Tutorial Yet :-( (maybe ever)
 		
@@ -93,7 +107,7 @@
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]]) {
 		NSLog(@"Update launch %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]);
 		
-		NSString *updateText = [NSString stringWithFormat:@"Redesigned \n Intuitive Interface Gems for Revival \n Gem Store \n Pause Feature \n Bug Fixes"];
+		NSString *updateText = [NSString stringWithFormat:@"Update Shit"];
 		
 		UIAlertView *update = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Update %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] message:[NSString stringWithFormat:@"%@", updateText] delegate:self cancelButtonTitle:@"Ok!" otherButtonTitles:nil];
 		[update show];
@@ -102,15 +116,52 @@
 	
 		
 		//Update dependant code
-		[[NSUserDefaults standardUserDefaults] setFloat:0 forKey:@"highScoreTime"];
-		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"highScoreGoals"];
-		[[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"gems"];
+		
 		
 		
 		
 	}
 }
+	
+#pragma mark Check for Rewards
+	
+	// Notifications
+	if ([_openConnection getStringFromURL:@"http://192.168.1.246/~ryan/notifications.php"].length != 0) {
+		NSString *list = [_openConnection getStringFromURL:@"http://192.168.1.246/~ryan/notifications.php"];
+		NSMutableArray *listItems = [NSMutableArray arrayWithArray:[list componentsSeparatedByString:@";"]];
+		[listItems removeLastObject];
+		
+		
+		NSMutableDictionary *listDictionary = [[NSMutableDictionary alloc] init];
+		
+		for (NSString *string in listItems) {
+			
+			NSLog(@"%@", [string componentsSeparatedByString:@"-"]);
+			
+//			[listDictionary setObject:<#(id)#> forKey:<#(id<NSCopying>)#>]
+		}
+		
+		
+
+		
 	}
+	
+	
+	// Gem Rewards
+	int award = (int)[[_openConnection getStringFromURL:@"http://192.168.1.246/~ryan/check_gems.php?myKey=1"] integerValue];
+	if (award != 0) {
+		NSLog(@"%i", award);
+		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+award forKey:@"gems"];
+		UIAlertView *reward = [[UIAlertView alloc] initWithTitle:@"Reward Time!"
+														message:[NSString stringWithFormat:@"While you were away you have earned %i gems. Enjoy!", award]
+													   delegate:self
+											  cancelButtonTitle:@"Ok"
+											  otherButtonTitles:nil];
+		[reward show];
+	}
+	
+	
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -119,7 +170,12 @@
 }
 
 
+
 -(void)viewWillAppear:(BOOL)animated {
+	
+	[[UIApplication sharedApplication] setStatusBarHidden:NO
+											withAnimation:UIStatusBarAnimationFade];
+	
 	
 #pragma mark Check Reward Code
 	
@@ -247,6 +303,9 @@
 
 #pragma mark Buttons
 - (IBAction)startButton:(id)sender {
+	
+	[[UIApplication sharedApplication] setStatusBarHidden:YES
+											withAnimation:UIStatusBarAnimationFade];
 	
 	ViewController *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"gamePlay"];
 	

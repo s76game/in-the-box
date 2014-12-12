@@ -38,10 +38,10 @@
 {
 	[self screenSize];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(pauseGame)
-												 name:@"PauseGameScene"
-											   object:nil];
+//	[[NSNotificationCenter defaultCenter] addObserver:self
+//											 selector:@selector(pauseGame)
+//												 name:@"PauseGameScene"
+//											   object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(theAppIsActive:)
@@ -547,10 +547,7 @@
 }
 
 -(void)reviveContinue {
-	if (triggered == 0) {
-		triggered = 1;
 		[self endGame];
-	}
 	
 }
 
@@ -774,6 +771,7 @@
 	
 	gameOver = NO;
 	gameStarted = NO;
+	gameEnded = NO;
 	goalsHit = 0;
 	
 	[self removeElements];
@@ -806,7 +804,9 @@
 
 #pragma mark Deal with appDidResignActive and appDidBecomeActive
 -(void)pauseGame {
-	[self pauseButton:nil];
+	self.view.paused = YES;
+	[self createPauseMenuInterface];
+	pause.hidden = YES;
 }
 
 -(void)theAppIsActive:(NSNotification *)note

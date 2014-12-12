@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+NSMutableData *receivedData;
+
 @interface Splashscreen : ViewController{
 	
 	BOOL moved;
