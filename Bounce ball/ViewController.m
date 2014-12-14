@@ -7,9 +7,17 @@
 //
 
 #import "ViewController.h"
+
+#import "OpenConnection.h"
+
+
 @class GameCenterManager;
 
-@interface ViewController ()
+@interface ViewController (){
+
+OpenConnection *_openConnection;
+	
+}
 
 @property (nonatomic) BOOL gameCenterEnabled;
 @property(assign, nonatomic) BOOL showsCompletionBanner;
@@ -59,12 +67,58 @@
 	_showsCompletionBanner = YES;
 	_banner.delegate = self;
 	
+	_openConnection = [[OpenConnection alloc] init];
+	
 	[self authenticateLocalPlayer];
 	[self retrieveAchievmentMetadata];
 
 	
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 
+#pragma mark Notification Code
+	
+	NSString *notificationRaw = [_openConnection getStringFromURL:@"http://rybel-llc.com/in-the-box/sharing/notifications.php"];
+	NSArray *arr = [notificationRaw componentsSeparatedByString:@";"];
+	NSMutableArray *notificationsArray = [[NSMutableArray alloc] initWithArray:arr];
+	[notificationsArray removeLastObject];
+	NSMutableDictionary *notificationsDictionary = [[NSMutableDictionary alloc] init];
+	for (NSString *string in notificationsArray) {
+		
+		NSArray *listItems = [string componentsSeparatedByString:@":"];
+		
+		[notificationsDictionary setValue:[listItems objectAtIndex:1] forKey:[listItems objectAtIndex:0]];
+	}
+	
+	NSMutableArray *previous = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"notifications"]];
+
+	NSMutableArray *keys = [[NSMutableArray alloc] init];
+	for (NSString *string in notificationsDictionary) {
+		[keys addObject:string];
+	}
+	
+	for (NSString *string in keys) {
+		if (![previous containsObject: string] ) {
+			[previous addObject:string];
+			
+			NSArray *seperateTitle = [[notificationsDictionary objectForKey:string] componentsSeparatedByString:@"-"];
+			NSString *title = [seperateTitle objectAtIndex:0];
+			
+			NSArray *seperateReward = [[seperateTitle objectAtIndex:1] componentsSeparatedByString:@"="];
+			NSString *description = [seperateReward objectAtIndex:0];
+			int reward = [[seperateReward objectAtIndex:1] intValue];
+			
+			UIAlertView *notification = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@", title]
+															message:[NSString stringWithFormat:@"%@", description]
+														   delegate:self
+												  cancelButtonTitle:@"Ok"
+												  otherButtonTitles:nil];
+			[notification show];
+			
+			[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+reward forKey:@"gems"];
+			
+		}
+	}
+	[[NSUserDefaults standardUserDefaults] setObject:previous forKey:@"notifications"];
 
 	
 #pragma mark First Launch Code
@@ -83,6 +137,9 @@
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasPerformedFirstLaunch"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		
+		// Get sharing code
+		[[NSUserDefaults standardUserDefaults] setInteger:[[_openConnection getStringFromURL:@"http://rybel-llc.com/in-the-box/sharing/assign_code.php"] intValue] forKey:@"sharingKey"];
+		
 		// Show tutorial code goes here
 			// No Tutorial Yet :-( (maybe ever)
 		
@@ -93,7 +150,7 @@
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]]) {
 		NSLog(@"Update launch %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]);
 		
-		NSString *updateText = [NSString stringWithFormat:@"Redesigned \n Intuitive Interface Gems for Revival \n Gem Store \n Pause Feature \n Bug Fixes"];
+		NSString *updateText = [NSString stringWithFormat:@"New sharing features \n Bug Fixes"];
 		
 		UIAlertView *update = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Update %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] message:[NSString stringWithFormat:@"%@", updateText] delegate:self cancelButtonTitle:@"Ok!" otherButtonTitles:nil];
 		[update show];
@@ -102,10 +159,7 @@
 	
 		
 		//Update dependant code
-		
-		
-		
-		
+		[[NSUserDefaults standardUserDefaults] setInteger:[[_openConnection getStringFromURL:@"http://rybel-llc.com/in-the-box/sharing/assign_code.php"] intValue] forKey:@"sharingKey"];
 	}
 }
 	}
@@ -118,6 +172,23 @@
 
 
 -(void)viewWillAppear:(BOOL)animated {
+	
+#pragma mark Check for gems
+	
+	int gemsYetAwarded = [[_openConnection getStringFromURL:[NSString stringWithFormat:@"http://rybel-llc.com/in-the-box/sharing/check_gems.php?myKey=%i", (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"sharingKey"]]] intValue];
+	if (gemsYetAwarded != 0) {
+		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+gemsYetAwarded forKey:@"gems"];
+	
+		UIAlertView *gemAward = [[UIAlertView alloc] initWithTitle:@"Reward Time!"
+															   message:[NSString stringWithFormat:@"You have been awarded %i gems!", gemsYetAwarded]
+														   delegate:self
+												  cancelButtonTitle:@"Ok"
+												  otherButtonTitles:nil];
+		[gemAward show];
+	
+	}
+	
+	
 	
 #pragma mark Check Reward Code
 	
@@ -362,7 +433,7 @@
 		 
 	 default:
 	 {
-		 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Send Failure" message:@":-("
+		 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sending Failure" message:@":-("
 														delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
 		 [alert show];
 	 }

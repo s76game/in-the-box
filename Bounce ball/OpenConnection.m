@@ -34,14 +34,14 @@
 }
 
 
-//
-//
-//#import "OpenConnection.h"
-//OpenConnection *_openConnection;
-//
-//_openConnection = [[OpenConnection alloc] init];
-//NSLog(@"%@", [_openConnection getStringFromURL:@"http://192.168.1.246/~ryan/index.php"]);
-//
-//
+/*
+
+#import "OpenConnection.h"
+OpenConnection *_openConnection;
+
+_openConnection = [[OpenConnection alloc] init];
+NSLog(@"%@", [_openConnection getStringFromURL:[NSString stringWithFormat:<#    URL    #>]);
+
+*/
 
 @end

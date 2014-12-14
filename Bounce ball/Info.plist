@@ -12,14 +12,25 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>In The Box</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.rybel-llc.inside-the-box</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>InsideTheBox</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.0</string>
+	<string>2.1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>141201</string>
+	<string>141213</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>

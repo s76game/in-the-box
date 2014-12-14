@@ -1,77 +1,61 @@
 //
-//  NormalStrategic.h
+//  Normal.h
 //  Inside The Box
 //
-//  Created by Ryan Cobelli on 6/30/14.
+//  Created by Ryan Cobelli on 7/12/14.
 //  Copyright (c) 2014 Rybel LLC. All rights reserved.
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import <AudioToolbox/AudioToolbox.h>
-#import "ViewController.h"
 #import "Menu.h"
-
+#import "ViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 int pos1x;
 int pos1y;
 int pos2x;
 int pos2y;
-NSString *goalTimeString;
+int scoreiPad;
+int startiPad;
+int speediPad;
+float gameTime;
 int scoreNumber;
 BOOL gameOver;
 BOOL gameStarted;
 int x;
 int y;
 BOOL dotDrawn;
-int goalsHit;
 float totalScore;
-int kMinDistanceFromBall;
-NSTimer *countingTimer;
 int countingAnimation;
+BOOL night;
+BOOL touchStarted;
 
 int timesRevived;
 int triggered;
 int previousCost;
 
-BOOL gameEnded;
-
-int goalSize;
 int gemSize;
 BOOL gemSpawned;
 
+BOOL gameEnded;
+
+int minutesTimer;
+int secondsTimer;
+
 NSTimer *speedUpTimer;
 NSTimer *timer;
+NSTimer *countingTimer;
 
-// Menu View Controller Delegates
-@protocol sceneDelegate <NSObject>
--(void)showDifferentView;
-@end
-
-@protocol resetSKScene <NSObject>
--(void)showScene;
-@end
-
-@protocol shareTimeDelegate <NSObject>
--(void)showShareTime;
-@end
-
-@protocol shareGoalDelegate <NSObject>
--(void)showShareGoal;
-@end
+static const uint32_t ballCategory     =  0x1 << 0;
+static const uint32_t lineCategory     =  0x1 << 1;
+static const uint32_t goalCategory     =  0x1 << 2;
+static const uint32_t pointGoalCategory = 0x1 << 3;
+static const uint32_t edgeCategory     =  0x1 << 4;
+static const uint32_t gemCategory     =  0x1 << 5;
 
 
 
-
-static inline CGFloat skRandf() {
-	return rand() / (CGFloat) RAND_MAX;
-}
-
-static inline CGFloat skRand(CGFloat low, CGFloat high) {
-	return skRandf() * (high - low) + low;
-}
-
-
-@interface NormalStrategic : SKScene <SKPhysicsContactDelegate, GKGameCenterControllerDelegate, NSObject> {
+@interface TimeBased : SKScene <SKPhysicsContactDelegate, GKGameCenterControllerDelegate, NSObject> {
 	
 	// Post game stuff
 	UIButton *menu;
@@ -101,27 +85,26 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 	UILabel *gemCost;
 	UIImageView *gemCostImage;
 	UIImageView *gemCountImage;
-	
-	// In game stuff
+
+	// UI stuff
 	SKShapeNode* border;
 	SKShapeNode* lines;
 	SKSpriteNode *line;
 	SKSpriteNode *gemSprite;
-	SKSpriteNode *goal;
-	SKSpriteNode *detect;
-	
 	SKAction *remove;
-	
-	// UI Stuff
 	SKSpriteNode *ball;
 	UILabel *score;
-	UIButton *start;
 	CGFloat screenWidth;
 	CGFloat screenHeight;
 	UIButton *pause;
 	UILabel *tapToStart;
 	
+	SKAction *wait;
+	
+	SKEmitterNode *tail;
 	SKEmitterNode *explosion;
+	
+	CGPoint old;
 }
 
 @end

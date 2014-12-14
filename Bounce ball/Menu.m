@@ -27,12 +27,10 @@
 	
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"normal"]) {
-// Normal gameplay
-			[self normal];
+		[self normal];
 	}
 	else {
-// Strategic gameplay
-			[self strategy];
+		[self strategy];
 	}
 }
 
@@ -71,7 +69,7 @@
 }
 
 -(void)normal {
-	Normal* scene = [[Normal alloc] initWithSize:screenSize];
+	TimeBased* scene = [[TimeBased alloc] initWithSize:screenSize];
 	spriteView = (SKView *) self.view;
 	lastPlayed = @"normal";
 	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
@@ -80,7 +78,7 @@
 
 
 -(void)strategy {
-	NormalStrategic* scene = [[NormalStrategic alloc] initWithSize:screenSize];
+	GoalBased* scene = [[GoalBased alloc] initWithSize:screenSize];
 	spriteView = (SKView *) self.view;
 	lastPlayed = @"strategy";
 	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
@@ -96,14 +94,14 @@
 
 -(void)showScene {
 	if ([lastPlayed isEqualToString:@"strategy"]) {
-		NormalStrategic* hello = [[NormalStrategic alloc] initWithSize:screenSize];
+		GoalBased* hello = [[GoalBased alloc] initWithSize:screenSize];
 		spriteView = (SKView *) self.view;
 		lastPlayed = @"strategy";
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];
 		[spriteView presentScene: hello];
 	}
 	else if ([lastPlayed isEqualToString:@"normal"]) {
-		Normal* hello = [[Normal alloc] initWithSize:screenSize];
+		TimeBased* hello = [[TimeBased alloc] initWithSize:screenSize];
 		spriteView = (SKView *) self.view;
 		lastPlayed = @"normal";
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gamesPlayed"]+1 forKey:@"gamesPlayed"];

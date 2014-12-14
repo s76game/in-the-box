@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		9400629C1964AE0700B5D811 /* normalproceed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9400629B1964AE0700B5D811 /* normalproceed.png */; };
 		940339E1195F78B300FD9516 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 940339E0195F78B300FD9516 /* StoreKit.framework */; };
-		94033A14196205D200FD9516 /* NormalStrategic.m in Sources */ = {isa = PBXBuildFile; fileRef = 94033A13196205D200FD9516 /* NormalStrategic.m */; };
+		94033A14196205D200FD9516 /* GoalBased.m in Sources */ = {isa = PBXBuildFile; fileRef = 94033A13196205D200FD9516 /* GoalBased.m */; };
 		9410DA431A27E34D00E2AE3D /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9410DA421A27E34D00E2AE3D /* iPad.storyboard */; };
 		9410DA4C1A2D736900E2AE3D /* OpenConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9410DA4B1A2D736900E2AE3D /* OpenConnection.m */; };
 		9422FD2619FDD5CF001FD0F6 /* boken.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9422FD2419FDD5CF001FD0F6 /* boken.sks */; };
 		9422FD2719FDD5CF001FD0F6 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 9422FD2519FDD5CF001FD0F6 /* bokeh.png */; };
 		945D89E119FC7A3500218159 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D89DF19FC7A3500218159 /* spark.png */; };
 		945D89E319FC7F9B00218159 /* explode.sks in Resources */ = {isa = PBXBuildFile; fileRef = 945D89E219FC7F9B00218159 /* explode.sks */; };
+		94614A6E1A3CB8E200FFC386 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94614A6D1A3CB8E200FFC386 /* ShareView.m */; };
+		94614A711A3CBCFA00FFC386 /* Dismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 94614A701A3CBCFA00FFC386 /* Dismiss.m */; };
+		94614A751A3CC3F100FFC386 /* paste-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 94614A741A3CC3F100FFC386 /* paste-100.png */; };
 		946E19D71A2411780069C44B /* angel.png in Resources */ = {isa = PBXBuildFile; fileRef = 946E19B71A2411780069C44B /* angel.png */; };
 		946E19D81A2411780069C44B /* continue.png in Resources */ = {isa = PBXBuildFile; fileRef = 946E19B81A2411780069C44B /* continue.png */; };
 		946E19D91A2411780069C44B /* gem.png in Resources */ = {isa = PBXBuildFile; fileRef = 946E19B91A2411780069C44B /* gem.png */; };
@@ -147,7 +150,7 @@
 		94C9B6BB1979AC9F00AE4BF2 /* nightquote2.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C9B6B71979AC9F00AE4BF2 /* nightquote2.png */; };
 		94C9B6BC1979AC9F00AE4BF2 /* normalquote1.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C9B6B81979AC9F00AE4BF2 /* normalquote1.png */; };
 		94C9B6BD1979AC9F00AE4BF2 /* normalquote2.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C9B6B91979AC9F00AE4BF2 /* normalquote2.png */; };
-		94D31A48197236FE006E21C2 /* Normal.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D31A47197236FE006E21C2 /* Normal.m */; };
+		94D31A48197236FE006E21C2 /* TimeBased.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D31A47197236FE006E21C2 /* TimeBased.m */; };
 		94D31A531972483E006E21C2 /* strategyproceed.png in Resources */ = {isa = PBXBuildFile; fileRef = 94D31A4F1972483E006E21C2 /* strategyproceed.png */; };
 		94D31A571972C392006E21C2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94D31A561972C392006E21C2 /* iAd.framework */; };
 		94E19B93196C8F4600893DEE /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94E19B92196C8F4600893DEE /* Media.xcassets */; };
@@ -169,15 +172,21 @@
 /* Begin PBXFileReference section */
 		9400629B1964AE0700B5D811 /* normalproceed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalproceed.png; path = ../normalproceed.png; sourceTree = "<group>"; };
 		940339E0195F78B300FD9516 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		94033A12196205D200FD9516 /* NormalStrategic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalStrategic.h; sourceTree = "<group>"; };
-		94033A13196205D200FD9516 /* NormalStrategic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalStrategic.m; sourceTree = "<group>"; };
+		94033A12196205D200FD9516 /* GoalBased.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalBased.h; sourceTree = "<group>"; };
+		94033A13196205D200FD9516 /* GoalBased.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalBased.m; sourceTree = "<group>"; };
 		9410DA421A27E34D00E2AE3D /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		9410DA4A1A2D736900E2AE3D /* OpenConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenConnection.h; path = "Bounce Ball/OpenConnection.h"; sourceTree = SOURCE_ROOT; };
 		9410DA4B1A2D736900E2AE3D /* OpenConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenConnection.m; path = "Bounce Ball/OpenConnection.m"; sourceTree = SOURCE_ROOT; };
 		9422FD2419FDD5CF001FD0F6 /* boken.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = boken.sks; path = "Bounce Ball/boken.sks"; sourceTree = SOURCE_ROOT; };
 		9422FD2519FDD5CF001FD0F6 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bokeh.png; path = "Bounce Ball/bokeh.png"; sourceTree = SOURCE_ROOT; };
+		9451F9A11A3D237D00F55A0E /* Bounce ball.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Bounce ball.entitlements"; sourceTree = "<group>"; };
 		945D89DF19FC7A3500218159 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../spark.png; sourceTree = "<group>"; };
 		945D89E219FC7F9B00218159 /* explode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = explode.sks; path = "Bounce Ball/explode.sks"; sourceTree = SOURCE_ROOT; };
+		94614A6C1A3CB8E200FFC386 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareView.h; path = ../ShareView.h; sourceTree = "<group>"; };
+		94614A6D1A3CB8E200FFC386 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareView.m; path = ../ShareView.m; sourceTree = "<group>"; };
+		94614A6F1A3CBCFA00FFC386 /* Dismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dismiss.h; sourceTree = "<group>"; };
+		94614A701A3CBCFA00FFC386 /* Dismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dismiss.m; sourceTree = "<group>"; };
+		94614A741A3CC3F100FFC386 /* paste-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paste-100.png"; sourceTree = "<group>"; };
 		946E19B71A2411780069C44B /* angel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angel.png; sourceTree = "<group>"; };
 		946E19B81A2411780069C44B /* continue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = continue.png; sourceTree = "<group>"; };
 		946E19B91A2411780069C44B /* gem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gem.png; sourceTree = "<group>"; };
@@ -319,8 +328,8 @@
 		94C9B6B71979AC9F00AE4BF2 /* nightquote2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nightquote2.png; sourceTree = "<group>"; };
 		94C9B6B81979AC9F00AE4BF2 /* normalquote1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalquote1.png; sourceTree = "<group>"; };
 		94C9B6B91979AC9F00AE4BF2 /* normalquote2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = normalquote2.png; sourceTree = "<group>"; };
-		94D31A46197236FE006E21C2 /* Normal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Normal.h; sourceTree = "<group>"; };
-		94D31A47197236FE006E21C2 /* Normal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Normal.m; sourceTree = "<group>"; };
+		94D31A46197236FE006E21C2 /* TimeBased.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeBased.h; sourceTree = "<group>"; };
+		94D31A47197236FE006E21C2 /* TimeBased.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeBased.m; sourceTree = "<group>"; };
 		94D31A4F1972483E006E21C2 /* strategyproceed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = strategyproceed.png; path = ../strategyproceed.png; sourceTree = "<group>"; };
 		94D31A561972C392006E21C2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		94E19B92196C8F4600893DEE /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = ../Media.xcassets; sourceTree = "<group>"; };
@@ -371,8 +380,8 @@
 		94033A10196205A500FD9516 /* Strategic Gameplay */ = {
 			isa = PBXGroup;
 			children = (
-				94033A12196205D200FD9516 /* NormalStrategic.h */,
-				94033A13196205D200FD9516 /* NormalStrategic.m */,
+				94033A12196205D200FD9516 /* GoalBased.h */,
+				94033A13196205D200FD9516 /* GoalBased.m */,
 			);
 			name = "Strategic Gameplay";
 			sourceTree = "<group>";
@@ -380,8 +389,8 @@
 		94033A11196205B700FD9516 /* Normal Gameplay Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				94D31A46197236FE006E21C2 /* Normal.h */,
-				94D31A47197236FE006E21C2 /* Normal.m */,
+				94D31A46197236FE006E21C2 /* TimeBased.h */,
+				94D31A47197236FE006E21C2 /* TimeBased.m */,
 			);
 			name = "Normal Gameplay Scenes";
 			sourceTree = "<group>";
@@ -391,6 +400,8 @@
 			children = (
 				9410DA4A1A2D736900E2AE3D /* OpenConnection.h */,
 				9410DA4B1A2D736900E2AE3D /* OpenConnection.m */,
+				94614A6F1A3CBCFA00FFC386 /* Dismiss.h */,
+				94614A701A3CBCFA00FFC386 /* Dismiss.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -642,6 +653,8 @@
 				9410DA421A27E34D00E2AE3D /* iPad.storyboard */,
 				94E19B94196C93C600893DEE /* Credits.h */,
 				94E19B95196C93C600893DEE /* Credits.m */,
+				94614A6C1A3CB8E200FFC386 /* ShareView.h */,
+				94614A6D1A3CB8E200FFC386 /* ShareView.m */,
 				946E19FA1A2418290069C44B /* Store.h */,
 				946E19FB1A2418290069C44B /* Store.m */,
 				94792A901958EBCF004A6404 /* Splashscreen.h */,
@@ -660,6 +673,8 @@
 		94C7FEA8194E3CDF00270AE8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9451F9A11A3D237D00F55A0E /* Bounce ball.entitlements */,
+				94614A741A3CC3F100FFC386 /* paste-100.png */,
 				948214571A0FF6CF00B0FAAB /* Fonts */,
 				948213DD1A0FF54500B0FAAB /* Sounds */,
 				948213BA1A0FF53100B0FAAB /* App Icon [Squared] */,
@@ -754,6 +769,11 @@
 					94C7FEA4194E3CDF00270AE8 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = AL6H9GEC6N;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 					94C7FEBD194E3CDF00270AE8 = {
 						CreatedOnToolsVersion = 6.0;
@@ -908,6 +928,7 @@
 				948214191A0FF57400B0FAAB /* post_rate.png in Resources */,
 				94932F4619E1ADB800B533AA /* Settings.bundle in Resources */,
 				946E19EB1A2411780069C44B /* store_1250.png in Resources */,
+				94614A751A3CC3F100FFC386 /* paste-100.png in Resources */,
 				949793351A17D47300876461 /* goal_contact.mp3 in Resources */,
 				946E19F11A2411780069C44B /* store_400.png in Resources */,
 				948213CC1A0FF53100B0FAAB /* AppIcon29x29@2x.png in Resources */,
@@ -930,12 +951,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94D31A48197236FE006E21C2 /* Normal.m in Sources */,
+				94D31A48197236FE006E21C2 /* TimeBased.m in Sources */,
 				947A9F5519589907006AE1C9 /* Menu.m in Sources */,
 				94E19B96196C93C600893DEE /* Credits.m in Sources */,
 				946E19FC1A2418290069C44B /* Store.m in Sources */,
+				94614A6E1A3CB8E200FFC386 /* ShareView.m in Sources */,
+				94614A711A3CBCFA00FFC386 /* Dismiss.m in Sources */,
 				94C7FEB1194E3CDF00270AE8 /* Bounce_ball.xcdatamodeld in Sources */,
-				94033A14196205D200FD9516 /* NormalStrategic.m in Sources */,
+				94033A14196205D200FD9516 /* GoalBased.m in Sources */,
 				94C7FEAE194E3CDF00270AE8 /* AppDelegate.m in Sources */,
 				9410DA4C1A2D736900E2AE3D /* OpenConnection.m in Sources */,
 				94792A921958EBCF004A6404 /* Splashscreen.m in Sources */,
@@ -1071,6 +1094,7 @@
 				CLANG_WARN_ENUM_CONVERSION = NO;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = NO;
+				CODE_SIGN_ENTITLEMENTS = "Bounce ball/Bounce ball.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
@@ -1099,6 +1123,7 @@
 				CLANG_WARN_ENUM_CONVERSION = NO;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = NO;
+				CODE_SIGN_ENTITLEMENTS = "Bounce ball/Bounce ball.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
