@@ -16,9 +16,11 @@ BOOL validKey;
 @property (strong, nonatomic) IBOutlet UIButton *myCode;
 @property (strong, nonatomic) IBOutlet UIButton *exit;
 @property (strong, nonatomic) IBOutlet UIButton *pasteButtonOutlet;
-@property (strong, nonatomic) IBOutlet UIButton *searchOutlet;
+@property (strong, nonatomic) IBOutlet UILabel *friendExplain;
+@property (strong, nonatomic) IBOutlet UILabel *myExplain;
 
 -(IBAction)pasteText:(id)sender;
 - (IBAction)copyAction:(id)sender;
+- (IBAction)exitAction:(id)sender;
 
 @end

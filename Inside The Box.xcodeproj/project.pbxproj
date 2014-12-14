@@ -156,6 +156,11 @@
 		94E19B93196C8F4600893DEE /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94E19B92196C8F4600893DEE /* Media.xcassets */; };
 		94E19B96196C93C600893DEE /* Credits.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E19B95196C93C600893DEE /* Credits.m */; };
 		94E19B98196C955200893DEE /* Prototype.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94E19B97196C955200893DEE /* Prototype.ttf */; };
+		94E526F51A3E0D0E001593B2 /* night_remove_ads.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E526F11A3E0D0E001593B2 /* night_remove_ads.png */; };
+		94E526F61A3E0D0E001593B2 /* night_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E526F21A3E0D0E001593B2 /* night_share.png */; };
+		94E526F71A3E0D0E001593B2 /* remove_ads.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E526F31A3E0D0E001593B2 /* remove_ads.png */; };
+		94E526F81A3E0D0E001593B2 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E526F41A3E0D0E001593B2 /* share.png */; };
+		94E526FA1A3E12E8001593B2 /* paste-100-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E526F91A3E12E8001593B2 /* paste-100-white.png */; };
 		94F843DD196E4EF100461256 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F843DC196E4EF100461256 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -336,6 +341,11 @@
 		94E19B94196C93C600893DEE /* Credits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Credits.h; sourceTree = "<group>"; };
 		94E19B95196C93C600893DEE /* Credits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Credits.m; sourceTree = "<group>"; };
 		94E19B97196C955200893DEE /* Prototype.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Prototype.ttf; sourceTree = "<group>"; };
+		94E526F11A3E0D0E001593B2 /* night_remove_ads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = night_remove_ads.png; path = "../Bounce ball/night_remove_ads.png"; sourceTree = "<group>"; };
+		94E526F21A3E0D0E001593B2 /* night_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = night_share.png; path = ../../night_share.png; sourceTree = "<group>"; };
+		94E526F31A3E0D0E001593B2 /* remove_ads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = remove_ads.png; path = "../Bounce ball/remove_ads.png"; sourceTree = "<group>"; };
+		94E526F41A3E0D0E001593B2 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = share.png; path = ../../share.png; sourceTree = "<group>"; };
+		94E526F91A3E12E8001593B2 /* paste-100-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paste-100-white.png"; sourceTree = "<group>"; };
 		94F843DC196E4EF100461256 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -424,6 +434,8 @@
 		946E19BE1A2411780069C44B /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				94E526F11A3E0D0E001593B2 /* night_remove_ads.png */,
+				94E526F31A3E0D0E001593B2 /* remove_ads.png */,
 				946E19C11A2411780069C44B /* night_store_1250.png */,
 				946E19C21A2411780069C44B /* night_store_15.png */,
 				946E19C31A2411780069C44B /* night_store_190.png */,
@@ -503,6 +515,7 @@
 		948213E21A0FF55E00B0FAAB /* Night_Mode */ = {
 			isa = PBXGroup;
 			children = (
+				94E526F21A3E0D0E001593B2 /* night_share.png */,
 				948213E31A0FF55E00B0FAAB /* night_background.png */,
 				94911A4D1A19173200B0FCAD /* night_strategy.png */,
 				949793301A17CDB200876461 /* night_goal.png */,
@@ -561,6 +574,7 @@
 			children = (
 				948214281A0FF59300B0FAAB /* background.png */,
 				948214291A0FF59300B0FAAB /* ball.png */,
+				94E526F41A3E0D0E001593B2 /* share.png */,
 				9497932D1A17CD3000876461 /* strategy.png */,
 				9482142A1A0FF59300B0FAAB /* credits.png */,
 				9497932C1A17CD3000876461 /* goal.png */,
@@ -675,6 +689,7 @@
 			children = (
 				9451F9A11A3D237D00F55A0E /* Bounce ball.entitlements */,
 				94614A741A3CC3F100FFC386 /* paste-100.png */,
+				94E526F91A3E12E8001593B2 /* paste-100-white.png */,
 				948214571A0FF6CF00B0FAAB /* Fonts */,
 				948213DD1A0FF54500B0FAAB /* Sounds */,
 				948213BA1A0FF53100B0FAAB /* App Icon [Squared] */,
@@ -863,11 +878,14 @@
 				946E19F51A2411780069C44B /* store_icon.png in Resources */,
 				94C7FEB7194E3CDF00270AE8 /* iPhone.storyboard in Resources */,
 				94911A4E1A19173200B0FCAD /* night_strategy.png in Resources */,
+				94E526F71A3E0D0E001593B2 /* remove_ads.png in Resources */,
 				948214011A0FF55E00B0FAAB /* night_proceed.png in Resources */,
 				948214041A0FF55E00B0FAAB /* night_rate.png in Resources */,
+				94E526FA1A3E12E8001593B2 /* paste-100-white.png in Resources */,
 				948213D41A0FF53100B0FAAB /* AppIcon60x60@2x.png in Resources */,
 				94792AD2195B6FEA004A6404 /* iPodiPhone4.png in Resources */,
 				9422FD2719FDD5CF001FD0F6 /* bokeh.png in Resources */,
+				94E526F61A3E0D0E001593B2 /* night_share.png in Resources */,
 				948213D31A0FF53100B0FAAB /* AppIcon60x60.png in Resources */,
 				948213D21A0FF53100B0FAAB /* AppIcon57x57@2x.png in Resources */,
 				946E19E91A2411780069C44B /* night_store_exit.png in Resources */,
@@ -904,6 +922,7 @@
 				948214251A0FF58C00B0FAAB /* pause_restart.png in Resources */,
 				948213CD1A0FF53100B0FAAB /* AppIcon40x40.png in Resources */,
 				946E19E71A2411780069C44B /* night_store_500.png in Resources */,
+				94E526F81A3E0D0E001593B2 /* share.png in Resources */,
 				946E19F21A2411780069C44B /* store_500.png in Resources */,
 				946E19EA1A2411780069C44B /* night_store_icon.png in Resources */,
 				948214171A0FF57400B0FAAB /* post_exit.png in Resources */,
@@ -926,6 +945,7 @@
 				948214421A0FF59300B0FAAB /* light.png in Resources */,
 				94C9B6BA1979AC9F00AE4BF2 /* nightquote1.png in Resources */,
 				948214191A0FF57400B0FAAB /* post_rate.png in Resources */,
+				94E526F51A3E0D0E001593B2 /* night_remove_ads.png in Resources */,
 				94932F4619E1ADB800B533AA /* Settings.bundle in Resources */,
 				946E19EB1A2411780069C44B /* store_1250.png in Resources */,
 				94614A751A3CC3F100FFC386 /* paste-100.png in Resources */,

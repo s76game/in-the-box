@@ -312,6 +312,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="storeButton:" destination="gwX-Fy-fTi" eventType="touchUpInside" id="O3C-zM-KwY"/>
                                     <segue destination="2NZ-AU-wDY" kind="modal" id="Hyn-0z-P1d"/>
                                 </connections>
                             </button>
@@ -347,10 +348,11 @@
                                     <constraint firstAttribute="height" constant="60" id="6T4-3L-wlJ"/>
                                     <constraint firstAttribute="width" constant="60" id="kwx-5t-PKC"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="post_share.png">
+                                <state key="normal" backgroundImage="share.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="shareButton:" destination="gwX-Fy-fTi" eventType="touchUpInside" id="V3J-os-s8J"/>
                                     <segue destination="3ZJ-F3-MKy" kind="modal" id="IcA-rt-srA"/>
                                 </connections>
                             </button>
@@ -416,6 +418,7 @@
                         <outlet property="gamecenterOutlet" destination="GeY-Yb-7zh" id="ssY-UT-G9p"/>
                         <outlet property="lightOutlet" destination="odT-52-KZY" id="TXL-iv-bK9"/>
                         <outlet property="modeOutlet" destination="rOY-nj-0f7" id="0FD-Rj-CW9"/>
+                        <outlet property="shareOutlet" destination="AGS-9I-Taa" id="2wu-Mx-CVZ"/>
                         <outlet property="soundOutlet" destination="ytw-S5-Th7" id="gky-PC-cbz"/>
                         <outlet property="startOutlet" destination="Rdf-Vb-Wzo" id="UDb-DZ-JHn"/>
                         <outlet property="storeOutlet" destination="6LW-aM-FsS" id="ork-AK-ffN"/>
@@ -685,16 +688,18 @@
                                 </state>
                                 <connections>
                                     <action selector="backButton:" destination="vAb-VW-64Y" eventType="touchUpInside" id="Ndr-lp-LvS"/>
+                                    <action selector="exitAction:" destination="3ZJ-F3-MKy" eventType="touchUpInside" id="9Vn-vo-6eM"/>
                                     <segue destination="gwX-Fy-fTi" kind="custom" customClass="Dismiss" id="HAf-By-pwW"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="123456" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WXl-AT-qWY">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="123456" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WXl-AT-qWY">
                                 <rect key="frame" x="236" y="147" width="129" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="129" id="814-kk-Edl"/>
                                     <constraint firstAttribute="height" constant="30" id="apX-B5-uqF"/>
                                 </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" keyboardAppearance="alert" returnKeyType="search"/>
                             </textField>
@@ -763,8 +768,10 @@
                     </view>
                     <connections>
                         <outlet property="exit" destination="M4I-cd-QOg" id="XYA-Bs-9kN"/>
+                        <outlet property="friendExplain" destination="4oU-mP-Gr8" id="sq6-Es-srB"/>
                         <outlet property="friendKeyBox" destination="WXl-AT-qWY" id="hg8-0i-UsI"/>
                         <outlet property="myCode" destination="aVk-Sf-x2K" id="E9v-p4-hnq"/>
+                        <outlet property="myExplain" destination="cYT-Le-Lq8" id="LBy-QZ-q0z"/>
                         <outlet property="pasteButtonOutlet" destination="mXl-rY-bZH" id="nwh-Kb-usN"/>
                     </connections>
                 </viewController>
@@ -804,10 +811,10 @@
         <image name="normalquote2.png" width="691" height="197"/>
         <image name="paste-100.png" width="100" height="100"/>
         <image name="play.png" width="185" height="185"/>
-        <image name="post_share.png" width="185" height="185"/>
         <image name="proceed.png" width="185" height="185"/>
         <image name="rate.png" width="185" height="185"/>
         <image name="rybel.png" width="185" height="185"/>
+        <image name="share.png" width="185" height="185"/>
         <image name="sound_on.png" width="185" height="185"/>
         <image name="store_1250.png" width="992" height="161"/>
         <image name="store_15.png" width="992" height="161"/>

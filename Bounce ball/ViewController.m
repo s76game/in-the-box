@@ -219,6 +219,7 @@ OpenConnection *_openConnection;
 		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"night_rybel.png"] forState:UIControlStateNormal];
 		[_storeOutlet setBackgroundImage:[UIImage imageNamed:@"night_store_icon.png"] forState:UIControlStateNormal];
 		[_gamecenterOutlet setBackgroundImage:[UIImage imageNamed:@"night_gamecenter.png"] forState:UIControlStateNormal];
+		[_shareOutlet setBackgroundImage:[UIImage imageNamed:@"night_share.png"] forState:UIControlStateNormal];
 		[_titleOutlet setImage:[UIImage imageNamed:@"night_title.png"]];
 		[_background setImage:[UIImage imageNamed:@"night_background.png"]];
 		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -230,6 +231,7 @@ OpenConnection *_openConnection;
 		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"rybel.png"] forState:UIControlStateNormal];
 		[_gamecenterOutlet setBackgroundImage:[UIImage imageNamed:@"gamecenter.png"] forState:UIControlStateNormal];
 		[_storeOutlet setBackgroundImage:[UIImage imageNamed:@"store_icon.png"] forState:UIControlStateNormal];
+		[_shareOutlet setBackgroundImage:[UIImage imageNamed:@"share.png"] forState:UIControlStateNormal];
 		[_titleOutlet setImage:[UIImage imageNamed:@"title.png"]];
 		[_background setImage:[UIImage imageNamed:@"background.png"]];
 		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
@@ -366,8 +368,14 @@ OpenConnection *_openConnection;
 	[self playSound];
 }
 
+- (IBAction)shareButton:(id)sender {
+}
+
 -(IBAction)creditsButton:(id)sender {
 	
+}
+
+- (IBAction)storeButton:(id)sender {
 }
 
 -(void)playSound {

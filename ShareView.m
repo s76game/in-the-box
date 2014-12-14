@@ -46,6 +46,35 @@
 	_myCode.titleLabel.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"sharingKey"];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+	
+	self.friendKeyBox.layer.borderWidth = 1.0f;
+	self.friendKeyBox.layer.cornerRadius = 15;
+	
+	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+		self.view.layer.contents = (id)[UIImage imageNamed:@"night_background.png"].CGImage;
+		[_exit setBackgroundImage:[UIImage imageNamed:@"night_exit.png"] forState:UIControlStateNormal];
+		[_pasteButtonOutlet setBackgroundImage:[UIImage imageNamed:@"paste-100-white.png"] forState:UIControlStateNormal];
+		_friendExplain.textColor = [UIColor whiteColor];
+		_myExplain.textColor = [UIColor whiteColor];
+		_friendKeyBox.keyboardAppearance = UIKeyboardAppearanceDark;
+		_friendKeyBox.textColor = [UIColor whiteColor];
+		self.friendKeyBox.layer.borderColor = [[UIColor whiteColor] CGColor];
+		[_myCode setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	}
+	else {
+		self.view.layer.contents = (id)[UIImage imageNamed:@"background.png"].CGImage;
+		[_exit setBackgroundImage:[UIImage imageNamed:@"exit.png"] forState:UIControlStateNormal];
+		[_pasteButtonOutlet setBackgroundImage:[UIImage imageNamed:@"paste-100.png"] forState:UIControlStateNormal];
+		_friendExplain.textColor = [UIColor blackColor];
+		_myExplain.textColor = [UIColor blackColor];
+		_friendKeyBox.keyboardAppearance = UIKeyboardAppearanceLight;
+		_friendKeyBox.textColor = [UIColor blackColor];
+		self.friendKeyBox.layer.borderColor = [[UIColor blackColor] CGColor];
+		[_myCode setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	}
+}
+
 -(void)dismissKeyboard {
 	[_friendKeyBox resignFirstResponder];
 }
@@ -131,6 +160,10 @@
 	NSArray *excludedActivities = @[UIActivityTypeAirDrop];
 	controller.excludedActivityTypes = excludedActivities;
 	[self presentViewController:controller animated:YES completion:nil];
+}
+
+- (IBAction)exitAction:(id)sender {
+	[self dismissKeyboard];
 }
 
 -(IBAction)pasteText:(id)sender {
