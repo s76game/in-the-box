@@ -201,6 +201,14 @@ OpenConnection *_openConnection;
 		[reward show];
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+5 forKey:@"gems"];
 		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"reward"];
+		
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ttile"
+														message:@"Message"
+													   delegate:self
+											  cancelButtonTitle:@"Ok"
+											  otherButtonTitles:nil];
+		[alert show];
+		
 	}
 	
 #pragma mark Jailbreak Check
@@ -275,17 +283,26 @@ OpenConnection *_openConnection;
 	
 #pragma mark Rate my app code
 
-	//Check if game has been played this version
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
-		if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@CHECK",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
-			// Show UIALert View
-			
-			alert=[[UIAlertView alloc]initWithTitle:@"Rate my app" message:@"Want 5 Gems? Who doesn't? Go ahead and give us a rating on the App Store and collect your reward!"
+	if (rateCount == 10) {
+		//Check if game has been played this version
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
+			if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@CHECK",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
+				// Show UIALert View
+				
+				alert=[[UIAlertView alloc]initWithTitle:@"Rate my app" message:@"Want 5 Gems? Who doesn't? Go ahead and give us a rating on the App Store and collect your reward!"
 														delegate:self cancelButtonTitle:@"Remind me later" otherButtonTitles:@"Rate it now", @"Give feedback", @"No, thanks", nil];
-			alert.tag=101;
-			[alert show];
+				alert.tag=101;
+				[alert show];
+			}
 		}
+		rateCount = 0;
+		[[NSUserDefaults standardUserDefaults] setInteger:rateCount forKey:@"rateCount"];
 	}
+	else {
+		rateCount = rateCount + 1;
+		[[NSUserDefaults standardUserDefaults] setInteger:rateCount forKey:@"rateCount"];
+	}
+	
 	
 	
 }

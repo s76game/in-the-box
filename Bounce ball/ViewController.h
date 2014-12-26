@@ -24,6 +24,7 @@ BOOL gameCenterEnabled;
 UIAlertView *alert;
 NSString *alias;
 SystemSoundID toggle;
+int rateCount;
 
 @interface ViewController : UIViewController <GKGameCenterControllerDelegate, ADBannerViewDelegate, MFMailComposeViewControllerDelegate> {
 	
