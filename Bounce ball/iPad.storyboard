@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ldl-JU-9JG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C94b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ldl-JU-9JG">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -626,10 +626,19 @@
                                 <rect key="frame" x="16" y="101" width="568" height="491"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kvY-Vd-imk">
-                                        <rect key="frame" x="8" y="8" width="552" height="724"/>
+                                        <rect key="frame" x="8" y="8" width="680" height="724"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTB-hx-ZqL">
+                                                <rect key="frame" x="135" y="8" width="477" height="72"/>
+                                                <state key="normal" backgroundImage="store_15.png">
+                                                    <color key="titleShadowColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="Gem15Action:" destination="o0K-Go-q05" eventType="touchUpInside" id="Oyl-gq-2XC"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lde-PC-afW">
-                                                <rect key="frame" x="38" y="408" width="477" height="72"/>
+                                                <rect key="frame" x="135" y="408" width="477" height="72"/>
                                                 <state key="normal" backgroundImage="store_400.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -638,7 +647,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQ5-4y-tu4">
-                                                <rect key="frame" x="38" y="328" width="477" height="72"/>
+                                                <rect key="frame" x="135" y="328" width="477" height="72"/>
                                                 <state key="normal" backgroundImage="store_285.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -647,7 +656,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0J3-Gu-uxl">
-                                                <rect key="frame" x="38" y="248" width="477" height="72"/>
+                                                <rect key="frame" x="135" y="248" width="477" height="72"/>
                                                 <state key="normal" backgroundImage="store_190.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -656,7 +665,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sbf-nz-0NY">
-                                                <rect key="frame" x="38" y="168" width="477" height="72"/>
+                                                <rect key="frame" x="135" y="168" width="477" height="72"/>
                                                 <state key="normal" backgroundImage="store_75.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -665,7 +674,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOq-nB-evY">
-                                                <rect key="frame" x="38" y="88" width="477" height="72"/>
+                                                <rect key="frame" x="135" y="88" width="477" height="72"/>
                                                 <state key="normal" backgroundImage="store_35.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -673,17 +682,8 @@
                                                     <action selector="Gem35Action:" destination="o0K-Go-q05" eventType="touchUpInside" id="VH1-h9-4oz"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTB-hx-ZqL">
-                                                <rect key="frame" x="38" y="8" width="477" height="72"/>
-                                                <state key="normal" backgroundImage="store_15.png">
-                                                    <color key="titleShadowColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="Gem15Action:" destination="o0K-Go-q05" eventType="touchUpInside" id="Oyl-gq-2XC"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ec5-3z-bbW">
-                                                <rect key="frame" x="38" y="488" width="477" height="72"/>
+                                                <rect key="frame" x="135" y="488" width="477" height="72"/>
                                                 <state key="normal" backgroundImage="store_500.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -692,7 +692,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EEP-Z0-Y8U">
-                                                <rect key="frame" x="38" y="568" width="477" height="72"/>
+                                                <rect key="frame" x="135" y="568" width="477" height="72"/>
                                                 <state key="normal" backgroundImage="store_1250.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -701,7 +701,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0eb-eg-9Wh">
-                                                <rect key="frame" x="38" y="648" width="477" height="72"/>
+                                                <rect key="frame" x="135" y="648" width="477" height="72"/>
                                                 <state key="normal" backgroundImage="store_2750.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
