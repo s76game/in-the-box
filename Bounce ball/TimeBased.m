@@ -495,7 +495,7 @@
 	}
 }
 
-#pragma mark Revive Shit
+#pragma mark Revive Crap
 
 -(void)adjustInterfacePause {
 	reviveButton.frame = CGRectMake(reviveButton.frame.origin.x, reviveButton.frame.origin.y+150, reviveButton.frame.size.width, reviveButton.frame.size.height);

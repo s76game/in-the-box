@@ -145,6 +145,8 @@
 		94911A4E1A19173200B0FCAD /* night_strategy.png in Resources */ = {isa = PBXBuildFile; fileRef = 94911A4D1A19173200B0FCAD /* night_strategy.png */; };
 		94932F4619E1ADB800B533AA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 94932F4519E1ADB800B533AA /* Settings.bundle */; };
 		94932F4919E4B54B00B533AA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94792ADD195CDE23004A6404 /* AudioToolbox.framework */; };
+		949702A71A6CAC350006A924 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 949702A61A6CAC350006A924 /* LaunchScreen.xib */; };
+		949702A91A6CAC9B0006A924 /* logotext.png in Resources */ = {isa = PBXBuildFile; fileRef = 949702A81A6CAC9B0006A924 /* logotext.png */; };
 		9497932E1A17CD3000876461 /* goal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9497932C1A17CD3000876461 /* goal.png */; };
 		9497932F1A17CD3000876461 /* strategy.png in Resources */ = {isa = PBXBuildFile; fileRef = 9497932D1A17CD3000876461 /* strategy.png */; };
 		949793311A17CDB200876461 /* night_goal.png in Resources */ = {isa = PBXBuildFile; fileRef = 949793301A17CDB200876461 /* night_goal.png */; };
@@ -333,6 +335,8 @@
 		94911A4D1A19173200B0FCAD /* night_strategy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = night_strategy.png; path = ../../night_strategy.png; sourceTree = "<group>"; };
 		94932F4519E1ADB800B533AA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = "Bounce Ball/Settings.bundle"; sourceTree = SOURCE_ROOT; };
 		94932F4719E4B20500B533AA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		949702A61A6CAC350006A924 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = ../LaunchScreen.xib; sourceTree = "<group>"; };
+		949702A81A6CAC9B0006A924 /* logotext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logotext.png; path = ../logotext.png; sourceTree = "<group>"; };
 		9497932C1A17CD3000876461 /* goal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goal.png; path = ../../goal.png; sourceTree = "<group>"; };
 		9497932D1A17CD3000876461 /* strategy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = strategy.png; path = ../../strategy.png; sourceTree = "<group>"; };
 		949793301A17CDB200876461 /* night_goal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = night_goal.png; path = "../../../Bounce Ball/Mode_Selection/Night_Mode/night_goal.png"; sourceTree = "<group>"; };
@@ -708,6 +712,7 @@
 				94792A911958EBCF004A6404 /* Splashscreen.m */,
 				947A9F5319589907006AE1C9 /* Menu.h */,
 				947A9F5419589907006AE1C9 /* Menu.m */,
+				949702A61A6CAC350006A924 /* LaunchScreen.xib */,
 				9410DA4D1A2D737100E2AE3D /* Classes */,
 				940339DF195F789900FD9516 /* Gameplay Scenes */,
 				94C7FEAF194E3CDF00270AE8 /* Bounce_ball.xcdatamodeld */,
@@ -720,6 +725,7 @@
 		94C7FEA8194E3CDF00270AE8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				949702A81A6CAC9B0006A924 /* logotext.png */,
 				9451F9A11A3D237D00F55A0E /* Bounce ball.entitlements */,
 				94614A741A3CC3F100FFC386 /* paste-100.png */,
 				94E526F91A3E12E8001593B2 /* paste-100-white.png */,
@@ -893,6 +899,7 @@
 				948213F81A0FF55E00B0FAAB /* night_ball.png in Resources */,
 				946E19EE1A2411780069C44B /* store_2750.png in Resources */,
 				946E19DA1A2411780069C44B /* night_angel.png in Resources */,
+				949702A71A6CAC350006A924 /* LaunchScreen.xib in Resources */,
 				945D89E319FC7F9B00218159 /* explode.sks in Resources */,
 				948213D01A0FF53100B0FAAB /* AppIcon50x50@2x.png in Resources */,
 				94792AD3195B6FEA004A6404 /* iPodiPhone5.png in Resources */,
@@ -908,6 +915,7 @@
 				946E19DB1A2411780069C44B /* night_continue.png in Resources */,
 				946E19EC1A2411780069C44B /* store_15.png in Resources */,
 				9482143E1A0FF59300B0FAAB /* credits.png in Resources */,
+				949702A91A6CAC9B0006A924 /* logotext.png in Resources */,
 				9497932E1A17CD3000876461 /* goal.png in Resources */,
 				948214151A0FF57400B0FAAB /* clockscore.png in Resources */,
 				9482143C1A0FF59300B0FAAB /* background.png in Resources */,
@@ -1192,8 +1200,8 @@
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = NO;
 				CODE_SIGN_ENTITLEMENTS = "Bounce ball/Bounce ball.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: James Cobelli (AL6H9GEC6N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: James Cobelli (AL6H9GEC6N)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

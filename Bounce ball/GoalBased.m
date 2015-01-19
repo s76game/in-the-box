@@ -480,6 +480,10 @@
 		gemCostImage.image = [UIImage imageNamed:@"gem.png"];
 		[self.view addSubview:gemCostImage];
 		
+		if (IPAD) {
+			[self adjustInterfacePause];
+		}
+		
 		
 		[UIView animateWithDuration:1.0
 							  delay:0.0
@@ -506,7 +510,18 @@
 	}
 }
 
-#pragma mark Revive Shit
+#pragma mark Revive Crap
+
+-(void)adjustInterfacePause {
+	reviveButton.frame = CGRectMake(reviveButton.frame.origin.x, reviveButton.frame.origin.y+150, reviveButton.frame.size.width, reviveButton.frame.size.height);
+	continueButton.frame = CGRectMake(continueButton.frame.origin.x, continueButton.frame.origin.y+150, continueButton.frame.size.width, continueButton.frame.size.height);
+	reviveAngel.frame = CGRectMake(reviveAngel.frame.origin.x, reviveAngel.frame.origin.y+150, reviveAngel.frame.size.width, reviveAngel.frame.size.height);
+	gemCountImage.frame = CGRectMake(gemCountImage.frame.origin.x, gemCountImage.frame.origin.y+150, gemCountImage.frame.size.width, gemCountImage.frame.size.height);
+	gemCostImage.frame = CGRectMake(gemCostImage.frame.origin.x, gemCostImage.frame.origin.y+150, gemCostImage.frame.size.width, gemCostImage.frame.size.height);
+	gemCost.frame = CGRectMake(gemCost.frame.origin.x, gemCost.frame.origin.y+150, gemCost.frame.size.width, gemCost.frame.size.height);
+	gemCount.frame = CGRectMake(gemCount.frame.origin.x, gemCount.frame.origin.y+150, gemCount.frame.size.width, gemCount.frame.size.height);
+	
+}
 
 -(void)revive {
 	
