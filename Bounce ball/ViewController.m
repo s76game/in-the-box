@@ -7,12 +7,25 @@
 //
 
 #import "ViewController.h"
+<<<<<<< HEAD
 #import "OpenConnection.h"
 @class GameCenterManager;
 
 @interface ViewController () {
 	
 	OpenConnection *_openConnection;
+=======
+
+#import "OpenConnection.h"
+
+
+@class GameCenterManager;
+
+@interface ViewController (){
+
+OpenConnection *_openConnection;
+	
+>>>>>>> development
 }
 
 @property (nonatomic) BOOL gameCenterEnabled;
@@ -66,6 +79,8 @@
 	_showsCompletionBanner = YES;
 	_banner.delegate = self;
 	
+	_openConnection = [[OpenConnection alloc] init];
+	
 	[self authenticateLocalPlayer];
 	[self retrieveAchievmentMetadata];
 	
@@ -74,6 +89,50 @@
 	
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 
+#pragma mark Notification Code
+	
+	NSString *notificationRaw = [_openConnection getStringFromURL:@"http://rybel-llc.com/in-the-box/sharing/notifications.php"];
+	NSArray *arr = [notificationRaw componentsSeparatedByString:@";"];
+	NSMutableArray *notificationsArray = [[NSMutableArray alloc] initWithArray:arr];
+	[notificationsArray removeLastObject];
+	NSMutableDictionary *notificationsDictionary = [[NSMutableDictionary alloc] init];
+	for (NSString *string in notificationsArray) {
+		
+		NSArray *listItems = [string componentsSeparatedByString:@":"];
+		
+		[notificationsDictionary setValue:[listItems objectAtIndex:1] forKey:[listItems objectAtIndex:0]];
+	}
+	
+	NSMutableArray *previous = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"notifications"]];
+
+	NSMutableArray *keys = [[NSMutableArray alloc] init];
+	for (NSString *string in notificationsDictionary) {
+		[keys addObject:string];
+	}
+	
+	for (NSString *string in keys) {
+		if (![previous containsObject: string] ) {
+			[previous addObject:string];
+			
+			NSArray *seperateTitle = [[notificationsDictionary objectForKey:string] componentsSeparatedByString:@"-"];
+			NSString *title = [seperateTitle objectAtIndex:0];
+			
+			NSArray *seperateReward = [[seperateTitle objectAtIndex:1] componentsSeparatedByString:@"="];
+			NSString *description = [seperateReward objectAtIndex:0];
+			int reward = [[seperateReward objectAtIndex:1] intValue];
+			
+			UIAlertView *notification = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@", title]
+															message:[NSString stringWithFormat:@"%@", description]
+														   delegate:self
+												  cancelButtonTitle:@"Ok"
+												  otherButtonTitles:nil];
+			[notification show];
+			
+			[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+reward forKey:@"gems"];
+			
+		}
+	}
+	[[NSUserDefaults standardUserDefaults] setObject:previous forKey:@"notifications"];
 
 #pragma mark First Launch Code
 	
@@ -91,11 +150,16 @@
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasPerformedFirstLaunch"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		
+<<<<<<< HEAD
 		// Get sharing key
 //		[[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@", [_openConnection getStringFromURL:@"http://192.168.1.246/~ryan/assign_code.php"]] forKey:@"sharingKey"];
 		
 		// Show initial sharing screen
 		
+=======
+		// Get sharing code
+		[[NSUserDefaults standardUserDefaults] setInteger:[[_openConnection getStringFromURL:@"http://rybel-llc.com/in-the-box/sharing/assign_code.php"] intValue] forKey:@"sharingKey"];
+>>>>>>> development
 		
 		// Show tutorial code goes here
 			// No Tutorial Yet :-( (maybe ever)
@@ -107,7 +171,11 @@
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]]) {
 		NSLog(@"Update launch %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]);
 		
+<<<<<<< HEAD
 		NSString *updateText = [NSString stringWithFormat:@"Update Shit"];
+=======
+		NSString *updateText = [NSString stringWithFormat:@"New sharing features \n Bug Fixes"];
+>>>>>>> development
 		
 		UIAlertView *update = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Update %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] message:[NSString stringWithFormat:@"%@", updateText] delegate:self cancelButtonTitle:@"Ok!" otherButtonTitles:nil];
 		[update show];
@@ -116,10 +184,14 @@
 	
 		
 		//Update dependant code
+<<<<<<< HEAD
 		
 		
 		
 		
+=======
+		[[NSUserDefaults standardUserDefaults] setInteger:[[_openConnection getStringFromURL:@"http://rybel-llc.com/in-the-box/sharing/assign_code.php"] intValue] forKey:@"sharingKey"];
+>>>>>>> development
 	}
 }
 	
@@ -173,8 +245,26 @@
 
 -(void)viewWillAppear:(BOOL)animated {
 	
+<<<<<<< HEAD
 	[[UIApplication sharedApplication] setStatusBarHidden:NO
 											withAnimation:UIStatusBarAnimationFade];
+=======
+#pragma mark Check for gems
+	
+	int gemsYetAwarded = [[_openConnection getStringFromURL:[NSString stringWithFormat:@"http://rybel-llc.com/in-the-box/sharing/check_gems.php?myKey=%i", (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"sharingKey"]]] intValue];
+	if (gemsYetAwarded != 0) {
+		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+gemsYetAwarded forKey:@"gems"];
+	
+		UIAlertView *gemAward = [[UIAlertView alloc] initWithTitle:@"Reward Time!"
+															   message:[NSString stringWithFormat:@"You have been awarded %i gems!", gemsYetAwarded]
+														   delegate:self
+												  cancelButtonTitle:@"Ok"
+												  otherButtonTitles:nil];
+		[gemAward show];
+	
+	}
+	
+>>>>>>> development
 	
 	
 #pragma mark Check Reward Code
@@ -188,6 +278,14 @@
 		[reward show];
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+5 forKey:@"gems"];
 		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"reward"];
+		
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ttile"
+														message:@"Message"
+													   delegate:self
+											  cancelButtonTitle:@"Ok"
+											  otherButtonTitles:nil];
+		[alert show];
+		
 	}
 	
 #pragma mark Jailbreak Check
@@ -206,6 +304,7 @@
 		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"night_rybel.png"] forState:UIControlStateNormal];
 		[_storeOutlet setBackgroundImage:[UIImage imageNamed:@"night_store_icon.png"] forState:UIControlStateNormal];
 		[_gamecenterOutlet setBackgroundImage:[UIImage imageNamed:@"night_gamecenter.png"] forState:UIControlStateNormal];
+		[_shareOutlet setBackgroundImage:[UIImage imageNamed:@"night_share.png"] forState:UIControlStateNormal];
 		[_titleOutlet setImage:[UIImage imageNamed:@"night_title.png"]];
 		[_background setImage:[UIImage imageNamed:@"night_background.png"]];
 		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -217,6 +316,7 @@
 		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"rybel.png"] forState:UIControlStateNormal];
 		[_gamecenterOutlet setBackgroundImage:[UIImage imageNamed:@"gamecenter.png"] forState:UIControlStateNormal];
 		[_storeOutlet setBackgroundImage:[UIImage imageNamed:@"store_icon.png"] forState:UIControlStateNormal];
+		[_shareOutlet setBackgroundImage:[UIImage imageNamed:@"share.png"] forState:UIControlStateNormal];
 		[_titleOutlet setImage:[UIImage imageNamed:@"title.png"]];
 		[_background setImage:[UIImage imageNamed:@"background.png"]];
 		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
@@ -260,17 +360,26 @@
 	
 #pragma mark Rate my app code
 
-	//Check if game has been played this version
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
-		if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@CHECK",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
-			// Show UIALert View
-			
-			alert=[[UIAlertView alloc]initWithTitle:@"Rate my app" message:@"Want 5 Gems? Who doesn't? Go ahead and give us a rating on the App Store and collect your reward!"
+	if (rateCount == 10) {
+		//Check if game has been played this version
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
+			if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@CHECK",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
+				// Show UIALert View
+				
+				alert=[[UIAlertView alloc]initWithTitle:@"Rate my app" message:@"Want 5 Gems? Who doesn't? Go ahead and give us a rating on the App Store and collect your reward!"
 														delegate:self cancelButtonTitle:@"Remind me later" otherButtonTitles:@"Rate it now", @"Give feedback", @"No, thanks", nil];
-			alert.tag=101;
-			[alert show];
+				alert.tag=101;
+				[alert show];
+			}
 		}
+		rateCount = 0;
+		[[NSUserDefaults standardUserDefaults] setInteger:rateCount forKey:@"rateCount"];
 	}
+	else {
+		rateCount = rateCount + 1;
+		[[NSUserDefaults standardUserDefaults] setInteger:rateCount forKey:@"rateCount"];
+	}
+	
 	
 	
 }
@@ -356,8 +465,14 @@
 	[self playSound];
 }
 
+- (IBAction)shareButton:(id)sender {
+}
+
 -(IBAction)creditsButton:(id)sender {
 	
+}
+
+- (IBAction)storeButton:(id)sender {
 }
 
 -(void)playSound {
@@ -423,7 +538,7 @@
 		 
 	 default:
 	 {
-		 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Send Failure" message:@":-("
+		 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sending Failure" message:@":-("
 														delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
 		 [alert show];
 	 }

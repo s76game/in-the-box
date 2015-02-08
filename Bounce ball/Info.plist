@@ -15,11 +15,30 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
+<<<<<<< HEAD
 	<string>2.0.1</string>
+=======
+	<string>2.1.0</string>
+>>>>>>> development
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.rybel-llc.inside-the-box</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>InsideTheBox</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
+<<<<<<< HEAD
 	<string>141210</string>
+=======
+	<string>150118</string>
+>>>>>>> development
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>
@@ -31,7 +50,7 @@
 		<string>dinbek-black.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string> </string>
+	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>iPhone</string>
 	<key>UIMainStoryboardFile~ipad</key>

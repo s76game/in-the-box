@@ -14,14 +14,17 @@
 #import <MessageUI/MessageUI.h>
 #import <iAd/iAd.h>
 
-#import "Normal.h"
-#import "NormalStrategic.h"
+#import "TimeBased.h"
+#import "GoalBased.h"
+
+
 
 NSArray *gameCenterData;
 BOOL gameCenterEnabled;
 UIAlertView *alert;
 NSString *alias;
 SystemSoundID toggle;
+int rateCount;
 
 @interface ViewController : UIViewController <GKGameCenterControllerDelegate, ADBannerViewDelegate, MFMailComposeViewControllerDelegate> {
 	
@@ -32,7 +35,10 @@ SystemSoundID toggle;
 - (IBAction)soundsButton:(id)sender;
 - (IBAction)gameTypeButton:(id)sender;
 - (IBAction)lightButton:(id)sender;
+- (IBAction)shareButton:(id)sender;
 - (IBAction)creditsButton:(id)sender;
+- (IBAction)storeButton:(id)sender;
+
 @property (strong, nonatomic) IBOutlet UIButton *modeOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *startOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *gamecenterOutlet;
@@ -40,6 +46,7 @@ SystemSoundID toggle;
 @property (strong, nonatomic) IBOutlet UIButton *lightOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *creditsOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *storeOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *shareOutlet;
 
 
 @property (strong, nonatomic) IBOutlet UIImageView *titleOutlet;

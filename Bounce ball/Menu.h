@@ -7,8 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "Normal.h"
-#import "NormalStrategic.h"
+#import "TimeBased.h"
+#import "GoalBased.h"
 
 BOOL returnToMenu;
 NSString *lastPlayed;

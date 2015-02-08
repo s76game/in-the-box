@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
 
 
 @interface AppDelegate ()
@@ -22,13 +23,39 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	
+<<<<<<< HEAD
 	// Let the device know we want to receive push notifications
 	UIUserNotificationSettings* notificationSettings = [UIUserNotificationSettings settingsForTypes: UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil];
 	[[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+=======
+	[Parse enableLocalDatastore];
+
+	[Parse setApplicationId:@"sSTfaaSPFi1CZ7wc0Fwcrxnp550PkrNXqrGLQ3IG" clientKey:@"DG998kFTyH9HlOj8XO2VCrm87vvcd39ByP8oCQee"];
+>>>>>>> development
 	
+	UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+													UIUserNotificationTypeBadge |
+													UIUserNotificationTypeSound);
+	UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+																			 categories:nil];
+	[application registerUserNotificationSettings:settings];
+	[application registerForRemoteNotifications];
 	
 	// Override point for customization after application launch.
 	return YES;
+}
+
+#pragma mark APNS
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+	// Store the deviceToken in the current installation and save it to Parse.
+	PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+	[currentInstallation setDeviceTokenFromData:deviceToken];
+	[currentInstallation saveInBackground];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+	[PFPush handlePush:userInfo];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -147,39 +174,6 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
-
--(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-	NSLog(@"My token is %@", deviceToken);
-	NSString* token = [[[[deviceToken description]
-								stringByReplacingOccurrencesOfString: @"<" withString: @""]
-							   stringByReplacingOccurrencesOfString: @">" withString: @""]
-							  stringByReplacingOccurrencesOfString: @" " withString: @""];
-	NSString *url =[NSString stringWithFormat:@"http://rybel-llc.com/apns/add.php?name=%@", token];
-	NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-	[req setHTTPMethod:@"GET"]; // This might be redundant, I'm pretty sure GET is the default value
-	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:req delegate:self];
-	[connection start];
-}
-
--(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-	NSLog(@"Failed to get token with error: %@", error);
-}
-
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
-{
-	//register to receive notifications
-	[application registerForRemoteNotifications];
-}
-
-//For interactive notification only
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
-{
-	//handle the actions
-	if ([identifier isEqualToString:@"declineAction"]){
-	}
-	else if ([identifier isEqualToString:@"answerAction"]){
-	}
-}
 
 
 
