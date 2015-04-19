@@ -157,7 +157,6 @@
 		94C7FEB1194E3CDF00270AE8 /* Bounce_ball.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94C7FEAF194E3CDF00270AE8 /* Bounce_ball.xcdatamodeld */; };
 		94C7FEB4194E3CDF00270AE8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C7FEB3194E3CDF00270AE8 /* ViewController.m */; };
 		94C7FEB7194E3CDF00270AE8 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94C7FEB5194E3CDF00270AE8 /* iPhone.storyboard */; };
-		94C7FEC5194E3CDF00270AE8 /* Bounce_ballTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C7FEC4194E3CDF00270AE8 /* Bounce_ballTests.m */; };
 		94C7FECF194E3DE600270AE8 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C7FECE194E3DE600270AE8 /* SpriteKit.framework */; };
 		94C9B6BA1979AC9F00AE4BF2 /* nightquote1.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C9B6B61979AC9F00AE4BF2 /* nightquote1.png */; };
 		94C9B6BB1979AC9F00AE4BF2 /* nightquote2.png in Resources */ = {isa = PBXBuildFile; fileRef = 94C9B6B71979AC9F00AE4BF2 /* nightquote2.png */; };
@@ -176,16 +175,6 @@
 		94E526FA1A3E12E8001593B2 /* paste-100-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 94E526F91A3E12E8001593B2 /* paste-100-white.png */; };
 		94F843DD196E4EF100461256 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F843DC196E4EF100461256 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		94C7FEBF194E3CDF00270AE8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 94C7FE9D194E3CDF00270AE8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 94C7FEA4194E3CDF00270AE8;
-			remoteInfo = "Bounce ball";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		9400629B1964AE0700B5D811 /* normalproceed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = normalproceed.png; path = ../normalproceed.png; sourceTree = "<group>"; };
@@ -351,7 +340,6 @@
 		94C7FEB2194E3CDF00270AE8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		94C7FEB3194E3CDF00270AE8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		94C7FEB6194E3CDF00270AE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/iPhone.storyboard; sourceTree = "<group>"; };
-		94C7FEBE194E3CDF00270AE8 /* Bounce ballTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bounce ballTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94C7FEC3194E3CDF00270AE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94C7FEC4194E3CDF00270AE8 /* Bounce_ballTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bounce_ballTests.m; sourceTree = "<group>"; };
 		94C7FECE194E3DE600270AE8 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
@@ -398,13 +386,6 @@
 				94792ACB1958FA17004A6404 /* QuartzCore.framework in Frameworks */,
 				948C9C011A6B3C41002A6526 /* Parse.framework in Frameworks */,
 				94C7FECF194E3DE600270AE8 /* SpriteKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		94C7FEBB194E3CDF00270AE8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,7 +668,6 @@
 			isa = PBXGroup;
 			children = (
 				94C7FEA5194E3CDF00270AE8 /* Bounce ball.app */,
-				94C7FEBE194E3CDF00270AE8 /* Bounce ballTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -804,24 +784,6 @@
 			productReference = 94C7FEA5194E3CDF00270AE8 /* Bounce ball.app */;
 			productType = "com.apple.product-type.application";
 		};
-		94C7FEBD194E3CDF00270AE8 /* Bounce ballTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 94C7FECB194E3CDF00270AE8 /* Build configuration list for PBXNativeTarget "Bounce ballTests" */;
-			buildPhases = (
-				94C7FEBA194E3CDF00270AE8 /* Sources */,
-				94C7FEBB194E3CDF00270AE8 /* Frameworks */,
-				94C7FEBC194E3CDF00270AE8 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				94C7FEC0194E3CDF00270AE8 /* PBXTargetDependency */,
-			);
-			name = "Bounce ballTests";
-			productName = "Bounce ballTests";
-			productReference = 94C7FEBE194E3CDF00270AE8 /* Bounce ballTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -840,10 +802,6 @@
 							};
 						};
 					};
-					94C7FEBD194E3CDF00270AE8 = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = 94C7FEA4194E3CDF00270AE8;
-					};
 				};
 			};
 			buildConfigurationList = 94C7FEA0194E3CDF00270AE8 /* Build configuration list for PBXProject "Inside The Box" */;
@@ -860,7 +818,6 @@
 			projectRoot = "";
 			targets = (
 				94C7FEA4194E3CDF00270AE8 /* Bounce ball */,
-				94C7FEBD194E3CDF00270AE8 /* Bounce ballTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1009,13 +966,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		94C7FEBC194E3CDF00270AE8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1039,23 +989,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		94C7FEBA194E3CDF00270AE8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				94C7FEC5194E3CDF00270AE8 /* Bounce_ballTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		94C7FEC0194E3CDF00270AE8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 94C7FEA4194E3CDF00270AE8 /* Bounce ball */;
-			targetProxy = 94C7FEBF194E3CDF00270AE8 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		948214551A0FF5AA00B0FAAB /* DS1.ttf */ = {
@@ -1201,7 +1135,7 @@
 				CLANG_WARN_INT_CONVERSION = NO;
 				CODE_SIGN_ENTITLEMENTS = "Bounce ball/Bounce ball.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: James Cobelli (AL6H9GEC6N)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: James Cobelli (AL6H9GEC6N)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: James Cobelli (AL6H9GEC6N)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1218,42 +1152,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		94C7FECC194E3CDF00270AE8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Bounce ball.app/Bounce ball";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Bounce ballTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
-		94C7FECD194E3CDF00270AE8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Bounce ball.app/Bounce ball";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Bounce ballTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
 		};
@@ -1274,15 +1172,6 @@
 			buildConfigurations = (
 				94C7FEC9194E3CDF00270AE8 /* Debug */,
 				94C7FECA194E3CDF00270AE8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		94C7FECB194E3CDF00270AE8 /* Build configuration list for PBXNativeTarget "Bounce ballTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				94C7FECC194E3CDF00270AE8 /* Debug */,
-				94C7FECD194E3CDF00270AE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
