@@ -20,7 +20,6 @@
 
 @property (nonatomic) id <sceneDelegate, resetSKScene, shareTimeDelegate> delegate;
 
-
 @end
 
 

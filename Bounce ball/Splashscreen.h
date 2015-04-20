@@ -9,10 +9,9 @@
 #import "ViewController.h"
 
 @interface Splashscreen : ViewController{
-	
 	BOOL moved;
-	
 }
+
 @property (strong, nonatomic) IBOutlet UIImageView *splashImage;
 @property (strong, nonatomic) IBOutlet UIImageView *quote;
 @property (strong, nonatomic) IBOutlet UIImageView *quote2;

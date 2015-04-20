@@ -15,17 +15,15 @@
 @implementation Menu
 
 
-- (void)viewWillAppear:(BOOL)animated
-{
-	// Store game has been played for this version
+- (void)viewWillAppear:(BOOL)animated {
+	// Save that game has been played
 	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
 	
-	
+	// Determine screen size
 	screenRect = [[UIScreen mainScreen] bounds];
 	screenSize = screenRect.size;
 	
-	
-	
+	// Load right game mode
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"normal"]) {
 		[self normal];
 	}
@@ -35,10 +33,13 @@
 }
 
 - (void)viewDidLoad {
-	
 	[self setNotificationListeners];
 	[super viewDidLoad];
+	
+	// Set Debugging view here
 	sceneView = (SKView *) self.view;
+	
+	// Check settings to show FPS or naw
 	sceneView.showsFPS = [[NSUserDefaults standardUserDefaults] boolForKey:@"FPS"];
 }
 
@@ -61,14 +62,8 @@
 											   object:nil];
 }
 
-
-- (void)didReceiveMemoryWarning {
-	[super didReceiveMemoryWarning];
-	// Dispose of any resources that can be recreated.
-	NSLog(@"Memory Warning!!!");
-}
-
 -(void)normal {
+	// Load TimeBased Game
 	TimeBased* scene = [[TimeBased alloc] initWithSize:screenSize];
 	spriteView = (SKView *) self.view;
 	lastPlayed = @"normal";
@@ -78,6 +73,7 @@
 
 
 -(void)strategy {
+	// Load GoalBased Game
 	GoalBased* scene = [[GoalBased alloc] initWithSize:screenSize];
 	spriteView = (SKView *) self.view;
 	lastPlayed = @"strategy";
@@ -87,13 +83,13 @@
 
 
 
--(void)showDifferentView
-{
+-(void)showDifferentView {
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)showScene {
 	if ([lastPlayed isEqualToString:@"strategy"]) {
+		// Load GoalBased game
 		GoalBased* hello = [[GoalBased alloc] initWithSize:screenSize];
 		spriteView = (SKView *) self.view;
 		lastPlayed = @"strategy";
@@ -101,6 +97,7 @@
 		[spriteView presentScene: hello];
 	}
 	else if ([lastPlayed isEqualToString:@"normal"]) {
+		// Load TimeBased game
 		TimeBased* hello = [[TimeBased alloc] initWithSize:screenSize];
 		spriteView = (SKView *) self.view;
 		lastPlayed = @"normal";
@@ -108,6 +105,8 @@
 		[spriteView presentScene: hello];
 	}
 }
+
+#pragma mark - Sharing
 
 -(void)showShareTime {
 	

@@ -27,17 +27,17 @@ SystemSoundID toggle;
 int rateCount;
 
 @interface ViewController : UIViewController <GKGameCenterControllerDelegate, ADBannerViewDelegate, MFMailComposeViewControllerDelegate> {
-	
-	
 }
+
+
 - (IBAction)startButton:(id)sender;
 - (IBAction)gameCenterButton:(id)sender;
 - (IBAction)soundsButton:(id)sender;
 - (IBAction)gameTypeButton:(id)sender;
 - (IBAction)lightButton:(id)sender;
-- (IBAction)shareButton:(id)sender;
 - (IBAction)creditsButton:(id)sender;
 - (IBAction)storeButton:(id)sender;
+
 
 @property (strong, nonatomic) IBOutlet UIButton *modeOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *startOutlet;
@@ -46,7 +46,6 @@ int rateCount;
 @property (strong, nonatomic) IBOutlet UIButton *lightOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *creditsOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *storeOutlet;
-@property (strong, nonatomic) IBOutlet UIButton *shareOutlet;
 
 
 @property (strong, nonatomic) IBOutlet UIImageView *titleOutlet;

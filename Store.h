@@ -7,21 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
-NSMutableArray *purchases;
-
 #import <StoreKit/StoreKit.h>
 
-
+NSMutableArray *purchases;
 int gems;
 
 @interface Store : UIViewController <SKProductsRequestDelegate, SKPaymentTransactionObserver> {
-
 	SKProduct *purchaseProduct;
 	SKProductsRequest *productsRequest;
 }
-@property (strong, nonatomic) IBOutlet UIScrollView *Scroller;
 
+// Purchase Buttons
 @property (strong, nonatomic) IBOutlet UIButton *Gem15Outlet;
 - (IBAction)Gem15Action:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *Gem35Outlet;
@@ -41,13 +37,13 @@ int gems;
 @property (strong, nonatomic) IBOutlet UIButton *Gem2750Outlet;
 - (IBAction)Gem2750Action:(id)sender;
 
+
 @property (strong, nonatomic) IBOutlet UIButton *ExitOutlet;
 - (IBAction)ExitAction:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UIImageView *background;
-
 @property (strong, nonatomic) IBOutlet UILabel *gemCount;
-
+@property (strong, nonatomic) IBOutlet UIScrollView *Scroller;
 @property (strong, nonatomic) IBOutlet UILabel *storeLabel;
 
 @end

@@ -17,13 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	// Create ScrollView for buttons
 	[_Scroller setScrollEnabled:YES];
 	[_Scroller setContentSize:CGSizeMake(320, 520)];
 	
+	// Get current count of gems
 	gems = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"];
-	
 	[self updateGems];
 	
+	// Update Interface
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		[_Gem15Outlet setBackgroundImage:[UIImage imageNamed:@"night_store_15.png"] forState:UIControlStateNormal];
 		[_Gem35Outlet setBackgroundImage:[UIImage imageNamed:@"night_store_35.png"] forState:UIControlStateNormal];
@@ -55,72 +57,53 @@
 		_storeLabel.textColor = [UIColor blackColor];
 	}
 	
+	// Init StoreKit
 	[[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-	
 }
 
 -(void)updateGems {
-	
 	_gemCount.text = [NSString stringWithFormat:@"%i", gems];
 	[[NSUserDefaults standardUserDefaults] setInteger:gems forKey:@"gems"];
-	
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-- (void)requestProductData:(NSString *)identifier
-{
+-(void)requestProductData:(NSString *)identifier {
 	NSSet *productIdentifiers = [NSSet setWithObject:[NSString stringWithFormat:@"com.rybel.IAP.%@", identifier]];
 	productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
 	productsRequest.delegate = self;
 	[productsRequest start];
 }
 
-#pragma mark SKProductsRequestDelegate methods
+#pragma mark - StoreKit
 
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
-{
+-(void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
 	NSArray *products = response.products;
 	purchaseProduct = [products count] == 1 ? [products firstObject] : nil;
-	if (purchaseProduct)
-	{
-		
-		NSLog(@"Product title: %@" , purchaseProduct.localizedTitle);
-		NSLog(@"Product id: %@" , purchaseProduct.productIdentifier);
-		
-		
+	if (purchaseProduct) {
+		NSLog(@"Store: Product title: %@" , purchaseProduct.localizedTitle);
+		NSLog(@"Store: Product id: %@" , purchaseProduct.productIdentifier);
 		SKProduct *product = purchaseProduct;
 		SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:product];
 		[[SKPaymentQueue defaultQueue] addPayment:payment];
-		
 	}
-	
-	for (NSString *invalidProductId in response.invalidProductIdentifiers)
-	{
-		NSLog(@"Invalid product id: %@" , invalidProductId);
+	for (NSString *invalidProductId in response.invalidProductIdentifiers) {
+		NSLog(@"Store: Invalid product id: %@" , invalidProductId);
 	}
 }
 
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
-{
+-(void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions {
 	for (SKPaymentTransaction *transaction in transactions) {
 		switch (transaction.transactionState) {
-				// Call the appropriate custom method for the transaction state.
 			case SKPaymentTransactionStatePurchasing:
-				NSLog(@"Purchasing");
+				NSLog(@"Store: Purchasing");
 				break;
 			case SKPaymentTransactionStateDeferred:
-				NSLog(@"Deferred");
+				NSLog(@"Store: Deferred");
 				break;
 			case SKPaymentTransactionStateFailed:
-				NSLog(@"Failed");
+				NSLog(@"Store: Failed");
 				break;
 			case SKPaymentTransactionStatePurchased: {
-				NSLog(@"Purchased");
+				NSLog(@"Store: Purchased");
 				[[SKPaymentQueue defaultQueue]finishTransaction:transaction];
 				NSString* quantity = [[purchaseProduct.localizedTitle stringByReplacingOccurrencesOfString:@"Gems" withString:@""] stringByReplacingOccurrencesOfString:@" " withString: @""];
 				gems = gems + (int)[quantity integerValue];
@@ -128,47 +111,58 @@
 				break;
 			}
 			case SKPaymentTransactionStateRestored:
-				NSLog(@"Restored");
+				NSLog(@"Store: Restored");
 				break;
 			default:
 				// For debugging
-				NSLog(@"Unexpected transaction state %@", @(transaction.transactionState));
+				NSLog(@"Store: Unexpected transaction state %@", @(transaction.transactionState));
 				break;
 		}
 	}
 }
 
 
-- (IBAction)Gem15Action:(id)sender {
+
+#pragma mark - Buttons
+
+-(IBAction)Gem15Action:(id)sender {
 	[self requestProductData:@"gem_15"];
-	
 }
-- (IBAction)Gem35Action:(id)sender {
+
+-(IBAction)Gem35Action:(id)sender {
 	[self requestProductData:@"gem_35"];
 }
-- (IBAction)Gem75Action:(id)sender {
+
+-(IBAction)Gem75Action:(id)sender {
 	[self requestProductData:@"gem_75"];
 }
-- (IBAction)Gem190Action:(id)sender {
+
+-(IBAction)Gem190Action:(id)sender {
 	[self requestProductData:@"gem_190"];
 }
-- (IBAction)Gem285Action:(id)sender {
+
+-(IBAction)Gem285Action:(id)sender {
 	[self requestProductData:@"gem_285"];
 }
-- (IBAction)Gem400Action:(id)sender {
+
+-(IBAction)Gem400Action:(id)sender {
 	[self requestProductData:@"gem_400"];
 }
-- (IBAction)Gem500Action:(id)sender {
+
+-(IBAction)Gem500Action:(id)sender {
 	[self requestProductData:@"gem_500"];
 }
-- (IBAction)Gem1250Action:(id)sender {
+
+-(IBAction)Gem1250Action:(id)sender {
 	[self requestProductData:@"gem_1250"];
 }
-- (IBAction)Gem2750Action:(id)sender {
+
+-(IBAction)Gem2750Action:(id)sender {
 	[self requestProductData:@"gem_2750"];
 }
-- (IBAction)ExitAction:(id)sender {
-	 [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
+
+-(IBAction)ExitAction:(id)sender {
+	[[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 

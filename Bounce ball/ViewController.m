@@ -8,19 +8,12 @@
 
 #import "ViewController.h"
 
-#import "OpenConnection.h"
-
-
 @class GameCenterManager;
 
 @interface ViewController (){
-
-OpenConnection *_openConnection;
-	
 }
 
 @property (nonatomic) BOOL gameCenterEnabled;
-@property(assign, nonatomic) BOOL showsCompletionBanner;
 -(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard;
 -(void)authenticateLocalPlayer;
 
@@ -28,104 +21,22 @@ OpenConnection *_openConnection;
 @implementation ViewController
 
 
-
-#pragma mark iAd Code
-
--(void)bannerViewDidLoadAd:(ADBannerView *)banner {
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0];
-	[banner setAlpha:1];
-	[UIView commitAnimations];
-	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"adsLoaded"];
-}
-
--(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0];
-	[banner setAlpha:0];
-	[UIView commitAnimations];
-	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"adsLoaded"];
-}
-
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if (self) {
-		// Custom initialization
-	}
-	return self;
-}
-
-
-- (void)viewDidLoad
-{
-	
+-(void)viewDidLoad {
 	[super viewDidLoad];
 	
-	_gameCenterEnabled = NO;
-	_showsCompletionBanner = YES;
 	_banner.delegate = self;
 	
-	_openConnection = [[OpenConnection alloc] init];
-	
+	// Activate GameCenter
+	_gameCenterEnabled = NO;
 	[self authenticateLocalPlayer];
 	[self retrieveAchievmentMetadata];
 
 	
 #define IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
-
-#pragma mark Notification Code
 	
-	NSString *notificationRaw = [_openConnection getStringFromURL:@"http://rybel-llc.com/in-the-box/sharing/notifications.php"];
-	NSArray *arr = [notificationRaw componentsSeparatedByString:@";"];
-	NSMutableArray *notificationsArray = [[NSMutableArray alloc] initWithArray:arr];
-	[notificationsArray removeLastObject];
-	NSMutableDictionary *notificationsDictionary = [[NSMutableDictionary alloc] init];
-	for (NSString *string in notificationsArray) {
-		
-		NSArray *listItems = [string componentsSeparatedByString:@":"];
-		
-		[notificationsDictionary setValue:[listItems objectAtIndex:1] forKey:[listItems objectAtIndex:0]];
-	}
-	
-	NSMutableArray *previous = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"notifications"]];
-
-	NSMutableArray *keys = [[NSMutableArray alloc] init];
-	for (NSString *string in notificationsDictionary) {
-		[keys addObject:string];
-	}
-	
-	for (NSString *string in keys) {
-		if (![previous containsObject: string] ) {
-			[previous addObject:string];
-			
-			NSArray *seperateTitle = [[notificationsDictionary objectForKey:string] componentsSeparatedByString:@"-"];
-			NSString *title = [seperateTitle objectAtIndex:0];
-			
-			NSArray *seperateReward = [[seperateTitle objectAtIndex:1] componentsSeparatedByString:@"="];
-			NSString *description = [seperateReward objectAtIndex:0];
-			int reward = [[seperateReward objectAtIndex:1] intValue];
-			
-			UIAlertView *notification = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@", title]
-															message:[NSString stringWithFormat:@"%@", description]
-														   delegate:self
-												  cancelButtonTitle:@"Ok"
-												  otherButtonTitles:nil];
-			[notification show];
-			
-			[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+reward forKey:@"gems"];
-			
-		}
-	}
-	[[NSUserDefaults standardUserDefaults] setObject:previous forKey:@"notifications"];
-
-	
-#pragma mark First Launch Code
+	// First Launch Code
 	
 	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasPerformedFirstLaunch"]) {
-		
-		NSLog(@"First Launch!");
 		
 		// Set toBePlayed to STRAGETY
 		[[NSUserDefaults standardUserDefaults] setObject:@"strategy" forKey:@"toBePlayed"];
@@ -137,88 +48,56 @@ OpenConnection *_openConnection;
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasPerformedFirstLaunch"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		
-		// Get sharing code
-		[[NSUserDefaults standardUserDefaults] setInteger:[[_openConnection getStringFromURL:@"http://rybel-llc.com/in-the-box/sharing/assign_code.php"] intValue] forKey:@"sharingKey"];
-		
 		// Show tutorial code goes here
 			// No Tutorial Yet :-( (maybe ever)
 		
 	}
-	else {
-#pragma mark Update First Launch
-	
-	if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]]) {
-		NSLog(@"Update launch %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]);
-		
-		NSString *updateText = [NSString stringWithFormat:@"New sharing features \n Bug Fixes"];
-		
-		UIAlertView *update = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Update %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] message:[NSString stringWithFormat:@"%@", updateText] delegate:self cancelButtonTitle:@"Ok!" otherButtonTitles:nil];
-		[update show];
-		
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]];
-	
-		
-		//Update dependant code
-		[[NSUserDefaults standardUserDefaults] setInteger:[[_openConnection getStringFromURL:@"http://rybel-llc.com/in-the-box/sharing/assign_code.php"] intValue] forKey:@"sharingKey"];
-	}
-}
-	}
-
-- (void)didReceiveMemoryWarning
-{
-	[super didReceiveMemoryWarning];
-	// Dispose of any resources that can be recreated.
 }
 
+-(NSString *)getStringFromURL:(NSString *)url {
+	
+	NSError *error;
+	NSString *stringFromFileAtURL = [[NSString alloc]
+									 initWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",url]]
+									 encoding:NSUTF8StringEncoding
+									 error:&error];
+	if (stringFromFileAtURL == nil) {
+		// an error occurred
+		NSLog(@"Error reading file at %@\n%@", url, [error localizedFailureReason]);
+		
+	}
+	return stringFromFileAtURL;
+}
+
+#pragma mark - iAd
+
+-(void)bannerViewWillLoadAd:(ADBannerView *)banner{
+}
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner{
+	
+	// Show the ad banner.
+	[UIView animateWithDuration:0.5 animations:^{
+		_banner.alpha = 1.0;
+	}];
+}
+-(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave{
+	
+	return YES;
+}
+-(void)bannerViewActionDidFinish:(ADBannerView *)banner{
+}
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error{
+	NSLog(@"Unable to show ads. Error: %@", [error localizedDescription]);
+	
+	// Hide the ad banner.
+	[UIView animateWithDuration:0.5 animations:^{
+		_banner.alpha = 0.0;
+	}];
+}
 
 -(void)viewWillAppear:(BOOL)animated {
 	
-#pragma mark Check for gems
-	
-	int gemsYetAwarded = [[_openConnection getStringFromURL:[NSString stringWithFormat:@"http://rybel-llc.com/in-the-box/sharing/check_gems.php?myKey=%i", (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"sharingKey"]]] intValue];
-	if (gemsYetAwarded != 0) {
-		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+gemsYetAwarded forKey:@"gems"];
-	
-		UIAlertView *gemAward = [[UIAlertView alloc] initWithTitle:@"Reward Time!"
-															   message:[NSString stringWithFormat:@"You have been awarded %i gems!", gemsYetAwarded]
-														   delegate:self
-												  cancelButtonTitle:@"Ok"
-												  otherButtonTitles:nil];
-		[gemAward show];
-	
-	}
-	
-	
-	
-#pragma mark Check Reward Code
-	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"reward"]) {
-		UIAlertView *reward = [[UIAlertView alloc] initWithTitle:@"5 Gems"
-														 message:@"Thanks for giving us a rating! Here is your reward!"
-														delegate:self
-											   cancelButtonTitle:@"Ok"
-											   otherButtonTitles:nil];
-		[reward show];
-		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+5 forKey:@"gems"];
-		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"reward"];
-		
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ttile"
-														message:@"Message"
-													   delegate:self
-											  cancelButtonTitle:@"Ok"
-											  otherButtonTitles:nil];
-		[alert show];
-		
-	}
-	
-#pragma mark Jailbreak Check
-	NSString *filePath = @"/Applications/Cydia.app";
-	if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
-	{
-		NSLog(@"Jailbroken!!!!");
-		NSURL* url = [NSURL URLWithString:@"cydia://package/com.example.package"];
-		[[UIApplication sharedApplication] canOpenURL:url];
-	}
+	// Update Interface State
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		// Night UI code
@@ -227,7 +106,6 @@ OpenConnection *_openConnection;
 		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"night_rybel.png"] forState:UIControlStateNormal];
 		[_storeOutlet setBackgroundImage:[UIImage imageNamed:@"night_store_icon.png"] forState:UIControlStateNormal];
 		[_gamecenterOutlet setBackgroundImage:[UIImage imageNamed:@"night_gamecenter.png"] forState:UIControlStateNormal];
-		[_shareOutlet setBackgroundImage:[UIImage imageNamed:@"night_share.png"] forState:UIControlStateNormal];
 		[_titleOutlet setImage:[UIImage imageNamed:@"night_title.png"]];
 		[_background setImage:[UIImage imageNamed:@"night_background.png"]];
 		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -239,13 +117,12 @@ OpenConnection *_openConnection;
 		[_creditsOutlet setBackgroundImage:[UIImage imageNamed:@"rybel.png"] forState:UIControlStateNormal];
 		[_gamecenterOutlet setBackgroundImage:[UIImage imageNamed:@"gamecenter.png"] forState:UIControlStateNormal];
 		[_storeOutlet setBackgroundImage:[UIImage imageNamed:@"store_icon.png"] forState:UIControlStateNormal];
-		[_shareOutlet setBackgroundImage:[UIImage imageNamed:@"share.png"] forState:UIControlStateNormal];
 		[_titleOutlet setImage:[UIImage imageNamed:@"title.png"]];
 		[_background setImage:[UIImage imageNamed:@"background.png"]];
 		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 	}
 	
-	
+	// Game Mode Toggle Button
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"strategy"]) {
 		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 			[_modeOutlet setBackgroundImage:[UIImage imageNamed:@"night_strategy.png"] forState:UIControlStateNormal];
@@ -263,6 +140,7 @@ OpenConnection *_openConnection;
 		}
 	}
 	
+	// Sound Toggle Button
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
 		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 			[_soundOutlet setBackgroundImage:[UIImage imageNamed:@"night_sound_on.png"] forState:UIControlStateNormal];
@@ -281,7 +159,7 @@ OpenConnection *_openConnection;
 	}
 	
 	
-#pragma mark Rate my app code
+	//Rate My App
 
 	if (rateCount == 10) {
 		//Check if game has been played this version
@@ -289,7 +167,7 @@ OpenConnection *_openConnection;
 			if (![[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@CHECK",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]]) {
 				// Show UIALert View
 				
-				alert=[[UIAlertView alloc]initWithTitle:@"Rate my app" message:@"Want 5 Gems? Who doesn't? Go ahead and give us a rating on the App Store and collect your reward!"
+				alert=[[UIAlertView alloc]initWithTitle:@"Rate my app" message:@"Want to leave a rating on the App Store?"
 														delegate:self cancelButtonTitle:@"Remind me later" otherButtonTitles:@"Rate it now", @"Give feedback", @"No, thanks", nil];
 				alert.tag=101;
 				[alert show];
@@ -308,34 +186,35 @@ OpenConnection *_openConnection;
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	// Rate my app
 	if (alert.tag==101) {
+		// Remind me later
 		if (buttonIndex == 0) {
-			NSLog(@"Remind me later");
 			[[NSUserDefaults standardUserDefaults] setBool:NO forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
 		}
+		// Rate it now
 		else if (buttonIndex == 1){
-			NSLog(@"Rate it now");
 			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
 			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"reward"];
 			// Open app App Store URL
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://appsto.re/us/i1fu1.i"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://appstore.com/inthebox"]];
 		}
+		// Leave feedback
 		else if (buttonIndex == 2) {
 			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
-			NSLog(@"Feedback");
 			[self mail];
 		}
+		// No Thanks
 		else {
-			NSLog(@"No, thanks");
 			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@CHECK", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
 		}
 	}
 }
 
+#pragma mark - Buttons
 
-#pragma mark Buttons
 - (IBAction)startButton:(id)sender {
-	
+	// Play Game
 	ViewController *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"gamePlay"];
 	
 	CATransition* transition = [CATransition animation];
@@ -347,12 +226,10 @@ OpenConnection *_openConnection;
 	
 	[self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
 	[self.navigationController pushViewController:menu animated:NO];
-	
-	
 }
 
-
 -(IBAction)soundsButton:(id)sender {
+	// Toggle Sounds
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
 		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"soundFX"];
 	}
@@ -364,6 +241,7 @@ OpenConnection *_openConnection;
 }
 
 -(IBAction)gameTypeButton:(id)sender {
+	// Toggle Game Modes
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"toBePlayed"] isEqualToString:@"strategy"]) {
 		[[NSUserDefaults standardUserDefaults] setObject:@"normal" forKey:@"toBePlayed"];
 	}
@@ -375,6 +253,7 @@ OpenConnection *_openConnection;
 }
 
 -(IBAction)lightButton:(id)sender {
+	// Toggle Night Mode
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		[[NSUserDefaults standardUserDefaults] setObject:@"normal" forKey:@"UI"];
 	}
@@ -385,102 +264,87 @@ OpenConnection *_openConnection;
 	[self playSound];
 }
 
-- (IBAction)shareButton:(id)sender {
-}
-
 -(IBAction)creditsButton:(id)sender {
-	
 }
 
 - (IBAction)storeButton:(id)sender {
 }
 
+
 -(void)playSound {
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
-		// Create the sound ID
 		NSString* path = [[NSBundle mainBundle]
 						  pathForResource:@"toggle_sound" ofType:@"mp3"];
 		NSURL* url = [NSURL fileURLWithPath:path];
 		AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &toggle);
-		
-		// Play the sound
 		AudioServicesPlaySystemSound(toggle);
 	}
 	else {
+		// Log to console when sound disabled
 		NSLog(@"***Toggle Sound***");
 	}
 }
 
 -(void)mail {
-	if ([MFMailComposeViewController canSendMail])
-	{
+	if ([MFMailComposeViewController canSendMail]) {
 		MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
-		
 		mailer.mailComposeDelegate = self;
-		
 		[mailer setSubject:@"Feedback/Suggestions For Inside The Box"];
-		
 		NSArray *toRecipients = [NSArray arrayWithObjects:@"rybelllc@gmail.com", nil];
 		[mailer setToRecipients:toRecipients];
-		
-		NSString *emailBody = @"Give us your feedback or suggestions here!";
+		NSString *emailBody = @"Leave your feedback or suggestions here!";
 		[mailer setMessageBody:emailBody isHTML:YES];
-		
 		[self presentViewController:mailer animated:YES completion:nil];
 	}
-	else
-	{
+	else {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mail Incompatibility"
-														message:@"The dark lords of email have frowned upon you"
+														message:@"We were unable to send your email :-("
 													   delegate:nil
 											  cancelButtonTitle:@"Ok"
 											  otherButtonTitles: nil];
 		[alert show];
 	}
 }
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
-{
- // Notifies users about errors associated with the interface
- switch (result)
- {
-	 case MFMailComposeResultCancelled:
-		 NSLog(@"Cancelled");
-		 break;
-	 case MFMailComposeResultSaved:
-		 NSLog(@"Saved");
-		 break;
-	 case MFMailComposeResultSent:
-		 NSLog(@"Sent");
-		 break;
-	 case MFMailComposeResultFailed:
-		 NSLog(@"Failed");
-		 break;
-		 
-	 default:
-	 {
-		 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sending Failure" message:@":-("
-														delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-		 [alert show];
-	 }
-		 
-		 break;
- }
- [self dismissViewControllerAnimated:YES completion:nil];
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+	// Notifies users about errors associated with the interface
+	switch (result) {
+		case MFMailComposeResultCancelled:
+			NSLog(@"Mail: Cancelled");
+			break;
+		case MFMailComposeResultSaved:
+			NSLog(@"Mail: Saved");
+			break;
+		case MFMailComposeResultSent:
+			NSLog(@"Mail: Sent");
+			break;
+		case MFMailComposeResultFailed:
+			NSLog(@"Mail: Failed");
+			break;
+		default: {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sending Failure" message:@":-(" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+			[alert show];
+			}
+			break;
+	}
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - GameCenter
 
-- (IBAction)gameCenterButton:(id)sender {
+-(IBAction)gameCenterButton:(id)sender {
+	// Check for GameCenter authorization
 	if ([GKLocalPlayer localPlayer].authenticated == NO) {
-		UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Game Center not enabled!"
-														  message:@"Please login for Game Center use"
+		UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Game Center Not Enabled!"
+														  message:@"Please login for Game Center use."
 														 delegate:nil
-												cancelButtonTitle:@"OK"
+												cancelButtonTitle:@"Ok"
 												otherButtonTitles:nil];
 		[message show];
-	} else {
+	}
+	else {
 		GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
-		if (gameCenterController != nil)
-		{
+		if (gameCenterController != nil) {
 			gameCenterController.gameCenterDelegate = self;
 			gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
 			UIViewController *vc = self.view.window.rootViewController;
@@ -489,14 +353,9 @@ OpenConnection *_openConnection;
 	}
 }
 
-#pragma mark Game Center
-
--(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
-{
-	[gameCenterViewController dismissViewControllerAnimated:YES completion:^{
-		
-	}];
-	
+-(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController {
+	// Dismiss GameCenter Leaderboard on user action
+	[gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)showLeaderboard {
@@ -504,11 +363,10 @@ OpenConnection *_openConnection;
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
+-(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard {
+	// Get Leaderboard Information
 	GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
-	
 	gcViewController.gameCenterDelegate = self;
-	
 	if (shouldShowLeaderboard) {
 		gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
 		gcViewController.leaderboardIdentifier = @"com.rybel.in-the-box";;
@@ -516,25 +374,28 @@ OpenConnection *_openConnection;
 	else{
 		gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
 	}
-	
 	[self presentViewController:gcViewController animated:YES completion:nil];
 }
 
+-(void)retrieveAchievmentMetadata {
+	// Get Achievement Infomation
+	[GKAchievementDescription loadAchievementDescriptionsWithCompletionHandler: ^(NSArray *descriptions, NSError *error) {
+		if (descriptions != nil) {
+			gameCenterData = descriptions;
+		}
+	}];
+}
 
 -(void)authenticateLocalPlayer{
 	GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
-	
 	localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error){
 		if (viewController != nil) {
 			[self presentViewController:viewController animated:YES completion:nil];
 		}
-		else{
+		else {
 			if ([GKLocalPlayer localPlayer].authenticated) {
 				_gameCenterEnabled = YES;
-				
-				// Get the default leaderboard identifier.
 				[[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
-					
 					if (error != nil) {
 						NSLog(@"%@", [error localizedDescription]);
 					}
@@ -542,14 +403,10 @@ OpenConnection *_openConnection;
 						leaderboardIdentifier = @"com.rybel.in-the-box";;
 					}
 				}];
-				
-				NSLog(@"Gamecenter Enabled");
 				alias = [GKLocalPlayer localPlayer].alias;
-				[self specialUsernames];
 				gameCenterEnabled = YES;
 			}
-			
-			else{
+			else {
 				NSLog(@"Gamecenter Not Enabled");
 				gameCenterEnabled = NO;
 			}
@@ -557,45 +414,15 @@ OpenConnection *_openConnection;
 	};
 }
 
--(void)specialUsernames {
-	if ([alias isEqualToString:@"Alpha-Rybel"]) {
-		NSLog(@"SANDBOX");
-		[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-	}
-	else if ([alias isEqualToString:@"Camille hensley"]) {
-		[[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
-	}
-	else if ([alias isEqualToString:@"innovator013"]) {
-		[[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
-	}
-	else if ([alias isEqualToString:@"_!(ConnorC)!_"]) {
-		[[UIApplication sharedApplication] setApplicationIconBadgeNumber:69];
-	}
-}
-
-
-- (void) resetAchievements
-{
+// Used in Development Only
+-(void)resetAchievements {
+	// Should never be called
 	NSLog(@"Attempt to reset game center achievements");
-	// Clear all progress saved on Game Center.
-	[GKAchievement resetAchievementsWithCompletionHandler:^(NSError *error)
-	 {
+	[GKAchievement resetAchievementsWithCompletionHandler:^(NSError *error) {
 		 if (error != nil){
 			 NSLog(@"Error: %@", error);
 		 }
-			 
     }];
-}
-
-- (void) retrieveAchievmentMetadata
-{
-	[GKAchievementDescription loadAchievementDescriptionsWithCompletionHandler:
-	 ^(NSArray *descriptions, NSError *error) {
-		 if (descriptions != nil)
-		 {
-			 gameCenterData = descriptions;
-		 }
-	 }];
 }
 
 @end

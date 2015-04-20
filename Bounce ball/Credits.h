@@ -10,11 +10,8 @@
 #import <iAd/iAd.h>
 #import <MessageUI/MessageUI.h>
 
-@protocol test <NSObject>
--(void)showLeaderboard;
-@end
-
 @interface Credits : UIViewController <NSObject, MFMailComposeViewControllerDelegate>
+
 @property (strong, nonatomic) IBOutlet UIImageView *credits;
 @property (strong, nonatomic) IBOutlet UIImageView *creditsBackground;
 @property (strong, nonatomic) IBOutlet UIButton *backOutlet;
