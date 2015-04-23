@@ -29,16 +29,11 @@ float totalScore;
 int countingAnimation;
 BOOL night;
 BOOL touchStarted;
-
 int timesRevived;
 int triggered;
 int previousCost;
-
-int gemSize;
 BOOL gemSpawned;
-
 BOOL gameEnded;
-
 int minutesTimer;
 int secondsTimer;
 
@@ -96,7 +91,6 @@ static const uint32_t gemCategory     =  0x1 << 5;
 	UILabel *score;
 	CGFloat screenWidth;
 	CGFloat screenHeight;
-	UIButton *pause;
 	UILabel *tapToStart;
 	
 	SKAction *wait;

@@ -27,7 +27,6 @@
 												 name:@"becomeActive" object:nil];
 	
 	
-	
 	// Set default values/reset
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		night = YES;
@@ -102,9 +101,9 @@
 	[self checkGemSpawn];
 	[self setStartingDirection];
 
-	UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(pauseButton:)];
-	singleTap.numberOfTapsRequired = 3;
-	[self.view addGestureRecognizer:singleTap];
+	UITapGestureRecognizer *tripleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(pauseButton:)];
+	tripleTap.numberOfTapsRequired = 3;
+	[self.view addGestureRecognizer:tripleTap];
 	
 	[NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(tapToStart) userInfo:nil repeats:NO];
 }
@@ -308,6 +307,7 @@
 	else {
 		textureName = @"ball.png";
 	}
+	
 	// Create physics body ball
 	SKSpriteNode *ballSprite = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"%@", textureName]];
 	ballSprite.size = CGSizeMake(75*startiPad, 75*startiPad);
@@ -367,7 +367,7 @@
 	}
 }
 
-#pragma mark Game Over Code
+#pragma mark - Game Over Code
 
 -(void)gameOver {
 	
@@ -449,8 +449,7 @@
 		[UIView animateWithDuration:1.0
 							  delay:0.0
 							options: UIViewAnimationOptionCurveEaseOut
-						 animations:^
-		 {
+						 animations:^ {
 			 reviveButton.frame = CGRectMake(reviveButton.frame.origin.x, reviveButton.frame.origin.y-screenHeight, reviveButton.frame.size.width, reviveButton.frame.size.height);
 			 continueButton.frame = CGRectMake(continueButton.frame.origin.x, continueButton.frame.origin.y-screenHeight, continueButton.frame.size.width, continueButton.frame.size.height);
 			 reviveAngel.frame = CGRectMake(reviveAngel.frame.origin.x, reviveAngel.frame.origin.y-screenHeight, reviveAngel.frame.size.width, reviveAngel.frame.size.height);
@@ -458,14 +457,12 @@
 			 gemCostImage.frame = CGRectMake(gemCostImage.frame.origin.x, gemCostImage.frame.origin.y-screenHeight, gemCostImage.frame.size.width, gemCostImage.frame.size.height);
 			 gemCost.frame = CGRectMake(gemCost.frame.origin.x, gemCost.frame.origin.y-screenHeight, gemCost.frame.size.width, gemCost.frame.size.height);
 			 gemCount.frame = CGRectMake(gemCount.frame.origin.x, gemCount.frame.origin.y-screenHeight, gemCount.frame.size.width, gemCount.frame.size.height);
-		 }
-						 completion:^(BOOL finished)
-		 {
-		 }];
+		}
+		completion:nil];
 		
 	}
 	else {
-		// Revive cant be afforded
+		// Revive can't be afforded
 		[self endGame];
 		
 	}
@@ -493,8 +490,7 @@
 	[UIView animateWithDuration:1.0
 						  delay:0.25
 						options: UIViewAnimationOptionCurveEaseOut
-					 animations:^
-	 {
+					 animations:^ {
 		 reviveButton.frame = CGRectMake(reviveButton.frame.origin.x, reviveButton.frame.origin.y-screenHeight, reviveButton.frame.size.width, reviveButton.frame.size.height);
 		 continueButton.frame = CGRectMake(continueButton.frame.origin.x, continueButton.frame.origin.y-screenHeight, continueButton.frame.size.width, continueButton.frame.size.height);
 		 reviveAngel.frame = CGRectMake(reviveAngel.frame.origin.x, reviveAngel.frame.origin.y-screenHeight, reviveAngel.frame.size.width, reviveAngel.frame.size.height);
@@ -503,10 +499,8 @@
 		 gemCost.frame = CGRectMake(gemCost.frame.origin.x, gemCost.frame.origin.y-screenHeight, gemCost.frame.size.width, gemCost.frame.size.height);
 		 gemCount.frame = CGRectMake(gemCount.frame.origin.x, gemCount.frame.origin.y-screenHeight, gemCount.frame.size.width, gemCount.frame.size.height);
 		 ball.position = CGPointMake(screenWidth/2, screenHeight/2);
-	 }
-					 completion:^(BOOL finished)
-	 {
-	 }];
+	}
+	completion:nil];
 	
 	triggered = 1;
 	gameOver = NO;
@@ -514,7 +508,7 @@
 }
 
 -(void)restart {
-	// Restart game
+	// Restart game from middle
 	triggered = 0;
 	[ball.physicsBody applyImpulse:CGVectorMake(25*speediPad, 25*speediPad)];
 }
@@ -843,7 +837,6 @@
 	self.scene.paused = NO;
 	
 	[tapToStart removeFromSuperview];
-	
 	goalsHit = 0;
 	score.text = @"0";
 	gameStarted = YES;
@@ -899,11 +892,58 @@
 #pragma mark - Spawning Methods
 
 -(void)checkGemSpawn {
-	int i = arc4random() % 50;
-	if (i == 1) {
+	int i = arc4random() % 75;
+	if (i == 1 && !gemSpawned) {
 		[self spawnGem];
 	}
 }
+
+-(void)spawnGem {
+	
+	int gemSize = 25 * startiPad;
+	
+	gemSprite = [SKSpriteNode spriteNodeWithImageNamed:@"gem.png"];
+	gemSprite.size = CGSizeMake(gemSize, gemSize-(4*startiPad));
+	gemSprite.position = [self chooseLocationGem];
+	[self addChild:gemSprite];
+	
+	float gemSizes = (float)gemSize / 2.0;
+	
+	gemSprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:gemSizes];
+	gemSprite.physicsBody.dynamic = NO;
+	gemSprite.physicsBody.categoryBitMask = gemCategory;
+	gemSprite.physicsBody.collisionBitMask = ballCategory;
+	gemSprite.physicsBody.contactTestBitMask = gemCategory;
+	
+}
+
+-(CGPoint)chooseLocationGem {
+	
+	kMinDistanceFromBall = 50;
+	
+	CGFloat gemWidth = gemSprite.size.width;
+	CGFloat gemHeight = gemSprite.size.height;
+	
+	CGFloat maxX = screenWidth - gemWidth*3;
+	CGFloat maxY = screenHeight - gemHeight*3;
+	
+	CGFloat dx = MAX(maxX-kMinDistanceFromBall-ball.position.x, 0) + MAX(ball.position.x-kMinDistanceFromBall, 0);
+	CGFloat dy = MAX(maxY-kMinDistanceFromBall-ball.position.y, 0) + MAX(ball.position.y-kMinDistanceFromBall, 0);
+	
+	CGFloat newX = ball.position.x + MIN(maxX-ball.position.x, kMinDistanceFromBall) + skRand(0, dx);
+	CGFloat newY = ball.position.y + MIN(maxY-ball.position.y, kMinDistanceFromBall) + skRand(0, dy);
+	
+	if (newX > maxX) {
+		newX -= maxX;
+	}
+	
+	if (newY > maxY) {
+		newY -= maxY;
+	}
+	
+	return CGPointMake(newX+gemWidth/2, newY+gemHeight/2);
+}
+
 
 -(void)spawnGoal {
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
@@ -957,56 +997,7 @@
 }
 
 
--(void)spawnGem {
-	
-	int gemSize = 25 * startiPad;
-	
-	gemSprite = [SKSpriteNode spriteNodeWithImageNamed:@"gem.png"];
-	gemSprite.size = CGSizeMake(gemSize, gemSize-(4*startiPad));
-	gemSprite.position = [self chooseLocationGem];
-	[self addChild:gemSprite];
-	
-	float gemSizes = (float)gemSize / 2.0;
-	
-	gemSprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:gemSizes];
-	gemSprite.physicsBody.dynamic = NO;
-	gemSprite.physicsBody.categoryBitMask = gemCategory;
-	gemSprite.physicsBody.collisionBitMask = ballCategory;
-	gemSprite.physicsBody.contactTestBitMask = gemCategory;
-	
-}
-
--(CGPoint)chooseLocationGem {
-	
-	kMinDistanceFromBall = 50;
-	
-	CGFloat gemWidth = gemSprite.size.width;
-	CGFloat gemHeight = gemSprite.size.height;
-	
-	CGFloat maxX = screenWidth - gemWidth*3;
-	CGFloat maxY = screenHeight - gemHeight*3;
-	
-	CGFloat dx = MAX(maxX-kMinDistanceFromBall-ball.position.x, 0) + MAX(ball.position.x-kMinDistanceFromBall, 0);
-	CGFloat dy = MAX(maxY-kMinDistanceFromBall-ball.position.y, 0) + MAX(ball.position.y-kMinDistanceFromBall, 0);
-	
-	CGFloat newX = ball.position.x + MIN(maxX-ball.position.x, kMinDistanceFromBall) + skRand(0, dx);
-	CGFloat newY = ball.position.y + MIN(maxY-ball.position.y, kMinDistanceFromBall) + skRand(0, dy);
-	
-	if (newX > maxX) {
-		newX -= maxX;
-	}
-	
-	if (newY > maxY) {
-		newY -= maxY;
-	}
-	
-	return CGPointMake(newX+gemWidth/2, newY+gemHeight/2);
-}
-
-
-
 #pragma mark - Game Center
-
 
 // Checks all game center achievements
 -(void)gameCenter {
@@ -1022,8 +1013,6 @@
 		}
 	}];
 	
-#pragma mark Achievements
-
 	// Achievement: Afraid of the dark
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"] && totalScore == 0) {
 		[self achievementComplete:@"afraid_dark" percentComplete:100];
