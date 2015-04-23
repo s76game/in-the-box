@@ -16,6 +16,7 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:YES];
 	// Save that game has been played
 	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
 	

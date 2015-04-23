@@ -18,8 +18,6 @@
 @interface TimeBased ()
 @property BOOL contentCreated;
 
-@property (nonatomic) id <sceneDelegate, resetSKScene, shareTimeDelegate> delegate;
-
 @end
 
 
@@ -111,7 +109,7 @@
 	// Set up score
 	score = [[UILabel alloc] initWithFrame:CGRectMake(0, scoreiPad/2, screenWidth, 75)];
 	[self.view addSubview:score];
-	scoreNumber = 0;
+	scoreValue = 0;
 	score.text = @"Time";
 	score.textAlignment = NSTextAlignmentCenter;
 	[score setFont:[UIFont fontWithName:@"DS-Digital-BoldItalic" size:scoreiPad]];
@@ -370,7 +368,7 @@
 	{
 		// Ball hits line
 		[self playBounce];
-		scoreNumber = scoreNumber + 1;
+		scoreValue = scoreValue + 1;
 		[self spawn];
 	}
 	else if ((firstBody.categoryBitMask & edgeCategory) != 0)
@@ -826,6 +824,7 @@
 
 #pragma mark Deal with appDidResignActive and appDidBecomeActive
 -(void)pauseGame {
+	NSLog(@"Time");
 	[self pauseButton:nil];
 }
 
@@ -919,7 +918,7 @@
 	[pauseExit removeFromSuperview];
 	[pauseContinue removeFromSuperview];
 	
-	self.scene.view.paused = NO;
+	self.scene.paused = NO;
 	pause.hidden = NO;
 }
 

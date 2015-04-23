@@ -17,7 +17,7 @@ int pos1y;
 int pos2x;
 int pos2y;
 NSString *goalTimeString;
-int scoreNumber;
+int scoreValue;
 BOOL gameOver;
 BOOL gameStarted;
 int x;
@@ -35,31 +35,10 @@ int previousCost;
 
 BOOL gameEnded;
 
-int goalSize;
-int gemSize;
 BOOL gemSpawned;
 
 NSTimer *speedUpTimer;
 NSTimer *timer;
-
-// Menu View Controller Delegates
-@protocol sceneDelegate <NSObject>
--(void)showDifferentView;
-@end
-
-@protocol resetSKScene <NSObject>
--(void)showScene;
-@end
-
-@protocol shareTimeDelegate <NSObject>
--(void)showShareTime;
-@end
-
-@protocol shareGoalDelegate <NSObject>
--(void)showShareGoal;
-@end
-
-
 
 
 static inline CGFloat skRandf() {
@@ -109,7 +88,7 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 	SKSpriteNode *gemSprite;
 	SKSpriteNode *goal;
 	SKSpriteNode *detect;
-	
+	SKEmitterNode *explosion;
 	SKAction *remove;
 	
 	// UI Stuff
@@ -118,10 +97,8 @@ static inline CGFloat skRand(CGFloat low, CGFloat high) {
 	UIButton *start;
 	CGFloat screenWidth;
 	CGFloat screenHeight;
-	UIButton *pause;
 	UILabel *tapToStart;
 	
-	SKEmitterNode *explosion;
 }
 
 @end

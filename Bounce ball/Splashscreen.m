@@ -15,7 +15,7 @@
 @implementation Splashscreen
 
 -(void)viewWillAppear:(BOOL)animated {
-	
+	[super viewWillAppear:YES];
 	// Pre-animation values
 	_quote.alpha = 0.0;
 	_quote2.alpha = 0.0;
@@ -68,6 +68,7 @@
 
 
 -(void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:YES];
 	// Fade in animation
 	[UIView animateWithDuration:1.0 delay:0.5 options:0 animations:^{
 		_quote.alpha = 1.0f;

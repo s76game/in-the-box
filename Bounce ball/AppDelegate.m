@@ -26,6 +26,7 @@
 
 	[Parse setApplicationId:@"sSTfaaSPFi1CZ7wc0Fwcrxnp550PkrNXqrGLQ3IG" clientKey:@"DG998kFTyH9HlOj8XO2VCrm87vvcd39ByP8oCQee"];
 	
+	// Register for Push Notitications
 	UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
 													UIUserNotificationTypeBadge |
 													UIUserNotificationTypeSound);
@@ -52,7 +53,7 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"PauseGameScene" object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"resignActive" object:self];
 	// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
 	// Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
@@ -67,7 +68,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"appIsActive" object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"becomeActive" object:nil];
 	// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

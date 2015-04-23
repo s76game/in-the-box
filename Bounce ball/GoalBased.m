@@ -9,45 +9,26 @@
 #import "GoalBased.h"
 
 @interface GoalBased ()
-@property BOOL contentCreated;
-
-@property (weak, nonatomic) id <sceneDelegate, resetSKScene, shareGoalDelegate> delegate;
-
 @end
-
 
 @implementation GoalBased
 
-- (void)didMoveToView:(SKView *)view
-{
-	if (!self.contentCreated)
-	{
-		[self createSceneContents];
-		self.contentCreated = YES;
-		
-	}
-}
-
--(void)screenSize {
-	CGRect screenRect = [[UIScreen mainScreen] bounds];
-	screenWidth = screenRect.size.width;
-	screenHeight = screenRect.size.height;
-}
-
-- (void)createSceneContents
-{
+-(void)didMoveToView:(SKView *)view {
+	
 	[self screenSize];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(pauseGame)
-												 name:@"PauseGameScene"
+											 selector:@selector(pauseButton:)
+												 name:@"resignActive"
 											   object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(theAppIsActive:)
-												 name:@"appIsActive" object:nil];
-
+											 selector:@selector(becomeActive)
+												 name:@"becomeActive" object:nil];
 	
+	
+	
+	// Set default values/reset
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		night = YES;
 	}
@@ -67,15 +48,20 @@
 		speediPad = 1;
 	}
 	
-	// Set starting goal size
-	goalSize = 50*startiPad;
+	previousCost = 1;
+	triggered = 0;
+	scoreValue = 0;
 	
-	gemSize = 25*startiPad;
+	remove = [SKAction removeFromParent];
 	
-	// Set up score
+	[speedUpTimer invalidate];
+	[timer invalidate];
+	
+	
+
+	// Create score label
 	score = [[UILabel alloc] initWithFrame:CGRectMake(0, scoreiPad/2, screenWidth, 75)];
 	[self.view addSubview:score];
-	scoreNumber = 0;
 	score.text = @"Goals";
 	score.textAlignment = NSTextAlignmentCenter;
 	[score setFont:[UIFont fontWithName:@"DS-Digital-BoldItalic" size:scoreiPad]];
@@ -86,31 +72,20 @@
 		score.textColor = [UIColor blueColor];
 	}
 	
-	previousCost = 1;
-	triggered = 0;
-	
-	
-	// Set up background texture
+	// Create background texture
 	NSString *textureName;
-	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		textureName = @"night_background.png";
 	}
 	else {
 		textureName = @"background.png";
 	}
-
 	SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%@", textureName]];
 	SKSpriteNode *background = [SKSpriteNode spriteNodeWithTexture:backgroundTexture size:self.view.frame.size];
 	background.position = (CGPoint) {CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame)};
 	[self addChild:background];
 	
-	[speedUpTimer invalidate];
-	[timer invalidate];
-	
-	// Set up scene
-	
-	// Set up border physics
+	// Create edge physics body
 	self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
 	self.physicsBody.categoryBitMask = edgeCategory;
 	self.physicsBody.contactTestBitMask = edgeCategory;
@@ -118,59 +93,63 @@
 	self.physicsWorld.gravity = CGVectorMake(0.0, 0.0);
 	
 	
+	// Create ball
 	ball = [self newBall];
-	ball.position = CGPointMake(CGRectGetMidX(self.frame),                              CGRectGetMidY(self.frame));
+	ball.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
 	[self addChild:ball];
 	
 	[self spawnGoal];
-	[self spawn];
+	[self checkGemSpawn];
+	[self setStartingDirection];
+
+	UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(pauseButton:)];
+	singleTap.numberOfTapsRequired = 3;
+	[self.view addGestureRecognizer:singleTap];
 	
-	remove = [SKAction removeFromParent];
+	[NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(tapToStart) userInfo:nil repeats:NO];
+}
+
+-(void)screenSize {
+	CGRect screenRect = [[UIScreen mainScreen] bounds];
+	screenWidth = screenRect.size.width;
+	screenHeight = screenRect.size.height;
+}
+
+-(void)setStartingDirection {
+	// Make ball start in random direction
 	
-	// Start random direction code
+	// speediPad*2 compensates for greater mass of iPad ball
+	
 	int smallest = 1;
 	int largest = 2;
 	x = (int)smallest + (int)arc4random() %(largest+1-smallest);
 	y = (int)smallest + (int)arc4random() %(largest+1-smallest);
 	
 	switch (x) {
-  case 1:
-			x = speediPad*2;
+		case 1:
+			x = speediPad * 2;
 			break;
-  case 2:
-			x = -speediPad*2;
+		case 2:
+			x = -speediPad * 2;
 			break;
-  default:
+		default:
 			break;
 	}
 	switch (y) {
-  case 1:
-			y = speediPad*2;
+		case 1:
+			y = speediPad * 2;
 			break;
-  case 2:
+		case 2:
 			y = -speediPad*2;
 			break;
-  default:
+		default:
 			break;
 	}
-	
-	pause = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[pause addTarget:self action:@selector(pauseButton:) forControlEvents:UIControlEventTouchUpInside];
-	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
-		[pause setBackgroundImage:[UIImage imageNamed:@"night_pause_button.png"] forState:UIControlStateNormal];
-	}
-	else {
-		[pause setBackgroundImage:[UIImage imageNamed:@"pause_button.png"] forState:UIControlStateNormal];
-	}
-	pause.frame = CGRectMake(screenWidth-40, 20, 30.0, 30.0);
-	
-	pause.hidden = YES;
-	
-	[NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(tapToStart) userInfo:nil repeats:NO];
 }
 
 -(void)tapToStart {
 	if (!gameStarted && !self.scene.view.paused) {
+		// Create label
 		tapToStart = [[UILabel alloc] initWithFrame:CGRectMake(screenWidth/2-100, 75*startiPad, 200, 75)];
 		tapToStart.text = [NSString stringWithFormat:@"Tap to start"];
 		tapToStart.textAlignment = NSTextAlignmentCenter;
@@ -178,6 +157,8 @@
 		tapToStart.textColor = [UIColor grayColor];
 		tapToStart.alpha = 0;
 		[self.view addSubview:tapToStart];
+		
+		// Fade in animation
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationDuration:0.5];
 		[UIView setAnimationDelay:0.0];
@@ -189,7 +170,7 @@
 
 
 -(void)initExplosion {
-	
+	// Create explosion for when ball hits edge
 	explosion = [[SKEmitterNode alloc] init];
 	explosion = [NSKeyedUnarchiver unarchiveObjectWithFile:[[NSBundle mainBundle] pathForResource:@"explode" ofType:@"sks"]];
 	
@@ -201,6 +182,7 @@
 		[explosion setParticleColor:[UIColor redColor]];
 		[explosion setParticleTexture:[SKTexture textureWithImage:[UIImage imageNamed:@"particle.png"]]];
 	}
+	// Set animation effects
 	[explosion setNumParticlesToEmit:200];
 	[explosion setParticleBirthRate:750];
 	[explosion setParticleLifetime:0.5];
@@ -224,72 +206,65 @@
 
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	
 	if (!gameOver && gameStarted) {
-		
+		// Remove previous real/fake lines
 		[line removeFromParent];
 		[lines removeFromParent];
 		
 		touchStarted = YES;
-		
 		dotDrawn = YES;
 		
+		// Get touch location
 		UITouch* touch = [touches anyObject];
 		CGPoint positionInScene = [touch locationInNode:self];
-		
 		pos1x = positionInScene.x;
 		pos1y = positionInScene.y;
 	}
 	else if (!gameOver && !gameStarted) {
+		// Start game
 		[self start];
-		pause.hidden = NO;
 	}
 }
 
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	
 	if (!gameOver && gameStarted && touchStarted) {
-		
+		// Remove previous fake line
 		[lines removeFromParent];
 		
 		dotDrawn = NO;
 		
+		// Get touch location
 		UITouch* touch = [touches anyObject];
 		CGPoint positionInScene = [touch locationInNode:self];
-		
 		pos2x = positionInScene.x;
 		pos2y = positionInScene.y;
 		
+		// Create fake line
 		lines = [SKShapeNode node];
-		
 		CGMutablePathRef path = CGPathCreateMutable();
 		CGPathMoveToPoint(path, NULL, pos1x, pos1y);
 		CGPathAddLineToPoint(path, NULL, pos2x, pos2y);
-		
 		lines.path = path;
 		CGPathRelease(path);
 		lines.strokeColor = [UIColor grayColor];
 		[lines setLineWidth:5];
-		
 		[self addChild:lines];
 	}
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	
 	if (!gameOver && gameStarted && touchStarted) {
-		
-		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"linesDrawn"]+1 forKey:@"linesDrawn"];
-		
+		// Remove fake lines
 		[lines removeFromParent];
 		
+		// Get touch location
 		UITouch* touch = [touches anyObject];
 		CGPoint positionInScene = [touch locationInNode:self];
-		
 		pos2x = positionInScene.x;
 		pos2y = positionInScene.y;
 		
+		// Create real line
 		line = [[SKSpriteNode alloc] init];
 		[self addChild:line];
 		line.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(pos1x, pos1y) toPoint:CGPointMake(pos2x-line.position.x, pos2y-line.position.y)];
@@ -297,13 +272,10 @@
 		line.physicsBody.categoryBitMask = lineCategory;
 		line.physicsBody.collisionBitMask = ballCategory;
 		line.physicsBody.contactTestBitMask = lineCategory;
-		
 		lines = [SKShapeNode node];
-		
 		CGMutablePathRef path = CGPathCreateMutable();
 		CGPathMoveToPoint(path, NULL, pos1x, pos1y);
 		CGPathAddLineToPoint(path, NULL, pos2x, pos2y);
-		
 		lines.path = path;
 		if (night) {
 			[lines setStrokeColor:[UIColor whiteColor]];
@@ -312,32 +284,31 @@
 			[lines setStrokeColor:[UIColor blackColor]];
 		}
 		[lines setLineWidth:5];
-		
 		[self addChild:lines];
 		
+		// Reset values
 		pos1x = 0;
 		pos2x = 0;
 		pos1y =	0;
 		pos2y = 0;
-		
 		touchStarted = NO;
+		
+		// Update lines drawn achievement
+		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"linesDrawn"]+1 forKey:@"linesDrawn"];
 	}
 }
 
 
-- (SKSpriteNode *)newBall
-{
-	// Generates new ball
-	
+-(SKSpriteNode *)newBall {
+	// Generate new ball skin
 	NSString *textureName;
-	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		textureName = @"night_ball.png";
 	}
 	else {
 		textureName = @"ball.png";
 	}
-	
+	// Create physics body ball
 	SKSpriteNode *ballSprite = [SKSpriteNode spriteNodeWithImageNamed:[NSString stringWithFormat:@"%@", textureName]];
 	ballSprite.size = CGSizeMake(75*startiPad, 75*startiPad);
 	ballSprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:ballSprite.size.width/2];
@@ -353,57 +324,46 @@
 }
 
 
-- (void)didBeginContact:(SKPhysicsContact *)contact
-{
-	// Handle contacts between two physics bodies.
+-(void)didBeginContact:(SKPhysicsContact *)contact {
+	// Physics bodies begin contact
 	
+	// Assign contact pseudo variables to bodies
 	SKPhysicsBody *firstBody;
-	SKPhysicsBody *secondBody;
-	
-	if (contact.bodyA.categoryBitMask > contact.bodyB.categoryBitMask)
-	{
+	if (contact.bodyA.categoryBitMask > contact.bodyB.categoryBitMask) {
 		firstBody = contact.bodyA;
-		secondBody = contact.bodyB;
 	}
-	else
-	{
+	else {
 		firstBody = contact.bodyB;
-		secondBody = contact.bodyA;
 	}
 	
-	
-	if ((firstBody.categoryBitMask & lineCategory) != 0)
-	{
-		// Ball hits line
+	// Determine which bodies made contact
+	if ((firstBody.categoryBitMask & lineCategory) != 0) {
+		// Ball contacts line
 		[self playBounce];
 	}
-	else if ((firstBody.categoryBitMask & edgeCategory) != 0)
-	{
-		// Ball hits wall
+	else if ((firstBody.categoryBitMask & edgeCategory) != 0) {
+		// Ball contacts wall
 		[ball.physicsBody setVelocity:CGVectorMake(0, 0)];
 		[self gameOver];
 	}
-	else if ((firstBody.categoryBitMask & goalCategory) != 0)
-	{
-		// Ball hits goal
+	else if ((firstBody.categoryBitMask & goalCategory) != 0) {
+		// Ball contacts goal
 		[self playGoal];
 		[goal removeFromParent];
 		[detect removeFromParent];
 		[self spawnGoal];
-		[self spawn];
+		[self checkGemSpawn];
 		goalsHit = goalsHit + 1;
 		score.text = [NSString stringWithFormat:@"%i", goalsHit];
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"goalsHit"]+1 forKey:@"goalsHit"];
 	}
 	else if ((firstBody.categoryBitMask & gemCategory) != 0) {
+		// Ball contacts gem
 		[self playGoal];
 		[gemSprite removeFromParent];
 		gemSpawned = NO;
-		[self spawn];
+		[self checkGemSpawn];
 		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+1 forKey:@"gems"];
-	}
-	else {
-		NSLog(@"Da fuq!");
 	}
 }
 
@@ -413,9 +373,10 @@
 	
 	gameOver = YES;
 	
+	// Check to see if revive can be afforded
 	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"gems"] >= previousCost*2 ) {
-		
-		pause.hidden = YES;
+
+		// Create revive interface
 		
 		reviveButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 		[reviveButton addTarget:self action:@selector(revive) forControlEvents:UIControlEventTouchUpInside];
@@ -429,7 +390,7 @@
 		[self.view addSubview:reviveButton];
 		
 		continueButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-		[continueButton addTarget:self action:@selector(reviveContinue) forControlEvents:UIControlEventTouchUpInside];
+		[continueButton addTarget:self action:@selector(endGame) forControlEvents:UIControlEventTouchUpInside];
 		if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 			[continueButton setBackgroundImage:[UIImage imageNamed:@"night_continue.png"] forState:UIControlStateNormal];
 		}
@@ -481,9 +442,9 @@
 		[self.view addSubview:gemCostImage];
 		
 		if (IPAD) {
+			// Adjust for iPad interface
 			[self adjustInterfacePause];
 		}
-		
 		
 		[UIView animateWithDuration:1.0
 							  delay:0.0
@@ -504,13 +465,11 @@
 		
 	}
 	else {
-		
+		// Revive cant be afforded
 		[self endGame];
 		
 	}
 }
-
-#pragma mark Revive Crap
 
 -(void)adjustInterfacePause {
 	reviveButton.frame = CGRectMake(reviveButton.frame.origin.x, reviveButton.frame.origin.y+150, reviveButton.frame.size.width, reviveButton.frame.size.height);
@@ -520,16 +479,17 @@
 	gemCostImage.frame = CGRectMake(gemCostImage.frame.origin.x, gemCostImage.frame.origin.y+150, gemCostImage.frame.size.width, gemCostImage.frame.size.height);
 	gemCost.frame = CGRectMake(gemCost.frame.origin.x, gemCost.frame.origin.y+150, gemCost.frame.size.width, gemCost.frame.size.height);
 	gemCount.frame = CGRectMake(gemCount.frame.origin.x, gemCount.frame.origin.y+150, gemCount.frame.size.width, gemCount.frame.size.height);
-	
 }
 
 -(void)revive {
-	
+	// Double previous cost
 	previousCost = previousCost*2;
-	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]-previousCost forKey:@"gems"];
 	
+	// Update gem count
+	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]-previousCost forKey:@"gems"];
 	gemCount.text = [NSString stringWithFormat:@"%li", (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]];
 	
+	// Fly in animation
 	[UIView animateWithDuration:1.0
 						  delay:0.25
 						options: UIViewAnimationOptionCurveEaseOut
@@ -542,7 +502,6 @@
 		 gemCostImage.frame = CGRectMake(gemCostImage.frame.origin.x, gemCostImage.frame.origin.y-screenHeight, gemCostImage.frame.size.width, gemCostImage.frame.size.height);
 		 gemCost.frame = CGRectMake(gemCost.frame.origin.x, gemCost.frame.origin.y-screenHeight, gemCost.frame.size.width, gemCost.frame.size.height);
 		 gemCount.frame = CGRectMake(gemCount.frame.origin.x, gemCount.frame.origin.y-screenHeight, gemCount.frame.size.width, gemCount.frame.size.height);
-		 
 		 ball.position = CGPointMake(screenWidth/2, screenHeight/2);
 	 }
 					 completion:^(BOOL finished)
@@ -555,21 +514,16 @@
 }
 
 -(void)restart {
+	// Restart game
 	triggered = 0;
-	pause.hidden = NO;
 	[ball.physicsBody applyImpulse:CGVectorMake(25*speediPad, 25*speediPad)];
-	
 }
-
--(void)reviveContinue {
-	[self endGame];
-}
-
 
 -(void)endGame {
-	
 	if (!gameEnded) {
 		gameEnded = YES;
+		
+		// Remove revive interface
 		[reviveButton removeFromSuperview];
 		[continueButton removeFromSuperview];
 		[reviveAngel removeFromSuperview];
@@ -590,16 +544,13 @@
 		pos2x = nil;
 		pos1y = nil;
 		pos2y = nil;
-	
-		// Runs game center code block
+		
 		[self gameCenter];
-	
 		[self gameOverAnimation];
-		pause.hidden = YES;
 	}
 }
 
-#pragma mark Create Post Game UI
+#pragma mark - Create Post Game UI
 
 -(void)gameOverAnimation {
 	
@@ -607,6 +558,7 @@
 	
 	[self playExplosion];
 	
+	// Create interface
 	postBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, screenHeight, screenWidth, screenHeight)];
 	postBackground.image = [UIImage imageNamed:@"black_overlay.png"];
 	postBackground.alpha = 0.75;
@@ -644,8 +596,7 @@
 		bestScoreNumber.text = [NSString stringWithFormat:@"%i", goalsHit];
 	}
 	
-	// Start first row
-
+	// Start first row buttons
 	replay = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[replay addTarget:self action:@selector(restartButton:) forControlEvents:UIControlEventTouchUpInside];
 	[replay setBackgroundImage:[UIImage imageNamed:@"post_replay.png"] forState:UIControlStateNormal];
@@ -665,9 +616,7 @@
 	[self.view addSubview:rate];
 	
 	
-	// Start second row
-	
-	
+	// Start second row buttons
 	gameCenter = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[gameCenter addTarget:self action:@selector(gameCenterButton:) forControlEvents:UIControlEventTouchUpInside];
 	[gameCenter setBackgroundImage:[UIImage imageNamed:@"post_gamecenter.png"] forState:UIControlStateNormal];
@@ -686,13 +635,11 @@
 		share.alpha = 0.5;
 	}
 	
-	// Begin Animation
-	
+	// Fly in animation
 	[UIView animateWithDuration:1.0
 						  delay:0.0
 						options: UIViewAnimationOptionCurveEaseOut
-					 animations:^
-	 {
+					 animations:^ {
 		 postBackground.frame = CGRectMake(0, 0, screenWidth, screenHeight);
 		 replay.frame = CGRectMake(replay.frame.origin.x, replay.frame.origin.y-screenHeight, replay.frame.size.width, replay.frame.size.height);
 		 menu.frame = CGRectMake(menu.frame.origin.x, menu.frame.origin.y-screenHeight, menu.frame.size.width, menu.frame.size.height);
@@ -703,19 +650,12 @@
 		 share.frame = CGRectMake(share.frame.origin.x, share.frame.origin.y-screenHeight, share.frame.size.width, share.frame.size.height);
 		 bigImage.frame = CGRectMake(bigImage.frame.origin.x, bigImage.frame.origin.y-screenHeight, bigImage.frame.size.width, bigImage.frame.size.height);
 		 gameCenter.frame = CGRectMake(gameCenter.frame.origin.x, gameCenter.frame.origin.y-screenHeight, gameCenter.frame.size.width, gameCenter.frame.size.height);
-		 	 }
-					 completion:^(BOOL finished)
-	 {
-}];
-	
-	
-	
+	}
+	completion:nil];
 }
 
 -(void)adjustInterface {
-	
-	// iPad Screen Adjustments
-	
+	// Adjust post game interface for iPad
 	[bestScore setFont:[UIFont fontWithName:@"Prototype" size:80]];
 	[currentScoreNumber setFont:[UIFont fontWithName:@"Prototype" size:200]];
 	[currentScoreNumber setFrame:CGRectMake(bigImage.frame.origin.x+bigImage.frame.size.height/2-150/2, bigImage.frame.origin.y+bigImage.frame.size.width/2-200/2, 200, 150)];
@@ -729,10 +669,9 @@
 }
 
 -(void)countAnimation {
+	// Count in animation
 	countingAnimation = countingAnimation +1;
-	
 	if(countingAnimation <= goalsHit) {
-		
 		currentScoreNumber.text = [NSString stringWithFormat:@"%i", countingAnimation];
 	}
 	else {
@@ -741,48 +680,42 @@
 	}
 }
 
-#pragma mark Buttons
+#pragma mark - Buttons
 
 -(void)shareButton:(UIButton *)button {
-	[[NSNotificationCenter defaultCenter]
-	 postNotificationName:@"shareGoal" object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"shareGoal" object:self];
 }
 
 -(void)gameCenterButton:(UIButton *)button {
-	
 	if ([GKLocalPlayer localPlayer].authenticated == NO) {
-		UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Game Center not enabled!"
+		UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Game Center Not Logged In"
 														  message:@"Please login for Game Center use"
 														 delegate:nil
-												cancelButtonTitle:@"OK"
+												cancelButtonTitle:@"Ok"
 												otherButtonTitles:nil];
 		[message show];
-	} else {
+	}
+	else {
 		GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
-		if (gameCenterController != nil)
-		{
+		if (gameCenterController != nil) {
 			gameCenterController.gameCenterDelegate = self;
 			gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
 			UIViewController *vc = self.view.window.rootViewController;
 			[vc presentViewController: gameCenterController animated: YES completion:nil];
 		}
 	}
-	
 }
 
-- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController*)gameCenterViewController {
-	
+-(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController*)gameCenterViewController {
 	UIViewController *vc = self.view.window.rootViewController;
 	[vc dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)rateButton:(UIButton *)button {
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://appsto.re/us/i1fu1.i"]];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://appstore.com/inthebox"]];
 }
 
-
 -(void)menuButton:(UIButton *)button {
-	
 	gameOver = NO;
 	gameStarted = NO;
 	goalsHit = 0;
@@ -792,17 +725,13 @@
 	
 	[self.view presentScene:nil];
 
-	[[NSNotificationCenter defaultCenter]
-	 postNotificationName:@"GameOverNotification" object:self];
-	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"GameOverNotification" object:self];
 }
 
 -(void)restartButton:(UIButton *)button {
 	
 	gameEnded = NO;
-	
 	triggered = 0;
-	
 	gameOver = NO;
 	gameStarted = NO;
 	gameTime = 0;
@@ -811,44 +740,29 @@
 	
 	[self.view presentScene:nil];
 	
-	NSLog(@"Alpha");
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"showScene" object:self];
-	NSLog(@"alpha 2");
 }
 
-#pragma mark Deal with appDidResignActive and appDidBecomeActive
--(void)pauseGame {
-	[self pauseButton:nil];
-}
-
--(void)theAppIsActive:(NSNotification *)note
-{
-	self.view.paused = YES;
+-(void)becomeActive {
 	SKAction *pauseTimer= [SKAction sequence:@[
-											   [SKAction performSelector:@selector(pauseTimerfun)
-																onTarget:self]
-											   
-											   ]];
+		[SKAction performSelector:@selector(delayedUnpause) onTarget:self]
+	]];
 	[self runAction:pauseTimer withKey:@"pauseTimer"];
 }
 
--(void) pauseTimerfun
-{
-	self.view.paused = YES;
+-(void)delayedUnpause {
+	self.scene.paused = YES;
 	
 }
 
-#pragma mark Pause Menu Interface
+#pragma mark - Pause Menu Interface
 
 -(void)pauseButton:(UIButton *)button {
-	NSLog(@"Pause");
-	self.view.paused = YES;
+	self.scene.paused = YES;
 	[self createPauseMenuInterface];
-	pause.hidden = YES;
 }
 
 -(void)createPauseMenuInterface {
-	
 	pauseBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
 	pauseBackground.image = [UIImage imageNamed:@"black_overlay.png"];
 	pauseBackground.alpha = 0.75;
@@ -878,24 +792,19 @@
 	pauseExit.frame = CGRectMake(pauseContinue.frame.origin.x+(15*startiPad)+(75*startiPad), pauseContinue.frame.origin.y, 75.0*startiPad, 75.0*startiPad);
 	[self.view addSubview:pauseExit];
 	
-	
 	[self performSelector:@selector(showResume) withObject:self afterDelay:1];
 }
 
 -(void)showResume {
-	
 	[UIView animateWithDuration:0.75
 						  delay:0.5
 						options: UIViewAnimationOptionCurveEaseOut
-					 animations:^
-	 {
+					 animations:^ {
 		 pauseContinue.alpha = 1;
-	 }
-					 completion:^(BOOL finished)
-	 {
+	}
+	completion:^(BOOL finished) {
 		 pauseContinue.enabled = YES;
-	 }];
-	
+	}];
 }
 
 -(void)pauseRestart {
@@ -909,11 +818,8 @@
 	[pauseRestart removeFromSuperview];
 	[pauseExit removeFromSuperview];
 	[pauseContinue removeFromSuperview];
-	
-	self.scene.view.paused = NO;
-	pause.hidden = NO;
+	self.scene.paused = NO;
 }
-
 
 -(void)removeElements {
 	// Removes elements not in the scene
@@ -931,88 +837,22 @@
 	[postBackground removeFromSuperview];
 	[explosion removeFromParent];
 	[bigImage removeFromSuperview];
-	pause.hidden = YES;
 }
 
-// Ball speed up method
-- (void) speedUp:(NSTimer *)timer
-{
-	int xImpluse;
-	int yImpluse;
-	if (ball.physicsBody.velocity.dx > 0) {
-		if (IPAD) {
-			xImpluse = 25;
-		}
-		else {
-			xImpluse = 2;
-		}
-	}
-	else {
-		if (IPAD) {
-			xImpluse = -25;
-		}
-		else {
-			xImpluse = -2;
-		}
-	}
-	
-	if (ball.physicsBody.velocity.dy > 0) {
-		if (IPAD) {
-			yImpluse = 25;
-		}
-		else {
-			yImpluse = 2;
-		}
-	}
-	else {
-		if (IPAD) {
-			yImpluse = -25;
-		}
-		else {
-			yImpluse = -2;
-		}
-	}
-}
-
-// Start ball on user touch
-// Done to avoid extremely low FPS at load of scene
 -(void)start {
-	
 	self.scene.paused = NO;
 	
 	[tapToStart removeFromSuperview];
 	
 	goalsHit = 0;
-	
 	score.text = @"0";
-	
 	gameStarted = YES;
 	
+	// Start ball moving
 	[ball.physicsBody applyImpulse:CGVectorMake(25*speediPad, 25*speediPad)];
-	//Calls ball speed up method
-	speedUpTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(speedUp:) userInfo:nil repeats:YES];
-	// Start Timer
-	timer = [NSTimer scheduledTimerWithTimeInterval:1.0
-											 target:self
-										   selector:@selector(timer:)
-										   userInfo:nil
-											repeats:YES];
 }
 
--(void)timer:(NSTimer *)timer {
-	
-	if (!gameOver) {
-		
-		minutesTimer = gameTime/60;
-		secondsTimer = gameTime-(minutesTimer * 60);
-		
-		gameTime = gameTime + 1;
-		// Minutes:Seconds
-	}
-	
-}
-
-#pragma mark Sounds
+#pragma mark - Sounds
 
 -(void)playBounce {
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"soundFX"]) {
@@ -1024,7 +864,7 @@
 		AudioServicesPlaySystemSound(soundID);
 	}
 	else {
-		NSLog(@"***Bouncing Sound***");
+		NSLog(@"***Bouncing***");
 	}
 }
 
@@ -1038,7 +878,7 @@
 		AudioServicesPlaySystemSound(soundID);
 	}
 	else {
-		NSLog(@"***Goal Sound***");
+		NSLog(@"***Goal***");
 	}
 }
 
@@ -1052,13 +892,13 @@
 				AudioServicesPlaySystemSound(soundID);
 	}
 	else {
-		NSLog(@"***Explosion Sound***");
+		NSLog(@"***Explosion***");
 	}
 }
 
-#pragma mark Spawning Methods
+#pragma mark - Spawning Methods
 
--(void)spawn {
+-(void)checkGemSpawn {
 	int i = arc4random() % 50;
 	if (i == 1) {
 		[self spawnGem];
@@ -1066,14 +906,15 @@
 }
 
 -(void)spawnGoal {
-	
-	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
 		goal = [SKSpriteNode spriteNodeWithImageNamed:@"night_goal.png"];
 	}
 	else {
 		goal = [SKSpriteNode spriteNodeWithImageNamed:@"goal.png"];
 	}
+	
+	int goalSize = 50 * startiPad;
+	
 	goal.size = CGSizeMake(goalSize, goalSize);
 	goal.position = [self chooseLocationGoal];
 	[self addChild:goal];
@@ -1117,6 +958,8 @@
 
 
 -(void)spawnGem {
+	
+	int gemSize = 25 * startiPad;
 	
 	gemSprite = [SKSpriteNode spriteNodeWithImageNamed:@"gem.png"];
 	gemSprite.size = CGSizeMake(gemSize, gemSize-(4*startiPad));
@@ -1162,10 +1005,10 @@
 
 
 
-#pragma mark Game Center Achievement Code
+#pragma mark - Game Center
 
 
-// Checks all game center stuff
+// Checks all game center achievements
 -(void)gameCenter {
 	
 #pragma mark Leaderboard
@@ -1210,12 +1053,12 @@
 	
 }
 
-- (void)achievementComplete:(NSString *)achievementID percentComplete: (int)percent {
+-(void)achievementComplete:(NSString *)achievementID percentComplete: (int)percent {
 	GKAchievement *achievement1 = [[GKAchievement alloc] initWithIdentifier: [NSString stringWithFormat:@"%@", achievementID]];
 	achievement1.percentComplete = percent;
 	achievement1.showsCompletionBanner = YES;
 	NSArray *achievementsToComplete = [NSArray arrayWithObjects:achievement1, nil];
-	NSLog(@"Attempt to report %@", achievement1.identifier);
+	NSLog(@"Attempt to report achievement: %@", achievement1.identifier);
 	[GKAchievement reportAchievements: achievementsToComplete withCompletionHandler:^(NSError *error)
 	 {
 		 if (error != nil)

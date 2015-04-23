@@ -96,7 +96,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-	
+	[super viewWillAppear:YES];
 	// Update Interface State
 	
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
@@ -180,9 +180,6 @@
 		rateCount = rateCount + 1;
 		[[NSUserDefaults standardUserDefaults] setInteger:rateCount forKey:@"rateCount"];
 	}
-	
-	
-	
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

@@ -19,7 +19,7 @@ int scoreiPad;
 int startiPad;
 int speediPad;
 float gameTime;
-int scoreNumber;
+int scoreValue;
 BOOL gameOver;
 BOOL gameStarted;
 int x;
