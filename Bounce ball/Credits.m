@@ -71,7 +71,7 @@
 #pragma mark - Buttons
 
 -(IBAction)backButton:(id)sender {
-	[self dismissViewControllerAnimated:YES completion:nil];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 -(IBAction)rateButton:(id)sender {

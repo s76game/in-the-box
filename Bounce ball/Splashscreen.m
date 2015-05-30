@@ -93,20 +93,7 @@
 
 
 -(void)advanceScene {
-	if (!moved) {
-		moved = YES;
-
-		// Create Main View Controller
-		ViewController *menu = [self.storyboard instantiateViewControllerWithIdentifier:@"menu"];
-	
-		CATransition* transition = [CATransition animation];
-	
-		transition.duration = 0.5;
-		transition.type = kCATransitionFade;
-	
-		[self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
-		[self.navigationController pushViewController:menu animated:NO];
-	}
+	[self performSegueWithIdentifier:@"advance" sender:self];
 }
 
 @end

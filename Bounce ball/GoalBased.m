@@ -47,7 +47,7 @@
 		speediPad = 1;
 	}
 	
-	previousCost = 1;
+	previousCost = 5;
 	triggered = 0;
 	scoreValue = 0;
 	
@@ -481,6 +481,7 @@
 -(void)revive {
 	// Double previous cost
 	previousCost = previousCost*2;
+	NSLog(@"%i", previousCost);
 	
 	// Update gem count
 	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]-previousCost forKey:@"gems"];
@@ -571,8 +572,8 @@
 	
 	highScore = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"highScoreGoals"];
 	
-	currentScoreNumber = [[UILabel alloc] initWithFrame:CGRectMake(bigImage.frame.origin.x+bigImage.frame.size.height/2-75/2, bigImage.frame.origin.y+bigImage.frame.size.width/2-100/2, 100, 75)];
-	currentScoreNumber.text = [NSString stringWithFormat:@"%@", score.text];
+	currentScoreNumber = [[UILabel alloc] initWithFrame:CGRectMake(bigImage.frame.origin.x+bigImage.frame.size.height/2-100/2, bigImage.frame.origin.y+bigImage.frame.size.width/2-75/2, 125, 75)];
+	currentScoreNumber.text = [NSString stringWithFormat:@" %@", score.text];
 	currentScoreNumber.textAlignment = NSTextAlignmentLeft;
 	[currentScoreNumber setFont:[UIFont fontWithName:@"DS-Digital-BoldItalic" size:100]];
 	currentScoreNumber.textColor = [UIColor greenColor];
@@ -717,7 +718,7 @@
 	
 	[self removeElements];
 	
-	[self.view presentScene:nil];
+//	[self.view presentScene:nil];
 
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"GameOverNotification" object:self];
 }
@@ -732,7 +733,7 @@
 	
 	[self removeElements];
 	
-	[self.view presentScene:nil];
+//	[self.view presentScene:nil];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"showScene" object:self];
 }

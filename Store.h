@@ -18,6 +18,8 @@ int gems;
 }
 
 // Purchase Buttons
+@property (strong, nonatomic) IBOutlet UIButton *GemFreeOutlet;
+- (IBAction)GemFreeAction:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *Gem15Outlet;
 - (IBAction)Gem15Action:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *Gem35Outlet;

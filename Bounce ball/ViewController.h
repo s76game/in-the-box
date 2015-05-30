@@ -50,7 +50,10 @@ int rateCount;
 
 @property (strong, nonatomic) IBOutlet UIImageView *titleOutlet;
 @property (strong, nonatomic) IBOutlet UIImageView *background;
+// Disabled for test run to see about video ads
 @property (strong, nonatomic) IBOutlet ADBannerView *banner;
+
+@property (strong, nonatomic) IBOutlet UILabel *ad;
 
 
 

@@ -108,6 +108,7 @@
 		[_gamecenterOutlet setBackgroundImage:[UIImage imageNamed:@"night_gamecenter.png"] forState:UIControlStateNormal];
 		[_titleOutlet setImage:[UIImage imageNamed:@"night_title.png"]];
 		[_background setImage:[UIImage imageNamed:@"night_background.png"]];
+		_ad.textColor = [UIColor whiteColor];
 		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 	}
 	else {
@@ -119,6 +120,7 @@
 		[_storeOutlet setBackgroundImage:[UIImage imageNamed:@"store_icon.png"] forState:UIControlStateNormal];
 		[_titleOutlet setImage:[UIImage imageNamed:@"title.png"]];
 		[_background setImage:[UIImage imageNamed:@"background.png"]];
+		_ad.textColor = [UIColor blackColor];
 		[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 	}
 	

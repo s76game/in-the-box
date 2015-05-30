@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>B1297EE408353F5DF439D86DBDD0AFBFE1454CFD</key>
-		<string>github.com:Rybel/in-the-box.git</string>
+		<string>https://github.com/appleguy1999/in-the-box.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Inside The Box.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:Rybel/in-the-box.git</string>
+	<string>https://github.com/appleguy1999/in-the-box.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>B1297EE408353F5DF439D86DBDD0AFBFE1454CFD</string>
 			<key>IDESourceControlWCCName</key>
-			<string>In-The-Box</string>
+			<string>in-the-box</string>
 		</dict>
 	</array>
 </dict>

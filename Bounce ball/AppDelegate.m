@@ -35,6 +35,13 @@
 	[application registerUserNotificationSettings:settings];
 	[application registerForRemoteNotifications];
 	
+	// Configure AdColony (V4VC)
+	
+	[AdColony configureWithAppID: @"app7af2725ae7ef4cd2b7"
+						 zoneIDs: @[ @"vz6eee0f4e837c404da1" ]
+						delegate: self
+						 logging: NO];
+	
 	// Override point for customization after application launch.
 	return YES;
 }
@@ -79,17 +86,50 @@
 }
 
 - (void)saveContext {
-    NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-             // Replace this implementation with code to handle the error appropriately.
-             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        } 
-    }
+	NSError *error = nil;
+	NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+	if (managedObjectContext != nil) {
+		if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+			// Replace this implementation with code to handle the error appropriately.
+			// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+			abort();
+		}
+	}
 }
+
+#pragma mark - V4VC
+
+- (void)onAdColonyV4VCReward:(BOOL)success currencyName:(NSString*)currencyName currencyAmount:(int)amount inZone:(NSString*)zoneID {
+	
+	if (success) {
+		[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]+2 forKey:@"gems"];
+		[self performSelector:@selector(awardGems) withObject:self afterDelay:0.1];
+	}
+	else {
+		[self performSelector:@selector(doNotAwardGems) withObject:self afterDelay:0.1];
+	}
+}
+
+-(void)awardGems {
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Gems Have Been Awarded"
+													message:@"You have received 2 free gems for watching that video!"
+												   delegate:self
+										  cancelButtonTitle:@"Sweet"
+										  otherButtonTitles:nil];
+	[alert show];
+}
+
+-(void)doNotAwardGems {
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Gems Have Not Been Awarded"
+													message:@"You have NOT received 2 free gems for watching that video!"
+												   delegate:self
+										  cancelButtonTitle:@"Awww"
+										  otherButtonTitles:nil];
+	[alert show];
+}
+
+
 
 #pragma mark - Core Data stack
 

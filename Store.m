@@ -7,6 +7,7 @@
 //
 
 #import "Store.h"
+#import <AdColony/AdColony.h>
 
 @interface Store ()
 
@@ -19,7 +20,7 @@
 	
 	// Create ScrollView for buttons
 	[_Scroller setScrollEnabled:YES];
-	[_Scroller setContentSize:CGSizeMake(320, 520)];
+	[_Scroller setContentSize:CGSizeMake(320, 550)];
 	
 	// Get current count of gems
 	gems = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"];
@@ -27,6 +28,7 @@
 	
 	// Update Interface
 	if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"UI"] isEqualToString:@"night"]) {
+		[_GemFreeOutlet setBackgroundImage:[UIImage imageNamed:@"night_store_free.png"] forState:UIControlStateNormal];
 		[_Gem15Outlet setBackgroundImage:[UIImage imageNamed:@"night_store_15.png"] forState:UIControlStateNormal];
 		[_Gem35Outlet setBackgroundImage:[UIImage imageNamed:@"night_store_35.png"] forState:UIControlStateNormal];
 		[_Gem75Outlet setBackgroundImage:[UIImage imageNamed:@"night_store_75.png"] forState:UIControlStateNormal];
@@ -42,6 +44,7 @@
 		_storeLabel.textColor = [UIColor whiteColor];
 	}
 	else {
+		[_GemFreeOutlet setBackgroundImage:[UIImage imageNamed:@"store_free.png"] forState:UIControlStateNormal];
 		[_Gem15Outlet setBackgroundImage:[UIImage imageNamed:@"store_15.png"] forState:UIControlStateNormal];
 		[_Gem35Outlet setBackgroundImage:[UIImage imageNamed:@"store_35.png"] forState:UIControlStateNormal];
 		[_Gem75Outlet setBackgroundImage:[UIImage imageNamed:@"store_75.png"] forState:UIControlStateNormal];
@@ -59,6 +62,13 @@
 	
 	// Init StoreKit
 	[[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+	
+	// Create exit gesture
+	UISwipeGestureRecognizer *exitGesture = [[UISwipeGestureRecognizer alloc]
+													initWithTarget:self
+													action:@selector(ExitAction:)] ;
+	[exitGesture setDirection:UISwipeGestureRecognizerDirectionRight];
+	[[self view] addGestureRecognizer:exitGesture];
 }
 
 -(void)updateGems {
@@ -100,7 +110,6 @@
 				NSLog(@"Store: Deferred");
 				break;
 			case SKPaymentTransactionStateFailed:
-				NSLog(@"Store: Failed");
 				break;
 			case SKPaymentTransactionStatePurchased: {
 				NSLog(@"Store: Purchased");
@@ -121,6 +130,26 @@
 	}
 }
 
+#pragma mark - V4VC
+
+-(void)viewWillAppear:(BOOL)animated {
+	_gemCount.text = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"gems"]];
+	if ([AdColony getVirtualCurrencyRewardsAvailableTodayForZone:@"vz6eee0f4e837c404da1"] > 0) {
+		_GemFreeOutlet.enabled = YES;
+		_GemFreeOutlet.alpha = 1;
+	}
+	else {
+		_GemFreeOutlet.enabled = NO;
+		_GemFreeOutlet.alpha = 0.5;
+	}
+}
+
+-(IBAction)GemFreeAction:(id)sender {
+	[AdColony playVideoAdForZone:@"vz6eee0f4e837c404da1"
+					withDelegate:nil
+				withV4VCPrePopup:NO
+				andV4VCPostPopup:NO];
+}
 
 
 #pragma mark - Buttons
@@ -163,7 +192,7 @@
 
 -(IBAction)ExitAction:(id)sender {
 	[[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-	[self dismissViewControllerAnimated:YES completion:nil];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 

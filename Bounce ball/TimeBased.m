@@ -18,7 +18,7 @@
 	[self screenSize];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(pauseButton:)
+											 selector:@selector(pauseButton)
 												 name:@"resignActive"
 											   object:nil];
 	
@@ -46,7 +46,7 @@
 		speediPad = 1;
 	}
 	
-	previousCost = 1;
+	previousCost = 5;
 	triggered = 0;
 	
 	[speedUpTimer invalidate];
@@ -99,7 +99,7 @@
 	[self spawn];
 	[self setStartingDirection];
 	
-	UITapGestureRecognizer *tripleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(pauseButton:)];
+	UITapGestureRecognizer *tripleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(pauseButton)];
 	tripleTap.numberOfTapsRequired = 3;
 	[self.view addGestureRecognizer:tripleTap];
 	
@@ -471,6 +471,7 @@
 -(void)revive {
 	// Double previous cost
 	previousCost = previousCost*2;
+	NSLog(@"%i", previousCost);
 	
 	// Update gem count
 	[[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:@"gems"]-previousCost forKey:@"gems"];
@@ -728,7 +729,7 @@
 	
 	[self removeElements];
 	
-	[self.view presentScene:nil];
+//	[self.view presentScene:nil];
 
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"GameOverNotification" object:self];
 }
@@ -744,7 +745,7 @@
 	
 	[self removeElements];
 	
-	[self.view presentScene:nil];
+//	[self.view presentScene:nil];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"showScene" object:self];
 }
@@ -763,7 +764,7 @@
 
 #pragma mark - Pause Menu Interface
 
--(void)pauseButton:(UIButton *)button {
+-(void)pauseButton {
 	self.scene.paused = YES;
 	[self createPauseMenuInterface];
 }
