@@ -35,6 +35,7 @@
 		9410DA431A27E34D00E2AE3D /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9410DA421A27E34D00E2AE3D /* iPad.storyboard */; };
 		9415946B1A6B44FE008B228B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9415946A1A6B44FE008B228B /* Bolts.framework */; };
 		9415946D1A6B4509008B228B /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9415946C1A6B4509008B228B /* ParseUI.framework */; };
+		94204D6A1B1BABBE00A5E0C8 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94204D691B1BABBE00A5E0C8 /* GoogleMobileAds.framework */; };
 		9422FD2619FDD5CF001FD0F6 /* boken.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9422FD2419FDD5CF001FD0F6 /* boken.sks */; };
 		9422FD2719FDD5CF001FD0F6 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 9422FD2519FDD5CF001FD0F6 /* bokeh.png */; };
 		945D89E119FC7A3500218159 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 945D89DF19FC7A3500218159 /* spark.png */; };
@@ -210,6 +211,7 @@
 		9410DA421A27E34D00E2AE3D /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		9415946A1A6B44FE008B228B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		9415946C1A6B4509008B228B /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		94204D691B1BABBE00A5E0C8 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		9422FD2419FDD5CF001FD0F6 /* boken.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = boken.sks; path = "Bounce Ball/boken.sks"; sourceTree = SOURCE_ROOT; };
 		9422FD2519FDD5CF001FD0F6 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bokeh.png; path = "Bounce Ball/bokeh.png"; sourceTree = SOURCE_ROOT; };
 		9451F9A11A3D237D00F55A0E /* Bounce ball.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Bounce ball.entitlements"; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				94D31A571972C392006E21C2 /* iAd.framework in Frameworks */,
 				9415946B1A6B44FE008B228B /* Bolts.framework in Frameworks */,
 				94792ADC195BAA16004A6404 /* GameKit.framework in Frameworks */,
+				94204D6A1B1BABBE00A5E0C8 /* GoogleMobileAds.framework in Frameworks */,
 				94792ACB1958FA17004A6404 /* QuartzCore.framework in Frameworks */,
 				948C9C011A6B3C41002A6526 /* Parse.framework in Frameworks */,
 				94C7FECF194E3DE600270AE8 /* SpriteKit.framework in Frameworks */,
@@ -751,6 +754,7 @@
 		94D31A5519724EA2006E21C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				94204D691B1BABBE00A5E0C8 /* GoogleMobileAds.framework */,
 				94075BCF1B069CF100FFB645 /* Accounts.framework */,
 				94075BC91B0690FE00FFB645 /* WebKit.framework */,
 				94075BC71B0690F100FFB645 /* Social.framework */,
@@ -1127,7 +1131,7 @@
 				GCC_WARN_UNUSED_LABEL = NO;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "Bounce ball/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1162,7 +1166,7 @@
 				GCC_WARN_UNUSED_LABEL = NO;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "Bounce ball/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";

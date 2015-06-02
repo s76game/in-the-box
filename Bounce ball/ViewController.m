@@ -7,16 +7,16 @@
 //
 
 #import "ViewController.h"
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 @class GameCenterManager;
 
-@interface ViewController (){
-}
+@interface ViewController () <GADInterstitialDelegate>
 
 @property (nonatomic) BOOL gameCenterEnabled;
 -(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard;
 -(void)authenticateLocalPlayer;
-
+@property(nonatomic, strong) GADInterstitial *interstitial;
 @end
 @implementation ViewController
 
@@ -53,6 +53,42 @@
 		
 	}
 }
+
+#pragma mark - Interstitial Ad
+
+-(void)viewDidAppear:(BOOL)animated {
+
+	self.interstitial = [[GADInterstitial alloc] initWithAdUnitID:@"ca-app-pub-1124285807831911/6331678185"];
+	
+	GADRequest *request = [GADRequest request];
+	// Requests test ads on simulators.
+	request.testDevices = @[
+							@"3c7004bd8a41d0ccc632d8d6d77aea6e"  // Ryan's iPhone
+							];
+	[self.interstitial loadRequest:request];
+	if (showAd) {
+		[self performSelector:@selector(showAd) withObject:self afterDelay:1];
+		showAd = FALSE;
+	}
+	else {
+		showAd = TRUE;
+	}
+}
+
+-(void)showAd {
+	if ([self.interstitial isReady]) {
+		NSLog(@"Showing Ad");
+		[self.interstitial presentFromRootViewController:self];
+	}
+	else {
+		NSLog(@"Ad Not Ready");
+	}
+}
+
+-(void)interstitial:(GADInterstitial *)interstitial didFailToReceiveAdWithError:(GADRequestError *)error {
+	NSLog(@"interstitialDidFailToReceiveAdWithError: %@", [error localizedDescription]);
+}
+
 
 -(NSString *)getStringFromURL:(NSString *)url {
 	

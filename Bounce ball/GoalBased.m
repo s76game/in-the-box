@@ -577,6 +577,7 @@
 	currentScoreNumber.textAlignment = NSTextAlignmentLeft;
 	[currentScoreNumber setFont:[UIFont fontWithName:@"DS-Digital-BoldItalic" size:100]];
 	currentScoreNumber.textColor = [UIColor greenColor];
+	currentScoreNumber.adjustsFontSizeToFitWidth = YES;
 	[self.view addSubview:currentScoreNumber];
 	
 	bestScoreNumber = [[UILabel alloc] initWithFrame:CGRectMake(bestScore.frame.origin.x+bestScore.frame.size.width+10, bestScore.frame.origin.y, 100, 75)];

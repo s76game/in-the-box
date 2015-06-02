@@ -25,6 +25,7 @@ UIAlertView *alert;
 NSString *alias;
 SystemSoundID toggle;
 int rateCount;
+BOOL showAd;
 
 @interface ViewController : UIViewController <GKGameCenterControllerDelegate, ADBannerViewDelegate, MFMailComposeViewControllerDelegate> {
 }
